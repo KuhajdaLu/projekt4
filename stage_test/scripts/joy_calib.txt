@@ -1,0 +1,4 @@
+{
+  "throttle": 2, 
+  "steering": 0
+}

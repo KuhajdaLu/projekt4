@@ -2,6 +2,6 @@
 
 <launch>
 
-    <node pkg="stage_ros" type="stageros" name="stage" args="./worlds/cave/cave.world" output="screen" />
+    <node pkg="stage_ros" type="stageros" name="stage" args="$(find stage_test)/launch/worlds/cave/cave.world" output="screen" />
 
 </launch>
