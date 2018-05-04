@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <node pkg="stage_ros" type="stageros" name="stage" args="./worlds/cave/cave.world" output="screen" />
+
+</launch>
