@@ -1,0 +1,17 @@
+window( 
+  size [ 550 550 1]         
+  rotate [ 0 0]    
+  center [ 0 0 0 ]       
+  scale 85                 # zoom
+  show_data 1
+  show_clock 1
+)
+
+include "map.inc"
+floorplan (
+  bitmap "myworld.png"
+)
+
+
+include "terminator.inc"
+terminator(pose [-2 2 0 0])
