@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  18 NOV 2018 15:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  28 DEC 2018 14:48
 entering extended mode
 **./SLAM.tex
 (SLAM.tex
@@ -730,163 +730,178 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout3 = `SLAM.toc'.
 
  [1]
-Underfull \hbox (badness 10000) in paragraph at lines 47--48
+Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
 
 
-Overfull \hbox (8.18059pt too wide) in paragraph at lines 49--53
+Overfull \hbox (8.18059pt too wide) in paragraph at lines 53--57
 []\OT1/cmr/m/n/10.95 Ve stejnem ob-dob pra-co-vali Ni-cho-las Ayache a Oli-v
 ier Fau-ge-ras pra-co-vali na zakladech
  []
 
 
-Overfull \hbox (4.88374pt too wide) in paragraph at lines 49--53
+Overfull \hbox (4.88374pt too wide) in paragraph at lines 53--57
 \OT1/cmr/m/n/10.95 vizualn na-vi-gace a Crowley, Cha-tila a Laumond na na-vi
 -gaci pra-cujc se so-na-rem pouzvajc
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--53
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
 
  []
 
 
-Overfull \hbox (2.45653pt too wide) in paragraph at lines 54--55
+Overfull \hbox (2.45653pt too wide) in paragraph at lines 59--60
 \OT1/cmr/m/n/10.95 lan-d-marku nen potreba zna-losti lo-kace ro-bota. Od-ha
 d techto pa-ra-metru probha soucastne. 
  []
 
 [2]
-Overfull \hbox (45.21274pt too wide) in paragraph at lines 66--71
+Overfull \hbox (45.21274pt too wide) in paragraph at lines 73--78
 \OT1/cmr/m/n/10.95 V pravdepodobnostn forme resen problemu SLAM je za-
 potreb vypocet rozlozen pravdepodobnosti
  []
 
 
-Overfull \hbox (6.26328pt too wide) in paragraph at lines 66--71
+Overfull \hbox (6.26328pt too wide) in paragraph at lines 73--78
 []\OT1/cmr/m/n/10.95 Nyn je SLAM im-ple-men-to-vany ve dvou-stupnove re-ku
 r-zivn forme ko-rekce predpoved. 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 82--88
+Underfull \hbox (badness 10000) in paragraph at lines 92--98
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 88--95
+Underfull \hbox (badness 10000) in paragraph at lines 98--105
 
  []
 
 [4] [5] [6] [7]
-Overfull \hbox (3.06596pt too wide) in paragraph at lines 158--161
+Overfull \hbox (3.06596pt too wide) in paragraph at lines 175--178
 \OT1/cmr/m/n/10.95 stavu po-zice. Mame moznost mar-gi-na-li-zo-vat vsechny 
 predchoz stavy, coz vede na zhustenou
  []
 
 [8] [9]
-Overfull \hbox (6.61882pt too wide) in paragraph at lines 173--174
+Overfull \hbox (6.61882pt too wide) in paragraph at lines 195--196
 \OT1/cmr/m/n/10.95 Dale je me-toda vyzvana, zvlaste ve velkych prostre
 dch, v im-ple-men-taci ro-bustnho SLAMu,
  []
 
 
-Overfull \hbox (5.82802pt too wide) in paragraph at lines 177--179
+Overfull \hbox (5.82802pt too wide) in paragraph at lines 201--203
 \OT1/cmr/m/n/10.95 Zakladnmi dvema typy pro po-zo-rovan je viden, po-
 moc ka-mery, nebo nejaky typ dalkoveho
  []
 
 
-Overfull \hbox (1.11221pt too wide) in paragraph at lines 177--179
+Overfull \hbox (1.11221pt too wide) in paragraph at lines 201--203
 \OT1/cmr/m/n/10.95 vzdalenosti byva velmi presne, za to se pro tento typ v
 y-sky-tuje problem se srkou vyslaneho
  []
 
 
-Overfull \hbox (14.89813pt too wide) in paragraph at lines 180--181
+Overfull \hbox (14.89813pt too wide) in paragraph at lines 205--206
 \OT1/cmr/m/n/10.95 slozitost a kom-pli-ko-vanejs mo-de-lovan, zpusoben
 e slozitejsm snmanm. Rozlisujeme zakladn
  []
 
 [10]
-Overfull \hbox (29.41476pt too wide) in paragraph at lines 189--189
+Overfull \hbox (29.41476pt too wide) in paragraph at lines 218--218
 []\OT1/cmr/bx/n/14.4 Improved tech-niques for grid map-ping with Rao-Blackwelli
 zed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--201
+Underfull \hbox (badness 10000) in paragraph at lines 221--231
 
  []
 
 [11]
-Overfull \hbox (11.84923pt too wide) in paragraph at lines 202--214
+Overfull \hbox (11.84923pt too wide) in paragraph at lines 233--245
 \OT1/cmr/m/n/10.95 krok pro potrebnou konecnost castic k apro-xi-maci kon-t
 inualnho rozlozen, dale prevzorkovan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--214
+Underfull \hbox (badness 10000) in paragraph at lines 233--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--238
+Underfull \hbox (badness 10000) in paragraph at lines 247--270
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--238
+Underfull \hbox (badness 10000) in paragraph at lines 247--270
 
  []
 
 
-Overfull \hbox (5.43262pt too wide) in paragraph at lines 215--238
+Overfull \hbox (5.43262pt too wide) in paragraph at lines 247--270
 \OT1/cmr/m/n/10.95 (uvazuje odo-me-t-rii a po-zo-rovan, me-zitm efek-tivn
 e vzor-kuje), snzena neurcitost vyslednych
  []
 
 
-Overfull \hbox (10.9051pt too wide) in paragraph at lines 215--238
+Overfull \hbox (10.9051pt too wide) in paragraph at lines 247--270
 \OT1/cmr/m/n/10.95 rovan - vzor-kovan z dulezitych ob-last - vetsi
 na po-rovnavacu ma-xi-ma-li-zuje pravdepodobnost
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--238
+Underfull \hbox (badness 10000) in paragraph at lines 247--270
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 215--238
+Underfull \hbox (badness 10000) in paragraph at lines 247--270
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 238--249
+Underfull \hbox (badness 10000) in paragraph at lines 270--281
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 250--259
+Underfull \hbox (badness 10000) in paragraph at lines 283--292
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--277
+Underfull \hbox (badness 10000) in paragraph at lines 294--310
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 279--303
+Underfull \hbox (badness 10000) in paragraph at lines 312--336
 
  []
 
-[15] [16] (SLAM.aux) ) 
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 342--348
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 350--355
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 357--373
+
+ []
+
+[16] [17] (SLAM.aux) ) 
 Here is how much of TeX's memory you used:
  8040 strings out of 493312
- 115542 string characters out of 3138899
+ 115552 string characters out of 3138899
  307364 words of memory out of 3000000
  11444 multiletter control sequences out of 15000+200000
  9806 words of font info for 37 fonts, out of 3000000 for 9000
@@ -902,9 +917,9 @@ iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9
 e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
 /cm/cmsy8.pfb>
-Output written on SLAM.pdf (17 pages, 192096 bytes).
+Output written on SLAM.pdf (18 pages, 199366 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
+ 102 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
