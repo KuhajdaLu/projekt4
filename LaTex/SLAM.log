@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  28 DEC 2018 14:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  6 JAN 2019 23:41
 entering extended mode
 **./SLAM.tex
 (SLAM.tex
@@ -725,11 +725,11 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [1])
 \tf@toc=\write3
 \openout3 = `SLAM.toc'.
 
- [1]
+ [2]
 Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
@@ -757,7 +757,7 @@ Overfull \hbox (2.45653pt too wide) in paragraph at lines 59--60
 d techto pa-ra-metru probha soucastne. 
  []
 
-[2]
+[3]
 Overfull \hbox (45.21274pt too wide) in paragraph at lines 73--78
 \OT1/cmr/m/n/10.95 V pravdepodobnostn forme resen problemu SLAM je za-
 potreb vypocet rozlozen pravdepodobnosti
@@ -769,7 +769,7 @@ Overfull \hbox (6.26328pt too wide) in paragraph at lines 73--78
 r-zivn forme ko-rekce predpoved. 
  []
 
-[3]
+[4]
 Underfull \hbox (badness 10000) in paragraph at lines 92--98
 
  []
@@ -779,13 +779,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 98--105
 
  []
 
-[4] [5] [6] [7]
+[5] [6] [7] [8]
 Overfull \hbox (3.06596pt too wide) in paragraph at lines 175--178
 \OT1/cmr/m/n/10.95 stavu po-zice. Mame moznost mar-gi-na-li-zo-vat vsechny 
 predchoz stavy, coz vede na zhustenou
  []
 
-[8] [9]
+[9] [10]
 Overfull \hbox (6.61882pt too wide) in paragraph at lines 195--196
 \OT1/cmr/m/n/10.95 Dale je me-toda vyzvana, zvlaste ve velkych prostre
 dch, v im-ple-men-taci ro-bustnho SLAMu,
@@ -809,7 +809,7 @@ Overfull \hbox (14.89813pt too wide) in paragraph at lines 205--206
 e slozitejsm snmanm. Rozlisujeme zakladn
  []
 
-[10]
+[11]
 Overfull \hbox (29.41476pt too wide) in paragraph at lines 218--218
 []\OT1/cmr/bx/n/14.4 Improved tech-niques for grid map-ping with Rao-Blackwelli
 zed
@@ -820,7 +820,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--231
 
  []
 
-[11]
+[12]
 Overfull \hbox (11.84923pt too wide) in paragraph at lines 233--245
 \OT1/cmr/m/n/10.95 krok pro potrebnou konecnost castic k apro-xi-maci kon-t
 inualnho rozlozen, dale prevzorkovan
@@ -863,12 +863,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 247--270
 
  []
 
-[12]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 270--281
 
  []
 
-[13]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 283--292
 
  []
@@ -878,12 +878,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 294--310
 
  []
 
-[14]
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 312--336
 
  []
 
-[15]
+[16]
 Underfull \hbox (badness 10000) in paragraph at lines 342--348
 
  []
@@ -898,7 +898,47 @@ Underfull \hbox (badness 10000) in paragraph at lines 357--373
 
  []
 
-[16] [17] (SLAM.aux) ) 
+[17]
+Underfull \hbox (badness 10000) in paragraph at lines 376--382
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 382--387
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--403
+
+ []
+
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 403--406
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 410--416
+
+ []
+
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 428--433
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 453--457
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 459--469
+
+ []
+
+[21] (SLAM.aux) ) 
 Here is how much of TeX's memory you used:
  8040 strings out of 493312
  115552 string characters out of 3138899
@@ -906,20 +946,21 @@ Here is how much of TeX's memory you used:
  11444 multiletter control sequences out of 15000+200000
  9806 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,14n,39p,1265b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
-2.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmsy8.pfb>
-Output written on SLAM.pdf (18 pages, 199366 bytes).
+ 41i,14n,39p,1265b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+bx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Pro
+gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+
+Output written on SLAM.pdf (22 pages, 226011 bytes).
 PDF statistics:
- 102 PDF objects out of 1000 (max. 8388607)
+ 119 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

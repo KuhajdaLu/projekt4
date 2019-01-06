@@ -356,11 +356,11 @@ Převzorkování ... O(N*M)\\
 \subsection{Local 2D SLAM}
 - lokální a globální přístup - obě optimalizace pozice (x, y, natočení)\\
 - IMU - inertial measurment unit - odhad směru gravitace, při nerovné ploše\\
-- submapa - kousek světa - lokální chyba chyba porovnáváí je odstaněna v globálním přístupu\\
-- Sken - iterativní, zarovnávání skenů a rámů submapy\\
+- submapa - kousek světa - lokální chyba porovnáváí je odstaněna v globálním přístupu\\
+- Sken - iterativní, zarovnávání skenů a souřadnicových snímků submapy\\
 - - $H$ ... informace o bodech skenu\\
 - - $M$ ... pravděpodobnostní mřížka\\
-- - $\xi$ ... pozice rámu skenu\\
+- - $\xi$ ... pozice snímání skenu\\
 - - $T_{\xi}$ ... pozice skenu vůči submapě - transormace - body skenu do submapy\\
 - Submapy - pár skenů do submapy - pravděpodobnostní mřížky mapované z diskrétních bodů mřížky v určitém rozlišení (5 cm)\\
 - - všechny body mřížky - odpovídající pixel ze všech pixelů nejblíže danému bodu\\
@@ -372,9 +372,100 @@ Převzorkování ... O(N*M)\\
 - Ceres scan matching - před vložením do submapy - optimalizace pozice skenu vůči submapě - maximalizace pravděpodobnosti\\
 $$argmin_\xi\Sigma^K_{k=1}(1-M(T_{\xi}h_k))$$
 
+\subsection{Closing loops}
+- hromadění lokálních chyb, jen pár snímků za sebou má vždy minimální chybu vůči sobě\\
+- Spare Pose Adjustment - optimalizace pozice snímků\\
+- - relativní pozice skenů jsou ukládány, všechny další páry ze skenů a submap jsou brány v potaz při uzavírání smyčky, pokud se submapa nezmění\\
+- běh v pozadí, shoda - relativní pozice uložena mezi optimalizační problémy\\
+- optimalizační problém - nelineární nejmenší čtevrce, jednoduché přidávání zbytků - zohlednění dalších dat\\
+- - 1x za sekundu Ceres - optimalizace pozice skenu v souladu vůči daným omezením - relativní pozice, kovarianční matice\\
+$$argmin_{\Xi^m,\Xi^s}0.5\Sigma_{ij}\rho(E^2(\xi_i^m,\xi_j^s,\Sigma_{ij},\xi_{ij}))$$
+- - $\rho$ ... ztrátová funkce\\
+- - - Huberova ztráta - snížení vlivu odlehlých hodnot - přidávají nesprávná omezení do optimalizačního problému - lokálně symetrická prostředí\\
+- branch-and-bound scan matching - větev a mez\\
+- - přesnost pixelů\\
+$$\xi^*=argmax_{(\xi\epsilon W)}\Sigma_{k=1}^KM_{nearest}(T_{\xi}h_k) $$
+- - $W$ ... vyhledávací okno\\
+- - $M_{nearest}$ ... rozšíření M na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky - rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel\\
+- - vylepšení účinnosti - úhlový krok takový, aby body skenu v maximálním rozsahu nebyly větší než šířka žádného pixelu - pomalé\\
+- - použití branch-and-bound - podmnožiny možností jako uzly ve stromu, kořenový uzel jsou všechny možná řešení ($W$)\\
+- - uzly - potomci dohromady tvoří stejný soubor možností jako rodičovský uzel\\
+- - listy - singlety - jediné proveditelné řešení\\
+- - stejné řešení jako předchozí přístup pokud je $score(c)$ vnitřních uzlů horní mezí skóre jeho prvků - neexistuje lepší řešení než to doposud známé\\
+- výběr uzlů - prohledávání do hloubky - DFS\\
+- - efektivnost závisí na tom jaký je strom - dobrá horní mez a dobré aktuální řešení\\
+- - prahová hodnota skóre - pod ní nemáme zájem o dané řešení - nepřidáváme špatné shody jako omezení pro uzavírání smyčky\\
+- - - často nepřekonané - snížení výnamu výběru uzlů nebo nalezení počátečního heuristického nastavení\\
+- - pořadí průchodu stromu - výpočet horní hranice skóre pro každého potomka, navštívení nejlibnějšího uzlu - největší mezní počet\\
+- pravidlo větvení - každý uzel popsán pomocí tuple integerů ($c=(c_x,c_y,c_\Theta,c_h)$ $\epsilon Z^4$)\\
+- - $c_h$ ... výška uzlu - $c_h=0 \rightarrow$ uzel je list\\
+- výpočet horních mezí - výpočet na vnitřních uzlech - zákem o výpočetní úsilí a kvalitu spojení\\
+$$score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)$$
+- - pro výpočet použití předvypočítaného $M_{precomp}^{c_h}$ - můžeme vypočítat skóre s lineární náročností s body skenu\\
+- - - udržení nízké naročnosti - čekání než pravděpodobnostní mřížka není již aktualizována, poté výpočet sbírky předvypočítaných mřížek, znovu a začínáme porovnávat\\
 
+\section{A Flexible and Scalable SLAM System with Full 3D Motion Estimation \\ Hector SLAM}
 
+\subsection{Úvod}
+- nízké výpočetní nároky - malé autonomní systémy\\
+- ne pro uzavírání velkých smyček\\
+- pro rychlý pohyb terénem\\
+- 2D SLAM (soft real time), 3D navigace (hard real time), IMU (inertial measurment unit) - nerovný povrch - narozdíl od gmappingu\\
+- frontend SLAM - Hector - odhad pohybu robota v reálném čase\\
+- backend SLAM - optimalizace pozičního grafu vzhledem k omezením mezi pozicemi\\
 
+\subsection{System overview}
+- pro 6DOF - z 3DOF odhadem nakolonění a rotace - navigační filtr spojí měření z inerciální jednotky a dalších senzorů (3D řešení), informace o poloze (2D SLAM) - volně spojeno, synchronizace v čase\\
+- $x=(\Omega^T p^T v^T)^T$ ... reorezentace 3D stavu\\
+- $\Omega=(\phi,\theta,\psi)^T$ ... otáčení, stoupání, natočení\\
+- $p,v$ ... pozice, rychlost platformy v navigačním rámci\\
+- $u=(\omega^T a^T)^T$ ... vstupní vektor pro inerciální měření\\
+- $\omega=(\omega_x,\omega_y,\omega_z)^T$ ... úhlová rychlost\\
+- $a=(a_x,a_y,a_z)^T$ ... zrychlení\\
+pohyb tuhého tělesa
+$$\dot{\Omega}=E_\Omega.\omega$$
+$$\dot{p}=v$$
+$$\dot{v}=R_\Omega.a+g$$
+- $R_\Omega$ ... matice směrových cosinů\\
+- $E_\Omega$ ... mapování natočení těla na deriváty Eulerova úhlu\\
+- $g$ ... vektor gravitace\\
+- integrovaná rychlost a pozice - signifikantní šum $\rightarrow$ další informace o senzoru - porovnávání snímků (interiéry), snímač magnetického pole (směr), senzor barometrického tlaku (výška), měření rychlosti kol\\
+
+\subsection{2D SLAM}
+- mžížková mapa obsazenosti - reprezentace prostředí, osvědčená lokalizace robota\\
+- transformace skenu na lokální stabilizovaný souřadnicový rámec odhadovanou polohou\\
+- odhad orientace + sdružené hodnoty $\rightarrow$ bodový oblak bodů - možnost předzpracování - odstranění odlehlých bodů\\
+- tady filtrace na základě koncového bodu $z$ - při shodě skenu použity pouze koncové bodyprahové hodnoty skenovací roviny\\
+- přístup k mapě - mřížková mapa obsazenosti - omezení přesnosti, neumožnění přímého výpočtu interpolovaných hodnot a derivátů - interpolační schéma - submřížková přesnost buňky bilineárním filtrem\\
+- - aproximace souřadnice $P_m$ čtyřmi nejbližšími integerovými souřadnicemi ($P_{00} - P_{11}$)\\
+- - vzorkovací body (buňky mřížky) od sebe na vzdálenost 1\\
+- porovnávání snímků - zarovnávání snímků vůči sobě nebo celé mapě\\
+- - laserové skenery - malý šum, vysoká rychlost dělání snímků $\rightarrow$ možnost velmi přesného měření\\
+- - - mnohem větší přesnost než odometrie, pokud vůbec je - v tomto případě nemáme vůbec\\
+- - zarovnání koncových bodů s již známou mapou - není zapotřebí hledání spojení mezi koncovými body - porovnání se všemi předchozími skeny\\
+- - hledání transformace s nejlepším sladěním skenu s mapou
+$$\xi^*=argmin_\xi\Sigma_{i=1}^n[1-M(S_i(\xi))]^2$$
+- - $M(P_m)$ ... hodnota obsazenosti\\
+- - $S_i(\xi)$ ... souřadnice koncového bodu $s_i=(s_{i,x},s_{i,y})^T$\\
+- - $\xi$ ... souřadnice robota\\
+- - $M(S_i(\xi))$ ... hodnota mapy v souřadnicích $S_i(\xi)$
+- - odhad $\Delta\xi$ - optimalizace chyby měření podle
+$$\Sigma_{i=1}^n[1-M(S_i(\xi+\Delta\xi))]^2\rightarrow 0$$
+- reprezentace map s více rozlišeními - riziko dosahu pouze lokálního minima - tímto se riziko zmírňuje - více mžížkových map vždy s polovičním rozlišením oproti předchozí - uložených více map, součastné aktualizace odhady pozice generovaných zarovnávacím procesem\\
+- - konzistence map napříč stupnicemi, vyhnutí se převzorkování\\
+- - zarovnávání skenů na nejvyšší mapě, odhad pozice poté pro všechny ostatní - okamžitá dostupnost hrubých zrnitých map - dobré pro odhad trasy\\
+ 
+\subsection{3D State Estimation}
+- odhad úplného 3D stavového vektoru\\
+- navigační filtr - 100 Hz - asynchronní aktualizace s pozicí z porovnávače a dalších informací ze senzorů jakmile přijdou\\
+- navigační filtr - EKF - odhad 6D pozice - rozšíření ještě o náklon gyroskopů a akcelerometry\\
+- - nelineární filtr, inerciální měření se berou jako známé vstupy systému\\
+- - aktualizace rychlosti a pozice integrací zrychlení\\
+- - aktualizace pseudo-nulové rychlosti - zabránění nezávislému růstu odhadu stavu pokud nejsou k dispozici měření - při dosažení odchylky určité prahové hodnoty - zajištění stability\\
+- - pro odhad potřeba barometr, snímač rozsahu\\
+- integrace SLAM - 2D SLAM + 3D EKF - komunikace v obou směrech - nesynchronizovány, EKF větší frekvence obnovování\\
+- - odhadovaná pozice EKF počáteční odhad pro optimalizaci porovnávání - nebo integrace odhadované rychlosti a úhlové rychlosti\\
+- - opačně - kovarianční křižovatka (CI - covariance intersection) - spojení pozice ze SLAM s celkovým odhadovaným stavem\\
 
 
 
