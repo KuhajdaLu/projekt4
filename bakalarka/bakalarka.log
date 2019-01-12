@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  8 JAN 2019 23:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  12 JAN 2019 17:26
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -734,58 +734,59 @@ Underfull \hbox (badness 10000) in paragraph at lines 50--51
  []
 
 
-Overfull \hbox (11.6728pt too wide) in paragraph at lines 53--57
+Overfull \hbox (11.6728pt too wide) in paragraph at lines 54--58
 \OT1/cmr/m/n/10.95 o vztahu mezi ori-entacnmi body (lan-d-marky) a zmensen
  ge-o-me-t-ricke nepresnosti. Dulezitym
  []
 
 
-Overfull \hbox (6.28911pt too wide) in paragraph at lines 59--60
+Overfull \hbox (6.28911pt too wide) in paragraph at lines 61--62
 \OT1/cmr/m/n/10.95 lan-d-marku nen treba zna-losti jeho lo-kace, ne-bot[] o
 d-had techto pa-ra-metru probha soucastne. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--71
+Underfull \hbox (badness 10000) in paragraph at lines 64--73
 
  []
 
 [3]
-Overfull \hbox (16.27882pt too wide) in paragraph at lines 78--80
+Overfull \hbox (16.27882pt too wide) in paragraph at lines 79--81
 []\OT1/cmr/m/n/10.95 Model po-hybu vo-zi-dla muze byt popsan jako sta-vovy
  prechodovy mo-del. Predpokladame
  []
 
 
-Overfull \hbox (3.97008pt too wide) in paragraph at lines 89--93
+Overfull \hbox (3.97008pt too wide) in paragraph at lines 90--94
 \OT1/cmr/m/n/10.95 tudz od-had po-zice lan-d-marku bude s narustajcm p
 octem po-zo-rovan mo-notonne presnejs.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 89--93
+Underfull \hbox (badness 10000) in paragraph at lines 90--94
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 100--106
+Underfull \hbox (badness 10000) in paragraph at lines 102--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 106--113
+Underfull \hbox (badness 10000) in paragraph at lines 108--115
 
  []
 
 [5]
-Overfull \hbox (9.8002pt too wide) in paragraph at lines 137--141
+Overfull \hbox (9.8002pt too wide) in paragraph at lines 140--144
 []\OT1/cmr/m/n/10.95 Zpracovan kazdeho lan-d-marku probha zvlast[], p
 o-zice se ak-tu-a-li-zuje stejnym zpusobem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--143
-
+Overfull \hbox (1.79448pt too wide) in paragraph at lines 149--151
+[]\OT1/cmr/m/n/10.95 Prvnm prstupem pro re-dukci vypocetn slozitosti,
+ je ome-zen pozadovaneho vypoctu
  []
 
 [6] [7]
@@ -794,182 +795,158 @@ Overfull \hbox (3.06596pt too wide) in paragraph at lines 187--190
 predchoz stavy, coz vede na zhustenou
  []
 
-[8] [9]
-Overfull \hbox (6.61882pt too wide) in paragraph at lines 207--208
-\OT1/cmr/m/n/10.95 Dale je me-toda vyzvana, zvlaste ve velkych prostre
-dch, v im-ple-men-taci ro-bustnho SLAMu,
- []
-
-
-Overfull \hbox (5.82802pt too wide) in paragraph at lines 213--215
-\OT1/cmr/m/n/10.95 Zakladnmi dvema typy pro po-zo-rovan je viden, po-
-moc ka-mery, nebo nejaky typ dalkoveho
- []
-
-
-Overfull \hbox (1.11221pt too wide) in paragraph at lines 213--215
-\OT1/cmr/m/n/10.95 vzdalenosti byva velmi presne, za to se pro tento typ v
-y-sky-tuje problem se srkou vyslaneho
- []
-
-
-Overfull \hbox (14.89813pt too wide) in paragraph at lines 217--218
-\OT1/cmr/m/n/10.95 slozitost a kom-pli-ko-vanejs mo-de-lovan, zpusoben
-e slozitejsm snmanm. Rozlisujeme zakladn
- []
-
-[10]
-Overfull \hbox (29.41476pt too wide) in paragraph at lines 230--230
+[8] [9] [10] [11]
+Overfull \hbox (29.41476pt too wide) in paragraph at lines 234--234
 []\OT1/cmr/bx/n/14.4 Improved tech-niques for grid map-ping with Rao-Blackwelli
 zed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 233--243
+Underfull \hbox (badness 10000) in paragraph at lines 237--247
 
  []
 
-[11]
-Overfull \hbox (11.84923pt too wide) in paragraph at lines 245--257
+
+Overfull \hbox (11.84923pt too wide) in paragraph at lines 249--261
 \OT1/cmr/m/n/10.95 krok pro potrebnou konecnost castic k apro-xi-maci kon-t
 inualnho rozlozen, dale prevzorkovan
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 245--257
+Underfull \hbox (badness 10000) in paragraph at lines 249--261
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--282
+Underfull \hbox (badness 10000) in paragraph at lines 263--286
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--282
+Underfull \hbox (badness 10000) in paragraph at lines 263--286
 
  []
 
 
-Overfull \hbox (5.43262pt too wide) in paragraph at lines 259--282
+Overfull \hbox (5.43262pt too wide) in paragraph at lines 263--286
 \OT1/cmr/m/n/10.95 (uvazuje odo-me-t-rii a po-zo-rovan, me-zitm efek-tivn
 e vzor-kuje), snzena neurcitost vyslednych
  []
 
 
-Overfull \hbox (10.9051pt too wide) in paragraph at lines 259--282
+Overfull \hbox (10.9051pt too wide) in paragraph at lines 263--286
 \OT1/cmr/m/n/10.95 rovan - vzor-kovan z dulezitych ob-last - vetsi
 na po-rovnavacu ma-xi-ma-li-zuje pravdepodobnost
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--282
+Underfull \hbox (badness 10000) in paragraph at lines 263--286
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 259--282
+Underfull \hbox (badness 10000) in paragraph at lines 263--286
 
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 282--293
-
- []
-
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 295--304
+[12] [13]
+Underfull \hbox (badness 10000) in paragraph at lines 286--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 306--322
+Underfull \hbox (badness 10000) in paragraph at lines 299--308
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 324--348
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 354--360
+Underfull \hbox (badness 10000) in paragraph at lines 310--326
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--367
+Underfull \hbox (badness 10000) in paragraph at lines 328--352
+
+ []
+
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 359--365
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 369--385
-
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 388--394
+Underfull \hbox (badness 10000) in paragraph at lines 367--372
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 394--399
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 399--415
+Underfull \hbox (badness 10000) in paragraph at lines 374--390
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 415--418
+Underfull \hbox (badness 10000) in paragraph at lines 393--399
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 422--428
+Underfull \hbox (badness 10000) in paragraph at lines 399--404
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 404--420
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 440--445
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 465--469
+Underfull \hbox (badness 10000) in paragraph at lines 420--423
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 471--481
+Underfull \hbox (badness 10000) in paragraph at lines 430--436
 
  []
 
-[20] (bakalarka.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 448--453
+
+ []
+
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 473--477
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 479--489
+
+ []
+
+[21] [22] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
  8040 strings out of 493312
  115632 string characters out of 3138899
- 307364 words of memory out of 3000000
+ 309364 words of memory out of 3000000
  11444 multiletter control sequences out of 15000+200000
  9806 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,14n,39p,1116b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx1
-2.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9
-/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
-cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8
-.pfb>
-Output written on bakalarka.pdf (21 pages, 222262 bytes).
+ 41i,14n,39p,1041b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmsy8.pfb>
+Output written on bakalarka.pdf (23 pages, 222243 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
+ 122 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
