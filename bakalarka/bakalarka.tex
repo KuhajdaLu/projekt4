@@ -134,7 +134,7 @@ Mezi hlavní problémy této metody se řadí konvergence, výpočetní složito
 \indent Nelinerita je posledním z významných problémů, kvůli níž můžeme dojít k větším nepřesnostem ve výsledku, neboť EKF-SLAM využívá lineárních modelů pro vyjádření nelineárního pohybu a modelu pozorování, konvergence a konzistence modelu je tedy jistá pouze v lineárním případě. 
 
 
-\subsection{Rao-Blackweillizedův filtr}
+\subsection{Rao-Blackweillizedův částicový filtr (RBPF)}
 Forma SLAM založená na Rao-Blackellizedově filtru, jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Je výpočetně nemožné aplikovat na stavový prostor s vysokým počtem dimenzí partikulární filtry, je však možné redukovat velikost vzorků. \\
 Sdružený stav může být jako faktor komponentů vozidla a podmíněných komponentů mapy:
 $$P(X_{0:k},m|Z_{0:k},U_{0:k},x_0)=P(m|X_{0:k},Z_{0:k})P(X_{0:k}|Z_{0:k},U_{0:k},x_0) $$ 
@@ -231,124 +231,40 @@ Ve světě se setkáváme převážně s dynamicky se vyvíjejícím prostředí
 
 \newpage
 
-\section{Improved techniques for grid mapping with Rao-Blackwellized particle filters}
+\section{Improved techniques for grid mapping with Rao-Blackwellized particle filters\\GMAPPING}
 
-\subsection{Introduction}
-- tvorba mapy - základní funkce mobilního robota (problém mapování = SLAM)\\
-- pro odhad pozice dobrá mapa, pro získání mapy dobrý odhad pozice\\
-- $\rightarrow$ RBPF - effective solution\\
-- redukce dat, převzorkování může elimiovat správné částice $\rightarrow$ problém vyčerpání částice\\
-- 2 přístupy zlepšení RBPF \\
-- - návrhové rozložení zahrnuje přesnost senzoru $\rightarrow$ přesné vykreslení částic\\
-- - vzorkovací technika udžující rozumné množství částic, umožňuje algoritmu určovat přesnou mapu a snižuje riziko vyčerpání částic\\
-- návrhové rozložení - vyhodnocováním pravěpodobné pozice (kombinace informací z laseru a odometrie), poslední pozorování použito pro tvorbu nových částic $\rightarrow$ odhad stavu na základě více informací než pouze na odometrii \\
-- - přesnější mapa - zvážení vlivu pozorování na pozici, poté až změny v mapě $\rightarrow$ redukce chyby odhadu\\
-- - adaptivní vzorkování - udělání zvorku pouze když ho potřebujeme, udržení rozumné různosti částic $\rightarrow$ snížení rizika vyčerpání částice\\
+\subsection{Úvod}
+Jako velice podstatný úkol mobilního robota, bereme schopnost tvorby mapy. Tu můžeme kvalitně vytvářet, pokud máme dobrý odhad pozice a pozici zase správně získávat, pokud máme dostatečně kvalitní mapu. Efektivním řešením je tedy RBPF, který můžeme ještě zlepšit. Jednou možností, je zahrnout přesnost měření do návrhového rozložení, tím získáme přesné vykreslení částic. Druhou možností, je volba vzorkovací techniky udržující rozumný počet částic. Udržujeme tak přesnou mapu a snižujeme riziko vyčerpání částice, což je problém vznikající při převzorkování.\\
+\indent Návrhové rozložení získáváme vyhodnocováním pravděpodobnosti pozice robota z kombinace informací ze senzoru a odometrie. Poslední pozorování využíváme pro tvorbu nových částic, odhad stavu tedy provádíme na základě více informací, než jen z odometrie. 
 
-\subsection{Mapping with RBPFs}
-- základní úkol - odhad sdružené postreriorní pravděpodobnosti\\
-- - cíl - mapa, trajektorie\\
-- - odhad na základě - pozorování, odometrie\\
-- odhad trajektorie, poté až mapy\\
-- mapy tvořeny pozorováním, trajektorie odpovídajícími částicemi (každá částice reprezentuje část trajektorie)\\
-- částicové filtry - SIR (sampling importance resampling) filter, pro mapovánní postupně zpracovává data ze sezoru, pak odometrii, updatuje sadu vzorků reprezentujících posterior o mapě a trajektorii\\
-- - vzorkování - nové částice jsou získávány z předchozí generace odběrem vzorků z návrhového rozložení (často pravděpodobnostní odometrie) 
-- - vážená důležitost - individuální váhu důležitosti má každá částice podle zásady důležitostního vzorkování. Váhu zavádíme kvůli tomu, že cílové rozložení neni rovno tomu navrhovanému.\\
-- - převzorkovávání - částice jsou přepisovány úměrně jejich vážené důležitosti, nezbytný krok pro potřebnou konečnost částic k aproximaci kontinuálního rozložení, dále převzorkování umožňuje použít částicový filtr v situaci neschodujícího se cílového rozložení od toho navrhovaného (po převzorkování všechny částice mají stejnou váhu)\\
-- - odhad mapy - pro každou částici je vypočítána mapa na základě trajektorie vzorku a historie pozorování\\
-- pro implementaci potřeba vyhodnocovat váhy trajektorií při každém pozorování, po delší době neefektivní\\
-- omezením navrhovaného rozložení získáme rekurzivní formulaci pro výpočet vážené důležitosti\\
+\subsection{Mapování pomocí RBPF}
+Základním úkolem je odhad posteriorní pravděpodobnosti a získat tím mapu a trajektorii pohybu, kdy odhad provádíme díky pozorování a informaci z odometrie. Nejprve dochází k odhadu mapy, kterou utváříme z pozorování, poté až trajektorii. Tu získáváme z částic, které měly v rozhodovací době největší pravděpodobnost a každá částice tedy reprezentuje část trajektorie.\\
+\indent Pro výběr správné částice používáme částicový filtr, v tomto případě SIR (Sampling Importance Resampling), který postupně při mapování zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost o mapě a trajektorii. \\
+\indent Celý proces začíná ziskem nových částic odběrem vzorků z předchozí generace návrhového rozložení. Dále nastavujeme částicím váženou důležitost, abychom neměli cílové rozložení rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem a nakonec odhad mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, vypočítána mapa.
 
-\subsection{RBPF with improved proposals and adaptive resampling}
-- zlepšení návrhového rozložení - pro zisk nové generace částic je potřeba vykreslení vzorků z návrhového rozložení (čím lepší návrh tím lepší výsledek, kdyby přímo jako cílové rozložení $\rightarrow$ stejné vážené důležitosti částic, není potřeba převzorkování)\\
-- - typický částicový filtr - návrhové rozložení = odometrický pohybový model (+ jednoduchý výpočet pro většinu robotů, vážená důležitost je počítána podle modelu pozorování) - toto rozložení není optimální, zvlášť pokud je senzor výrazně přesnější než odhad pozice (laser)\\ 
-- - vyhlazování pravděpodobné funkce - zabránění, částicím v blízkosti významné oblasti, přílišného poklesu vážených důležitostí (- vyřazuje užitečnou informaci ze senzoru $\rightarrow$ nepřesnější mapa)\\
-- - překonání problému - zvažovat poslední pozorování při generování nových vzorků, integrováním posledního pozorování do návrhu se dá zaměřit na vzorkování ve významné oblasti pravděpodobnosti pozorování\\
-\\
-- efektivní výpočet zlepšeného návrhu - nepředvídatelná funkce pravděpodobnosti pozorování $\rightarrow$ nedostupná uzavřená aproximace informačního návrhu\\
-- - teorie - získání aproximace upraveným částicovým filtrem - návrh pro každou částici je vypočten odhadem vzorků z optimálního návrhu\\
-- - SLAM - navzorkování potenciální pozice z pohybového modelu $\rightarrow$ zvážení vzorků podle pravděpodobnosti pozorování (zisk aproximace optimálního návrhu - pokud již je, stále je potřeba vysoký počet vzorků pozice z pohybového modelu)\\
-- - většinou cílové rozložení omezený počet maxim (většinou jedno) $\rightarrow$ vzorkování pozic kolem maxima (snížení složitosti) - zvažujeme pravděpodobnost pozorování i pohybový model v době použití senzoru - lokální aproximace posteriorní pravděpodobnosti kolem maxima pravděpodobnostní funkce\\
-- - - na těchto datech počítáme Gaussovskou aproximaci - efektivní vykreslování nových vzorků\\
-- - - porovnání scanů pro zisk významé oblasti z funkce pravděpodobnosti pozorování $\rightarrow$ navzorkujeme tuto oblast, vyhodnotíme vzorky podle cílového rozložení\\
-- - - pro každou částici $i$ jsou Gaussiánské parametry ($\mu_t^i$, $\Sigma_t^i$) určené individuálně pro daný počet vzorků na intervalu kdy je aktivní senzor + bereme v potaz odometrii při výpočtu střední hodnoty $\mu^i$ a výchylky $\Sigma^i$ $\rightarrow$ zisk uzavřené aproximace optimálního návrhu $\rightarrow$ efektivní zisk nové generace částic - pro výpočet váhové funkce používáme stejný normalizační faktor jako u Gaussiánské aproximace\\
-\\
-- zlepšený návrh - získání parametrů Gaussiánského návrhu zvlášť pro každou částici (uvažuje odometrii a pozorování, mezitím efektivně vzorkuje), snížená neurčitost výsledných hustot\\
-- - porovnávač pozorování určuje režim významné oblasti funkce pravděpodobnosti pozorování - vzorkování z důležitých oblastí - většina porovnávačů maximalizuje pravděpodobnost pozorování, dává mapu a nástřel pozice robota\\
-- - vícerežimová pravděpodobnostní funkce (uzavření smyčky) - porovnávač vrátí pro každou částici maximum nejblíže původnímu odhadu - může způsobit ztrátudalších maxim v pravděpodobnostní funkci, protože je hlášen jen 1 režim\\
-- - přílišná důvěřivost filtru (teoreticky) - přeplněný prostor + odometrie silně zatížena šumem\\
-- - - řešení - sledovat více režimů porovnávače měření + opakovat vzorkování v každém uzlu\\
-\\
-- adaptivní převzorkování\\
-- - převzorkování - důležitý aspekt výkonu částicového filtru, nahrazování vzorků s nízkou váhou důležitosti těmi s vysokou\\
-- - - nezbytné - konečný počet částic je použit k aproximaci cílového rozložení (- může odstanit dobré vzorky z filtru $\rightarrow$ ochuzení částic) $\rightarrow$ důležité převzorkování ve správný čas, mít dobré rozhodovacví kritérium\\
-- - Liu - efektivní velikost vzorkování pro odhad, jak aktuální sada částic reprezentuje cílový posterior\\
+
+\subsection{RBPF s vylepšenými návrhy a adaptivním převzorkováním}
+Pro zisk nové generace částic je třeba vykreslení vzorků z návrhového rozložení, kde platí úměra, čím lepší návrh, tím lepší výsledek. Kdybychom měli návrh rovný cílovému rozložení, měli bychom částice se stejnou váženou důležitostí a nebylo by třeba převzorkování. \\
+\indent Typicky je návrhové rozložení odpovídající odometrickému pohybovému modelu, který však není optimální a to zejména pokud je senzor výrazně přesnější než odhad pozice. Využívá se také vyhlazování pravděpodobnostní funkce, což zabraňuje částicím v okolí významné oblasti, přílišnému poklesu vážených důležitostí. Následkem je ale zkreslení mapy. To se však dá vyřešit zahrnutím posledního pozorování do generování nových vzorků. Díky tomu se můžeme aměřit na vzorkování ve významné oblasti pro pravděpodobnost pozorování.\\
+\indent Díky zlepšenému návrhu můžeme získávat pro každou částici zvlášť její parametry Gaussiánského návrhu a snižuje se také neurčitost výsledných hustot pravěpodobnosti. Porovnávač pozorování určuje režim výnamné oblasti pravděpodobnostní funkce pozorování. Také má většinou funkci maximalizace pravděpodobnosti pozorování, tvorby mapy a počáteční odhad pozice robota. Pokud je pravděpodobnostní funkce vícerežimová, například při uzavírání smyčky, porovnávač vrací pro každou částici nejbližší maximum, což může způsobit vynechání některých maxim v pavděpodobnostní funkci.\\
+\indent Převzorkování je velice důležitým aspektem určujícím výkon částicového filtru, dochází k nahrazování vzorků s nízkou váhou, těmi s váhou vysokou. Je to nezbytný proces, neboť je potřeba konečného počtu částic pro aproximaci cílového rozložení. Může však odtranit dobré vzorky a ochudit tak částice, je proto důležité mít pro převzorkování vhodné rozhodovací kritérium a provádět ho ve správný čas. 
 $$N_{eff}=\frac{1}{\varSigma_{i-1}^N(w^{(i)})^2}$$ 
-- - - $w^{(i)}$ ... normalizovaná váha částice $i$ \\
-- - - $N_{eff}$ - vzorky z cílového rozložení $\rightarrow$ stejné váhové důležitosti (zhoršující se aproximace cílového rozložení $\rightarrow$ větší ochylka váhových důležitostí)\\
-- - - - Doucet - převzorkování, když $N_{eff}$ < N/2 (N ... počet částic) - výrazná redukce možnosti nahrazení dobrých částic (redukován počet převzorkování, převzorkování když je potřeba)\\
- - - algoritmus\\
- - - - nástřel pozice reprezentovaný danou částicí, získáno z předchozí pozice této částice a odometrického měření od poslední aktualizace filtru\\
- - - - na základě mapy provedeno porovnání pozorování z místa úvodního nástřelu pozice, vyhledává se pouze v okolí tohoto bodu, v případě selhání - pozice a váhy počítány podle pohybového modelu (další 2 kroky přeskočeny)\\
- - - - vybrána sada vzorků kolem dané pozice, vypočítání průměru a kovarianční matice návrhu bodovým hodnocením cílového rozložení v pozici vzorku, také počítán váhový faktor\\
- - - -  nová pozice částice je zakreslena podle z Gaussovské aproximace podle zlepšeného návrhového rozložení\\
- - - - aktualizace váhových důležitostí\\
- - - - mapa částice je aktualizována podle její zakreslené pozice a pozorování\\
+$w^{(i)}$ ... normalizovaná váha částice $i$ \\
+$N_{eff}$ - vzorky z cílového rozložení $\rightarrow$ stejné váhové důležitosti (zhoršující se aproximace cílového rozložení $\rightarrow$ větší odchylka vážených důležitostí)\\
+Základní nastavení převzorkování je následující:
+$$N_{eff} < N/2$$
+$N$ ... počet částic\\
+Dochází tak k výrazné redukci možnosti nahrazení dobrých částic a počtu převzorkování, které se vykonává pouze pokud je potřeba.\\
+\indent Algoritmus probíhá následovně. Zisk odhadu pozice, který je reprezentovaný danou částicí. Dostaneme ho z předchozí pozice částice a odometrického měření od poslední aktualizace. Na základě mapy je provedeno porovnání pozorování z místa úvodního odhadu pozice, kdy se vyhledává pouze v okolí tohoto bodu. V případě selhání se pozice a váhy počítají dle pohybového modelu a následující dva kroky jsou přeskočeny. Prvním z nich vybrání sady vzorků v okolí dané pozice, vypočítání průměrů a kovarianční matice návrhu bodovým hodnocením cílového rozložení v pozici vzorku. Druhým, potenciálně přeskočeným krokem, je zakreslení nové pozice částice z Gaussovské aproximace podle zlepšeného návrhového rozložení. Dále, a to již vždy, dojde k aktualizaci vážených důležitostí a podle zakreslené pozice a pozorování je aktualizována i mapa částice. 
  
-\subsection{Implementation issues}
- - porovnávač "vasco" - hledání pozice porovnáním scanu vůči mapě se zanesením i úvodního odhadu (sestupné gradientní hledání v pravděpodobnostní funkci aktuálního pozorování vůči grid mapě - hledání maxima funkce)\\
- - - může být použit každý porovnávač umožňující najít nejlepší zarovnání mezi mapou a aktuálním pozorování s ohledem na úvodní odhad\\
- - Bayesovo pravidlo - hledání pozice\\
- - model koncového bodu - výpočet pravděpodobnosti pozorování\\
- - - paprsky nezávislé - pravděpodobnost paprsku počítána na základě vzdálenosti konce paprsku od nejbližší překážky od tohoto bodu - pro rychlý výpočet využití konvolované lokální grid mapy\\
- - návrh - výpočet 2 komponent - jejich vyhodnocování pro každý vzorek\\
- - - 1. - výpočet podle modelu koncového bodu\\
- - - 2. - Gaussovská aproximace odometrie pohybového modelu - aproximace získána přes rozšíření Taylorovy řady\\
- - 0.5 m mezi 2 použití filtru - aproximace funguje dobře, žádný rozdíl mezi modelem na EKF a přesnějším  modelem rychlosti pohybu na bázi vzorků\\
+\subsection{Složitost}
+Výpočet návrhového rozložení ... $O(N)$\\
+Aktualizace grid mapy ... $O(N)$\\
+Výpočet vah ... $O(N)$\\
+Testováí potřeby převzorkování ... $O(N)$\\
+Převzorkování ... $O(N*M)$\\
+$M$ ... velikost grid mapy\\
 
-\subsection{Complexity}
-Výpočet návrhového rozložení ... O(N)\\
-Aktualizace grid mapy ... O(N)\\
-Výpočet vah ... O(N)\\
-Testováí potřeby převzorkování ... O(N)\\
-Převzorkování ... O(N*M)\\
- - naučení se grid map s RBPF\\
- - - sada vzorků - posteriorní pravděpodobnost o mapách a pozicích\\
- - - počet vrozků - centrální množství\\
- - - návrhové rozložení - vzorkování u nejpravděpodobnější pozice danou porovnávačem pozorování\\
- - - vzorkování pro každou částici, žádná závislost mezi nimi při výpočtu návrhu\\
- - - poslední pozorování - výpočet Gaussiánských parametrů\\
- - - - kryje část mapy $\rightarrow$ komplexita závisí jen na počtu vzorků\\
- - - - - to samé platí pro aktualizaci jednotlivých map spojených s každou částicí\\
- - - kopírování informace náležící částici při převzorkování - nejhůže N-1 částic nahrazeno jednou\\
- - - každá částice si nese svou grid mapu $\rightarrow$ duplikování částice - kopírování její mapy $\rightarrow$ převzorkování má složitost O(N*M) - M ... velikost grid mapy\\
- - - - používání adaptivního převzorkování\\
-
-\subsection{Experiments}
- - ActivMedia Pioneer2 AT, Pioneer 2 DX-8, iRobot B21r\\
- - venkovní i vnitřní prostory\\
- - až rozlišení do 1 cm bez problémů\\
- - 250mx250m - max 80 částic\\
- - výsledky mapování \\
- - - Intel Research Lab - vnitřní prostor, 28mx28m, 15 částic, Pioneer II, SICK senzor, velmi přesné\\
- - - Freiburg Campus - venku, 250mx250m, 30 částic, keře,stromy, pohyblivé předměty (auta, lidi) i tak přesná mapa\\
- - - MIT Killian Court - vnořené smyšky (potenciální vyčerpání částic), dlouhé chodby, důležitá vlastnost adaptivního převzorkování, 60 částic (občas dvojité stěny), 80 částic (vysoká kvalita)\\
- - vyčíslitelné výsledky - porovnání počtu částic s přístupem dirka Hahnela, počet částic které potřebuje RBPF pro vytvoření topologicky přesné mapy alespoň v 60\% použití - Intel (8 vs. 40), Freiburg (20 vs. 400), MIT (60 vs. 400) - mnohem méně částic + lepší mapa (lepší vzorkování) \\
- - účinky lepších návrhů a adaptivního vzorkování\\
- - - zlepšené návrhové rozložení - generování vzorků s vyskovou pravděpodobností, \\
- - - adaptivní vzorkování - $N_{eff}$\\
- - - návrhy bez celé vstupní historie snižují v čase $N_{eff}$ (čím horší návrh, tím rychleji) - obnovení na max hodnotu po převzorkování\\
- - - v této implementaci\\
- - - - zlepšení poklesu $N_{eff}$ - klesá pomaleji i v neznámém prostředí (návrhové rozložeí není tak vypíchnuté)\\
- - - - částice při průchodu známým prostředím zůstávají ve vlastní mapě (díky zlepšenému návrhovému rozložení a kvůli váhám)\\
- - - - uzavírání smyčky - některé částice jsou správně seřazeny (velká váha) a některé chybně (nízká váha) $\rightarrow$ zvětšení výchylek vah $\rightarrow$ snižování $N_{eff}$ - většinou vynucení převzorkování\\
- - - - výrazné snížení pravděpodobnosti vyčerpání částice - uchovávání vzorků v sadě částic\\
- - vliv odometrie na návrh - většinou je návrh jen z laseru dobrý pro odhad pohybu částic, někdy potřeba odometrie pro návrhové rozložení - např. slabé vlastnosti dat z laseru (pustá místa, koridory)\\
- - situace, kdy selhá porovnávač pozorování - nemusí na základě dat dojít k odhadu pozice\\
- - - vzorkujeme rovnou z odometrie pro zisk nových částic\\
- - - vevnitř se tento problém nestává, venku v otevřených prostorách, když laser nikde ve svém rozsahu nic nezaznamenává\\
- - analýza běhu - PC 2.8 GHz procesor, scan při pohybu o 0.5m nebo otočení o $25^o$\\
- - - výpočet návrhového rozložení, vah, aktualizace mapy (1910 ms), testování potřeby převzorkování (41 ms), převzorkování (244 ms)\\
 
 
 \newpage

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  12 JAN 2019 17:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  13 JAN 2019 20:51
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -724,11 +724,11 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1])
+))
 \tf@toc=\write3
 \openout3 = `bakalarka.toc'.
 
- [2]
+ [1] [2]
 Underfull \hbox (badness 10000) in paragraph at lines 50--51
 
  []
@@ -802,137 +802,104 @@ zed
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--247
+Overfull \hbox (21.47275pt too wide) in paragraph at lines 241--244
+[]\OT1/cmr/m/n/10.95 Cely pro-ces zacna zis-kem novych castic odberem 
+vzorku z predchoz ge-ne-race navrhoveho
+ []
+
+
+Overfull \hbox (10.35876pt too wide) in paragraph at lines 247--251
+\OT1/cmr/m/n/10.95 rozlozen, meli bychom castice se stej-nou vazenou d
+ulezitost a ne-bylo by treba prevzorkovan. 
+ []
+
+
+Overfull \hbox (15.65742pt too wide) in paragraph at lines 247--251
+\OT1/cmr/m/n/10.95 vzorku. Dky tomu se muzeme amerit na vzor-kovan ve
+ vyznamne ob-lasti pro pravdepodobnost
+ []
+
+
+Overfull \hbox (4.25232pt too wide) in paragraph at lines 247--251
+\OT1/cmr/m/n/10.95 pocatecn od-had po-zice ro-bota. Po-kud je pravdepodob
+nostn funkce vcerezimova, naprklad
+ []
+
+
+Overfull \hbox (8.42528pt too wide) in paragraph at lines 247--251
+[]\OT1/cmr/m/n/10.95 Prevzorkovan je ve-lice dulezitym aspek-tem urcuj
+cm vykon casticoveho fil-tru, dochaz
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 261--267
+
+ []
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 275--281
 
  []
 
 
-Overfull \hbox (11.84923pt too wide) in paragraph at lines 249--261
-\OT1/cmr/m/n/10.95 krok pro potrebnou konecnost castic k apro-xi-maci kon-t
-inualnho rozlozen, dale prevzorkovan
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 249--261
+Underfull \hbox (badness 10000) in paragraph at lines 283--288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--286
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--286
-
- []
-
-
-Overfull \hbox (5.43262pt too wide) in paragraph at lines 263--286
-\OT1/cmr/m/n/10.95 (uvazuje odo-me-t-rii a po-zo-rovan, me-zitm efek-tivn
-e vzor-kuje), snzena neurcitost vyslednych
- []
-
-
-Overfull \hbox (10.9051pt too wide) in paragraph at lines 263--286
-\OT1/cmr/m/n/10.95 rovan - vzor-kovan z dulezitych ob-last - vetsi
-na po-rovnavacu ma-xi-ma-li-zuje pravdepodobnost
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--286
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 263--286
-
- []
-
-[12] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 286--297
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 299--308
+Underfull \hbox (badness 10000) in paragraph at lines 290--306
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 310--326
+Underfull \hbox (badness 10000) in paragraph at lines 309--315
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--352
-
- []
-
-[15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 359--365
+Underfull \hbox (badness 10000) in paragraph at lines 315--320
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 367--372
+Underfull \hbox (badness 10000) in paragraph at lines 320--336
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 336--339
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 346--352
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--390
+Underfull \hbox (badness 10000) in paragraph at lines 364--369
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 393--399
+Underfull \hbox (badness 10000) in paragraph at lines 389--393
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--404
+Underfull \hbox (badness 10000) in paragraph at lines 395--405
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 404--420
-
- []
-
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 420--423
-
- []
-
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 430--436
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 448--453
-
- []
-
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 473--477
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 479--489
-
- []
-
-[21] [22] (bakalarka.aux) ) 
+[18] [19] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
- 8040 strings out of 493312
- 115632 string characters out of 3138899
- 309364 words of memory out of 3000000
- 11444 multiletter control sequences out of 15000+200000
+ 8033 strings out of 493312
+ 115545 string characters out of 3138899
+ 303364 words of memory out of 3000000
+ 11437 multiletter control sequences out of 15000+200000
  9806 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,14n,39p,1041b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,14n,39p,1041b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.p
@@ -944,9 +911,9 @@ ts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb>
-Output written on bakalarka.pdf (23 pages, 222243 bytes).
+Output written on bakalarka.pdf (20 pages, 214119 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
+ 113 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
