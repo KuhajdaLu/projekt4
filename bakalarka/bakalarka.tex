@@ -195,7 +195,6 @@ Rozlišujeme dva základní typy submap a to globálně a lokálně referencovan
 \subsubsection{Submapy vztažné}
 Základním rozdílem od metody globálních submap, je absence společného základního rámce. V této metodě se submapy zaznamenávají dle sousedství s ostatními a celou mapu pak můžeme získat souhrnem vektoru cesty. Submapy jsou, díky vyhýbání se globálním spojením, velmi zajímavé z hlediska výpočetní složitosti a problémům týkajících se nelinearity. Velkým kladem je například tvorba lokálně optimální mapy s výpočetní složitostí nezávislou na celkové velikosti mapy a dále, díky úpravám pouze na lokální úrovni, je velmi stabilní.
 
-
 \subsection{Asociace dat}
 Jedná se velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy, často dokonce k pádu celého algoritmu
 
@@ -207,7 +206,6 @@ Jedním ze způsobů snímání okolí je vidění, kdy zaznamenáváme tvar, ba
 
 \subsubsection{Multihypoziční asociace dat}
 Jedná se o metodu nepostradatelnou pro robustní sběr dat v přeplněním prostředí, kdy vytváříme oddělené odhady trasy jízdy pro každou asociační hypotézu. Tato funkce je však silně limitována dotupným výpočetním výkonem. Dále je metoda vyžívána při implementaci robustního SLAMu ve velkých prostředích, kdy je při uzavírání smyčky vytvořena hypotéza pro smyčku uzavřenou i pro stále neuzavřenou, a tím se bere v potaz, že je prostředí pouze podobné. 
-
 
 \subsection{Reprezentace prostředí}
 Původně se svět modeloval jen jako soubor landmarků majících svůj určitý tvar, později však, zejména ve venkovním, podvodním a podzemním použití, se ukázala tato metoda jako nevyhovující.
@@ -272,71 +270,43 @@ $M$ ... velikost grid mapy\\
 \section{Real-Time Loop Closure in 2D LIDAR SLAM \\ CARTOGRAPHER}
 
 \subsection{Úvod}
-- veliké mapy, optimalizované výsedky v reálném čase\\
-- porovnávání scan-to-scan - rychlé hromadění chyb\\
-- porovnávání scan-to-map -  omezení chyb, pokud správný odhad pozice a kvalitní data z LIDAR $\rightarrow$ efektivnost, robustnost\\
-- porovnávání přesnosti pixelů - redukce hromadění lokálních chyb oproti scan-to-scan, náročnější, použití při uzavírání smyčky\\
-- částicové filtry - tvoří stav systému pro každou částici, pro SLAM s grid-mapami s velkým prostorem rychle roste náročnost - řešení - použití systému děající grid-mapu po čase a ne v každé částici\\
-- SLAM na grafu - kolekce nodů reprezentující pozice a funkce, hrany - omezení získaná pozorováním\\
+Systém Cartographer je vyvíjen společností Google. Je vhodný pro tvorbu rozsáhlých map a zisk optimalizovaných výsledků v reálném čase. Při porovnávání snímků typem scan-to-scan dochází rychlému hromadění globálních chyb, v případě porovnávání stylem scan-to-map dochází, při správném odhadu pozice a kvalitnímu snímku z LIDARu, k velké redukci chyb, což vede k větší efektivnosti a robustnosti algoritmu. Dále se využívá také porovnávání přesnosti pixelů. Jde o metodu redukující hromadění lokálních chyb a je vhodná při řešení problému uzavírání smyčky. \\
 
-\subsection{System overview}
-- real-time 2D mřížková mapa s rozlišením na 5 cm\\
-- submapa do odhadované pozice\\
-- porovnávání vůči poslední submapě $\rightarrow$ hromadění globálních chyb\\
-- neobsahuje částicový filtr - snížení HW požadavků\\
-- pořízení submapy, dále již nepřepisování - všechny vzniklé připraveny k porovnávání na uzavření smyčky - blízká odhadovaná pozice + dostatečná shoda $\rightarrow$ přidání omezení uzavření smyčky do optimalizačního problému (odhad pozice) - optimalizace po pár vteřinách - uzavření smyčky je vidět hned \\
+\subsection{Přehled}
+Cartographer vytváří v reálném čase 2D mřížkovou mapu s rozlišením na 5 cm. Submapy se vkládají na odhadované místo a daná submapa se porovnává vůči poslední zaznamenané, dochází tedy k hromadění globální chyby z odhadu pozice. Systém neobsahuje žádný částicový filtr. Je to z důvodu snížení hardwarových nároků na běh algoritmu.\\
+\indent Submap se již po pořízení dále nijak nepřepisuje a je zařazena mezi ostatní k porovnávání na uzavření smyčky. Pokud dojde k blízkému odhadu pozice a zároveň dostatečné shodě snímků, přidá se omezení uzavření smyčky do optimalizačního problému, tím je odhad pozice. Odhad se aktualizuje po několika vteřinách a uzavření smyčka je tedy okamžitě viditelné. 
 
-\subsection{Local 2D SLAM}
-- lokální a globální přístup - obě optimalizace pozice (x, y, natočení)\\
-- IMU - inertial measurment unit - odhad směru gravitace, při nerovné ploše\\
-- submapa - kousek světa - lokální chyba porovnáváí je odstaněna v globálním přístupu\\
-- Sken - iterativní, zarovnávání skenů a souřadnicových snímků submapy\\
-- - $H$ ... informace o bodech skenu\\
-- - $M$ ... pravděpodobnostní mřížka\\
-- - $\xi$ ... pozice snímání skenu\\
-- - $T_{\xi}$ ... pozice skenu vůči submapě - transormace - body skenu do submapy\\
-- Submapy - pár skenů do submapy - pravděpodobnostní mřížky mapované z diskrétních bodů mřížky v určitém rozlišení (5 cm)\\
-- - všechny body mřížky - odpovídající pixel ze všech pixelů nejblíže danému bodu\\
-- - přidání skenu do pravděpodobnostní mřížky - výpočet množiny zasažených bodů mřížky a minutých bodů\\
-- - zásah - vložíme nejbližší bod mřížky do množiny zásahů\\
-- - minutí - vložíme bod mřížky sdružený se všemi pixely, které jsou protínány jedním paprskem mezi počátkem skenování a každým snímacím bodem - nepřidáváme body již přidané do množiny zásahů\\
-- - dosud nepozorovaný bod mřížky má přiřazenu pravděpodobnost minutí či zásahu, podle toho jestli je v jedné z těchto množin\\
-- - již zpozorovaným bodům aktualizujeme pravděpodobnosti minutí a zásahu\\
-- Ceres scan matching - před vložením do submapy - optimalizace pozice skenu vůči submapě - maximalizace pravděpodobnosti\\
+\subsection{Lokální 2D SLAM}
+Rozlišujeme dva možné přístupy, lokální a globální, v obou případech se jedná o optimalizaci pozice, přičemž pozice se zkládá z hodnoty na ose $x$, z hodnoty na ose $y$ a z natočení robota. V systému je také obsažená jednotka IMU (inertial measurment unit), která slouží k odhadu směru gravitace, což má využití při pohybu na nerovné ploše.\\
+\indent Skeny prostředí se iterativně zarovnávají se snímky již obsaženými v submapě. Submapa je tedy v postatě zachycení kousku světa, který je složený z pár skenů. Lokální chyba, vznikající při její tvorbě, je poté odstraněna v globálním přístupu. Pro každý bod mřížky zadefinujeme odpovídající pixel skládající se ze všech pixelů nejblíže danému bodu.\\
+\indent Při přidání skenu do pravděpodobnostní mřížky, počítáme množinu zasažených bodů mřížky a bodů minutých. Při zásahu vložíme nejbližší bod mřížky do množiny zásahů. Při minutí vložíme bod mřížky sdružený se všemi pixely, které jsou protínány jedním paprskem mezi počátkem skenování a každým snímacím bodem. Nepřidáváme sem body již přidané do množiny zásahů. Doposud nepozorované body mřížky mají přiřazenou pravděpodobnost minutí či zásahu, podle toho, jestli se v jedné z těchto množin vyskytují. Již pozorovaným bodům pak aktualizujeme pravděpodobnosti minutí a zásahu.\\
+\indent Před vložením skenu do submapy se ještě využívá Ceres scan matching, který optimalizuje pozici skenu vůči submapě. Jedná se o maximalizaci pravděpodobnosti výskytu v dané oblasti.  
+
 $$argmin_\xi\Sigma^K_{k=1}(1-M(T_{\xi}h_k))$$
+$H$ ... informace o bodech skenu\\
+$M$ ... pravděpodobnostní mřížka\\
+$\xi$ ... pozice snímání skenu\\
+$T_{\xi}$ ... pozice skenu vůči submapě - transormace (body skenu do submapy)\\
 
-\subsection{Closing loops}
-- hromadění lokálních chyb, jen pár snímků za sebou má vždy minimální chybu vůči sobě\\
-- Spare Pose Adjustment - optimalizace pozice snímků\\
-- - relativní pozice skenů jsou ukládány, všechny další páry ze skenů a submap jsou brány v potaz při uzavírání smyčky, pokud se submapa nezmění\\
-- běh v pozadí, shoda - relativní pozice uložena mezi optimalizační problémy\\
-- optimalizační problém - nelineární nejmenší čtevrce, jednoduché přidávání zbytků - zohlednění dalších dat\\
-- - 1x za sekundu Ceres - optimalizace pozice skenu v souladu vůči daným omezením - relativní pozice, kovarianční matice\\
+\subsection{Uzavírání smyčky}
+Daný systém pracuje v oblasti submap s porovnáváním scan-to-scan, hromadí se v něm tedy lokální chyby, ale pár snímků za sebou má vůči sobě chybu minimální. Relativní pozice skenů se ukládají a v případě, že se submapa nezmění, všechny další páry ze skenů a submapy se předkládají k porovnávání pro uzavření smyčky. To vše běží na pozadí a pokud je nalezena shoda, dojde k uložení relativní pozice mezi optimalizační problémy.\\
+\indent Optimalizační problém je problém nelineárních nejmenších čtverců. Díky tomu můžeme jednoduše přidávat zbytky pro zohledňování dalších dat. Jednou za pár sekund je, pro optimalizaci pozice skenu vůči daným omezením, spuštěn Ceres scan matcher. Omezeními jsou myšlena relativní pozice $\xi_{ij}$ a kovarianční matice $\Sigma_{ij}$.
+
 $$argmin_{\Xi^m,\Xi^s}0.5\Sigma_{ij}\rho(E^2(\xi_i^m,\xi_j^s,\Sigma_{ij},\xi_{ij}))$$
-- - $\rho$ ... ztrátová funkce\\
-- - - Huberova ztráta - snížení vlivu odlehlých hodnot - přidávají nesprávná omezení do optimalizačního problému - lokálně symetrická prostředí\\
-- branch-and-bound scan matching - větev a mez\\
-- - přesnost pixelů\\
-$$\xi^*=argmax_{(\xi\epsilon W)}\Sigma_{k=1}^KM_{nearest}(T_{\xi}h_k) $$
-- - $W$ ... vyhledávací okno\\
-- - $M_{nearest}$ ... rozšíření M na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky - rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel\\
-- - vylepšení účinnosti - úhlový krok takový, aby body skenu v maximálním rozsahu nebyly větší než šířka žádného pixelu - pomalé\\
-- - použití branch-and-bound - podmnožiny možností jako uzly ve stromu, kořenový uzel jsou všechny možná řešení ($W$)\\
-- - uzly - potomci dohromady tvoří stejný soubor možností jako rodičovský uzel\\
-- - listy - singlety - jediné proveditelné řešení\\
-- - stejné řešení jako předchozí přístup pokud je $score(c)$ vnitřních uzlů horní mezí skóre jeho prvků - neexistuje lepší řešení než to doposud známé\\
-- výběr uzlů - prohledávání do hloubky - DFS\\
-- - efektivnost závisí na tom jaký je strom - dobrá horní mez a dobré aktuální řešení\\
-- - prahová hodnota skóre - pod ní nemáme zájem o dané řešení - nepřidáváme špatné shody jako omezení pro uzavírání smyčky\\
-- - - často nepřekonané - snížení výnamu výběru uzlů nebo nalezení počátečního heuristického nastavení\\
-- - pořadí průchodu stromu - výpočet horní hranice skóre pro každého potomka, navštívení nejlibnějšího uzlu - největší mezní počet\\
-- pravidlo větvení - každý uzel popsán pomocí tuple integerů ($c=(c_x,c_y,c_\Theta,c_h)$ $\epsilon Z^4$)\\
-- - $c_h$ ... výška uzlu - $c_h=0 \rightarrow$ uzel je list\\
-- výpočet horních mezí - výpočet na vnitřních uzlech - zákem o výpočetní úsilí a kvalitu spojení\\
-$$score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)$$
-- - pro výpočet použití předvypočítaného $M_{precomp}^{c_h}$ - můžeme vypočítat skóre s lineární náročností s body skenu\\
-- - - udržení nízké naročnosti - čekání než pravděpodobnostní mřížka není již aktualizována, poté výpočet sbírky předvypočítaných mřížek, znovu a začínáme porovnávat\\
+$\rho$ ... ztrátová funkce (např. Hubertova ztráta - snížení vlivu odlehlých hodnot, ty přiávají nesprávná omezení do optimalizačního problému)\\
 
+\indent Při uzavírání smyčky se vyžívá také branch-and-bound scan matching, což se dá přeložit jako porovnávání větví a mezí. Zde se zaměřujeme na přesnou shodu pixelů. Podmnožiny možností jsou zde popsány jako uzly stromu kdy kořenový uzel obsahuje všechna možná ($W$). Potomci uzlu dohromady utváří stejný soubor možností, jako samotný rodičovský uzel. Listy jsou brány jako singlety, odpovídají jedinému proveditelnému řešení. Tento přístup nám dává stejné řešení jako ten předchozí, dokud je hodnota $score(c)$ vnitřních uzlů horní mezní skóre jeho prvků, neexistuje tedy žádné řešení, než to doposud známé.
+
+$$\xi^*=argmax_{(\xi\epsilon W)}\Sigma_{k=1}^KM_{nearest}(T_{\xi}h_k) $$
+$W$ ... vyhledávací okno\\
+$M_{nearest}$ ... rozšíření pravděpodobnostní mřížky $M$ na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky - rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel\\
+
+\indent Výběr uzlů probíhá prohledáváním do hloubky, Efektivnost algoritmu hodně závisí na podobě stromu, zda-li má pro výpočet dobrou horní mez a dobré aktuální řešení. Důležitým termínem je zde prahová hodnota skóre. Jedná se o hodnotu, pod níž nemáme zájem jít a řešení je pro nás tedy nevyhovující. Díky tomu nepřidáváme špatné shody jako omezení pro uzavírání smyčky. Pro rychlost algoritmu je důležité rozhodování o průchodu stromem. Pro každého potomka se vypočítá horní hranice skóre a vybíráme toho nejslibnějšího, což je uzel s největším mezním počtem.\\
+\indent Každý z uzlů je popsán pomocí tuple integerů: 
+$$c=(c_x,c_y,c_\Theta,c_h)\epsilon Z^4$$
+$c_h$ ... výška uzlu - $c_h=0 \rightarrow$ uzel je list\\
+\indent Horní meze jsou počítány na vnitřních uzlech, máme zde zájem o výpočetní úsilí a kvalitu spojení. 
+$$score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)$$
 
 \newpage
 

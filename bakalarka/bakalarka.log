@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  13 JAN 2019 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  17 JAN 2019 23:24
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -796,98 +796,89 @@ predchoz stavy, coz vede na zhustenou
  []
 
 [8] [9] [10] [11]
-Overfull \hbox (29.41476pt too wide) in paragraph at lines 234--234
+Overfull \hbox (29.41476pt too wide) in paragraph at lines 232--232
 []\OT1/cmr/bx/n/14.4 Improved tech-niques for grid map-ping with Rao-Blackwelli
 zed
  []
 
 
-Overfull \hbox (21.47275pt too wide) in paragraph at lines 241--244
+Overfull \hbox (21.47275pt too wide) in paragraph at lines 239--242
 []\OT1/cmr/m/n/10.95 Cely pro-ces zacna zis-kem novych castic odberem 
 vzorku z predchoz ge-ne-race navrhoveho
  []
 
 
-Overfull \hbox (10.35876pt too wide) in paragraph at lines 247--251
+Overfull \hbox (10.35876pt too wide) in paragraph at lines 245--249
 \OT1/cmr/m/n/10.95 rozlozen, meli bychom castice se stej-nou vazenou d
 ulezitost a ne-bylo by treba prevzorkovan. 
  []
 
 
-Overfull \hbox (15.65742pt too wide) in paragraph at lines 247--251
+Overfull \hbox (15.65742pt too wide) in paragraph at lines 245--249
 \OT1/cmr/m/n/10.95 vzorku. Dky tomu se muzeme amerit na vzor-kovan ve
  vyznamne ob-lasti pro pravdepodobnost
  []
 
 
-Overfull \hbox (4.25232pt too wide) in paragraph at lines 247--251
+Overfull \hbox (4.25232pt too wide) in paragraph at lines 245--249
 \OT1/cmr/m/n/10.95 pocatecn od-had po-zice ro-bota. Po-kud je pravdepodob
 nostn funkce vcerezimova, naprklad
  []
 
 
-Overfull \hbox (8.42528pt too wide) in paragraph at lines 247--251
+Overfull \hbox (8.42528pt too wide) in paragraph at lines 245--249
 []\OT1/cmr/m/n/10.95 Prevzorkovan je ve-lice dulezitym aspek-tem urcuj
 cm vykon casticoveho fil-tru, dochaz
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 261--267
+Underfull \hbox (badness 10000) in paragraph at lines 259--265
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 275--281
+Underfull \hbox (badness 10000) in paragraph at lines 273--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 283--288
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 290--306
+Underfull \hbox (badness 10000) in paragraph at lines 285--290
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 309--315
+Overfull \hbox (10.80379pt too wide) in paragraph at lines 292--294
+[]\OT1/cmr/m/n/10.95 Optimalizacn problem je problem ne-linearnch nejme
+nsch ctvercu. Dky tomu muzeme
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--297
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--320
+Underfull \hbox (badness 10000) in paragraph at lines 300--303
+
+ []
+
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 316--322
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 320--336
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 336--339
-
- []
-
-[16]
-Underfull \hbox (badness 10000) in paragraph at lines 346--352
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 364--369
+Underfull \hbox (badness 10000) in paragraph at lines 334--339
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 389--393
+Underfull \hbox (badness 10000) in paragraph at lines 359--363
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 395--405
+Underfull \hbox (badness 10000) in paragraph at lines 365--375
 
  []
 
@@ -911,7 +902,7 @@ ts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
 onts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb>
-Output written on bakalarka.pdf (20 pages, 214119 bytes).
+Output written on bakalarka.pdf (20 pages, 213661 bytes).
 PDF statistics:
  113 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
