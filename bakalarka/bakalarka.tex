@@ -313,65 +313,46 @@ $$score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)$$
 \section{A Flexible and Scalable SLAM System with Full 3D Motion Estimation \\ Hector SLAM}
 
 \subsection{Úvod}
-- nízké výpočetní nároky - malé autonomní systémy\\
-- ne pro uzavírání velkých smyček\\
-- pro rychlý pohyb terénem\\
-- 2D SLAM (soft real time), 3D navigace (hard real time), IMU (inertial measurment unit) - nerovný povrch - narozdíl od gmappingu\\
-- frontend SLAM - Hector - odhad pohybu robota v reálném čase\\
-- backend SLAM - optimalizace pozičního grafu vzhledem k omezením mezi pozicemi\\
+Hlavním znakem systému Hector SLAM, je jeho rychlost a nízké výpočetní nároky oproti předchozím dvěma typům, které jsou v této práci rozebírány. Je tedy vhodný pro implementaci v menších autonomních systémech, pro rychlý pohyb terénem a nehodí se pro uzavírání velkých smyček.\\
+\indent Vnitřní složení je z hlavních tří částí, a to 2D SLAM, běžící jako soft real time, 3D navigace, která je hard real time a jednotka IMU, která se nachází i v systému Cartographer. Hector SLAM je braný jako frontend SLAM, což znamená, že dochází k odhadu robota v reálném čase. Backend SLAM optimalizuje poziční graf vzhledem k omezením mezi pozicemi.
 
-\subsection{System overview}
-- pro 6DOF - z 3DOF odhadem nakolonění a rotace - navigační filtr spojí měření z inerciální jednotky a dalších senzorů (3D řešení), informace o poloze (2D SLAM) - volně spojeno, synchronizace v čase\\
-- $x=(\Omega^T p^T v^T)^T$ ... reorezentace 3D stavu\\
-- $\Omega=(\phi,\theta,\psi)^T$ ... otáčení, stoupání, natočení\\
-- $p,v$ ... pozice, rychlost platformy v navigačním rámci\\
-- $u=(\omega^T a^T)^T$ ... vstupní vektor pro inerciální měření\\
-- $\omega=(\omega_x,\omega_y,\omega_z)^T$ ... úhlová rychlost\\
-- $a=(a_x,a_y,a_z)^T$ ... zrychlení\\
-pohyb tuhého tělesa
+\subsection{Přehled}
+Daný systém se musí převézt z 3DOF pomocí naklonění a rotace na 6DOF, kdy navigační filtr spojí měření z inerciální jednotky (IMU) a dalších senzorů, tím získáváme 3D řešení a díky 2D SLAMu máme informaci o poloze v prostoru. Oba odhady se aktualizují nezávisle na sobě a jsou propojeny jen velmi málo.\\
+\indent Kvůli znatelnému posunu odhadů integrované pozice a rychlosti, který je způsoben šumem v senzorech, zahrnujeme do systému další informace, jako je například porovnávání snímků, snímání magnetického pole, senzor barometrického tlaku a nebo měření rychlosti kol.
+
+pohyb tuhého tělesa:
 $$\dot{\Omega}=E_\Omega.\omega$$
 $$\dot{p}=v$$
 $$\dot{v}=R_\Omega.a+g$$
-- $R_\Omega$ ... matice směrových cosinů\\
-- $E_\Omega$ ... mapování natočení těla na deriváty Eulerova úhlu\\
-- $g$ ... vektor gravitace\\
-- integrovaná rychlost a pozice - signifikantní šum $\rightarrow$ další informace o senzoru - porovnávání snímků (interiéry), snímač magnetického pole (směr), senzor barometrického tlaku (výška), měření rychlosti kol\\
+$x=(\Omega^T p^T v^T)^T$ ... reprezentace 3D stavu\\
+$\Omega=(\phi,\theta,\psi)^T$ ... otáčení, stoupání, natočení\\
+$p,v$ ... pozice, rychlost platformy v navigačním rámci\\
+$u=(\omega^T a^T)^T$ ... vstupní vektor pro inerciální měření\\
+$\omega=(\omega_x,\omega_y,\omega_z)^T$ ... úhlová rychlost\\
+$a=(a_x,a_y,a_z)^T$ ... zrychlení\\
+$R_\Omega$ ... matice směrových cosinů\\
+$E_\Omega$ ... mapování natočení těla na deriváty Eulerova úhlu\\
+$g$ ... vektor gravitace\\
 
 \subsection{2D SLAM}
-- mžížková mapa obsazenosti - reprezentace prostředí, osvědčená lokalizace robota\\
-- transformace skenu na lokální stabilizovaný souřadnicový rámec odhadovanou polohou\\
-- odhad orientace + sdružené hodnoty $\rightarrow$ bodový oblak bodů - možnost předzpracování - odstranění odlehlých bodů\\
-- tady filtrace na základě koncového bodu $z$ - při shodě skenu použity pouze koncové bodyprahové hodnoty skenovací roviny\\
-- přístup k mapě - mřížková mapa obsazenosti - omezení přesnosti, neumožnění přímého výpočtu interpolovaných hodnot a derivátů - interpolační schéma - submřížková přesnost buňky bilineárním filtrem\\
-- - aproximace souřadnice $P_m$ čtyřmi nejbližšími integerovými souřadnicemi ($P_{00} - P_{11}$)\\
-- - vzorkovací body (buňky mřížky) od sebe na vzdálenost 1\\
-- porovnávání snímků - zarovnávání snímků vůči sobě nebo celé mapě\\
-- - laserové skenery - malý šum, vysoká rychlost dělání snímků $\rightarrow$ možnost velmi přesného měření\\
-- - - mnohem větší přesnost než odometrie, pokud vůbec je - v tomto případě nemáme vůbec\\
-- - zarovnání koncových bodů s již známou mapou - není zapotřebí hledání spojení mezi koncovými body - porovnání se všemi předchozími skeny\\
-- - hledání transformace s nejlepším sladěním skenu s mapou
+Jako reprezentace prostředí je zde vybrána osvědčená metoda mřížkových map. Odhadovaná pozice robota slouží pro transformaci skenu na lokální stabilizovaný souřadnicový rámec. Odhadovanou orientací a přidruženými hodnotami je ze skenu vytvořen oblak bodů, který si pro odstranění odlehlých bodů předzpracováváme. Filtrace probíhá pouze na základě souřadnic koncového bodu, kdy jsou pro porovnávání skenu použity pouze koncové body v rámci skenovací roviny.\\
+\indent Jak již bylo poznamenáno, je zde použita struktura mřížkových map, to vede k omezení přesnosti a neumožnění přímého výpočtu interpolovaných hodnot a derivátů. Pro oba odhady se tedy využívá interpolační schéma, díky kterému tu možnost máme. Jakoukoliv souřadnici, kterou potřebujeme nahradit, aproximujeme pomocí čtyř nejbližších integerových souřadnic. \\
+\indent Laserové skenery jsou již velice přesná zařízení, jejich měření zatěžuje minimální šum a snímky se dají vytvářet s vysokou frekvencí. Měření pomocí laseru je tedy mnohem přesnější než to odometrické, což je jeden z důvodu, proč je odometrie v tomto systému zcela vynechána. Při zarovnávání snímků s již známou mapou, nepotřebujeme hledat žádná spojení mezi koncovými body, ale porovnáváme s předchozími skeny.  
+
+Hledání transformace s nejlepším sladěním skenu s mapou:
 $$\xi^*=argmin_\xi\Sigma_{i=1}^n[1-M(S_i(\xi))]^2$$
-- - $M(P_m)$ ... hodnota obsazenosti\\
-- - $S_i(\xi)$ ... souřadnice koncového bodu $s_i=(s_{i,x},s_{i,y})^T$\\
-- - $\xi$ ... souřadnice robota\\
-- - $M(S_i(\xi))$ ... hodnota mapy v souřadnicích $S_i(\xi)$
-- - odhad $\Delta\xi$ - optimalizace chyby měření podle
+$M(P_m)$ ... hodnota obsazenosti\\
+$S_i(\xi)$ ... souřadnice koncového bodu $s_i=(s_{i,x},s_{i,y})^T$\\
+$\xi$ ... souřadnice robota\\
+$M(S_i(\xi))$ ... hodnota mapy v souřadnicích $S_i(\xi)$\\
+odhad $\Delta\xi$ ... optimalizace chyby měření podle: 
 $$\Sigma_{i=1}^n[1-M(S_i(\xi+\Delta\xi))]^2\rightarrow 0$$
-- reprezentace map s více rozlišeními - riziko dosahu pouze lokálního minima - tímto se riziko zmírňuje - více mžížkových map vždy s polovičním rozlišením oproti předchozí - uložených více map, součastné aktualizace odhady pozice generovaných zarovnávacím procesem\\
-- - konzistence map napříč stupnicemi, vyhnutí se převzorkování\\
-- - zarovnávání skenů na nejvyšší mapě, odhad pozice poté pro všechny ostatní - okamžitá dostupnost hrubých zrnitých map - dobré pro odhad trasy\\
- 
-\subsection{3D State Estimation}
-- odhad úplného 3D stavového vektoru\\
-- navigační filtr - 100 Hz - asynchronní aktualizace s pozicí z porovnávače a dalších informací ze senzorů jakmile přijdou\\
-- navigační filtr - EKF - odhad 6D pozice - rozšíření ještě o náklon gyroskopů a akcelerometry\\
-- - nelineární filtr, inerciální měření se berou jako známé vstupy systému\\
-- - aktualizace rychlosti a pozice integrací zrychlení\\
-- - aktualizace pseudo-nulové rychlosti - zabránění nezávislému růstu odhadu stavu pokud nejsou k dispozici měření - při dosažení odchylky určité prahové hodnoty - zajištění stability\\
-- - pro odhad potřeba barometr, snímač rozsahu\\
-- integrace SLAM - 2D SLAM + 3D EKF - komunikace v obou směrech - nesynchronizovány, EKF větší frekvence obnovování\\
-- - odhadovaná pozice EKF počáteční odhad pro optimalizaci porovnávání - nebo integrace odhadované rychlosti a úhlové rychlosti\\
-- - opačně - kovarianční křižovatka (CI - covariance intersection) - spojení pozice ze SLAM s celkovým odhadovaným stavem\\
+
+\indent Při tvorbě mapy dochází často k nalezení pouze lokálního minima, reprezentací mapy pomocí více rozlišení se tak toto riziko znatelně redukuje. Utváří se mřížkové mapy, kdy každá další má poloviční rozlišení, než ta předchozí. Máme tak uloženo více map, které se součastně aktualizují podle odhadu aktuální pozice, který je generovaný zarovnávacím procesem. Díky tomuto přístupu jsou mapy konzistentní a nepotřebují převzorkovávání. Zarovnávání skenů probíhá pouze na mapě s nejvyšším rozlišením a tento odhad je pak, jak je uvedeno, použit pro ostatní mapy. Mapy s nízkým rozlišením máme tedy v podstatě dostupné okamžitě, a můžeme je hned použít pro odhad trasy. 
+
+\subsection{Odhad 3D stavu}
+Pro odhad úplného 6D stavu (3D stav + informace o naklonění z gyroskopů a informace z akcelerometrů) slouží navigační filtr běžící v reálném čase, který je asynchronně aktualizován při příchodu odhadované pozice z porovnávače nebo jiných informací ze senzorů. Filtr je implementován ve formě EKF, jedná se tedy o nelineární filtr a jako jeho známé vstupy se berou inerciální měření. Rychlost a pozici aktualizujeme integrací zrychlení. Abychom se ale zabránilo nezávislému růstu odhadu stavu při nepřítomnosti měření, dochází k aktualizace pseudo-nulové rychlosti, které se spouští při dosažení odchylky určité prahové hodnoty a zajišťuje stabilitu systému.\\
+\indent Při integraci systému máme tedy základní dva celky, 2D SLAM a 3D stavový odhad, které spolu musejí komunikovat v obou směrech. Jejich fungování neni nijak synchronizováno, odhad stavu běží typicky s vyšší frekvencí. Odhadovaná pozice z EKF je brána jako počáteční odhad pro optimalizaci porovnávání. Opačným směrem je použit pro spojení pozice ze SLAM s celkovým odhadovaným stavem kovarianční průsečík (CI - covariance interseption).
 
 
 

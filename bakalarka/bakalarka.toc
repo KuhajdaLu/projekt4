@@ -37,6 +37,6 @@
 \contentsline {subsection}{\numberline {3.4}Uzav\IeC {\'\i }r\IeC {\'a}n\IeC {\'\i } smy\IeC {\v c}ky}{15}
 \contentsline {section}{\numberline {4}A Flexible and Scalable SLAM System with Full 3D Motion Estimation \\ Hector SLAM}{17}
 \contentsline {subsection}{\numberline {4.1}\IeC {\'U}vod}{17}
-\contentsline {subsection}{\numberline {4.2}System overview}{17}
+\contentsline {subsection}{\numberline {4.2}P\IeC {\v r}ehled}{17}
 \contentsline {subsection}{\numberline {4.3}2D SLAM}{17}
-\contentsline {subsection}{\numberline {4.4}3D State Estimation}{18}
+\contentsline {subsection}{\numberline {4.4}Odhad 3D stavu}{18}
