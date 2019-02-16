@@ -44,94 +44,111 @@
 
 
 
-\section{SLAM - Simultaneous Localization and Mapping}
 
-\subsection{Úvod}
-Simultaneous localization and mapping, v překladu simultánní lokalizace a mapování (SLAM) je problém, při kterém řešíme otázku, zda-li dokáže robot, umístěný do neznámého prostředí a s neznámou lokací, postupně utvářet mapu svého okolí a zároveň určovat místo, ve kterém se nachází. Řešení tohoto problému je nezbytně nutné pro tvorbu zcela autonomně se pohybujících robotů. Jedná se o aktuální téma vhledem k trendům moderní doby, kdy dochází k pozvolnému přechodu na samořiditelná auta. \\
 
+\section{Úvod}
+Ve své bakalářské práci se budu věnovat systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. V první části práce jsem se zaměřil obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Zabývám se zde vnitřními principy a různými přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. Já se zaměřuji na systémy využívající čistě jen 2D LIDAR, tedy o sezor měřící vzdálenosti pouze v jedné výškové úrovni.\\
+\indent V další části své práce jsem se podrobněji věnoval třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o GMapping, HectorSLAM a Google Cartographer. Popsal jsem zde jejich základní rysy, kterými se liší od ostatních a jimiž je dostatečně popsána jejich funkčnost. \\
+\indent měření, výsledky, porovnání, změna v gmappingu, proč jsem si vybral ...
+
+\newpage
+
+\section{Simultánní lokalizace a mapování}
 
 \subsection{Historie}
-Jako počátek, kdy byl daný problém poprvé zíněn, se bere konference Robotics and Automation Conference konaná v roce 1986. Pravděpodobnostní metody byly tehdy ještě velmi nerozvinuté, jak v robotice, tak i v umělé inteligenci, a došlo tak pouze k debatě na dané téma.\\
-\indent K většímu posunu kupředu se dostalo o pár let později, kdy vyšla práce pojednávající o vztahu mezi orientačními body (landmarky) a zmenšení geometrické nepřesnosti. Důležitým prvkem zde bylo zjištění, že mezi odhady landmarků na mapě musí být velký stupeň korelace, přičemž korelace roste s dalšími pozorováními.\\
-\indent Ve stejném období vznikaly základy vizuální navigace a navigace pracující se sonarem s použitím Kalmanova filtru. Práce byly v základu dosti podobné, ukazovaly, že odhady landmarků získané pohybem robota prostředím, jsou v korelaci s ostatními kvůli chybě v odhadu pozice robota a je třeba mít stav složený z pozice robota a landmarků. Vznikal tak však velký stavový vektor s náročností rostoucí v kvadrátu a tendence korelaci landmarků snižovat.\\
-\indent Později došlo ke sjednocení problémů lokalizace a mapování a závěru, že snaha minimalizovat korelaci mezi landmarky byla chybná, naopak bylo v zájmu korelaci co nejvíce zvýšit. Struktura SLAMu, a celkově první použití tohoto akronymu, byla prezentována v roce 1995 na International Symposium of Robotics Research (ISRR). Poté v roce 199 se na ISRR odehrálo první zasedání pojednávající přímo o SLAM a došlo k představení práce dosahující stupeň konvergence mezi SLAMem na Kalmanově filtru a pravděpodobnostními metodami pro lokalizaci a mapování.
+Jako počátek řešení problému se považuje konference Robotics and Automation Conference konaná v roce 1986. Pravděpodobnostní metody byly tehdy ještě velmi nerozvinuté, jak v robotice, tak i v umělé inteligenci. Došlo tedy pouze k debatě na dané téma.\\
+\indent K většímu posunu kupředu se dostalo o pár let později, kdy vyšla práce pojednávající o vztahu mezi orientačními body (landmarky) a zmenšení geometrické nepřesnosti. Důležitým prvkem zde bylo zjištění, že mezi odhady landmarků na mapě je velká korelace, které je rostoucí s dalšími pozorováními.\\
+\indent Ve stejném období vznikaly základy vizuální navigace a navigace pracující se sonarem s použitím Kalmanova filtru. Práce byly v základu dosti podobné. Ukazovaly, že odhady landmarků získané pohybem robota prostředím, jsou v korelaci s ostatními kvůli chybě v odhadu pozice robota. Je tak třeba mít stav složený z pozice robota a landmarků, tím však vznikal velký stavový vektor s náročností rostoucí v kvadrátu. V daném období byla tendence korelaci landmarků snižovat.\\
+\indent Později došlo k sjednocení problémů lokalizace a mapování a závěru, že snaha minimalizovat korelaci mezi landmarky byla chybná, naopak bylo v zájmu korelaci co nejvíce zvýšit. Struktura SLAMu, a celkově první použití tohoto akronymu, byla prezentována v roce 1995 na International Symposium of Robotics Research (ISRR). Poté se v roce 1999 na ISRR odehrálo první zasedání pojednávající přímo o SLAM a došlo k představení práce dosahující dostatečné konvergence mezi SLAMem na bázi Kalmanova filtru a pravděpodobnostními metodami pro lokalizaci a mapování.
 
 
-\subsection{Formulace a struktura SLAM} 
+\subsection{Formulace a struktura} 
 Jedná se o proces, při kterém robot vytváří mapu prostředí, v němž se pohybuje a na základě mapy určuje svoji pozici v prostoru. Pro určování trajektorie robota a rozložení landmarků není třeba znalosti jeho lokace, neboť odhad těchto parametrů probíhá součastně. 
 
-\subsubsection{Legenda}
-$k$ ... čas\\
-$x_k$ ... stavovoý vektor popisující lokaci a orientaci robota\\ 
-$u_k$ ... vektor aplikovaný v čase $k-1$ pro dostání robota v čase $k$ na pozici $x_k$\\
-$m_i$ ... vektor popisující pozici i-tého landmarku, která je brána jako neměnící se v čase\\
-$z_{ik}$ ... pozorování lokace i-tého landmarku z robota v čase $k$\\
-$x_{0:k}$ ... historie umístění robota\\
-$u_{0:k}$ ... historie vstupních dat pro pohyb robota\\
-$z_{0:k}$ ... množina pozorování landmarků\\
-$m$ ... množina landmarků\\
-
 \subsubsection{Pravděpodobnostní SLAM}
-V této formě je zapotřebí výpočet rozložení pravděpodobnosti 
-$$P(x_k,m|Z_{0:k},U_{0:k},x_0)$$ 
-pro každý časový okamžik ${k}$. Jedná se o srduženou posteriorní hustotu landmarků, stavu vozidla s ohledem na zaznamenané pozorování, řídící vstupy a zahrnuje čas ${k}$ s počátečním stavem vozidla. Pro výpočet je využit Bayesův teorém, je tedy potřeba, aby přechodový stavový model a model pozorování popisovaly vliv vstupního řízení a pozorování.\\
-\indent Model pozorování popisuje pravděpodobnost zisku pozorování $z_k$, pokud známe polohu vozidla a landmarků. 
-$$P(z_k|x_k,m)$$
-\indent Model pohybu vozidla může být popsán jako stavový přechodový model. Předpokládáme přechodový stav jako Markovův proces, při kterém následující stav $x_k$ je závislý pouze na předchozím stavu $x_{k-1}$ a aplikovaném řízení $u_k$ a není tak závislý ani na mapě, ani na pozorování.
-$$P(x_k|x_{k-1},u_k)$$
-Máme tak implementaci ve dvoustupňové rekurzivní formě korekce předpovědí.\\
-Aktualizace času:
-$$P(x_k,m|Z_{0:k-1},U_{0:k},x_0)=\int P(x_k|x_{k-1},u_k)\times P(x_{k-1},m|Z_{0:k-1},U_{0:k-1},x_0)dx_{k-1}$$ 
-Aktualizace měření:
-$$P(x_k,m|Z_{0:k},U_{0:k},x_0)=\frac{P(z_k|x_k,m)P(x_k,m|Z_{0:k-1},U_{0:k},x_0)}{P(z_k|Z_{0:k-1},U_{0:k})}$$
+V této formě je cílem získat odhad hustoty pravěpodobnosti
+\begin{equation}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k},\textbf{U}_{0:k},\textbf{x}_0)
+\end{equation}
+pro každý časový okamžik ${k}$, kde $\textbf{x}_k$ je stavový vektor popisující pozici a orientaci robota, $\textbf{m}$ je množina landmarů, tedy mapa, $\textbf{Z}_{0:k}$ jsou všechna pozorování landmarků, $\textbf{U}_{0:k}$ je historie vstupů a $\textbf{x}_0$ je počáteční stav. Jedná se tedy o srduženou posteriorní hustotu mapy, stavu vozidla s ohledem na zaznamenané pozorování, řídící vstupy a zahrnuje čas ${k}$ s počátečním stavem robota. Pro výpočet je využit Bayesův teorém, je tedy potřeba, aby pohybový model a model pozorování popisovaly vliv vstupního řízení a pozorování.\\
+\indent Model pozorování popisuje pravděpodobnost zisku pozorování $\textbf{z}_k$, pokud známe polohu vozidla a landmarků.
+\begin{equation}
+	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})
+\end{equation} 
+\indent Model pohybu vozidla může být popsán jako stavový přechodový model. \\Předpokládáme přechodový stav jako Markovův proces, při kterém následující stav $\textbf{x}_k$ je závislý pouze na předchozím stavu $\textbf{x}_{k-1}$ a aplikovaném řízení $\textbf{u}_k$ a není tak závislý ani na mapě, ani na pozorování.
+\begin{equation}
+	P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)
+\end{equation}
+Máme tak implementaci ve formě dvoustupňového rekurzivního algoritmu.\\
+\\
+Aktualizace času (predikce):
+\begin{equation}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)=\int P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\times P(\textbf{x}_{k-1},\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k-1},\textbf{x}_0)d\textbf{x}_{k-1}
+\end{equation}
+\\
+Aktualizace měření (korekce):
+\begin{equation}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k},\textbf{U}_{0:k},\textbf{x}_0)=\frac{P(\textbf{z}_k|\textbf{x}_k,\textbf{m})P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)}{P(\textbf{z}_k|\textbf{Z}_{0:k-1},\textbf{U}_{0:k})}
+\end{equation}
 
-\subsubsection{Struktura pravděpodobnostního SLAMu}
-Model pozorování udává závislost polohy vozidla a pozování landmarků, sdružená posteriorní pravděpodobnost nemůže být klasicky rozdělena stylem 
-$$P(x_k,m|z_k)\neq P(x_k|z_k)P(m|z_k),$$
-neboť by to vedlo k chybným odhadům. Dalším zdrojem chyb je špatný odhad pozice robota, landmarky jsou ale silně korelované, takže chybný odhad landmarku vůči mapě nevede k chybné poloze dvou landmarků navzájem.\\
-\indent Velmi důležitým poznatkem bylo zjištění, že korelace mezi landmarky monotónně vzrůstá s počtem jejich pozorování (potvrzeno pouze pro lineární Gaussovský případ), tudíž odhad pozice landmarků bude s narůstajícím počtem pozorování monotónně přesnější. Tento jev nastává díky, v podstatě, skoro nezávislému měření relativních pozic mezi landmarky, které jsou zcela nezávislé na natočení vozidla a úspěšné pozorovnání z tohoto bodu může nést další nezávislá měření relativních rozložení landmarků. \\
-\indent Pohybem robota v prostoru získává pozorováním novou pozici známých landmarků vůči sobě a dle této informace aktualizuje svoji odhadovanou pozici a také pozici landmarků. Pokud ji nějaký landmark není pozorován, tak je jeho pozice aktualizována dle změny landmarků pozorovaných a pokud jsou zpozorovány landmarky nové, korelují se s zostatními, čímž se vytváří síť. Čím častěji jsou dva landmarky pozorovány při jednom měření, tím je síla korelace větší. Opětovným projížděním mapy tak získáváme přesnější a robustnější mapu.\\
+\subsubsection{Struktura}
+Model pozorování udává závislost polohy vozidla a pozice landmarků, sdružená posteriorní pravděpodobnost nemůže být rozdělena na
+\begin{equation}
+	P(\textbf{x}_k,\textbf{m}|\textbf{z}_k)\neq P(\textbf{x}_k|\textbf{z}_k)P(\textbf{m}|\textbf{z}_k),
+\end{equation}
+
+neboť by to vedlo k chybným odhadům. Dalším zdrojem chyb je špatný odhad pozice robota. Landmarky jsou ale silně korelované, takže chybný odhad landmarku vůči mapě nevede k chybné poloze dvou landmarků navzájem.\\
+\indent Velmi důležitým poznatkem bylo zjištění, že korelace mezi landmarky monotónně vzrůstá s počtem jejich pozorování (potvrzeno pouze pro lineární Gaussovský případ). Odhad pozice landmarku je tedy s narůstajícím počtem pozorování monotónně přesnější. Tento jev nastává díky, v podstatě, skoro nezávislému měření relativních pozic mezi landmarky. Ty jsou zcela nezávislé na natočení vozidla a úspěšné pozorovnání z tohoto bodu může nést další nezávislá měření relativních rozložení landmarků. \\
+\indent Pohybem robota v prostoru, získává pozorováním novou pozici známých landmarků vůči sobě a dle této informace aktualizuje jejich pozici a též svoji odhadovanou polohu. Pokud již nějaký landmark není pozorován, tak je jeho pozice aktualizována dle změny landmarků pozorovaných. Při pozorování nových landmarků dochází ke korelaci s již známými, čímž se vytváří síť. Čím častěji jsou dva landmarky pozorovány při jednom měření, tím je síla korelace větší. Opětovným projížděním prostředím tak získáváme přesnější a robustnější mapu.\\
 
 
 \subsection{Řešení problému SLAM}
 Při řešení je potřeba adekvátně obsáhnout jak složku modelace prostředí, tak i tvorbu pohybového modelu.
-Máme řadu možností jak tento problém řešit, například princip Monte Carlo, kdy rozdělujeme hustoty pravděpodobnosti odhadu pozice robota. Další možností je Markovova lokalizace, s tímto přístupem jsme se setkali v pravděpodobnostní formě SLAM. Nejčastěji se setkáváme s reprezentací problému ve formě stavového modelu zatíženého šumem, což vede k použití rozšířeného Kalmanova filtru (v originále $extended$ $Kalman$ $filter\rightarrow EKF$). Jinou možností je ještě rozčlenit pohybový model vozidla na vzorky s obecnějším negausovským rozdělením pravděpodobnosti, v tomto případě mluvíme o použití Rao-Blackwellizedova partikulárního filtru. 
+Máme řadu možností jak tento problém řešit, například princip Monte Carlo, kdy rozdělujeme hustoty pravděpodobnosti odhadu pozice robota. Další možností je Markovova lokalizace, jedná se o pravděpodobnostní formu SLAM. Nejčastěji se setkáváme s reprezentací problému ve formě stavového modelu zatíženého šumem, což vede k použití rozšířeného Kalmanova filtru (v originále $extended$ $Kalman$ $filter\rightarrow EKF$). Jinou možností je ještě rozčlenit pohybový model vozidla na vzorky s obecnějším negausovským rozdělením pravděpodobnosti, v tomto případě mluvíme o použití Rao-Blackwellizedova částicového filtru. 
 
 \subsubsection{EKF-SLAM}
-Popis pohybu vozidla:
-$$P(x_k|x_{k-1},u_k)\leftrightarrow x_k=f(x_{k-1},u_k)+w_k$$
-$f(.)$ ... funkce modelující pohyb vozidla\\
-$w_k$ ... chyby měření\\
-$Q_k$ ... kovariance\\
+Pohybu robota je zde popsán rovnicí
+\begin{equation}
+	P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\leftrightarrow \textbf{x}_k=\textbf{f}(\textbf{x}_{k-1},\textbf{u}_k)+\textbf{w}_k,
+\end{equation} 
+kde $\textbf{f}(\textbf{x}_{k-1},\textbf{u}_k)$ je funkce modelující pohyb robota a $\textbf{w}_k$ jsou chyby měření.\\
 \\
-Model pozorování:
-$$P(z_k|x_k,m)\leftrightarrow z_k=h(x_k,m)+v_k $$
-$h(.)$ ... geometrické vlastnosti\\
-$v_k$ ... chyby měření\\
-$R_k$ ... kovariance\\
+Model pozorování je vyjádřen vztahem
+\begin{equation}
+	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})\leftrightarrow \textbf{z}_k=\textbf{h}(\textbf{x}_k,\textbf{m})+\textbf{v}_k
+\end{equation}
+kde funkce $\textbf{g}(.)$ popisuje geometrické vlastnosti pozorování a $\textbf{v}_k$ jsou chyby měření.\\
 \\
-Tyto dvě definice využijeme v EKF metodě k výpočtu průměru a kovariance sdruženého posteriorního rozložení\\
+Tyto dvě definice využijeme v metodě EKF k výpočtu průměru a kovariance sdruženého posteriorního rozložení\\
 \indent průměr:
-$$\begin{bmatrix}
-\hat{x}_{k|k}\\\hat{m}_k
-\end{bmatrix}=E
-\begin{bmatrix}
-x_k |Z_{0:k}\\m\indent
-\end{bmatrix}$$ 
+\begin{equation}
+	\begin{bmatrix}
+	\hat{\textbf{x}}_{k|k}\\\hat{\textbf{m}}_k
+	\end{bmatrix}=E
+	\begin{bmatrix}
+	\textbf{x}_k |\textbf{Z}_{0:k}\\\textbf{m}\indent
+	\end{bmatrix}
+\end{equation}
+
 \indent kovariance:
-$$P_{k|k}=\begin{bmatrix}
-P_{xx} P_{xm}\\P^T_{xm} P_{mm}
-\end{bmatrix}_{k|k}=E\begin{bmatrix}
-\begin{pmatrix}
-x_k-\hat{x}_k\\m-\hat{m}_k
-\end{pmatrix} \begin{pmatrix}
-x_k-\hat{x}_k\\m-\hat{m}_k
-\end{pmatrix}^T |Z_{0:k}
-\end{bmatrix}$$\\
+\begin{equation}
+	\textbf{P}_{k|k}=\begin{bmatrix}
+	\textbf{P}_{xx} \textbf{P}_{xm}\\\textbf{P}^T_{xm} \textbf{P}_{mm}
+	\end{bmatrix}_{k|k}=E\begin{bmatrix}
+	\begin{pmatrix}
+	\textbf{x}_k-\hat{\textbf{x}}_k\\\textbf{m}-\hat{\textbf{m}}_k
+	\end{pmatrix} \begin{pmatrix}
+	\textbf{x}_k-\hat{\textbf{x}}_k\\\textbf{m}-\hat{\textbf{m}}_k
+	\end{pmatrix}^T |\textbf{T}_{0:k}
+	\end{bmatrix}
+\end{equation}
+
+
 Mezi hlavní problémy této metody se řadí konvergence, výpočetní složitost, sdružování dat a nelinerita. Prvním z nich, konvergence, se projevuje postupným přechodem determinantu kovarianční matice mapy a všech podkategorií dvojic landmarků k nule. Jednotlivé odchylky landmarků pak konvergují dle původních nepřesností z odhadu pozice robota a jeho pozorování.\\
-\indent Výpočetní složitost je zde brána jako kvadraticky rostoucí s počtem zaznamenaných landmarků, neboť při každém zaznamenaném pozorování se aktualizují již uložené landmarky, tento problém již ale prošel vývojem a existují metody pracující v reálném čase s tisíci landmarky.\\
+\indent Výpočetní složitost je zde brána jako kvadraticky rostoucí s počtem zaznamenaných landmarků, neboť při každém zaznamenaném pozorování se aktualizují již uložené landmarky. Tento problém prošel vývojem a existují metody pracující v reálném čase s tisíci landmarky.\\
 \indent Metoda EKF-SLAM je velmi náchylná na chybné spojení pozorování se známými landmarky. Jedná se zejména o problém s uzavřením smyčky, kdy dochází k opětovnému návratu na místo, ze kterého robot začínal nebo ve kterém se již nacházel.\\
-\indent Nelinerita je posledním z významných problémů, kvůli níž můžeme dojít k větším nepřesnostem ve výsledku, neboť EKF-SLAM využívá lineárních modelů pro vyjádření nelineárního pohybu a modelu pozorování, konvergence a konzistence modelu je tedy jistá pouze v lineárním případě. 
+\indent Nelinerita je posledním z významných problémů. Kvůli ní může dojít k větším nepřesnostem ve výsledku, neboť EKF-SLAM využívá lineárních modelů pro vyjádření nelineárního pohybu a modelu pozorování. Konvergence a konzistence modelu je tedy jistá pouze v lineárním případě. 
+
 
 
 \subsection{Rao-Blackweillizedův částicový filtr (RBPF)}
