@@ -106,7 +106,7 @@ neboť by to vedlo k chybným odhadům. Dalším zdrojem chyb je špatný odhad 
 Při řešení je potřeba adekvátně obsáhnout jak složku modelace prostředí, tak i tvorbu pohybového modelu.
 Máme řadu možností jak tento problém řešit, například princip Monte Carlo, kdy rozdělujeme hustoty pravděpodobnosti odhadu pozice robota. Další možností je Markovova lokalizace, jedná se o pravděpodobnostní formu SLAM. Nejčastěji se setkáváme s reprezentací problému ve formě stavového modelu zatíženého šumem, což vede k použití rozšířeného Kalmanova filtru (v originále $extended$ $Kalman$ $filter\rightarrow EKF$). Jinou možností je ještě rozčlenit pohybový model vozidla na vzorky s obecnějším negausovským rozdělením pravděpodobnosti, v tomto případě mluvíme o použití Rao-Blackwellizedova částicového filtru. 
 
-\subsubsection{EKF-SLAM}
+\subsection{EKF-SLAM}
 Pohybu robota je zde popsán rovnicí
 \begin{equation}
 	P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\leftrightarrow \textbf{x}_k=\textbf{f}(\textbf{x}_{k-1},\textbf{u}_k)+\textbf{w}_k,
@@ -143,86 +143,50 @@ Tyto dvě definice využijeme v metodě EKF k výpočtu průměru a kovariance s
 	\end{bmatrix}
 \end{equation}
 
-
 Mezi hlavní problémy této metody se řadí konvergence, výpočetní složitost, sdružování dat a nelinerita. Prvním z nich, konvergence, se projevuje postupným přechodem determinantu kovarianční matice mapy a všech podkategorií dvojic landmarků k nule. Jednotlivé odchylky landmarků pak konvergují dle původních nepřesností z odhadu pozice robota a jeho pozorování.\\
 \indent Výpočetní složitost je zde brána jako kvadraticky rostoucí s počtem zaznamenaných landmarků, neboť při každém zaznamenaném pozorování se aktualizují již uložené landmarky. Tento problém prošel vývojem a existují metody pracující v reálném čase s tisíci landmarky.\\
 \indent Metoda EKF-SLAM je velmi náchylná na chybné spojení pozorování se známými landmarky. Jedná se zejména o problém s uzavřením smyčky, kdy dochází k opětovnému návratu na místo, ze kterého robot začínal nebo ve kterém se již nacházel.\\
 \indent Nelinerita je posledním z významných problémů. Kvůli ní může dojít k větším nepřesnostem ve výsledku, neboť EKF-SLAM využívá lineárních modelů pro vyjádření nelineárního pohybu a modelu pozorování. Konvergence a konzistence modelu je tedy jistá pouze v lineárním případě. 
 
+\subsubsection{Výpočetní složitost}
+Neobvyklá struktura problému, sdružený stav složený z pozice robota a landmarků, je využita v řadě metod pro redukci výpočetní složitosti. Zde má pohybový model vliv pouze na stav pozice robota a model pozorování na dvojici robot-landmark. Základním rozdělením metod redukujících výpočetní složitost, je rozlišování optimálních, konzervativních a nekonzistentních metod. První typ, optimální metody, jsou založené na redukci daného výpočtu, výsledkem jsou pak odhady a kovariance, stejně tak, jako je tomu v případě plnohodnotné formy SLAM. U metod konzervativních dochází k odhadům s vyšší neurčitostí nebo kovariancí, většinou ale, i přes větší nepřesnost, jsou implementovány v reálném použití. Poslední možností jsou nekonzistentní metody a jedná se o algorithmy, které mají nižsí neurčitost nebo kovarianci, než algoritmy optimální. Pro řešení SLAM v praxi se ale nepoužívají.\\
+\indent Prvním přístupem pro redukci výpočetní složitosti, je omezení požadovaného výpočtu rovnicí aktualizace pozorování. Výpočet časové aktualizace může být omezen metodami využívající rozšířený stav, výpočet stavu pozorování pak metodami oddělujícími rovnice dané aktualizace a obě tyto omezení vedou k redukci výpočtů, typicky jsou to optimální algoritmy. Další možností, je reformulace stavového prostoru do informační podoby, která umožnuje rozdělení výsledné matice s informacemi pro snížení výpočtů, což bývají algoritmy konzervativní. Obvykle je díky nim znatelně redukována výpočetní složitost a stále je zachována dostatečně dobrá odhadovací schopnost. Posledním přístupem, o kterém se zmíním, je submapping. Jde o rozdělování mapy na regiony, kdy následné aktualizace se týkají pouze dané oblasti a s určitou periodou poté i v rámci celé mapy. 
+
+\subsubsection{Oddělné aktualizace}
+Jedná se o metody vytvářející optimální odhady. Při implementaci základní podoby aktualizace pozorování, se při každém novém měření aktualizuje jak stav vozidla, tak i mapy. To vede ke kvadratickému nárůstu složitosti s množstvím landmarků. V této metodě se však mapa rozdělí na submapy.\\
+\indent Rozlišujeme dva způsoby možné implementace. První z nich pracuje na zmenšené oblasti, ale stále si drží globální referenční souřadnice, jedná se například o algoritmus $compressed$ $EKF$ (CEFK). Druhou možností je tvorba menších map s vlastním\\ souřadnicovým rámcem neopouštějícím danou submapu, což jsou algorithmy $constrained$ $local$ $submap$ $filter$ (CLSF, v překladu - omezený lokální submapový filtr). Pokračovat budu v rozboru druhé možnosti, neboť je jednodušší a při provádění operací s velkou frekvencí opakování je méně ovlivněna linearizačními chybami. Je také stabilnější a zabraňuje příliš velkému nárůstu globální kovariance. \\
+\indent Logaritmus submapy se skládá z dvou nezávislých odhadů, které si stále udržuje. Jde o vektory $x_G$ a $x_R$, kdy $x_G$ je mapa složená z globálně referencovaných landmarků a globálně referencované pozice dané submapy a $x_R$ je lokální submapa s lokálně referencovanou pozicí robota a lokálně referencovanými landmarky. Při získání pozorování se aktualizují pouze landmarky náležící aktuální submapě, ve které se robot nachází. Celkový globální odhad je pak získáván periodicky, zaevidováním submapy do mapy celé a použitím aktualizace omezení na společné vlatnosti obou map.
+
+\subsubsection{Rozčlenění stavového prostoru}
+V této metodě se vyjadřuje stavový odhad $\hat{x}_k$ a matici kovariance $P_k$ v informační formě pomocí matice informací $Y_k=P^{-1}_k$ a vektoru informací $\hat{y}_k=Y_k\hat{x}_k$. Je výhodné pro mapy s větším měřítkem, kdy spousta nediagonálních prvků bude velmi blízkých nule, což vede k možnosti nastavení těchto prvků na hodnotu nula. Může tím však vznikat malá ztráta optimality při vzniku map.\\
+\indent Rozšíření stavu je rozčleňovací operace vedoucí k přesnému rozčlenění informační formy. Předpokládáme, že podmnožina stavů $x_i$ obsahuje většinu stavů mapy a po rozčlenění dosahuje pouze konstantní složitosti v čase. Můžeme tedy získávat přesné řešení díky rozšiřování stavu novým odhadem pozice robota v každém kroce a zachovat všechny předchozí pozice. Nenulové nediagonální prvky jsou pouze ty, které jsou spojené napřímo s měřenými daty.\\
+\indent Dále sem musíme zahrnout marginalizaci, jež je nezbytná pro odstranění předchozích stavů pozice. Máme možnost marginalizovat všechny předchozí stavy, což vede na zhuštěnou matici informací, což je nežádoucí. Správnou volbou ukotvení pozice můžeme marginalizovat velkou čast pozic, aniž bychom vyvolaly nadměrnou hustotu matice informací.
 
 
 \subsection{Rao-Blackweillizedův částicový filtr (RBPF)}
-Forma SLAM založená na Rao-Blackellizedově filtru, jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Je výpočetně nemožné aplikovat na stavový prostor s vysokým počtem dimenzí partikulární filtry, je však možné redukovat velikost vzorků. \\
-Sdružený stav může být jako faktor komponentů vozidla a podmíněných komponentů mapy:
-$$P(X_{0:k},m|Z_{0:k},U_{0:k},x_0)=P(m|X_{0:k},Z_{0:k})P(X_{0:k}|Z_{0:k},U_{0:k},x_0) $$ 
+Forma SLAM založená na Rao-Blackellizedově filtru, jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Je výpočetně nemožné aplikovat na stavový prostor s vysokým počtem dimenzí částicové filtry, je však možné redukovat velikost vzorků. \\
+Sdružený stav může být jako faktor komponent vozidla a podmíněných komponent mapy
+\begin{equation}
+	P(X_{0:k},m|Z_{0:k},U_{0:k},x_0)=P(m|X_{0:k},Z_{0:k})P(X_{0:k}|Z_{0:k},U_{0:k},x_0)
+\end{equation}
 Rozdělení pravděpodobnosti zde není na jednotivých pozicích $x_k$, ale na celou trajektorii $X_{0:k}$ a tím se stávají jednotlivé landmarky na sobě nezávislými, mapa je tedy reprezentována jako soubor nezávislých gaussiánů, což znamená lineární složitost oproti kvadratické u formy EKF. Hlavními ukazateli FastSLAMu je mapa, jež je počítána analyticky a vážené vzorky, jimiž je reprezentována trajektorie pohybu. Rekurzivní odhad je proveden partikulárním filtrem pro stav pozice a EKF pro stav mapy.\\
 \indent Zpracování každého landmarku probíhá zvlášť, pozice se aktualizuje stejným způsobem jako v EKF a landmarky, které nebyly zpozorovány, zůstávají na původní pozici a neaktualizují se. Vzájemnou neprovázaností landmarků však vzniká chyba v odhadu, která s časem roste.\\
 \indent V čase $k-1$, je sdružený stav reprezentovaný jako 
-$$\{w^{(i)}_{k-1},X^{(i)}_{0:k-1},P(m|X^{(i)}_{0:k-1},Z_{0:k-1})\}^V_i$$
-V prvním kroce, pro každou částici vypočítáme návrh distribuce, jež je podmíněná svojí specifickou historií a z ní odebereme vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, stanovíme váhy vzorků. Třetím krokem je případné převzorkování, které se provádí různě často dle implementace. Krokem posledním je provézt EKF update, na každou, již zpozorovanou částici, která je při aktuálním pozorováním zaznamenána. 
+\begin{equation}
+	\{w^{(i)}_{k-1},X^{(i)}_{0:k-1},P(m|X^{(i)}_{0:k-1},Z_{0:k-1})\}^V_i
+\end{equation}
+V prvním kroce je pro každou částici vypočítán návrh distribuce, jež je podmíněná svojí specifickou historií. Z ní odebereme vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, je stanovena váha vzorků. Třetím krokem je případné převzorkování, které se provádí různě často dle implementace. Krokem posledním je provedení EKF aktualizace pro každou již zpozorovanou částici, která je při aktuálním pozorováním zaznamenána. \\
+... dále o RBPF
 
-
-\subsection{Výpočetní složitost}
-Neobvyklá struktura problému, sdružený stav složený z pozice robota a landmarků, je využita v řadě metod pro redukci výpočetní složitosti, zde má model procesu vliv pouze na stav pozice robota a model pozorování na dvojici robot-landmark. Základním rozdělením metod redukujících výpočetní složitost, je rozlišování optimálních, konzervativních a nekonzistentních metod. První typ, optimální metody, jsou založené na redukci daného výpočtu, výsledkem jsou pak odhady a kovariance, stejně tak, jako je tomu v případě plnohodnotné formy SLAM, rozebírané v předchozích kapitolách. U metod konzervativních dochází k odhadům s vyšší neurčitostí nebo kovariancí, většinou ale, i přes větší nepřesnost, jsou implementovány v reálném použití. Poslední možností jsou nekonzistentní metody a jedná se o algorithmy, které mají nižsí neurčitost nebo kovarianci, než algoritmy optimální, ale pro řešení SLAM se v praxi nepoužívají.\\
-\indent Prvním přístupem pro redukci výpočetní složitosti, je omezení požadovaného výpočtu rovnicí aktualizace pozorování. Výpočet časové aktualizace může být omezen metodami využívající rozšířený stav, výpočet stavu pozorování pak metodami oddělujícími rovnice dané aktualizace a obě tyto omezení vedou k redukci výpočtů, typicky jsou to optimální algoritmy. Další možností, je reformulace stavového prostoru do informační podoby, která umožnuje rozdělení výsledné matice s informacemi pro snížení výpočtů, což bývají algoritmy konzervativní. Obvykle je díky nim znatelně redukována výpočetní složitost a stále je zachována dostatečně dobrá odhadovací schopnost. Dalším přístupem je submapping, který rozděluje mapu na regiony, kdy následné aktualizace se konají pouze v dané oblasti a s určitou periodou poté i v rámci celé mapy. 
-
-\subsubsection{Rozšířený stav}
-Sdružený stavový vektor $x_k$ v čase $k$, se skládá z pozice robota a jím zaznamenaných landmarků, kdy model robota ovlivňuje pouze stav pozice, a to vlivem vstupního řízení, stav mapy se tím tedy nemění. 
-$$x_k=\begin{bmatrix}
-f_v(x_{vk-1},u_k)\\m
-\end{bmatrix} $$
-Pokud při volbě typu SLAM jako EKF, výpočet předpovědi kovariance má kubicky rostoucí složitost s počtem landmarků
-$$P_{k|k-1}=\bigtriangledown f_xP_{k-1|k-1}\bigtriangledown f^T_x+\bigtriangledown f_uU_k\bigtriangledown f^T_u,$$
-to se však dá předělat na formu s pouze lineární složitostí
-$$P_{k|k-1}=\begin{bmatrix}
-\bigtriangledown f_{vx}P_{vv}\bigtriangledown f^T_{vx}+\bigtriangledown f_{vu}U_k\bigtriangledown f^T_{vu}&&\bigtriangledown f_{vx}P_{vm}\\
-P^T_{vm}\bigtriangledown f^T_{vx}&&P_{mm}
-\end{bmatrix} $$
-Přidání nového landmarku má podobný tvar, kdy je nový landmark inicializován jako funkce pozice robota a pozorování a rozšířený stav pak získáme z malého množství existujících stavů 
-$$x^+_k=\begin{bmatrix}
-x_{vk}\\m\\g(x_{vk},z_k)
-\end{bmatrix},$$
-kde $g(x_{vk},z_k)=m_{new}\rightarrow$ přidání nového landmarku \\
-Rozšíření stavu můžeme aplikovat vždy, když je nový stav funkcí podmnožiny již existujících stavů
-$$\begin{bmatrix}
-x_1\\x_2\\f(x_2,q)
-\end{bmatrix}, $$
-$$
-\begin{bmatrix}
-P_{11}&&P_{13}&&P_{13}\bigtriangledown f^T_{x_2}\\
-P^T_{12}&&P_{23}&&P_{23}\bigtriangledown f^T_{x_2}\\
-\bigtriangledown f_{x_2}P^T_{11}&&\bigtriangledown f_{x_2}P_{32}&&\bigtriangledown f_{x_2}P_{32}\bigtriangledown f^T_{x_2}+\bigtriangledown f_qQ\bigtriangledown f^T_q
-\end{bmatrix}
-$$
-
-\subsubsection{Oddělné aktualizace}
-Jedná se o metody vytvářející optimální odhady. Při implementaci základní podoby aktualizace pozorování, se při každém novém měření aktualizuje jak stav vozidla, tak i mapy, což vede ke kvadratickému nárůstu složitosti s množstvím landmarků. V této metodě si však rozdělíme mapu na menší oblasti, které se aktualizují pouze při jejím průjezdu, zatímco aktualizace celé mapy probíhá s výrazně nižší frekvencí.\\
-\indent Rozlišujeme dva způsoby možné implementace. První z nich pracuje na zmenšené oblasti, ale stále si drží globální referenční souřadnice, jedná se například o algoritmus CEKF (compressed EKF). Druhou možností je tvorba menších map s vlastním souřadnicovým rámcem neopouštějícím danou submapu, což jsou algorithmy CLSF (constrained local submap filter $\rightarrow$ omezený lokální submapový filtr). Pokračovat budeme v rozboru druhé možnosti, neboť je jednodušší a při provádění operací s velkou frekvencí opakování je méně ovlivněna linearizačními chybami, je stabilnější a zabraňuje příliš velkému nárůstu globální kovariance. \\
-\indent Logaritmus submapy se skládá z dvou nezávislých odhadů, které si stále udržuje. Jde o vektory $x_G$ a $x_R$, kdy $x_G$ je mapa složená z globálně referencovaných landmarků a globálně referencované pozice dané submapy a $x_R$ je lokální submapa s lokálně referencovanou pozicí robota a lokálně referencovanými landmarky. Při získání pozorování se aktualizují pouze landmarky náležící aktuální submapě, ve které se robot nachází. Celkový globální odhad pak získáváme periodicky, zaevidováním submapy do mapy celé a použitím aktualizace omezení na společné vlatnosti obou map.
-
-\subsubsection{Rozčlenění stavového prostoru}
-V této metodě vyjadřujeme stavový odhad ($\hat{x}_k$) a matici kovariance ($P_k$) v informační formě pomocí matice informací $Y_k=P^{-1}_k$ a vektoru informací $\hat{y}_k=Y_k\hat{x}_k$. Je výhodné pro mapy s větším měřítkem, kdy spousta nediagonálních prvků bude velmi blízkých nule, což vede k možnosti nastavení těchto prvků na hodnotu nula. Může tím však vznikat malá ztráta optimality při vzniku map.\\
-\indent Rozšíření stavu je rozčleňovací operace vedoucí k přesnému rozčlenění informační formy a má tak ekvivalentní informační formu. Předpokládáme, že podmnožina stavů $x_i$ obsahuje většinu stavů mapy a po rozčlenění dosahuje pouze konstantní složitosti v čase. Můžeme tedy získávat přesné řešení díky rozšiřování stavu novým odhadem pozice robota v každém kroce a zachovat všechny předchozí pozice. Nenulové nediagonální prvky jsou tak pouze ty, které jsou spojené napřímo s měřenými daty.\\
-\indent Dále sem musíme zahrnout marginalizaci, jež je nezbytná pro odstranění předchozích stavů pozice. Máme možnost marginalizovat všechny předchozí stavy, což vede na zhuštěnou matici informací, a tedy stav, kterého dosáhnout nechceme. Správnou volbou ukotvení pozice můžeme marginalizovat velkou čast pozic, aniž bychom vyvolaly nadměrnou hustotu matice informací.
-
-\subsubsection{Globální submapy}
-Rozlišujeme dva základní typy submap a to globálně a lokálně referencované, přičemž oba mají společné, že submapa stanovuje místní souřadnicový rámec a landmarky z jejího okolí jsou odhadovány s ohledem na tento rámec.\\
-\indent Lokální metoda získává odhady pomocí optimálního algoritmu, používajícího pouze lokální landmarky. Tato metoda, i přes výpočetní efektivitu, je při tvorbě struktury submap neoptimální. Globální metoda dokáže z kvadraticky rostoucí složitosti, udělat lineární, či dokonce v čase konstantní složitost. Je to možné díky údržbě a konzervativním odhadům celé mapy. Metoda stojí na odhadování globální pozice submapy v rámci mapy, nevede však ke zmírnění problémů s linearizací, způsobenou velkými nepřesnostmi v odhadu pozic.
-
-\subsubsection{Submapy vztažné}
-Základním rozdílem od metody globálních submap, je absence společného základního rámce. V této metodě se submapy zaznamenávají dle sousedství s ostatními a celou mapu pak můžeme získat souhrnem vektoru cesty. Submapy jsou, díky vyhýbání se globálním spojením, velmi zajímavé z hlediska výpočetní složitosti a problémům týkajících se nelinearity. Velkým kladem je například tvorba lokálně optimální mapy s výpočetní složitostí nezávislou na celkové velikosti mapy a dále, díky úpravám pouze na lokální úrovni, je velmi stabilní.
 
 \subsection{Asociace dat}
-Jedná se velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy, často dokonce k pádu celého algoritmu
-
-\subsubsection{Validace várky dat}
-Z prvu se k problému přistupovalo způsobem, kdy se každé jednotlivé zachycení landmarku porovnávalo se všemi odhady nacházejícími se v blízkém okolí. Tento individuální přístup je neproveditelný, pokud je nejistá pozice robota, cožje tedy neproveditelné obzvlášť v málo zaplněných prostředích. 
-
-\subsubsection{Popis vzhledu}
-Jedním ze způsobů snímání okolí je vidění, kdy zaznamenáváme tvar, barvu, strukturu, a tím dokážeme rozlišovat různé balíčky dat, což využíváme pro přepověd dané asociace, nejčastěji pro problém s uzavřením smyčky. Pokrok této metody přišel, když se začala počítat metrika podobnosti přes sekvenci obrazů, místo původního jednoho. 
+Jedná se velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy. Často dokonce k pádu celého algoritmu.\\
+\indent Z prvu se k problému přistupovalo způsobem, kdy se každé jednotlivé zachycení landmarku porovnávalo se všemi odhady nacházejícími se v blízkém okolí. Tento individuální přístup je neproveditelný, pokud je nejistá pozice robota, tedy obvzláště v málo zaplněných prostředích. \\
+\indent Při popisu vzhledu je vidění jedním z hlavních způsobů snímání okolí. Podle typu senzoru se zaznamenává například tvar, barva, struktura, a tím je možné rozlišovat různé balíčky dat. To je úpté využito pro přepověd dané asociace, nejčastěji pro problém s uzavřením smyčky. Pokrok této metody přišel s počítáním metriky podobnosti přes sekvenci obrazů, místo původního jednoho. 
 
 \subsubsection{Multihypoziční asociace dat}
-Jedná se o metodu nepostradatelnou pro robustní sběr dat v přeplněním prostředí, kdy vytváříme oddělené odhady trasy jízdy pro každou asociační hypotézu. Tato funkce je však silně limitována dotupným výpočetním výkonem. Dále je metoda vyžívána při implementaci robustního SLAMu ve velkých prostředích, kdy je při uzavírání smyčky vytvořena hypotéza pro smyčku uzavřenou i pro stále neuzavřenou, a tím se bere v potaz, že je prostředí pouze podobné. 
+Jedná se o metodu nepostradatelnou pro robustní sběr dat v přeplněném prostředí, kdy se vytváří oddělené odhady trasy pohybu pro každou asociační hypotézu. Tato funkce je však silně limitována dotupným výpočetním výkonem. Dále je metoda vyžívána při implementaci robustního SLAMu ve velkých prostředích, kdy je při uzavírání smyčky vytvořena hypotéza pro smyčku uzavřenou i pro stále neuzavřenou. Tím se bere v potaz, že je prostředí pouze podobné. 
+
 
 \subsection{Reprezentace prostředí}
 Původně se svět modeloval jen jako soubor landmarků majících svůj určitý tvar, později však, zejména ve venkovním, podvodním a podzemním použití, se ukázala tato metoda jako nevyhovující.
