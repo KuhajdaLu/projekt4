@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage{graphicx}
 \usepackage[czech]{babel}
 \usepackage[utf8]{inputenc}
@@ -47,8 +47,8 @@
 
 
 \section{Úvod}
-Ve své bakalářské práci se budu věnovat systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. V první části práce jsem se zaměřil obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Zabývám se zde vnitřními principy a různými přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. Já se zaměřuji na systémy využívající čistě jen 2D LIDAR, tedy o sezor měřící vzdálenosti pouze v jedné výškové úrovni.\\
-\indent V další části své práce jsem se podrobněji věnoval třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o GMapping, HectorSLAM a Google Cartographer. Popsal jsem zde jejich základní rysy, kterými se liší od ostatních a jimiž je dostatečně popsána jejich funkčnost. \\
+Ve své bakalářské práci se věnuji systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. V první části práce jsem se zaměřil obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Zabývám se zde vnitřními principy a různými přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. Já se zaměřuji na systémy využívající čistě jen 2D LIDAR, tedy sezor, měřící vzdálenosti pouze v jedné výškové úrovni.\\
+\indent V další části své práce jsem se podrobněji věnoval třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o GMapping, HectorSLAM a Google Cartographer. Popsal jsem zde jejich základní rysy, kterými se liší od ostatních a jimiž je dostatečně charakterizována jejich funkčnost. \\
 \indent měření, výsledky, porovnání, změna v gmappingu, proč jsem si vybral ...
 
 \newpage
@@ -163,8 +163,8 @@ V této metodě se vyjadřuje stavový odhad $\hat{x}_k$ a matici kovariance $P_
 \indent Dále sem musíme zahrnout marginalizaci, jež je nezbytná pro odstranění předchozích stavů pozice. Máme možnost marginalizovat všechny předchozí stavy, což vede na zhuštěnou matici informací, což je nežádoucí. Správnou volbou ukotvení pozice můžeme marginalizovat velkou čast pozic, aniž bychom vyvolaly nadměrnou hustotu matice informací.
 
 \newpage
-\subsection{Rao-Blackwellizedův částicový filtr (RBPF)}
-Forma SLAM založená na Rao-Blackwellizedově filtru, jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
+\subsection{Rao-Blackwellizedův částicový filtr}
+Forma SLAM založená na Rao-Blackwellizedově filtru (RBPF), jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
 \indent Částice zde znázorňují trasu robota, jedna částice je tedy vzorkem v cestě. Každá částice také obsahuje mapu, kde je každý landmark reprezentovaný vlastním Gaussiánem. Díky použití částicových filtrů se jedná o jedinou formu SLAM, která řeší jak problém $full$ $SLAM$, tak i problém $online$ $SLAM$. Tato forma počítá posterior pro celou cestu, tím je tedy brána jako řešící problém $full$ $SLAM$. Odhadováním pozice robota v každém časovém okamžiku je algoritmus označován jako online. O odhad pozice se starají právě částicové filtry.\\
 \indent Sdružený stav může být jako faktor komponent robota a podmíněných komponent mapy
 \begin{equation}
@@ -340,5 +340,42 @@ kde $\Delta\xi$ je odhad $\xi$.\\
 \subsection{Odhad 3D stavu}
 Pro odhad úplného 6D stavu (3D stav + informace o naklonění z gyroskopů a informace z akcelerometrů) slouží navigační filtr běžící v reálném čase. Filtr je asynchronně aktualizován při příchodu odhadované pozice z porovnávače nebo jiných informací ze senzorů. Filtr je implementován ve formě EKF, jedná se tedy o nelineární filtr a jako jeho známé vstupy se berou inerciální měření. Rychlost a pozici aktualizujeme integrací zrychlení. Aby se ale zabránilo nezávislému růstu odhadu stavu při nepřítomnosti měření, dochází k aktualizace pseudo-nulové rychlosti, které se spouští při dosažení odchylky určité prahové hodnoty a zajišťuje tak stabilitu systému.\\
 \indent Při integraci systému jsou přítomny základní dva celky, 2D SLAM a 3D stavový odhad, které spolu musejí komunikovat v obou směrech. Jejich fungování neni nijak synchronizováno, odhad stavu běží typicky s vyšší frekvencí. Odhadovaná pozice z EKF je brána jako počáteční odhad pro optimalizaci porovnávání. Opačným směrem je použit pro spojení pozice ze SLAM s celkovým odhadovaným stavem kovarianční průsečík (CI - covariance interseption).
+
+
+\newpage
+
+
+\section{Experimentální měření}
+Pro testování všech výše zmíněných systémů jsem využil framework $Robot$ $Operating$ $System$ (ROS). V této části práce je tedy popsána jeho funkčnost a využití. Dále je zde porovnání implementací SLAM, jak na simulačních datech, tak i na datech reálných, pořízených pomocí šetikolového robota osazeného LIDARem. Porovnání je provedeno výpočtem chyb v trajektoriích jízdy a v případě nekonvergence systému rozebráním situace, proč k danému problému došlo.
+
+\subsection{Robot Operating System}
+Robot operating system, zkráceně ROS, je operační systém určený pro ovládání robotů. Poskytuje vše očekávané od operačního systému, jako je například abstrakce hardwaru, nízkoúrovňové ovládání, komunikace mezi procesy a mnoho dalších funkcí. Obsahuje také nástroje a knihovny pro vytváření, získávání, psaní a spouštění kódu na více zařízeních. ROS prozatím běží pouze na platformách založených na Unixu. Software je testovaný především na systémech s Ubuntu nebo Mac OS X, přičemž s Windows není zatím kompatibilní.\\
+\indent Při běhu je komunikační infrastrukturou ROSu vytvářena síť volně propojených procesů, které mohou běžet na více zařízeních. Implementováno je zde několik možných komunikačních stylů. Přes služby je to synchronní komunikace RPC ($Remote$ $Procedure$ $Call$ = vzdálené volání procedur). Je to jedna z nejstarších metod pro komunikaci programů na dálku. Obsahuje mechanismus umožňující volat z programu funkce ze vzdáleného počítače. Dalším obsaženým stylem komunikace je asynchronní streamování dat, které běží přes topiky. Posledním je ukládání dat na $Parameter$ $Server$, což je sdílený víceúrovňový slovník, který je přístupný prostřednictvím síťových rozhranní API. Procesy, označované jako $nodes$, využívají tento server k ukládání a načítání dat za běhu.\\
+\indent Existuje celá řada softwarových platforem pro roboty a je těžké porovnávat, která z nich je ta nejlepší. ROS je open source systém, hlavní jeho snahou je znovuvyužitelnost napsaného kódu a multiplatformní provozuschopnost, což z něj činí nejrozšířenější systém pro roboty. Celý rámec je složený z distribuovaných procesů, nodů. $Nodes$ jsou individuáně spustitelné soubory, které se ze běhu volně propojují do peer-to-peer sítě, mohou být seskupeny do balíků a být tak jednoduše sdíleny.\\
+\indent Jednou z dalších snah systému ROS je co největší hubenost. Nedochází k zabalení metody main() a tím může být kód využit i jinými frameworky. ROS je tak snadné integrovat s dalšími robotickými softwarovými frameworky, jako je například OpenRAVE nebo OROCOS. Dalším důležitým rysem je jazyková nezávislost, kdy je možné plně využívat jazyků Python, C++ a Lisp. Dále, zatím experimentálně, je možné používat určité knihovny z jazyků Java a Lua. Neméně důležitými vlatnostmi jsou také škálovatelnost, což je pro velké runtime systémy vlastnost velmi užitečná a snadné testování pomocí vestavěné jednotky $rostest$.\\
+\indent Ros se skládá ze tří úrovní pojmů. První úrovní je souborový systém, další je výpočetní graf a poslední je komunitní úroveň.\\
+
+\subsubsection{Souborový systém}
+Na úrovni souborového systému jsou v ROSu myšleny všechny prostředky, se kterými se pracuje na pevném disku. Jedná se o balíčky ($Pakages$), $Metapackages$, $Package$ $Manifests$, repozitáře, typy zpráv a typy služeb.\\
+\indent Balíčky jsou základní stavební jednotkou softwaru ROS. Jedná se o nejnižší strukturu umožňující tvorbu programu. Balíčky mohou obsahovat $ROS$ $runtime$ procesy, dále knihovny závislé na ROSu, datové sady, konfigurační soubory a mnoho dalšího, co lze užitečně zahrnout do jednoho souboru.\\
+\indent $Metapackage$ se již nachází výše, je to specializovaný balíček, který slouží k reprezentaci skupiny souvisejících balíčků. Nejčastější jejich využití je držení zpětné kompatibility pro zásobníky ($Stacks$), které prošly konverzí přes $rosbuild$. $Stacks$ jsou též kolekce balíčků, které seskupují určité funkce, například $navigation$ $stack$, jenž na základě informací ze senzorů dává příkazy pro další navigaci robota v prostředí. $Package$ $Manifest$, package.xml, poskytuje metadata o daném balíčku. Jsou v něm obsažené informace jako název, verze, popis, licenční informace, závislosti a další.\\
+\indent Repozitář je opět souhrn balíčků (může však obsahovat pouze jeden balíček), které sdílejí společný VCS ($Version$ $Controlling$ $System$), což je systém sdílející stejnou verzi. Balíčky tak mohou být společně uvolněny užitím nástoje $catkin$. Repozitáře často mapují převedené $Stacks$ přes $rosbuild$.\\
+\indent Typy zpráv a typy služeb pak již definují typy, které se smějí v ROS využívat. Pro typy zpráv je cesta k souboru $my\_package/msg/MyMessageType.msg$ a obsahuje datvé struktury pro posílané zprávy. Definice typů služeb se nachází na adrese $my\_package/srv/MyServiceType.srv$ a definuje datové struktury požadavků a odpovědí.\\
+
+\subsubsection{Výpočetní graf}
+Výpočetní graf se skládá z jednotlivých procesů zpracovávajících společně sdílená data a dohromady vytvářejících peer-to-peer síť. Základními pojmy pro výpočetní graf jsou $nodes$, $Master$, $Parameter$ $Server$, zprávy, topiky, služby a bagy. Všechny pojmy jsou implementovány v repozitáři pro komunikaci $ros\_comm$.\\
+\indent $Nodes$, v překladu uzly, jsou procesy obstarávající výpočty. Řídicí systémy pro robota obsahují často mnoho uzlů. Pro ROS je typická snaha o co největší modularitu, každý $node$ má tak jednu svoji úlohu, například zpracování laserového senzoru. $Nodes$ jsou nejčastěji psány pomocí knihoven $roscpp$ nebo $rospy$, kde písmena za $ros$ znamenají, zda-li se jedná o implementaci jazyka C++ nebo Python.\\
+\indent $Master$ zde zajišťuje registraci jmen a vyhledávání ve výpočetním grafu. Uzly s $Masterem$ komunikují a oznamují mu své registrační údaje, bez něj by se tedy uzly navzájem nemohly najít a vyměňovat si zprávy. Při změně registračních údajů provede $Master$ zpětné volání uzlů, tím je zajištěno dynamické vytváření spojení mezi uzly. Blízce související termín je $Parameter$ $Server$, který je součástí $Mastera$ a umožňuje ukládání dat do centrálního umístění.\\
+\indent Zprávy jsou informace posílané mezi $nodes$. Jsou tvořeny datovými typy jako je integer, float, boolean a tak dále a nebo ve formě pole obsahujících tyto primitivní typy.\\
+\indent Topik je název sloužící k identifikaci obsahu, kterým je určitá zpráva. Pokud chce $node$ určitý typ dat, začne odeírat data z příslušného topiku. Pokud chce uzel data do topiku odesílat, publikuje do něj danou zprávu. Do jednoho topiku může zapisovat i číst z něj zároveň více uzlů a jeden $node$ může odebírat a publikovat do více topiků. $Nodes$, ať publikující, či odebírající, nejsou si vědomy ostatních účastníků u daného topiku.\\
+\indent Komunikační model typu publikující/odběratel je vhodný pro posílání zpráv. Pro distribuované systémy, které využívají interakce typu žádost/odpověď, je to však nevyhovující. Tato interakce se tedy provádí pomocí služeb, které jsou definovány dvojicí struktur. Jedna pro žádost a druhá pro odpověď. Například $node$ nabízí určitou službu pod jménem a klient tétu služby využívá zasláním požadavku, kdy poté čeká na odpověď.\\
+\indent Posledním pojmem jsou zde bagy, v originálu $Bags$, které slouží k uložení a přehrávání dat z topiků. Jedná se o důležitý mechanismus skladování dat, který je nezbytný pro vývoj a testování algoritmů.\\
+\indent Pro ROS jsou velmi důležitá pojmenování. Jména jsou primárním prostředkem pro vybudování velkého a složitého systému. Každy uzel, topik, služba nebo parametr má svůj název. Všechny klientské knihovny podporují přemapování názvu z příkazového řádku, běžící programy tak mohou být za běhu překonfigurovány, aby fungovaly i odlišné topologii výpočetního grafu.\\
+
+\subsubsection{Komunitní úroveň}
+Jedná se o zdroje, které umožňují různým skupinám vývojářů, vyměňovat si software a znalosti. Spadají sem distribuce, což jsou kolekce verzovaných stacků, které lze nainstalovat. Mají dost podobnou úlohu jako distribuce Linuxu, usnadňují tedy instalaci kolekce softwaru a následné udržování konzistentní verze. Dále sem patří repozitáře, kdy různé instituce mohou vyvíjet své vlastní softwarové komponenty robota a sdílet je tak pomocí federované sítě úložišť. Velmi důležitým zdrojem je $The$ $ROS$ $Wiki$, což je hlavní fórum pro dokumentaci informací o ROSu. Kdokoliv přihlášený na svůj účet tak může přidávat nové, či upravovat a aktualizovat již vzniklé dokumentace, psát návody a mnoho dalšího.
+
+
+
 
 \end{document}

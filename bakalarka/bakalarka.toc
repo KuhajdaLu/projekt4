@@ -10,7 +10,7 @@
 \contentsline {subsubsection}{\numberline {2.4.1}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } slo\IeC {\v z}itost}{6}
 \contentsline {subsubsection}{\numberline {2.4.2}Odd\IeC {\v e}ln\IeC {\'e} aktualizace}{6}
 \contentsline {subsubsection}{\numberline {2.4.3}Roz\IeC {\v c}len\IeC {\v e}n\IeC {\'\i } stavov\IeC {\'e}ho prostoru}{7}
-\contentsline {subsection}{\numberline {2.5}Rao-Blackwellized\IeC {\r u}v \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr (RBPF)}{8}
+\contentsline {subsection}{\numberline {2.5}Rao-Blackwellized\IeC {\r u}v \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr}{8}
 \contentsline {subsubsection}{\numberline {2.5.1}Sdru\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } nezn\IeC {\'a}m\IeC {\'y}ch dat}{9}
 \contentsline {subsection}{\numberline {2.6}Asociace dat}{10}
 \contentsline {subsubsection}{\numberline {2.6.1}Multihypozi\IeC {\v c}n\IeC {\'\i } asociace dat}{10}
@@ -31,3 +31,8 @@
 \contentsline {subsection}{\numberline {5.2}P\IeC {\v r}ehled}{17}
 \contentsline {subsection}{\numberline {5.3}2D SLAM}{17}
 \contentsline {subsection}{\numberline {5.4}Odhad 3D stavu}{18}
+\contentsline {section}{\numberline {6}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{20}
+\contentsline {subsection}{\numberline {6.1}Robot Operating System}{20}
+\contentsline {subsubsection}{\numberline {6.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{21}
+\contentsline {subsubsection}{\numberline {6.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{21}
+\contentsline {subsubsection}{\numberline {6.1.3}Komunitn\IeC {\'\i } \IeC {\'u}rove\IeC {\v n}}{22}
