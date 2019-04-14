@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import re
 import matplotlib.pyplot as plt
 import math
@@ -13,7 +16,13 @@ class LidarMethodsComparing():
         self.comparison()
 
     def comparison(self):
+        print ''
+        print 'Porovnání cartographer...'
         self.compare_methods(self.cartographer_data)
+        print 'Porovnání gMapping...'
+        self.compare_methods(self.gmapping_data)
+        print 'Porovnání Hector...'
+        self.compare_methods(self.hector_data)
         self.plot_method(self.cartographer_data, self.ground_truth, self.gmapping_data, self.hector_data)
         pass
 
@@ -36,6 +45,8 @@ class LidarMethodsComparing():
         index2 = 0
         position_diff = []
         rotation_diff = []
+        rotation_diff_overall = 0
+        position_diff_overall = 0
         for i in range(len(met[0])-1):
             index1 = index2
             for j in range(len(self.ground_truth[2])):
@@ -46,14 +57,22 @@ class LidarMethodsComparing():
             rot_diff_ground_truth = abs(self.ground_truth[4][index2] - self.ground_truth[4][index1])
             min_val_met = min([2*math.pi-rot_diff_met, rot_diff_met])
             min_val_ground_truth = min([2*math.pi-rot_diff_ground_truth, rot_diff_ground_truth])
-            rotation_diff.append(abs(min_val_ground_truth-min_val_met))
+            rot_diff_value = abs(min_val_ground_truth-min_val_met)
+            rotation_diff.append(rot_diff_value)
 
             x = [(met[0][i + 1] - met[0][i]) - (self.ground_truth[0][index2] - self.ground_truth[0][index1]),
                     (met[1][i + 1] - met[1][i]) - (self.ground_truth[1][index2] - self.ground_truth[1][index1])]
             norm_x = la.norm(x)
             position_diff.append(norm_x)
-        print rotation_diff
-        print position_diff
+            rotation_diff_overall += math.pow(rot_diff_value, 2)
+            position_diff_overall += math.pow(norm_x, 2)
+        rotation_diff_overall = rotation_diff_overall / (len(met[0])-1)
+        position_diff_overall = position_diff_overall / (len(met[0])-1)
+        print 'Chyba orientace robota: ', rotation_diff_overall
+        print 'Chyba určení polohy robota: ', position_diff_overall
+        overall_difference = rotation_diff_overall + position_diff_overall
+        print 'Chyba určení stavu robota: ',overall_difference
+        print ''
 
 
 
@@ -171,9 +190,11 @@ class LidarMethodsComparing():
 
         axe_x_0 = axe_x[0]
         axe_y_0 = axe_y[0]
+        rot_diff = 1 - orientation_w[0]
         for i in range(len(axe_x)):
             axe_x[i] -= axe_x_0
             axe_y[i] -= axe_y_0
+            orientation_w[i] += rot_diff
 
         start_time = sim_time[0]
         processed_time = []
@@ -262,9 +283,11 @@ class LidarMethodsComparing():
 
         axe_x_0 = axe_x[0]
         axe_y_0 = axe_y[0]
+        rot_diff = 1 - orientation_w[0]
         for i in range(len(axe_x)):
             axe_x[i] -= axe_x_0
             axe_y[i] -= axe_y_0
+            orientation_w[i] += rot_diff
 
         start_time = sim_time[0]
         processed_time = []
