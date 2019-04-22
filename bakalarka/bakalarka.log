@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  14 APR 2019 16:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  22 APR 2019 23:16
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -724,17 +724,17 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [1])
 \tf@toc=\write3
 \openout3 = `bakalarka.toc'.
 
- [1] [2]
+ [2] [3]
 Overfull \hbox (1.71846pt too wide) in paragraph at lines 72--75
 []\OT1/cmr/m/n/12 Model po-zo-rovan po-pi-suje pravdepodobnost zisku po-zo-
 rovan $[][]$, po-kud zname
  []
 
-[3]
+[4]
 Underfull \hbox (badness 10000) in paragraph at lines 81--85
 
  []
@@ -744,7 +744,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 100--103
 
  []
 
-[4]
+[5]
 Underfull \hbox (badness 10000) in paragraph at lines 106--109
 
  []
@@ -789,7 +789,7 @@ Overfull \hbox (8.85591pt too wide) in paragraph at lines 146--150
 rnch mo-delu pro vyjadren
  []
 
-[5]
+[6]
 Overfull \hbox (7.55806pt too wide) in paragraph at lines 156--159
 []\OT1/cmr/m/n/12 Rozlisujeme dva zpusoby mozne im-ple-men-tace. Prvn z n
 ich pra-cuje na zmensene
@@ -807,7 +807,7 @@ Overfull \hbox (4.38771pt too wide) in paragraph at lines 156--159
 , ktere si stale udrzuje.
  []
 
-[6]
+[7]
 Overfull \hbox (1.10005pt too wide) in paragraph at lines 161--164
 \OT1/cmr/m/n/12 zskavat presne resen dky rozsirovan stavu novy
 m od-ha-dem po-zice ro-bota v kazdem
@@ -819,18 +819,18 @@ Overfull \hbox (26.6472pt too wide) in paragraph at lines 161--164
 ytna pro od-stranen predchozch
  []
 
-[7]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 184--186
 
  []
 
-[8] [9]
+[9] [10]
 Overfull \hbox (0.9786pt too wide) in paragraph at lines 193--196
 \OT1/cmr/m/n/12 rozlisovat ruzne balcky dat. To je upte vyuzito pro p
 repoved dane aso-ci-ace, nejcasteji
  []
 
-[10]
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 202--203
 
  []
@@ -841,7 +841,7 @@ Overfull \hbox (14.06328pt too wide) in paragraph at lines 209--212
 -a-li-zaci je hod-nota pravdepodobnosti
  []
 
-[11]
+[12]
 Overfull \hbox (20.03635pt too wide) in paragraph at lines 233--233
 []\OT1/cmr/bx/n/14.4 RBPF s vy-lepsenymi navrhy a adap-tivnm prevzorkova
 nm 
@@ -871,7 +871,7 @@ Overfull \hbox (49.01476pt too wide) in paragraph at lines 234--238
 han nekterych ma-xim v pavdepodobnostn
  []
 
-[12] [13]
+[13] [14]
 Underfull \hbox (badness 10000) in paragraph at lines 254--255
 
  []
@@ -900,7 +900,7 @@ Overfull \hbox (8.3189pt too wide) in paragraph at lines 261--265
 k ak-tu-a-li-zuj pravdepodobnosti
  []
 
-[14] [15] [16]
+[15] [16] [17]
 Overfull \hbox (15.38481pt too wide) in paragraph at lines 307--309
 []\OT1/cmr/m/n/12 Kvuli zna-telnemu po-sunu od-hadu in-te-gro-vane po-zice 
 a rych-losti, ktery je zpusoben
@@ -925,12 +925,12 @@ Overfull \hbox (3.09804pt too wide) in paragraph at lines 323--326
 chema, dky kteremu ta moznost
  []
 
-[17]
+[18]
 Underfull \hbox (badness 10000) in paragraph at lines 330--332
 
  []
 
-[18] [19]
+[19] [20]
 Overfull \hbox (0.78404pt too wide) in paragraph at lines 349--350
 \OT1/cmr/m/n/12 Pro tes-tovan vsech vyse zmnenych systemu jsem vyu
 zil fra-mework $\OML/cmm/m/it/12 Robot$ $Operating$
@@ -952,20 +952,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 359--364
 
  []
 
-[20]
+[21]
 Underfull \hbox (badness 10000) in paragraph at lines 366--374
 
  []
 
-[21] [22] [23] (bakalarka.aux) ) 
+[22] [23] [24] [25]
+Overfull \hbox (370.15704pt too wide) in paragraph at lines 408--410
+\OML/cmm/m/it/12 ==code:research:uts:edu:au=\OT1/cmr/m/n/12 13110756\OML/cmm/m/
+it/12 =cartographer[]ros=blob=master=cartographer[]ros=cartographer[]ros=dev=pb
+stream[]trajectories[]to[]rosbag[]main:cc$\OT1/cmr/m/n/12 ).
+ []
+
+
+Overfull \hbox (1.33208pt too wide) in paragraph at lines 413--414
+\OT1/cmr/m/n/12 mapy i castice, na ktere pri dobehnut dat z $\OML/cmm/m/
+it/12 measured:bag$ \OT1/cmr/m/n/12 jeste nedoslo. Nasledujcm
+ []
+
+[26] [27] [28] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
- 8039 strings out of 493312
- 115591 string characters out of 3138899
+ 8046 strings out of 493312
+ 115678 string characters out of 3138899
  304368 words of memory out of 3000000
- 11440 multiletter control sequences out of 15000+200000
+ 11447 multiletter control sequences out of 15000+200000
  10424 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,39p,1237b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,17n,39p,1353b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
@@ -975,9 +988,9 @@ m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb>
-Output written on bakalarka.pdf (24 pages, 196570 bytes).
+Output written on bakalarka.pdf (29 pages, 212103 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
+ 133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

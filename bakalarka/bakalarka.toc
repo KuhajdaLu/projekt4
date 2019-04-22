@@ -1,40 +1,45 @@
 \select@language {czech}
-\contentsline {section}{\numberline {1}\IeC {\'U}vod}{2}
-\contentsline {section}{\numberline {2}Simult\IeC {\'a}nn\IeC {\'\i } lokalizace a mapov\IeC {\'a}n\IeC {\'\i }}{3}
-\contentsline {subsection}{\numberline {2.1}Historie}{3}
-\contentsline {subsection}{\numberline {2.2}Formulace a struktura}{3}
-\contentsline {subsubsection}{\numberline {2.2.1}Pravd\IeC {\v e}podobnostn\IeC {\'\i } SLAM}{3}
-\contentsline {subsubsection}{\numberline {2.2.2}Struktura}{4}
-\contentsline {subsection}{\numberline {2.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i } probl\IeC {\'e}mu SLAM}{5}
-\contentsline {subsection}{\numberline {2.4}EKF-SLAM}{5}
-\contentsline {subsubsection}{\numberline {2.4.1}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } slo\IeC {\v z}itost}{6}
-\contentsline {subsubsection}{\numberline {2.4.2}Odd\IeC {\v e}ln\IeC {\'e} aktualizace}{6}
-\contentsline {subsubsection}{\numberline {2.4.3}Roz\IeC {\v c}len\IeC {\v e}n\IeC {\'\i } stavov\IeC {\'e}ho prostoru}{7}
-\contentsline {subsection}{\numberline {2.5}Rao-Blackwellized\IeC {\r u}v \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr}{8}
-\contentsline {subsubsection}{\numberline {2.5.1}Sdru\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } nezn\IeC {\'a}m\IeC {\'y}ch dat}{9}
-\contentsline {subsection}{\numberline {2.6}Asociace dat}{10}
-\contentsline {subsubsection}{\numberline {2.6.1}Multihypozi\IeC {\v c}n\IeC {\'\i } asociace dat}{10}
-\contentsline {subsection}{\numberline {2.7}Reprezentace prost\IeC {\v r}ed\IeC {\'\i }}{11}
-\contentsline {subsubsection}{\numberline {2.7.1}Mapa z landmark\IeC {\r u}}{11}
-\contentsline {subsubsection}{\numberline {2.7.2}M\IeC {\v r}\IeC {\'\i }\IeC {\v z}kov\IeC {\'e} mapy}{11}
-\contentsline {section}{\numberline {3}GMapping}{12}
-\contentsline {subsection}{\numberline {3.1}\IeC {\'U}vod}{12}
-\contentsline {subsection}{\numberline {3.2}Mapov\IeC {\'a}n\IeC {\'\i } pomoc\IeC {\'\i } RBPF}{12}
-\contentsline {subsection}{\numberline {3.3}RBPF s vylep\IeC {\v s}en\IeC {\'y}mi n\IeC {\'a}vrhy a adaptivn\IeC {\'\i }m p\IeC {\v r}evzorkov\IeC {\'a}n\IeC {\'\i }m}{12}
-\contentsline {section}{\numberline {4}Catographer}{14}
-\contentsline {subsection}{\numberline {4.1}\IeC {\'U}vod}{14}
-\contentsline {subsection}{\numberline {4.2}P\IeC {\v r}ehled}{14}
-\contentsline {subsection}{\numberline {4.3}Lok\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{14}
-\contentsline {subsection}{\numberline {4.4}Uzav\IeC {\'\i }r\IeC {\'a}n\IeC {\'\i } smy\IeC {\v c}ky}{15}
-\contentsline {section}{\numberline {5}Hector SLAM}{17}
-\contentsline {subsection}{\numberline {5.1}\IeC {\'U}vod}{17}
-\contentsline {subsection}{\numberline {5.2}P\IeC {\v r}ehled}{17}
-\contentsline {subsection}{\numberline {5.3}2D SLAM}{17}
-\contentsline {subsection}{\numberline {5.4}Odhad 3D stavu}{18}
-\contentsline {section}{\numberline {6}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{20}
-\contentsline {subsection}{\numberline {6.1}Robot Operating System}{20}
-\contentsline {subsubsection}{\numberline {6.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{21}
-\contentsline {subsubsection}{\numberline {6.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{21}
-\contentsline {subsubsection}{\numberline {6.1.3}Komunitn\IeC {\'\i } \IeC {\'u}rove\IeC {\v n}}{22}
-\contentsline {subsection}{\numberline {6.2}Zisk dat k porovn\IeC {\'a}n\IeC {\'\i }}{23}
-\contentsline {subsubsection}{\numberline {6.2.1}Simulace v ROS}{23}
+\contentsline {section}{\numberline {1}\IeC {\'U}vod}{3}
+\contentsline {section}{\numberline {2}Simult\IeC {\'a}nn\IeC {\'\i } lokalizace a mapov\IeC {\'a}n\IeC {\'\i }}{4}
+\contentsline {subsection}{\numberline {2.1}Historie}{4}
+\contentsline {subsection}{\numberline {2.2}Formulace a struktura}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Pravd\IeC {\v e}podobnostn\IeC {\'\i } SLAM}{4}
+\contentsline {subsubsection}{\numberline {2.2.2}Struktura}{5}
+\contentsline {subsection}{\numberline {2.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i } probl\IeC {\'e}mu SLAM}{6}
+\contentsline {subsection}{\numberline {2.4}EKF-SLAM}{6}
+\contentsline {subsubsection}{\numberline {2.4.1}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } slo\IeC {\v z}itost}{7}
+\contentsline {subsubsection}{\numberline {2.4.2}Odd\IeC {\v e}ln\IeC {\'e} aktualizace}{7}
+\contentsline {subsubsection}{\numberline {2.4.3}Roz\IeC {\v c}len\IeC {\v e}n\IeC {\'\i } stavov\IeC {\'e}ho prostoru}{8}
+\contentsline {subsection}{\numberline {2.5}Rao-Blackwellized\IeC {\r u}v \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr}{9}
+\contentsline {subsubsection}{\numberline {2.5.1}Sdru\IeC {\v z}ov\IeC {\'a}n\IeC {\'\i } nezn\IeC {\'a}m\IeC {\'y}ch dat}{10}
+\contentsline {subsection}{\numberline {2.6}Asociace dat}{11}
+\contentsline {subsubsection}{\numberline {2.6.1}Multihypozi\IeC {\v c}n\IeC {\'\i } asociace dat}{11}
+\contentsline {subsection}{\numberline {2.7}Reprezentace prost\IeC {\v r}ed\IeC {\'\i }}{12}
+\contentsline {subsubsection}{\numberline {2.7.1}Mapa z landmark\IeC {\r u}}{12}
+\contentsline {subsubsection}{\numberline {2.7.2}M\IeC {\v r}\IeC {\'\i }\IeC {\v z}kov\IeC {\'e} mapy}{12}
+\contentsline {section}{\numberline {3}GMapping}{13}
+\contentsline {subsection}{\numberline {3.1}\IeC {\'U}vod}{13}
+\contentsline {subsection}{\numberline {3.2}Mapov\IeC {\'a}n\IeC {\'\i } pomoc\IeC {\'\i } RBPF}{13}
+\contentsline {subsection}{\numberline {3.3}RBPF s vylep\IeC {\v s}en\IeC {\'y}mi n\IeC {\'a}vrhy a adaptivn\IeC {\'\i }m p\IeC {\v r}evzorkov\IeC {\'a}n\IeC {\'\i }m}{13}
+\contentsline {section}{\numberline {4}Catographer}{15}
+\contentsline {subsection}{\numberline {4.1}\IeC {\'U}vod}{15}
+\contentsline {subsection}{\numberline {4.2}P\IeC {\v r}ehled}{15}
+\contentsline {subsection}{\numberline {4.3}Lok\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{15}
+\contentsline {subsection}{\numberline {4.4}Uzav\IeC {\'\i }r\IeC {\'a}n\IeC {\'\i } smy\IeC {\v c}ky}{16}
+\contentsline {section}{\numberline {5}Hector SLAM}{18}
+\contentsline {subsection}{\numberline {5.1}\IeC {\'U}vod}{18}
+\contentsline {subsection}{\numberline {5.2}P\IeC {\v r}ehled}{18}
+\contentsline {subsection}{\numberline {5.3}2D SLAM}{18}
+\contentsline {subsection}{\numberline {5.4}Odhad 3D stavu}{19}
+\contentsline {section}{\numberline {6}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{21}
+\contentsline {subsection}{\numberline {6.1}Robot Operating System}{21}
+\contentsline {subsubsection}{\numberline {6.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{22}
+\contentsline {subsubsection}{\numberline {6.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{22}
+\contentsline {subsubsection}{\numberline {6.1.3}Komunitn\IeC {\'\i } \IeC {\'u}rove\IeC {\v n}}{23}
+\contentsline {subsection}{\numberline {6.2}Zisk dat k porovn\IeC {\'a}n\IeC {\'\i }}{24}
+\contentsline {subsubsection}{\numberline {6.2.1}Simulace v ROS}{24}
+\contentsline {subsubsection}{\numberline {6.2.2}Nahr\IeC {\'a}n\IeC {\'\i } re\IeC {\'a}ln\IeC {\'y}ch dat}{25}
+\contentsline {subsubsection}{\numberline {6.2.3}Vyta\IeC {\v z}en\IeC {\'\i } trajektorie}{25}
+\contentsline {subsubsection}{\numberline {6.2.4}P\IeC {\v r}\IeC {\'\i }prava dat}{27}
+\contentsline {subsection}{\numberline {6.3}Vyhodnocen\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{28}
+\contentsline {subsubsection}{\numberline {6.3.1}Srovn\IeC {\'a}vac\IeC {\'\i } krit\IeC {\'e}rium}{28}
