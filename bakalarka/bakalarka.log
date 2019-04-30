@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  22 APR 2019 23:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  29 APR 2019 23:45
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -729,185 +729,202 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \openout3 = `bakalarka.toc'.
 
  [2] [3]
-Overfull \hbox (1.71846pt too wide) in paragraph at lines 72--75
+Underfull \hbox (badness 10000) in paragraph at lines 74--76
+
+ []
+
+[4]
+Overfull \hbox (1.71846pt too wide) in paragraph at lines 77--78
 []\OT1/cmr/m/n/12 Model po-zo-rovan po-pi-suje pravdepodobnost zisku po-zo-
 rovan $[][]$, po-kud zname
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 81--85
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--88
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--103
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 106--109
-
+Overfull \hbox (7.42908pt too wide) in paragraph at lines 98--99
+\OT1/cmr/m/n/12 Model po-zo-rovan udava zavislost po-lohy vo-zi-dla a po-
+zice lan-d-marku, z cehoz vyplyva,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 113--117
+Overfull \hbox (18.85905pt too wide) in paragraph at lines 103--106
+\OT1/cmr/m/n/12 prostredm tak zskavame presnejs a ro-bustnejs m
+apu. Naprklad nasobnym pruchodem
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 103--106
+
+ []
+
+[5] [6]
+Overfull \hbox (7.75206pt too wide) in paragraph at lines 109--112
+\OT1/cmr/m/n/12 sumem, coz vede k pouzit rozsreneho Kal-ma-nova fil-t
+ru (v ori-ginale $\OML/cmm/m/it/12 extended$ $Kalman$
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--112
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--124
+Underfull \hbox (badness 10000) in paragraph at lines 117--121
 
  []
 
 
-Overfull \hbox (13.23198pt too wide) in paragraph at lines 119--124
-\OT1/cmr/m/n/12 Tyto dve de-fi-nice vyuzijeme v me-tode EKF k vypoctu pru
-meru a ko-va-ri-ance sdruzeneho
+Underfull \hbox (badness 10000) in paragraph at lines 123--128
+
  []
 
-
-Overfull \hbox (13.47578pt too wide) in paragraph at lines 146--150
+[7]
+Overfull \hbox (13.47578pt too wide) in paragraph at lines 173--179
 \OT1/cmr/m/n/12 marku k nule. Jed-not-live od-chylky lan-d-marku pak kon-ver
 -guj dle puvodnch nepresnost
  []
 
 
-Overfull \hbox (7.62814pt too wide) in paragraph at lines 146--150
+Overfull \hbox (7.62814pt too wide) in paragraph at lines 173--179
 []\OT1/cmr/m/n/12 Metoda EKF-SLAM je velmi nachylna na chybne spo-jen po-z
 o-rovan se znamymi
  []
 
 
-Overfull \hbox (13.86876pt too wide) in paragraph at lines 146--150
+Overfull \hbox (13.86876pt too wide) in paragraph at lines 173--179
 \OT1/cmr/m/n/12 lan-d-marky. Jedna se zejmena o problem s uzavrenm smyck
 y, kdy dochaz k opetovnemu
  []
 
 
-Overfull \hbox (8.85591pt too wide) in paragraph at lines 146--150
+Overfull \hbox (8.85591pt too wide) in paragraph at lines 173--179
 \OT1/cmr/m/n/12 nepresnostem ve vysledku, ne-bot[] EKF-SLAM vyuzva linea
 rnch mo-delu pro vyjadren
  []
 
-[6]
-Overfull \hbox (7.55806pt too wide) in paragraph at lines 156--159
+[8]
+Overfull \hbox (7.55806pt too wide) in paragraph at lines 185--188
 []\OT1/cmr/m/n/12 Rozlisujeme dva zpusoby mozne im-ple-men-tace. Prvn z n
 ich pra-cuje na zmensene
  []
 
 
-Overfull \hbox (23.07692pt too wide) in paragraph at lines 156--159
+Overfull \hbox (23.07692pt too wide) in paragraph at lines 185--188
 \OT1/cmr/m/n/12 souradnicovym ramcem ne-o-poustejcm da-nou sub-mapu, c
 oz jsou al-go-ri-thmy $\OML/cmm/m/it/12 constrained$
  []
 
 
-Overfull \hbox (4.38771pt too wide) in paragraph at lines 156--159
+Overfull \hbox (4.38771pt too wide) in paragraph at lines 185--188
 []\OT1/cmr/m/n/12 Logaritmus sub-mapy se sklada z dvou nezavislych od-hadu
 , ktere si stale udrzuje.
  []
 
-[7]
-Overfull \hbox (1.10005pt too wide) in paragraph at lines 161--164
+
+Overfull \hbox (1.10005pt too wide) in paragraph at lines 190--193
 \OT1/cmr/m/n/12 zskavat presne resen dky rozsirovan stavu novy
 m od-ha-dem po-zice ro-bota v kazdem
  []
 
 
-Overfull \hbox (26.6472pt too wide) in paragraph at lines 161--164
+Overfull \hbox (26.6472pt too wide) in paragraph at lines 190--193
 []\OT1/cmr/m/n/12 Dale sem musme za-hr-nout mar-gi-na-li-zaci, jez je ne-zb
 ytna pro od-stranen predchozch
  []
 
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 184--186
+[9] [10]
+Underfull \hbox (badness 10000) in paragraph at lines 213--215
 
  []
 
-[9] [10]
-Overfull \hbox (0.9786pt too wide) in paragraph at lines 193--196
+[11] [12]
+Overfull \hbox (0.9786pt too wide) in paragraph at lines 222--225
 \OT1/cmr/m/n/12 rozlisovat ruzne balcky dat. To je upte vyuzito pro p
 repoved dane aso-ci-ace, nejcasteji
  []
 
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 202--203
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
 
  []
 
 
-Overfull \hbox (14.06328pt too wide) in paragraph at lines 209--212
+Overfull \hbox (14.06328pt too wide) in paragraph at lines 238--241
 \OT1/cmr/m/n/12 zen kazde bunky muze nabyvat tr hod-not. Pri ini-ci
 -a-li-zaci je hod-nota pravdepodobnosti
  []
 
-[12]
-Overfull \hbox (20.03635pt too wide) in paragraph at lines 233--233
+[14]
+Overfull \hbox (20.03635pt too wide) in paragraph at lines 262--262
 []\OT1/cmr/bx/n/14.4 RBPF s vy-lepsenymi navrhy a adap-tivnm prevzorkova
 nm 
  []
 
 
-Overfull \hbox (2.27635pt too wide) in paragraph at lines 234--238
+Overfull \hbox (2.27635pt too wide) in paragraph at lines 263--267
 \OT1/cmr/m/n/12 rozlozen, castice by mely stej-nou vazenou dulezitost
  a ne-bylo by treba prevzorkovan. 
  []
 
 
-Overfull \hbox (7.69798pt too wide) in paragraph at lines 234--238
+Overfull \hbox (7.69798pt too wide) in paragraph at lines 263--267
 \OT1/cmr/m/n/12 casticm v okol vyznamne ob-lasti, prlisnemu po-kle
 su vazenych dulezitost. Nasledkem
  []
 
 
-Overfull \hbox (32.47142pt too wide) in paragraph at lines 234--238
+Overfull \hbox (32.47142pt too wide) in paragraph at lines 263--267
 \OT1/cmr/m/n/12 pravepodobnost. Po-rovnavac po-zo-rovan urcuje rezim 
 vynamne ob-lasti pravdepodobnostn
  []
 
 
-Overfull \hbox (49.01476pt too wide) in paragraph at lines 234--238
+Overfull \hbox (49.01476pt too wide) in paragraph at lines 263--267
 \OT1/cmr/m/n/12 castici nej-blizs ma-xi-mum, coz muze zpusobit vy-nec
 han nekterych ma-xim v pavdepodobnostn
  []
 
-[13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 254--255
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 283--284
 
  []
 
 
-Overfull \hbox (0.19528pt too wide) in paragraph at lines 257--259
+Overfull \hbox (0.19528pt too wide) in paragraph at lines 286--288
 \OT1/cmr/m/n/12 problemu, tm je od-had po-zice. Od-had se ak-tu-a-li-zuje po
  nekolika vterinach a uzavren
  []
 
 
-Overfull \hbox (3.7989pt too wide) in paragraph at lines 261--265
+Overfull \hbox (3.7989pt too wide) in paragraph at lines 290--294
 []\OT1/cmr/m/n/12 Pri pridan skenu do pravdepodobnostn mrzky je po
 ctana mnozina zasazenych
  []
 
 
-Overfull \hbox (3.88136pt too wide) in paragraph at lines 261--265
+Overfull \hbox (3.88136pt too wide) in paragraph at lines 290--294
 \OT1/cmr/m/n/12 zasahu. Pri mi-nut je vlozen bod mrzky sdruzeny se 
 vsemi pi-xely, ktere jsou protnany
  []
 
 
-Overfull \hbox (8.3189pt too wide) in paragraph at lines 261--265
+Overfull \hbox (8.3189pt too wide) in paragraph at lines 290--294
 \OT1/cmr/m/n/12 techto mnozin vy-sky-tuj. Jiz po-zo-ro-vanym bodum se pa
 k ak-tu-a-li-zuj pravdepodobnosti
  []
 
-[15] [16] [17]
-Overfull \hbox (15.38481pt too wide) in paragraph at lines 307--309
+[17] [18] [19]
+Overfull \hbox (15.38481pt too wide) in paragraph at lines 336--338
 []\OT1/cmr/m/n/12 Kvuli zna-telnemu po-sunu od-hadu in-te-gro-vane po-zice 
 a rych-losti, ktery je zpusoben
  []
 
 
-Overfull \hbox (1.07791pt too wide) in paragraph at lines 319--321
+Overfull \hbox (1.07791pt too wide) in paragraph at lines 348--350
 \OT1/cmr/m/n/12 
  = (\OML/cmm/m/it/12 ; ;  \OT1/cmr/m/n/12 )[]$ je zde in-for-mace o otacen
 , stoupan a natocen. Vek-tor $\OML/cmm/m/it/12 x \OT1/cmr/m/n/12 = (
@@ -915,82 +932,105 @@ Overfull \hbox (1.07791pt too wide) in paragraph at lines 319--321
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 319--321
+Underfull \hbox (badness 10000) in paragraph at lines 348--350
 
  []
 
 
-Overfull \hbox (3.09804pt too wide) in paragraph at lines 323--326
+Overfull \hbox (3.09804pt too wide) in paragraph at lines 352--355
 \OT1/cmr/m/n/12 rivatu. Pro oba od-hady se tedy vyuzva in-ter-polacn s
 chema, dky kteremu ta moznost
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 330--332
+[20]
+Underfull \hbox (badness 10000) in paragraph at lines 359--361
 
  []
 
-[19] [20]
-Overfull \hbox (0.78404pt too wide) in paragraph at lines 349--350
+[21] [22]
+Overfull \hbox (0.78404pt too wide) in paragraph at lines 378--379
 \OT1/cmr/m/n/12 Pro tes-tovan vsech vyse zmnenych systemu jsem vyu
 zil fra-mework $\OML/cmm/m/it/12 Robot$ $Operating$
  []
 
 
-Overfull \hbox (6.37807pt too wide) in paragraph at lines 352--357
+Overfull \hbox (6.37807pt too wide) in paragraph at lines 381--386
 \OT1/cmr/m/n/12 moznych ko-mu-nikacnch stylu. Pres sluzby je to syn-chr
 onn ko-mu-ni-kace RPC ($\OML/cmm/m/it/12 Remote$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 352--357
+Underfull \hbox (badness 10000) in paragraph at lines 381--386
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 359--364
+Underfull \hbox (badness 10000) in paragraph at lines 388--393
 
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 366--374
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 395--403
 
  []
 
-[22] [23] [24] [25]
-Overfull \hbox (370.15704pt too wide) in paragraph at lines 408--410
+[24] [25] [26] [27]
+Overfull \hbox (370.15704pt too wide) in paragraph at lines 437--439
 \OML/cmm/m/it/12 ==code:research:uts:edu:au=\OT1/cmr/m/n/12 13110756\OML/cmm/m/
 it/12 =cartographer[]ros=blob=master=cartographer[]ros=cartographer[]ros=dev=pb
 stream[]trajectories[]to[]rosbag[]main:cc$\OT1/cmr/m/n/12 ).
  []
 
 
-Overfull \hbox (1.33208pt too wide) in paragraph at lines 413--414
+Overfull \hbox (1.33208pt too wide) in paragraph at lines 442--443
 \OT1/cmr/m/n/12 mapy i castice, na ktere pri dobehnut dat z $\OML/cmm/m/
 it/12 measured:bag$ \OT1/cmr/m/n/12 jeste nedoslo. Nasledujcm
  []
 
-[26] [27] [28] (bakalarka.aux) ) 
+[28] [29] [30]
+Underfull \hbox (badness 10000) in paragraph at lines 484--485
+
+ []
+
+
+Overfull \hbox (45.61324pt too wide) in paragraph at lines 486--493
+ [] 
+ []
+
+[31]
+Overfull \hbox (15.82576pt too wide) in paragraph at lines 499--504
+\OT1/cmr/m/n/12 dopoctavanou. Pouzitm to-hoto na-sta-ven se Car-to-gra
+-pher stava nachylny na podlouhle
+ []
+
+
+Overfull \hbox (17.0479pt too wide) in paragraph at lines 499--504
+\OT1/cmr/m/n/12 pro-story bez vetsch rodlu, ty-pickym prkladem jsou 
+chodby. GMap-ping bez-podmnecne
+ []
+
+[32] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
- 8046 strings out of 493312
- 115678 string characters out of 3138899
+ 8048 strings out of 493312
+ 115694 string characters out of 3138899
  304368 words of memory out of 3000000
- 11447 multiletter control sequences out of 15000+200000
+ 11449 multiletter control sequences out of 15000+200000
  10424 words of font info for 39 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,17n,39p,1353b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
-s/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
-C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Progra
-m Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb>
-Output written on bakalarka.pdf (29 pages, 212103 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
+:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program
+ Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/symbols/msam10.pfb>
+Output written on bakalarka.pdf (33 pages, 231557 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
+ 150 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
