@@ -86,7 +86,9 @@ Máme tak implementaci ve formě dvoukrokého rekurzivního algoritmu.\\
 \\
 Aktualizace času (predikce):
 \begin{equation}
-	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)=\int P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\times P(\textbf{x}_{k-1},\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k-1},\textbf{x}_0)d\textbf{x}_{k-1}
+	\begin{split}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}&_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)=\\&\int P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\times P(\textbf{x}_{k-1},\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k-1},\textbf{x}_0)d\textbf{x}_{k-1}
+	\end{split}
 \end{equation}
 \\
 Aktualizace měření (korekce):
@@ -415,7 +417,7 @@ Pro zisk dat pomocí simulace jsou v systému ROS implementovány dva hlavní si
 \indent Své simulační prostředí jsem rozložil do tří souborů. Dva s příponou $inc$, kdy první obsahuje informace pro načtení mapy. Jsou zde obsaženy informace o velikosti, frekvenci obnovování, výšku překážek v ose $z$ a různá boolean nastavení. V druhém $inc$ souboru se pak nachází informace o simulačním robotovi. Zvolil jsem trojúhleníkovou platformu, na které se nachází malý čtvercový blok simulující LIDAR. Je zde osaženo i jeho nastavení, jako je počet paprsků, úhel rozsahu a vzdálenost dosahu. Posledním konfiguračním souborem je soubor $wolrd$, ve kterém se nachází nastavení velikosti okna a načtení obou souborů $.inc$. Při načítání souboru s nastevením mapy je zde definován obrázek obsahující mapu a s načítáním souboru o robotovi se definuje jeho pozice v prostoru.\\
 \indent Pro nahrání dat poté stačí příkazem
 \begin{center}
-	$rosrun$ $stage\_ros$ $stageros$ $file.world$
+	\texttt{rosrun stage\_ros stageros file.world}
 \end{center}
 spustit simulaci a pomocí některého z navigačních balíčků s robotem v mapě jezdit. Osobně jsem si zvolil knihovnu $teleop\_twist\_keyboard$, která umožňuje navigaci robota pomocí klávesnice.
 
@@ -424,28 +426,28 @@ K nahrání reálného datasetu jsem měl k dispozici robota $Wild$ $Thumper$ $6
 \indent Pro řízení kol je využito Arduino, pro zpracování dat a komunikaci je zde superpočítač od společnosti NVIDIA, jehož označení je Jetson TX2 a velikost 50 x 87 milimetrů. Výpočetní výkon zajišťuje osmijádrový procesor s architekturou jádra ARMv8. Velikost operační paměti má 8 GB a úložiště 32 GB. Pro komunikaci je zde rozhraní Wi-Fi 802.11ac a Bluetooth 4.1. Jako měřící senzor je zde využit LIDAR $Hokuyo$ $URG-04LX-UG01$ s detekovatelným rozsahem od dvou centimetrů do 5,6 metru. Daný sezor má rozsah snímání 240$^o$ s úhlovým rozlišením 0,36$^o$. Obnovovací frekvence je 100 milisekund a uvedená přesnost je 30 milimetrů.\\
 \indent Pro pohyb robota v prostoru jsem využil možnost připojení bezdrátového ovladače $Xbox$ $One$ $Wireless$ $Controller$. Přesto, že robot díky integrovanému počítači od NVIDIA má velmi vysoký výkon, tyto prostředky jsem nevyužil a data při běhu programu posílal rovnou do počítače, kde jsem je ukládal do souboru $bag$. Ke spojení byl využit Wi-Fi router $Ubiquiti$ $AirCube$ $AC$, který musí být připojen ethernetovým kabelem k danému počítači. Tento druh propojení má své jisté výhody i nevýhody. Výhodou je bezproblémový přenos, který při připojení robota rovnou na univerzitní Wi-Fi nebyl zdaleka pravidlem. Nevýhodou tohoto řešení je dosah, který je limitován, stejně tak jako je tomu běžně u vysílačů Wi-Fi signálu. Pro mé účely to však nakonec nebyl problém a vhodným umístěním routeru se mi podařilo naměřit data na dostatečném prostoru. 
 
-\subsubsection{Vytažení trajektorie}
+\subsubsection{Uložení trajektorie}
 Po nahrání datasetu a spuštěním všech metod SLAM na těchto datech, je získána množina výsledků, kterou je možno porovnat. Je více možností jak implementace porovnávat, kromě trajektorie je možné srovnání map. Pro možnost s mapou, byla by třeba tvorba výsledných map ve stejném měřítku a zisk přesné výměry prostředí, ve kterém byla data nahrána. Zvláště informace o přesné podobě prostředí by byla ve velkém množství porovnávání značný problém. Pro tyto účely se tak volí možnost s trajektoriemi, kdy zisk přesné trajektorie pohybu robota, $ground$ $truth$, je výrazně jednodušší.\\
-\indent Tvorba trajektorie je u každého systému zcela rozdílná. Nejjednodušší extrakce trajektorie je v případě Hector SLAM. Tato metoda sama publikuje $topic$ s názvem $slam\_out\_pose$, kde je zaznamenávána aktuální pozice. Tím, že Hector SLAM neumí přepisovat předchozí výsledky různými optimalizacemi, či uzavíráním smyčky a informace pouze přidává, může se $slam\_out\_pose$ při běhu implementace celou dobu poslouchat a data z $topicu$ ukládat. Poslouchání $topicu$ je prováděno příkazem $rostopic$ $echo$ $/topic$, což začne vypisovat data do terminálu. Přidáním za příkaz $>$ $file.txt$ se data uloží do daného soboru. Výsledný příkaz pro uložení trajektorie pomocí Hector SLAM tedy vypadá následovně:
+\indent Tvorba trajektorie je u každého systému zcela rozdílná. Nejjednodušší extrakce trajektorie je v případě Hector SLAM. Tato metoda sama publikuje $topic$ s názvem $slam\_out\_pose$, kde je zaznamenávána aktuální pozice. Tím, že Hector SLAM neumí přepisovat předchozí výsledky různými optimalizacemi, či uzavíráním smyčky a informace pouze přidává, může se $slam\_out\_pose$ při běhu implementace celou dobu poslouchat a data z $topicu$ ukládat. Poslouchání $topicu$ je prováděno příkazem \texttt{rostopic echo /topic}, což začne vypisovat data do terminálu. Přidáním za příkaz \texttt{> file.txt} se data uloží do daného soboru. Výsledný příkaz pro uložení trajektorie pomocí Hector SLAM tedy vypadá následovně:
 \begin{center}
-	$rostopic$ $echo$ $/slam\_out\_pose$ $>$ $trajectory\_hector.txt$
+	\texttt{rostopic echo /slam\_out\_pose > trajectory\_hector.txt}
 \end{center}
-U metody gMapping je zisk trajektorie složitější. Tato implementace nikam trajektorii nezaznamenává. Jednou z možností, jak ji tedy získat, je využít $node$ obsažený v systému Hector SLAM. Přidáním $node$ s názvem $hector\_trajectory\_server$ do spouštěného souboru $launch$ je tak získána možnost extrahovat trajektorii. Neboť je gMapping systém obsahující optimalizac cesty a mapy a umí uzavírání smyčky, je třeba trajektorii uložit až po doběhnutí dat obsažených v souboru $bag$. Takto se zavolání $topicu$ provádí příkazem $rosservice$ $call$ $/topic$, uložení do souboru se provede stejně jako v případě s Hector SLAM. Příkaz pro uložení trajektorie má podobu:
+U metody gMapping je zisk trajektorie složitější. Tato implementace nikam trajektorii nezaznamenává. Jednou z možností, jak ji tedy získat, je využít $node$ obsažený v systému Hector SLAM. Přidáním $node$ s názvem $hector\_trajectory\_server$ do spouštěného souboru $launch$ je tak získána možnost extrahovat trajektorii. Neboť je gMapping systém obsahující optimalizac cesty a mapy a umí uzavírání smyčky, je třeba trajektorii uložit až po doběhnutí dat obsažených v souboru $bag$. Takto se zavolání $topicu$ provádí příkazem \texttt{rosservice call /topic}, uložení do souboru se provede stejně jako v případě s Hector SLAM. Příkaz pro uložení trajektorie má podobu:
 \begin{center}
-	$rosservice$ $call$ $/trajectory$ $>$ $trajectory\_gmapping$
+	\texttt{rosservice call /trajectory > trajectory\_gmapping}
 \end{center}
 Nejsložitější postup zskávání trajektorie je v případě systému Cartographer. Dříve se dala tato informace získat pomocí dvou příkazů. Aktualizací Cartographeru před dvěmi lety však zavedl Google pro ukládání dat nový formát $pbstream$, pro práci s nimž není příliš dobrá veřeně dostupná dokumentace. 
 Cartographer při běhu publikuje $node$ s názvem $/trajectory\_node\_list$, který nese v daném časovém okamžiku informaci o všech bodech trajektorie. Při dokončení výpočtů ze spuštěného $bag$ souboru je tedy k uložení dostupná finální trajektorie. Součástí této informace jsou však pouze souřadnice v prostoru a chybí tak informace o natočení, či časovém momentu, kdy robot v daném místě byl. Pro jednodušší porovnání implementací by to stačilo, ale pro správné porovnávání dle (KUMMERLE - On Measuring the Accurancy of SLAM algorithms) by to bylo nedostatečné. Nalezl jsem nakonec soubor od vývojáře pro Google, který dokáže ze souboru $pbstream$ udělat soubor $bag$, ve verzi Cartographeru spravované přímo Googlem ale tento soubor obsažen není. ($https://code.research.uts.edu.au/13110756/cartographer\_ros/blob/master/cartographer\_ros/cartographer\_ros/dev/pbstream\_trajectories\_to\_rosbag\_main.cc$). Využitím tohoto kódu jsem již byl schopen trajektorii získat a to následujícím postupem. Nejprve je třeba nechat proběhnout všechny výpočty z nahraného souboru $bag$, pro lepší orientaci si ho zde označím jako $measured.bag$. Po doběhnutí výpočtů z $measured\_bag$ je potřeba ukončit výpočty Cartographeru zavoláním
 \begin{center}
-	$rosservice$ $call$ $/finish\_trajectory$ $0$,
+	\texttt{rosservice call /finish\_trajectory 0},
 \end{center}
 kdy $0$ označuje číslo trajektorie. Tímto příkazem se zahrnou do optimalizace trasy a mapy i částice, na které při doběhnutí dat z $measured.bag$ ještě nedošlo. Následujícím příkazem
 \begin{center}
-	$rosservice$ $call$ $/write\_state$ $state.pbstream$,
+	\texttt{rosservice call /write\_state state.pbstream},
 \end{center} 
-se uloží aktuální stav Cartographeru do souboru $pbstream$. Poté je třeba se dvěma parametry zavolat přidaný $node$ s názvem $pbstream\_trajectories\_to\_bag$, přičemž první parametr je název souboru $pbstream$ a parametr druhý je název souboru $bag$, do kterého se data uloží. Tento nový $bag$ soubor nazvu jako $processed.bag$. Finálním krokem je z $processed.bag$ získání trajektorie, která je zde uložena v $topicu$ $/tf$. To se provede již použitým příkazem $rostopic$ $echo$ $/topic$, za který se přidá argument $-b$ $"bag\_file"$, čímž se řekne, že se nechce poslouchat aktuálně publikovaný $topic$, ale $topic$ z určeného souboru $bag$. Za to se pro uložení do vybraného souboru ještě přidá $>$ $file.txt$. Výsledný příkaz je tedy v podobě:
+se uloží aktuální stav Cartographeru do souboru $pbstream$. Poté je třeba se dvěma parametry zavolat přidaný $node$ s názvem $pbstream\_trajectories\_to\_bag$, přičemž první parametr je název souboru $pbstream$ a parametr druhý je název souboru $bag$, do kterého se data uloží. Tento nový $bag$ soubor nazvu jako $processed.bag$. Finálním krokem je z $processed.bag$ získání trajektorie, která je zde uložena v $topicu$ $/tf$. To se provede již použitým příkazem \texttt{rostopic echo /topic}, za který se přidá argument \texttt{-b "bag\_file"}, čímž se řekne, že se nechce poslouchat aktuálně publikovaný $topic$, ale $topic$ z určeného souboru $bag$. Za to se pro uložení do vybraného souboru ještě přidá \texttt{> file.txt}. Výsledný příkaz je tedy v podobě:
 \begin{center}
-	$rostopic$ $echo$ $/tf$ $-b$ $processed.bag$ $>$ $trajectory\_cartographer.txt$
+	\texttt{rostopic echo /tf -b processed.bag > trajectory\_cartographer.txt}
 \end{center}
 
 \subsubsection{Příprava dat}
@@ -484,11 +486,11 @@ Tento přístup, narozdíl od běžného porovnávání vzdálenosti bodů v pro
 Pro porovnání výsledků, nahraných pomocí rozhraní Stage, jsem si vytvořil několik obrázkových map. Přesnost algoritmů byla u všech map přibližně stejná. Názorné porovnání jsem tedy udělal pouze na jedné, kde při průjezdu vznikly dvě smyčky. K porovnání jsem využil rovnice z předchozí sekce.\\
 \begin{center}
 	\begin{tabular}{c|ccp{3cm}}
-		\bfseries \bfseries  & \bfseries Cartographer & \bfseries GMapping & \bfseries Hector \\[2mm]
+		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$  \\ [2mm]
 		\hline
-		Chyba určení pozice robota [m] & $0.00086$ & $5.7225\times10^{-5}$ & $4.12745\times10^{-5}$ \\
-		Chyba určení orientace robota [rad] & $0.00062$ & $4.45249\times10^{-5}$ & $0.00023$\\
-		Chyba určení stavu robota & $0.00149$ & $0.00010$ & $0.00027$ \\
+		Cartographer & $0.00086$ & $0.00062$ & $0.00149$  \\
+		GMapping & $5.7225\times10^{-5}$ & $4.45249\times10^{-5}$ & $0.00010$  \\ 
+		Hector & $4.12745\times10^{-5}$ & $0.00023$ & $0.00027$  \\ 
 	\end{tabular}
 \end{center}
 
@@ -501,5 +503,91 @@ Data jsem pro toto porovnání nahrával v pátém patře budovy Fakulty aplikov
 \indent Při pohledu na vytvořené mapy je znát nedostatek s odometrií pouze u Cartographeru, kdy jedno projetí celého prostoru bylo nedostatečné a mapa není na pohled příliš kvalitní. Pro srovnání jsem však nahrál ještě nový dataset, kdy jsem projel daný prostor dvakrát a výsledek je znatelně lepší.\\
 \indent Pohled na trajektorie je však již více vypovídající o nedostatcích spojených s nekvalitní odometrickou informací. Pro Hector SLAM se opět nic neměnilo a trajektorie je v pořádku. U Cartographeru je vidět, že kvůli občasným problémům s rozeznáním posunu po chodbách, je trajektorie značně kratší. Největší problém v oblasti trajektorie je znatelný u systému gMapping, kdy informace o přetáčení vytváří na trajektorii po celou dobu velké výchylky a zuby. Algoritmus si s tím však dokáže i tak poradit a výsledná mapa tím ovlivněna není.\\
 \indent Bez znalosti $ground$ $truth$ musím porovnat algoritmy pomocí získaných map. Měřením poměru vzdáleností mezi jednotivými body v prostoru a porovnáním s těmito body ve vytvořených mapách, vyhodnocuji pro tento případ jako nejlepší algoritmus Hector SLAM, v těsném závěsu poté gMapping. 
+
+\newpage 
+\subsubsection{Porovnání výsledků ze staženého datasetu}
+Pro porovnání systémů byla potřeba najít dataset, který v sobě obsahuje všechny potřebné informace pro jejich vykonání. Další podmínkou, která musela být splněna, aby testování mělo srovnatelné výsledky, je nutnost znalosti $ground$ $truth$ pro daná data. Potřebné informace obsahují datasety nahrané v MIT Stata Center, kde k mnohým z nich je možno ještě stáhnout $ground$ $truth$. Pro porovnání tak byl zvolen jeden z těchto datasetů.\\
+\indent $Ground$ $truth$ má rovnou informaci o natočení v rozsahu $(-\pi,\pi\rangle$, nebyla v tomto tedy potřeba žádná změna. Data však byla natočená přibližně o 30$^o$ a posunuta mimo počátek [0,0,0]. Stažená data byla tedy přepočítána tak, aby bylo natočení a počátek stejný. Porovnávání pak bylo provedeno dle rovnic v sekci Srovnávací kritérium REFERENCE.\\
+\begin{center}
+	\begin{tabular}{c|ccp{3cm}}
+		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$  \\ [2mm]
+		\hline
+		Cartographer & $0.00049$ & $0.00148$ & $0.00197$  \\
+		GMapping & $0.02002$ & $0.00698$ & $0.02701$  \\ 
+		Hector & $0.00860$ & $0.00144$ & $0.01005$  \\ 
+	\end{tabular}
+\end{center}
+
+Z výsledků je patrné, že v tomto případě si nejlépe vedl Cartographer. Za ním je dle tabulky Hector SLAM a poslední je gMapping. Při pohledu na mapu je však vidět, že trajektorie Hector SLAMu je neúplná a na konci silně vychýlená. Je to z důvodu, že při průjezdu předcházejícím výběžkem, došlo vždy k dislokaci robota, následně i v dalších částech měl problémy v orientaci i přes změny v řadě nastavení. Trajektorie Hector SLAMu by tak byla pro porovnání naprosto nevyhovující a je proto ukončena v bodě, do kterého se systém ještě fungoval správně.\\
+\indent Výše zmíněné výsledky a mapa, jsou však získány z datasetu, kterému byla zmenšena obsažená data. Respektive jsou od určitého času ustřižena. Důvod byl, že i přes nastavení Cartographeru určené pro tyto data, nedokázal si tento systém částečně poradit s jednou chodbou a došlo tak k posunu velké části trajektorie a mapy. Výsledky z celého datasetu jsou následující.\\
+\begin{center}
+	\begin{tabular}{c|ccp{3cm}}
+		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$ \\ [2mm]
+		\hline
+		Cartographer & $0.00292$ & $0.00158$ & $0.00451$ \\
+		GMapping & $0.02601$ & $0.00831$ & $0.03432$ \\ 
+	\end{tabular}
+\end{center}
+
+Je vidět, že výsledky se u obou porovnávaných systémů mírně zhoršily, chyba v pozici u Cartographeru poté výrazněji, což je zaviněno zmíněným posunem. I tak má však Cartographer opět lepší výsledek, neboť srovnávací kritérium nepočítá rozdíl jednotlivých bodů od sebe, ale poměřuje přírůstek mezi dvěma časovými okamžiky. Přechody v trajektorii jsou u Cartographeru tedy přesnější, než ty u gMappingu. 
+
+\section{Průzkum vybraného systému}
+Pro důkladnější prozkoumání vybraného systému byl zvolen gMapping, neboť je komplexnější než Hector SLAM a předhlednější než Cartographer. Při běhu má také nejmenší sklony k poruchám. Pro bližší seznámení a případné návrhy změn vychází tedy nejlépe.
+
+\subsection{Změny v konfiguraci systému}
+V předchozích měřeních bylo vždy použito defaultní nastavení systému. Toto nastavení nebylo třeba měnit, neboť gMapping vždy provedl výpočty dle očekávání a nikdy se nestalo, že by jako jediný selhal.\\
+\indent Pro zkoumání vlivu nastavení na systém, byly postupně měněny různé parametry. Pro testovací data byl zvolen zkrácený dataset z MIT Stata Center.\\
+\indent Pro tyto účely byla přidána ke srovnání ještě jedna rovnice, porovnávající přímo polohu jednotlivých bodů trajektorie s $ground$ $truth$. Rovnice je ve tvaru
+\begin{equation}
+	e(t,g)=\sqrt{\frac{1}{N}\Sigma_i(||t_i-g_i||)^2},
+\end{equation}
+kde $t$ je vypočtená trajektorie, $g$ je $ground$ $truth$, $N$ je počet vzorků trajektorie a $i$ udává časový okamžik.\\
+\indent V násedující tabulce jsou defaultní hodnoty parametrů, které byly upraveny pro účely porovnání.
+\begin{center}
+	\begin{tabular}{c|p{3cm}}
+		\bfseries Parametr  & \bfseries Hodnota  \\ [2mm]
+		\hline
+		$lstep$ & $0.05$ \\
+		$astep$ & $0.05$ \\
+		$iterations$ & $5$ \\
+		$ogain$ & $3.0$ \\
+		$linearUpdate$ & $1.0$ \\
+		$angularUpdate$ & $0.5$ \\
+		$resampleThreshold$ & $0.5$ \\
+		$particles$ & $5$ \\
+		$llsamplerange$ & $0.01$ \\
+		$llsamplestep$ & $0.01$ \\
+		$lasamplerange$ & $0.005$ \\
+		$lasamplestep$ & $0.005$ \\
+	\end{tabular}
+\end{center}
+\newpage
+Výsledky jsou následující.
+\begin{center}
+	\begin{tabular}{c|cccp{3cm}}
+		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$ & $e(t,g)$ \\ [2mm]
+		\hline
+		GMapping 1 & $0.02002$ & $0.00698$ & $0.02701$ & $1.61581$\\
+		GMapping 2 & $0.01626$ & $0.00537$ & $0.02164$ & $2.52559$\\ 
+		GMapping 3 & $0.00945$ & $0.00566$ & $0.01512$ & $1.79921$\\ 
+		GMapping 4 & $0.00911$ & $0.00558$ & $0.01469$ & $3.27171$\\ 
+		GMapping 5 & $0.00902$ & $0.00551$ & $0.01453$ & $1.84911$\\ 
+		GMapping 6 & $0.00903$ & $0.00543$ & $0.01446$ & $1.74181$\\ 
+		GMapping 7 & $0.01997$ & $0.00641$ & $0.02639$ & $1.85808$\\ 
+	\end{tabular}
+\end{center}
+
+Každé nastavení, na kterém byl gMapping spuštěn, vychází v defaultního, je vždy změněno několik parametrů spolu souvisejících. První výpočet byl proveden s defaultním nastavením a shoduje se tak s výsledkem při porovnání všech tří systémů. V druhém případě byly změněny parametry $lstep$ a $astep$, které určují optimalizační krok pro pohyb $lstep=1$ a rotaci $astep=1$. Při třetím pokusu byl pozměněn počet iterací porovnávání pozorování $iterations=2$ a parametr $ogain$, který udává hodnotu pro vyhodnocování pravděpodobnosti, použitou při převzorkování, $ogain=1.0$. Pro čtvrtý výpočet byly pozměněny kritéria, kdy robot provádí nové pozorování. Pro ujetou vzdálenost $linearUpdate=4.0$ a pro otočení $angularUpdate=1.0$. Pro pátý pokus byl změněn parametr udávající, při jakém procentu zbylých částic má dojít k převzorkování, $resampleThreshold=0.1$. Při šestém výpočtu byl pozměněn počet částic ve filtru, $particles=5$. Pro poslední pokus pak byly změněny parametry pro translační a úhlové vzorkování použité pro pravděpodobnost, $llsamplerange=0.1$, $llsamplestep=0.1$, $lasamplerange=0.05$ a $lasamplestep=0.05$.\\
+\indent Z výsledků je patrný vliv nastavení na výpočet dat. Porovnáním dle (Kummerle) je dosaženo pro defaultní nastavení překvapivě nejhorších výsledků. Zlepšení u jiných nastavení nejsou rozdílná v řádu, tudíž ne tak zásadní. Při pohledu na výpočet chyby $e(t,g)$ je však dosaženo rozdílných výsledků a defaultní nastavení je s tímto kritériem porovnání nejlepší.\\
+\indent Z těchto informací lze dojít k závěru, že systém je nastavený tak, aby dosahoval nejpřesnější trajektorie z pohledu vzorek v trajektorii ku vzorku v $ground$ $truth$. Ziskem takové trajektroie pak může systém vytvořit nejpřesnější reprezentaci prostředí. Další věcí je, že gMapping sám o sobě extrahovatelnou trajektorii neposkytuje. Tvůrci systému se tedy pravděpodobně ani příliš nesnažili, aby v nějakém podobném testování implementací, jako například (Kummerle) gMapping dosahoval nejlepších výsledků. 
+
+\newpage
+\subsection{Návrh změn v systému}
+Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extrahovatelné trajektorie. Jako řešení se zde nabízí přidání topiku, který bude mít podobnou strukturu jako $/trajectory\_node\_list$ v Cartographeru. Tento topik, jak je popsáno v kapitole (Uložení trajektorie), nemá však pro potřebné porovnávání dostatek informací. Pro případ gMappingu by tak mohl být publikován topik, který by posílal v daném čase informaci o aktuální trajektorii. Obsah topiku by tak obsahoval vždy hlavu, ve které by byl uvedený aktuální čas. K tomu by byly připojeny pod sebou dle času seřazené částice tvořící aktuální trjaketorii. K těmto částicím by byla přidružena vždy informace o simulačním čase, kdy byla částice vytvořena, její souřadnice v prostoru a informace o natočení. Při poslouchání topiku v průběhu programu by tak bylo možné i získat srovnání, jak se trajektorie v průběhu času optimalizovala. Při zavolání po doběhnutí datasetu by pak byla poskytnuta rovnou hotová trajektorie.\\
+\indent Další prospěšnou změnou by pro systém byla určitě možnost upravovat parametry za běhu programu. Pro výše provedené testy nebyla taková úprava potřeba, neboť se ať reálný nebo simulační robot pohybovali po celou dobu ve stejném prostředí. Při uvážení, že by se však robot přemisťoval mezi uzavřenými a otevřenými prostory, tato mořnost by byla jistě užitečná. Při běžněm průběhu, kdy uživatel robotem sám jezdí, může program vypnout a spustit gMapping s jiným nastavením, což není příliš hezké řešení. Pro autonomního robota by to však mohl být větší problém. V případě, že vyjede do jiného typu prostředí mohl by si sám přenastavit parametry tak, aby odpovídali již někde uloženému nastavení pro dané prostředí.\\
+\indent Další potenciální změnou, která se již nevztahuje přímo k procesům v gMappingu, by byla integrace kamerového vidění, například monokulární kamery. Robot by snímal prostředí jak LIDARem, tak kamerou. V případě kamerových dat by se snažil rozeznat předměty v prostoru a následně předat informaci o tom, jaký typ předmětu to je. Například při detekci židle by byla vyslána informace, že se daný předmět nemá zanášet do mapy, případně z mapy vymazat. Do místa, kde je židle postavena, by se ještě přidala značka substituující židli. Při opětovném projetí by pak robot věděl, že v daném místě by se mohla židle nacházet a v případě, že tam stále nějaký předmět je, rovnou se snažit ho označit jako židli. Při velké množině objektů v paměti by se tak ušetřilo mnoho výpočetního výkonu. "Pohyblivé" předměty jsou v mapě navíc a při jejich přemístění může mít robot problém poznat stejné místo. Pokud by tedy v mapě zaneseny nebyly a robot měl opět jak LIDAR, tak kameru, sám by opět vyhodnotil, že předměty jsou v prostoru navíc, a počítal by tak s mapou předměty neobsahující. Pokud by mu tak byla poskytnuta mapa nějakého takto vyčištěného prostředí, byl by v něm schopen určit svoji pozici bez ohledu na předměty, které v daném prostoru již vůbec nejsou, jsou přemístěny nebo se tam dříve ani nenacházeli.
+
+\newpage
+\section{Závěr}
 
 \end{document}
