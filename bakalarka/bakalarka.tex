@@ -180,29 +180,36 @@ přičemž $\triangledown\textbf{h}$ je Jacobián z funkce $\textbf{h}$, která 
 \indent Nelinerita je posledním z významných problémů. Kvůli ní může dojít k větším nepřesnostem ve výsledku, neboť EKF-SLAM využívá lineárních modelů pro vyjádření nelineárního pohybu a modelu pozorování. Konvergence a konzistence modelu je tedy jistá pouze v lineárním případě. 
 
 \subsubsection{Výpočetní složitost}
-Neobvyklá struktura problému, sdružený stav složený z pozice robota a landmarků, je využita v řadě metod pro redukci výpočetní složitosti. Zde má pohybový model vliv pouze na stav pozice robota a model pozorování na dvojici robot-landmark. Základním rozdělením metod redukujících výpočetní složitost, je rozlišování optimálních, konzervativních a nekonzistentních metod. První typ, optimální metody, jsou založené na redukci daného výpočtu, výsledkem jsou pak odhady a kovariance, stejně tak, jako je tomu v případě plnohodnotné formy SLAM. U metod konzervativních dochází k odhadům s vyšší neurčitostí nebo kovariancí, většinou ale, i přes větší nepřesnost, jsou implementovány v reálném použití. Poslední možností jsou nekonzistentní metody a jedná se o algorithmy, které mají nižsí neurčitost nebo kovarianci, než algoritmy optimální. Pro řešení SLAM v praxi se ale nepoužívají.\\
-\indent Prvním přístupem pro redukci výpočetní složitosti, je omezení požadovaného výpočtu rovnicí aktualizace pozorování. Výpočet časové aktualizace může být omezen metodami využívající rozšířený stav, výpočet stavu pozorování pak metodami oddělujícími rovnice dané aktualizace a obě tyto omezení vedou k redukci výpočtů, typicky jsou to optimální algoritmy. Další možností, je reformulace stavového prostoru do informační podoby, která umožnuje rozdělení výsledné matice s informacemi pro snížení výpočtů, což bývají algoritmy konzervativní. Obvykle je díky nim znatelně redukována výpočetní složitost a stále je zachována dostatečně dobrá odhadovací schopnost. Posledním přístupem, o kterém se zmíním, je submapping. Jde o rozdělování mapy na regiony, kdy následné aktualizace se týkají pouze dané oblasti a s určitou periodou poté i v rámci celé mapy. 
+Jedním ze základních kritérií všech algoritmů je jejich výpočetní složitost. Je tak třeba co nejvíce zjednodušit sdružený stav z pozice robota a landmarků a operace s nimi. Základním rozdělením metod redukujících výpočetní složitost, je rozlišování optimálních, konzervativních a nekonzistentních metod.\\ 
+\indent První typ, optimální metody, jsou založené na redukci daného výpočtu. Rovnicí pro aktualizaci pozorování omezují požadované výpočty. Výsledkem jsou pak odhady a kovariance, stejně tak, jako je tomu v případě plnohodnotné formy SLAM. U metod konzervativních dochází k reformulaci stavového prostoru do informační podoby. To umožňuje rozdělení výsledné matice s informacemi, což vede ke snížení výpočtů, ale také k odhadům s vyšší neurčitostí nebo kovariancí. Konzervativní metody jsou nejčastěji implementovány v reálném použití, neboť dostatečně redukují výpočetní nároky a stále udržují dostatečnou odhadovací schopnost. Poslední možností jsou nekonzistentní metody. Jedná se o algorithmy, které mají nižší neurčitost nebo kovarianci, než algoritmy optimální. Pro řešení SLAM v praxi se ale nepoužívají.\\
 
 \subsubsection{Oddělné aktualizace}
-Jedná se o metody vytvářející optimální odhady. Při implementaci základní podoby aktualizace pozorování, se při každém novém měření aktualizuje jak stav vozidla, tak i mapy. To vede ke kvadratickému nárůstu složitosti s množstvím landmarků. V této metodě se však mapa rozdělí na submapy.\\
-\indent Rozlišujeme dva způsoby možné implementace. První z nich pracuje na zmenšené oblasti, ale stále si drží globální referenční souřadnice, jedná se například o algoritmus $compressed$ $EKF$ (CEFK). Druhou možností je tvorba menších map s vlastním\\ souřadnicovým rámcem neopouštějícím danou submapu, což jsou algorithmy $constrained$ $local$ $submap$ $filter$ (CLSF, v překladu - omezený lokální submapový filtr). Pokračovat budu v rozboru druhé možnosti, neboť je jednodušší a při provádění operací s velkou frekvencí opakování je méně ovlivněna linearizačními chybami. Je také stabilnější a zabraňuje příliš velkému nárůstu globální kovariance. \\
+Metody využívající oddělěné aktualizce vytvářejí optimální odhady. Při implementaci základní podoby aktualizace pozorování, se při každém novém měření aktualizuje jak stav vozidla, tak i mapy. To vede ke kvadratickému nárůstu složitosti s množstvím landmarků. Při této implementaci se však mapa rozdělí na submapy.\\
+\indent Rozlišují se dva způsoby možné implementace. První z nich pracuje na zmenšené oblasti, ale stále si drží globální referenční souřadnice, jedná se například o algoritmus $compressed$ $EKF$ (CEFK). Druhou možností je tvorba menších map s vlastním\\ souřadnicovým rámcem neopouštějícím danou submapu. Jsou to algorithmy $constrained$ $local$ $submap$ $filter$ (CLSF, v překladu - omezený lokální submapový filtr). Pro další rozbor je vhodnější druhá možnost, neboť je jednodušší a při provádění operací s velkou frekvencí opakování je méně ovlivněna linearizačními chybami. Je také stabilnější a zabraňuje příliš velkému nárůstu globální kovariance. \\
 \indent Logaritmus submapy se skládá z dvou nezávislých odhadů, které si stále udržuje. Jde o vektory $x_G$ a $x_R$, kdy $x_G$ je mapa složená z globálně referencovaných landmarků a globálně referencované pozice dané submapy a $x_R$ je lokální submapa s lokálně referencovanou pozicí robota a lokálně referencovanými landmarky. Při získání pozorování se aktualizují pouze landmarky náležící aktuální submapě, ve které se robot nachází. Celkový globální odhad je pak získáván periodicky, zaevidováním submapy do mapy celé a použitím aktualizace omezení na společné vlatnosti obou map.
 
 \subsubsection{Rozčlenění stavového prostoru}
-V této metodě se vyjadřuje stavový odhad $\hat{x}_k$ a matici kovariance $P_k$ v informační formě pomocí matice informací $Y_k=P^{-1}_k$ a vektoru informací $\hat{y}_k=Y_k\hat{x}_k$. Je výhodné pro mapy s větším měřítkem, kdy spousta nediagonálních prvků bude velmi blízkých nule, což vede k možnosti nastavení těchto prvků na hodnotu nula. Může tím však vznikat malá ztráta optimality při vzniku map.\\
-\indent Rozšíření stavu je rozčleňovací operace vedoucí k přesnému rozčlenění informační formy. Předpokládáme, že podmnožina stavů $x_i$ obsahuje většinu stavů mapy a po rozčlenění dosahuje pouze konstantní složitosti v čase. Můžeme tedy získávat přesné řešení díky rozšiřování stavu novým odhadem pozice robota v každém kroce a zachovat všechny předchozí pozice. Nenulové nediagonální prvky jsou pouze ty, které jsou spojené napřímo s měřenými daty.\\
-\indent Dále sem musíme zahrnout marginalizaci, jež je nezbytná pro odstranění předchozích stavů pozice. Máme možnost marginalizovat všechny předchozí stavy, což vede na zhuštěnou matici informací, což je nežádoucí. Správnou volbou ukotvení pozice můžeme marginalizovat velkou čast pozic, aniž bychom vyvolaly nadměrnou hustotu matice informací.
+V této metodě se vyjadřuje stavový odhad $\hat{x}_k$ a matice kovariance $P_k$ v informační formě pomocí matice informací $Y_k=P^{-1}_k$ a vektoru informací $\hat{y}_k=Y_k\hat{x}_k$. Pro mapy s větším měřítkem, kdy je spousta nediagonálních prvků velmi blízká nule, je vhodné nastavit tyto prvky na hodnotu nula. Může tím však vznikat malá ztráta optimality při vzniku map.\\
+\indent Rozšíření stavu je rozčleňovací operace vedoucí k přesnému rozčlenění informační formy. Předpokladem je, že podmnožina stavů $x_i$ obsahuje většinu stavů mapy a po rozčlenění dosahuje pouze konstantní složitosti v čase. Je tedy možnost, získávat přesné řešení díky rozšiřování stavu novým odhadem pozice robota v každém kroce a zachovat všechny předchozí pozice. Nenulové nediagonální prvky jsou pouze ty, které jsou spojené napřímo s měřenými daty.\\
+\indent Dalším důležitým pojmem je marginalizace, jež je nezbytná pro odstranění předchozích stavů pozice. Je možnost marginalizovat všechny předchozí stavy, což vede k zhuštěné matici informací. To je nežádoucí stav. Správnou volbou ukotvení pozice se může marginalizovat velká čast pozic, aniž by to vyvolalo nadměrnou hustotu matice informací.
+
+\subsubsection{Asociace dat}
+Jedná se o velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy. Často dokonce k pádu celého algoritmu.\\
+\indent Z prvu se k problému přistupovalo způsobem, kdy se každé jednotlivé zachycení landmarku porovnávalo se všemi odhady nacházejícími se v blízkém okolí. Tento individuální přístup je neproveditelný, pokud je nejistá pozice robota, tedy obvzláště v málo zaplněných prostředích. \\
+\indent Při popisu vzhledu je vidění jedním z hlavních způsobů snímání okolí. Podle typu senzoru se zaznamenává například tvar, barva, struktura, a tím je možné rozlišovat různé balíčky dat. To je poté využito pro přepověd dané asociace, nejčastěji pro problém s uzavřením smyčky. Metoda přinesla pokrok, jelikož počítá metriku podobnosti přes sekvenci obrazů, místo původního jednoho.\\
+\indent Multihypoziční asociace dat je metoda nepostradatelná pro robustní sběr dat v přeplněném prostředí, kdy se vytváří oddělené odhady trasy pohybu pro každou asociační hypotézu. Tato funkce je však silně limitována dotupným výpočetním výkonem.
+
 
 \newpage
-\subsection{Rao-Blackwellizedův částicový filtr}
-Forma SLAM založená na Rao-Blackwellizedově filtru (RBPF), jinak nazývaná také jako FastSLAM, je na bázi rekurzivního Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
-\indent Částice zde znázorňují trasu robota, jedna částice je tedy vzorkem v cestě. Každá částice také obsahuje mapu, kde je každý landmark reprezentovaný vlastním Gaussiánem. Díky použití částicových filtrů se jedná o jedinou formu SLAM, která řeší jak problém $full$ $SLAM$, tak i problém $online$ $SLAM$. Tato forma počítá posterior pro celou cestu, tím je tedy brána jako řešící problém $full$ $SLAM$. Odhadováním pozice robota v každém časovém okamžiku je algoritmus označován jako online. O odhad pozice se starají právě částicové filtry.\\
-\indent Sdružený stav může být jako faktor komponent robota a podmíněných komponent mapy
+\subsection{Rao-Blackwellizovaný částicový filtr}
+Forma SLAM na Rao-Blackwellizovaném filtru (RBPF), jinak nazývaná také jako FastSLAM, je založena na rekurzivním Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
+\indent Částice zde znázorňují trasu robota, jedna částice je tedy vzorkem v cestě. Každá částice také obsahuje mapu, kde je každý landmark reprezentovaný vlastním Gaussiánem. Díky použití částicových filtrů se jedná o jedinou formu SLAM, která řeší jak problém $full$ $SLAM$, tak i problém $online$ $SLAM$. Odhadováním pozice robota v každém časovém okamžiku je algoritmus označován jako online. O odhad pozice se starají právě částicové filtry.\\
+\indent Sdružený stav může být rozdělen zvlášť na komponentu robota a mapy. Posteriorní pravděpodobnost se tak dá odděleně počítat jako
 \begin{equation}
 	P(X_{0:k},m|Z_{0:k},U_{0:k},x_0)=P(m|X_{0:k},Z_{0:k})P(X_{0:k}|Z_{0:k},U_{0:k},x_0),
 \end{equation}
 kde $m$ je mapa, $X_{0:k}$ je trajektorie robota, $Z_{0:k}$ je sada všech již zpozorovaných landmarků, $U_{0:k}$ je historie řízení a $x_0$ úvodní pozice robota.\\
-\indent Rozdělení pravděpodobnosti zde není na jednotivých pozicích $x_i$, ale na celou trajektorii $X_{0:k}$ a tím se stávají jednotlivé landmarky na sobě nezávislými, mapa je tedy reprezentována jako soubor nezávislých gaussiánů, což znamená lineární složitost oproti kvadratické u formy EKF. Hlavními ukazateli FastSLAMu je mapa, jež je počítána analyticky a vážené vzorky, jimiž je reprezentována trajektorie pohybu. Rekurzivní odhad je proveden partikulárním filtrem pro stav pozice a EKF pro stav mapy.\\
+\indent Rozdělení pravděpodobnosti zde není na jednotivých pozicích $x_i$, ale na celou trajektorii $X_{0:k}$ a tím se stávají jednotlivé landmarky na sobě nezávislými, mapa je tedy reprezentována jako soubor nezávislých gaussiánů, což znamená lineární složitost oproti kvadratické u formy EKF. Hlavními ukazateli FastSLAMu je mapa, jež je počítána analyticky a vážené vzorky, jimiž je reprezentována trajektorie pohybu. Rekurzivní odhad je proveden částicovým filtrem pro stav pozice a EKF pro stav mapy.\\
 \indent Zpracování každého landmarku probíhá zvlášť, pozice se aktualizuje stejným způsobem jako v EKF a landmarky, které nebyly zpozorovány, zůstávají na původní pozici a neaktualizují se. Vzájemnou neprovázaností landmarků však vzniká chyba v odhadu, která s časem roste.\\
 \indent V čase $k-1$, je sdružený stav reprezentovaný jako 
 \begin{equation}
@@ -215,30 +222,41 @@ kde $w^{(i)}_{k}$ je váha vzorku $i$ v časovém okamžiku $k$. Sdružený stav
 \end{equation}
 kdy $a$ je cílové rozložení (rozložení, které je pro optimální pro sadu částic) a $b$ je návrhové rozložení. Třetím krokem je případné převzorkování, které se provádí různě často dle implementace. Krokem posledním je provedení EKF aktualizace pro každou již zpozorovanou částici, která je při aktuálním pozorováním zaznamenána. \\
 
-\subsubsection{Sdružování neznámých dat}
+\subsubsection{Asociace dat}
 Funkcionalita systému popisovaná výše se vztahuje k datům, která mají známé sdružování. Pokud se jedná o data, pro která danou informaci nemáme, je třeba systém rozšířit. Problém sdružení dat spočívá v tom, že na bázi dostupných dat, není možno v časovém okamžiku $k$, určit proměnnou vyjadřující shodu $c_k$. Může se jednat například o neurčitost s pozicí, kdy má robot na základě pozorování možnost přiřadit více než jednu pozici.\\
 \indent Běžně bývá na měření jedna asociace dat a tedy vzorkování pouze podél cesty. Zde ale dochází i k vzorkování nad možnými rozhodnutími v průběhu cesty. Chyby ve sdruženích tedy nejsou zdaleka tak fatální, jako je tomu například u EKF. Pokud dojde k převzorkování, chybně určené částice se díky tomu můžou jednoduše nahradit.
 
 \newpage
-\subsection{Asociace dat}
-Jedná se velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy. Často dokonce k pádu celého algoritmu.\\
-\indent Z prvu se k problému přistupovalo způsobem, kdy se každé jednotlivé zachycení landmarku porovnávalo se všemi odhady nacházejícími se v blízkém okolí. Tento individuální přístup je neproveditelný, pokud je nejistá pozice robota, tedy obvzláště v málo zaplněných prostředích. \\
-\indent Při popisu vzhledu je vidění jedním z hlavních způsobů snímání okolí. Podle typu senzoru se zaznamenává například tvar, barva, struktura, a tím je možné rozlišovat různé balíčky dat. To je úpté využito pro přepověd dané asociace, nejčastěji pro problém s uzavřením smyčky. Pokrok této metody přišel s počítáním metriky podobnosti přes sekvenci obrazů, místo původního jednoho. 
 
-\subsubsection{Multihypoziční asociace dat}
-Jedná se o metodu nepostradatelnou pro robustní sběr dat v přeplněném prostředí, kdy se vytváří oddělené odhady trasy pohybu pro každou asociační hypotézu. Tato funkce je však silně limitována dotupným výpočetním výkonem. Dále je metoda vyžívána při implementaci robustního SLAMu ve velkých prostředích, kdy je při uzavírání smyčky vytvořena hypotéza pro smyčku uzavřenou i pro stále neuzavřenou. Tím se bere v potaz, že je prostředí pouze podobné. 
+\subsection{Graph-based SLAM}
+Graph-based SLAM je algoritmus založený na metodě nejmenších čtverců. jedná se o offline algoritmus rozdělený do dvou částí, front-end a back-end.\\
+\indent Metoda nejmenších čtverců je optimalizační metoda počítající s přeurčeným systémem, kdy je známo více rovnic, než je neznámých. Metodu představil na konci 18. století Carl Friedrich Gauss, a jak z názvu vyplývá, snaží se minimalizovat sumu chyb ve čtverci. Chyba je zde definována jako rozdíl odhadovaného stavu k aktuálnímu měření:
+\begin{equation}
+	\textbf{e}_i(x)=\textbf{z}_i-\textbf{f}_i(x)
+\end{equation}  
+Jedním z předpokladů pro správný průběh metody je dobrý počáteční odhad stavu. Dále, okolí minima chyby musí být hladké, bez skoků a zubů. V této oblasti se provádí lokální linearizace prvním stupněm Taylorova polynomu. Následně je vypočítána první derivace funkce chyby ve čtverci, která se položí rovna nule. Vyřeší se lineární systém, získá se nový stav, který by měl být lepší, než ten předchozí. Poté se znovu iteruje.
+\subsubsection{Tvorba pozičního grafu}
+Tvorba grafu je první částí metody Graph-based SLAM, tedy část vývojová (front-end). Dochází zde ke tvorbě pozičního grafu, který je zpracováván do mapy. Graf se složen ze dvou složek, a to z uzlů a hran. Uzel zde znázorňuje odhadovanou pozici robota a hrana omezení, které je mezi dvěma uzly. Toto spojení je nejisté a proměnné. Při projetí známým prostředím se vytvářejí hrany mezi uzlem novým a uzly již dříve zaznamenanými, což je využito například při uzavírání smyčky.\\
+\indent Nové hrany vznikají při splnění jedné ze dvou podmínek. Pokud je zaznamenán přesun robota z pozice $x_i$ do $x_{i+1}$, hrana odpovídá naměřenné odometrii. Druhou možností je zpozorování stejného prostředí. Vzniká tak virtuální měření, ve kterém se porovnají obě tyto pozorování. Na základě rozdílu odhadované pozice při obou měřeních, se umístí nový uzel spojený odpovídající hranou. 
+\subsubsection{Optimalizace mapy}
+Druhou částí algoritmu Graph-based SLAM je back-end část, která zodpovídá za optimalizaci získaného grafu. Upravuje se zde pozice uzlů tak, aby byl získán stav, který co nejpřesněji vystihuje získaná měření. Po tomto procesu je pak možno utvořit mapu na základě známých pozic.\\
+\indent Rovnice pro optimalizaci vychází z metody nejmenších čtverců:
+\begin{equation}
+	\textbf{x}^*=argmin_{\textbf{x}}\Sigma_{ij}\textbf{e}_{ij}^T(\textbf{x}_i,\textbf{x}_j)\Omega_{ij}\textbf{e}_{ij},
+\end{equation}
+kde $\textbf{x}^*$ je cílové rozmístění uzlů, chyba $\textbf{e}_{ij}$ vychází z (rovnice nahoře) a $\Omega_{ij}$ je informační matice pro danou hranu. 
 
 \newpage
 \subsection{Reprezentace prostředí}
-Původně se svět modeloval jen jako soubor landmarků majících svůj určitý tvar, později však, zejména ve venkovním, podvodním a podzemním použití, se ukázala tato metoda jako nevyhovující.\\
+Původně se svět modeloval jen jako soubor landmarků majících svůj určitý tvar, později však, zejména ve venkovním, podvodním a podzemním použití, se ukázala tato metoda jako nevyhovující. Hledaly se tak další metody, které by zlepšily reprezentaci prostředí. Výsledné možnosti jsou popsány v následujících odstavích.\\
 
 \subsubsection{Mapa z landmarků}
 V počátcích vývoje problému SLAM bylo pochopitelně potřeba vymyslet, jak reprezentovat výsledky měření a pozorování. Vznikla tedy metoda, kdy podobu mapy utvářely landmarky samotné. Když je nový landmark zpozorován, je zanesen do mapy a vytvoří se korelace k ostatním, již pozorovaným landmarkům. Odhadovaná pozice robota je také korelovaná vůči všem landmarkům. \\
 \indent Opětovným projížděním známého místa korelace mezi landmarky roste a mapa se zpřesňuje. Tím, že jsou všechny landmarky ve vzájemné korelaci, vytváří se pomyslná síť z těchto spojení. Tato metoda může být při správné implementaci tedy velmi přesná. Problémem je však výpočetní náročnost, která kvadraticky roste s přibývajícími landmarky. Pro menší prostředí se tedy metoda využít dá, pro větší je to ale výkonově příliš náročné.
 
 \subsubsection{Mřížkové mapy}
-Metoda mřížkových map, v originále $Grid$ $maps$, byla představena v 80. letech minulého století. Její základní myšlenkou je diskretizace spojitého prostředí do jednotlivých buněk, přičemž mřížky rozdělující prostor na buňky mají pevnou velikost. Metoda je poměrně náročná na paměťové zrdoje.\\
-\indent Důležitým faktorem je zde takzvaná obsazenost, v angličtině $occupancy$. V originále se tedy metoda často nazývá $Occupancy$ $Grid$ $Maps$. Pravděpodobnost obsazení každé buňky může nabývat tří hodnot. Při inicializaci je hodnota pravděpodobnosti nastavena na $P(m_i)=0.5$, kdy $m_i$ je daná buňka. Tato počáteční hodnota znamená, že o buňce nemáme žádnou znalost. Poté, co se buňka dostane do dosahu senzoru, nabývá pravěpodobnost obsazenosti již pouze dvou hodnot. $P(m_i)=0$, pokud je buňka neobsazená a $P(m_i)=1$ v případě obsazenosti.\\
+Metoda mřížkových map, v originále $Grid$ $maps$, byla představena v 80. letech minulého století. Její základní myšlenkou je diskretizace spojitého prostředí do jednotlivých buněk, přičemž mřížky rozdělující prostor na buňky mají pevnou velikost. Metoda je poměrně náročná na paměť.\\
+\indent Důležitým faktorem je zde takzvaná obsazenost, v angličtině $occupancy$. V originále se tedy metoda nazývá $Occupancy$ $Grid$ $Maps$. Pravděpodobnost obsazení každé buňky může nabývat tří hodnot. Při inicializaci je hodnota pravděpodobnosti nastavena na $P(m_i)=0.5$, kdy $m_i$ je daná buňka. Tato počáteční hodnota znamená, že o buňce nemáme žádnou znalost. Poté, co se buňka dostane do dosahu senzoru, nabývá pravěpodobnost obsazenosti již pouze dvou hodnot. $P(m_i)=0$, pokud je buňka neobsazená a $P(m_i)=1$ v případě obsazenosti.\\
 \indent Buňky jsou na sobě zcela nezávislé a součinem pravděpodobností obsazení buněk je získáno pravděpodobnostní rozložení mapy:
 \begin{equation}
 	p(m)=\Pi_ip(m_i)
@@ -248,95 +266,43 @@ Odhad mapy ze senzoru:
 	p(m|z_{1:t},x_{1:t})=\Pi_ip(m_i|z_{1:t},x_{1:t}),
 \end{equation}
 kdy $z_{1:t}$ jsou pozorování a $x_{1:t}$ pozice robota.
+
+\subsubsection{Mračno bodů}
+Výše zmíněné metody se vztahují především na práci s daty ve 2D. Pro zahrnutí třetí dimenze do mapy se tak využívají mračna bodů, v originálu $point$ $clouds$. Data se získávají například pomocí kamer, či 3D LIDARů. Výsledné mapy tak vytvářejí komplexnější reprezentaci prostředí, které se skládá z milionů až miliard bodů. Jednotlivé body nesou vždy informaci o své pozici v prostoru, při využití kamery i přímo odpovídající barvu. Barevné rozlišení se dá použít i jinými způsoby. Je možné mít škálu barev, ve které přechází barvy dle zaznamenané výšky. Případně mohou barvy znázorňovat míru pravděpodobnosti, že se daný bod opravdu nachází na odhadované pozici.
+
 \newpage
-
 \section{GMapping}
-
-\subsection{Úvod}
-Jako velice podstatný úkol mobilního robota, bereme schopnost tvorby mapy. Ta může být kvalitně vytvářena, pokud existuje dobrý odhad pozice a pozice zase správně získávána, pokud je dostatečně kvalitní mapa. Efektivním řešením je tedy Rao-Blackwellizedův částicový filtr, který se může ještě vylepšit. Jednou možností, je zahrnout přesnost měření do návrhového rozložení, tím je získáno přesné vykreslení částic. Druhou možností, je volba vzorkovací techniky udržující rozumný počet částic. Udržuje se tak přesná mapa a snižuje se riziko vyčerpání částice, což je problém vznikající při převzorkování.\\
-\indent Návrhové rozložení je získáváno vyhodnocováním pravděpodobnosti pozice robota z kombinace informací ze senzoru a odometrie. Poslední pozorování je využito pro tvorbu nových částic, odhad stavu se tedy provádí na základě více informací, než jen z odometrie. 
+GMapping byl představen v roce 2007 v článku (Improved techinques...). Tato metoda je založená na implementaci Rao-Blackwellizovaného filtru, kde si každá vytvořená částice nese svoji mapu prostředí. Pro praktické využití je tedy nutné částicový filtr zefektivnit, což bylo úkolem tohoto systému. Jedna možnost je zahrnout přesnost měření do návrhového rozložení, tím je získáno přesné vykreslení částic. Druhou možností, je volba vzorkovací techniky udržující rozumný počet částic. Udržuje se tak přesná mapa a snižuje se riziko vyčerpání částice, což je problém vznikající při převzorkování.\\
 
 \subsection{Mapování pomocí RBPF}
-Základním úkolem je odhad posteriorní pravděpodobnosti a tím zisk mapy a trajektorie pohybu. Odhad je prováděn díky pozorování a informaci z odometrie. Nejprve dochází k odhadu mapy, která je utvářena z pozorování, poté až trajektorie. Ta je získána z částic, které měly v rozhodovací době největší pravděpodobnost. Každá částice tedy reprezentuje část trajektorie.\\
-\indent Pro výběr správné částice je použit částicový filtr, v tomto případěm typ SIR (Sampling Importance Resampling), který při mapování postupně zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost zahrnující informace o mapě a trajektorii. \\
-\indent Celý proces začíná ziskem nových částic odběrem vzorků z předchozí generace návrhového rozložení. Dále je částicím nastavena vážená důležitost, aby cílové rozložení nebylo rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem. Nakonec se odhaduje podoba mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, mapa vypočítána.
+Základním úkolem je odhad posteriorní pravděpodobnosti a tím zisk mapy a trajektorie pohybu. Odhad je prováděn na základě porovnání pozorování a informaci z odometrie. Nejprve dochází k odhadu mapy, která je utvářena z porovnání pozorování, poté až trajektorie. Ta je získána z částic, které měly v rozhodovací době největší pravděpodobnost. Každá částice tedy reprezentuje část trajektorie.\\
+\indent Pro výběr správné částice je použit částicový filtr, v tomto případěm Sampling Importance Resamplin (SIR), který při mapování postupně zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost, která zahrnuje informace o mapě a trajektorii. \\
+\indent Nejprve se získají nové částice. To je provedeno odběrem vzorků z předchozí generace návrhového rozložení. V dalším kroce je částicím nastavena vážená důležitost, aby cílové rozložení nebylo rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem. Nakonec se odhaduje podoba mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, mapa vypočítána.
 
-\subsection{RBPF s vylepšenými návrhy a adaptivním převzorkováním}
-Pro zisk nové generace částic je třeba vykreslení vzorků z návrhového rozložení, kde platí úměra, čím lepší návrh, tím lepší výsledek. Kdyby byl návrh rovný cílovému rozložení, částice by měly stejnou váženou důležitost a nebylo by třeba převzorkování. \\
-\indent Typicky návrhové rozložení odpovídá odometrickému pohybovému modelu, který však není optimální a to zejména, pokud je senzor výrazně přesnější než odhad pozice. Využívá se také vyhlazování pravděpodobnostní funkce, což zabraňuje částicím v okolí významné oblasti, přílišnému poklesu vážených důležitostí. Následkem je ale zkreslení mapy. To se však dá vyřešit zahrnutím posledního pozorování do generování nových vzorků. Díky tomu dochází k zaměření se na vzorkování ve významné oblasti pravděpodobnosti pozorování.\\
-\indent Zlepšením návrhu se objevuje možnost získávat pro každou částici zvlášť její parametry Gaussiánského návrhu a snižuje se také neurčitost výsledných hustot pravěpodobností. Porovnávač pozorování určuje režim výnamné oblasti pravděpodobnostní funkce pozorování. Také má většinou funkci maximalizace pravděpodobnosti pozorování, tvorby mapy a počáteční odhad pozice robota. Pokud je pravděpodobnostní funkce vícerežimová, například při uzavírání smyčky, porovnávač vrací pro každou částici nejbližší maximum, což může způsobit vynechání některých maxim v pavděpodobnostní funkci.\\
-\indent Převzorkování je velice důležitým aspektem určujícím výkon částicového filtru. Dochází k nahrazování vzorků s nízkou váhou, těmi s váhou vysokou. Je to nezbytný proces, neboť je potřeba konečného počtu částic pro aproximaci cílového rozložení. Může však odtranit dobré vzorky a ochudit tak částice, je proto důležité mít pro převzorkování vhodné rozhodovací kritérium a provádět ho ve správný čas. 
+\subsection{Vylepšené návrhy a adaptivní převzorkováním}
+Pro zisk nové generace částic je třeba vykreslení vzorků z návrhového rozložení, kde platí úměra, čím lepší návrh, tím lepší výsledek. Kdyby byl návrh rovný cílovému rozložení, částice by měly stejnou váženou důležitost a převzorkování by nebylo třeba. \\
+\indent Návrhové rozložení typicky odpovídá odometrickému pohybovému modelu, který však není optimální a to zejména, pokud je senzor výrazně přesnější než odhad pozice. Využívá se také vyhlazování pravděpodobnostní funkce, což zabraňuje částicím v okolí významné oblasti, aby vážené důležitosti příliš poklesly. Následkem je ale zkreslení mapy. To se však dá vyřešit zahrnutím posledního pozorování do generování nových vzorků. Díky tomu se systém zaměřuje na vzorkování ve významné oblasti pravděpodobnosti pozorování.\\
+\indent Zlepšením návrhu se objevuje možnost získávat pro každou částici zvlášť její parametry Gaussiánského návrhu a snižuje se také neurčitost výsledných hustot pravěpodobností. Porovnávač pozorování má funkci maximalizace pravděpodobnosti pozorování, tvorby mapy a počáteční odhad pozice robota. Pokud je pravděpodobnostní funkce vícerežimová, například při uzavírání smyčky, porovnávač vrací pro každou částici nejbližší lokální maximum.To může způsobit vynechání některých maxim v pavděpodobnostní funkci.\\
+\indent Převzorkování je velice důležitým aspektem určujícím výkon částicového filtru. Dochází k nahrazování vzorků s nízkou váhou. Je to nezbytný proces, neboť je potřeba konečného počtu částic pro aproximaci cílového rozložení. Může však odstranit dobré vzorky a ochudit tak částice, je proto důležité mít pro převzorkování vhodné rozhodovací kritérium a provádět ho ve správný čas. 
 \begin{equation}
-	N_{eff}=\frac{1}{\varSigma_{i-1}^N(w^{(i)})^2}
+	N_{eff}=\frac{1}{\varSigma_{i-1}^N(w^{(i)})^2},
 \end{equation} 
 $w^{(i)}$ je zde normalizovaná váha částice $i$ a $N_{eff}$ jsou vzorky z cílového rozložení, které mají stejné váhové důležitosti. Pokud dochází ke zhoršení aproximace cílového rozložení, nastává větší odchylka vážených důležitostí.\\
 Základní nastavení převzorkování je následující:
 \begin{equation}
 	N_{eff} < N/2,
 \end{equation}
-kde $N$ je počet částic. Tím dochází k výrazné redukci možnosti nahrazení dobrých částic a počtu převzorkování, které se vykonává pouze pokud je potřeba.\\
-\indent Algoritmus probíhá následovně. Dojde k zisku odhadu pozice, který je reprezentovaný danou částicí. Je získán z předchozí pozice částice a odometrického měření od poslední aktualizace. Na základě mapy je provedeno porovnání pozorování z místa úvodního odhadu pozice, kdy se vyhledává pouze v okolí tohoto bodu. V případě selhání se pozice a váhy počítají dle pohybového modelu a následující dva kroky jsou přeskočeny. Prvním z nich vybrání sady vzorků v okolí dané pozice, vypočítání průměrů a kovarianční matice návrhu bodovým hodnocením cílového rozložení v pozici vzorku. Druhým, potenciálně přeskočeným krokem, je zakreslení nové pozice částice z Gaussovské aproximace podle zlepšeného návrhového rozložení. Dále, a to již vždy, dojde k aktualizaci vážených důležitostí a podle zakreslené pozice a pozorování je aktualizována i mapa částice. 
+kde $N$ je počet částic. Tím dochází k výrazné redukci možnosti nahrazení dobrých částic a počtu převzorkování, které se vykonává pouze pokud je třeba.\\
+\indent Algoritmus probíhá následovně. Dojde k zisku odhadu pozice, který je reprezentovaný danou částicí. Odhad je získán z předchozí pozice částice a odometrického měření od poslední aktualizace. Na základě mapy je provedeno porovnání pozorování z místa úvodního odhadu pozice, kdy se vyhledává pouze v okolí tohoto bodu. V případě selhání se pozice a váhy počítají dle pohybového modelu a následující dva kroky jsou přeskočeny. Prvním z nich je vybrání sady vzorků v okolí dané pozice, vypočítání průměrů a kovarianční matice návrhu pomocí bodového ohodnocení cílového rozložení v pozici vzorku. Druhým, potenciálně přeskočeným krokem, je zakreslení nové pozice částice z Gaussovské aproximace podle zlepšeného návrhového rozložení. Dále, a to již vždy, dojde k aktualizaci vážených důležitostí a, podle zakreslené pozice a pozorování, je aktualizována i mapa částice. 
  
-\newpage
-
-\section{Catographer}
-
-\subsection{Úvod}
-Systém Cartographer je vyvíjen společností Google. Je vhodný pro tvorbu rozsáhlých map a zisk optimalizovaných výsledků v reálném čase. Při porovnávání snímků typem scan-to-scan dochází rychlému hromadění globálních chyb, v případě porovnávání stylem scan-to-map dochází, při správném odhadu pozice a kvalitnímu snímku z LIDARu, k velké redukci chyb, což vede k větší efektivnosti a robustnosti algoritmu. Dále se využívá porovnávání přesnosti pixelů. Jde o metodu redukující hromadění lokálních chyb a je vhodná při řešení problému uzavírání smyčky. \\
-
-\subsection{Přehled}
-Cartographer vytváří v reálném čase 2D mřížkovou mapu (grid mapu) s rozlišením na 5 cm. Submapy se vkládají na odhadované místo a daná submapa se porovnává vůči poslední zaznamenané, dochází tedy k hromadění globální chyby z odhadu pozice. Systém neobsahuje žádný částicový filtr a to z důvodu snížení hardwarových nároků na běh algoritmu.\\
-\indent Submapa se po pořízení již dále nijak nepřepisuje a je zařazena mezi ostatní k porovnávání na uzavření smyčky. Pokud dojde k blízkému odhadu pozice a zároveň dostatečné shodě snímků, přidá se omezení uzavření smyčky do optimalizačního problému, tím je odhad pozice. Odhad se aktualizuje po několika vteřinách a uzavření smyčky je tedy okamžitě viditelné. 
-
-\subsection{Lokální 2D SLAM}
-Rozlišujeme dva možné přístupy, lokální a globální, v obou případech se jedná o optimalizaci pozice, přičemž pozice se zkládá z hodnoty na ose $x$, z hodnoty na ose $y$ a z natočení robota. V systému je také obsažená jednotka IMU (inertial measurment unit), která slouží k odhadu směru gravitace, což má využití při pohybu na nerovné ploše.\\
-\indent Skeny prostředí se iterativně zarovnávají se snímky již obsaženými v submapě. Submapa je tedy v postatě zachycení kousku světa, který je složený z pár skenů. Lokální chyba, vznikající při její tvorbě, je poté odstraněna v globálním přístupu. Pro každý bod mřížky je definován odpovídající pixel skládající se ze všech pixelů nejblíže danému bodu.\\
-\indent Při přidání skenu do pravděpodobnostní mřížky je počítána množina zasažených bodů mřížky a bodů minutých. Při zásahu se nejbližší bod mřížky vloží do množiny zásahů. Při minutí je vložen bod mřížky sdružený se všemi pixely, které jsou protínány jedním paprskem mezi počátkem skenování a každým snímacím bodem. Nepřidávají se sem body již přidané do množiny zásahů. Doposud nepozorované body mřížky mají přiřazenou pravděpodobnost minutí či zásahu, podle toho, jestli se v jedné z těchto množin vyskytují. Již pozorovaným bodům se pak aktualizují pravděpodobnosti minutí a zásahu.\\
-\indent Před vložením skenu do submapy se ještě využívá Ceres scan matching, který optimalizuje pozici skenu vůči submapě. Jedná se o maximalizaci pravděpodobnosti výskytu v dané oblasti.  
-
-\begin{equation}
-	argmin_\xi\Sigma^K_{k=1}(1-M(T_{\xi}h_k))
-\end{equation}
-
-$H$ je zde informace o bodech skenu, $M$ je pravděpodobnostní mřížka, $\xi$ je pozice snímání skenu a $T_{\xi}$ je pozice skenu vůči submapě. Dochází k transormaci, kdy body skenu se transformují do submapy.
-
-\subsection{Uzavírání smyčky}
-Daný systém pracuje v oblasti submap s porovnáváním scan-to-scan, hromadí se v něm tedy lokální chyby, ale pár snímků za sebou má vůči sobě chybu minimální. Relativní pozice skenů se ukládají a v případě, že se submapa nezmění, všechny další páry ze skenů a submapy se předkládají k porovnávání pro uzavření smyčky. To vše běží na pozadí a pokud je nalezena shoda, dojde k uložení relativní pozice mezi optimalizační problémy.\\
-\indent Optimalizační problém je problém nelineárních nejmenších čtverců. Díky tomu můžeme jednoduše přidávat zbytky pro zohledňování dalších dat. Jednou za pár sekund je, pro optimalizaci pozice skenu vůči daným omezením, spuštěn Ceres scan matcher. Omezeními jsou myšlena relativní pozice $\xi_{ij}$ a kovarianční matice $\Sigma_{ij}$.
-
-\begin{equation}
-	argmin_{\Xi^m,\Xi^s}\frac{1}{2}\Sigma_{ij}\rho(E^2(\xi_i^m,\xi_j^s,\Sigma_{ij},\xi_{ij})),
-\end{equation}\\
-kde $\rho$ je ztrátová funkce, například tedy Hubertova ztráta. Jedná se o snížení vlivu odlehlých hodnot, které přidávají nesprávná omezení do optimalizačního problému.
-
-\indent Při uzavírání smyčky se vyžívá také branch-and-bound scan matching, což se dá přeložit jako porovnávání větví a mezí. Zde se metoda zaměřuje na přesnou shodu pixelů. Podmnožiny možností jsou popsány jako uzly stromu, kdy kořenový uzel obsahuje všechna možné možnosti ($W$). Potomci uzlu dohromady utváří stejný soubor možností, jako samotný rodičovský uzel. Listy jsou brány jako singlety, odpovídají jedinému proveditelnému řešení. Tento přístup dává stejné řešení jako ten předchozí, dokud je hodnota $score(c)$ vnitřních uzlů horní mezní skóre jeho prvků, neexistuje tedy žádné řešení, než to doposud známé.
-
-\begin{equation}
-	\xi^*=argmax_{(\xi\epsilon W)}\Sigma_{k=1}^KM_{nearest}(T_{\xi}h_k)
-\end{equation}\\
-$W$ je zde vyhledávací okno a $M_{nearest}$ je rozšíření pravděpodobnostní mřížky $M$ na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky. Rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel.\\
-\indent Výběr uzlů probíhá prohledáváním do hloubky. Efektivnost algoritmu hodně závisí na podobě stromu, zda-li má pro výpočet dobrou horní mez a dobré aktuální řešení. Důležitým termínem je zde prahová hodnota skóre. Jedná se o hodnotu, pod níž není v zájmu jít a řešení je tedy nevyhovující. Díky tomu se nepřidávají špatné shody jako omezení pro uzavírání smyčky. Pro rychlost algoritmu je důležité rozhodování o průchodu stromem. Pro každého potomka je vypočítána horní hranice skóre a je vybrán ten nejslibnější, což je uzel s největším mezním počtem.\\
-\indent Každý z uzlů je popsán pomocí tuple integerů: 
-\begin{equation}
-	c=(c_x,c_y,c_\Theta,c_h)\epsilon Z^4,
-\end{equation}\\
-kde $c_h$ je výška uzlu. Pokud $c_h=0$, uzel je list.\\
-\indent Horní meze jsou pak počítány na vnitřních uzlech, zde je zájem o výpočetní úsilí a kvalitu spojení. 
-\begin{equation}
-	score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)
-\end{equation}
-
 \newpage
 
 \section{Hector SLAM}
 
-\subsection{Úvod}
-Hlavním znakem systému Hector SLAM, je jeho rychlost a nízké výpočetní nároky oproti předchozím dvěma typům, které jsou v této práci rozebírány. Je tedy vhodný pro implementaci v menších autonomních systémech, pro rychlý pohyb terénem a nehodí se pro uzavírání velkých smyček.\\
-\indent Vnitřní skladba systému je ze tří hlavních částí, a to 2D SLAM, běžící jako soft real time, 3D navigace, která je hard real time a jednotka IMU, která se nachází i v systému Cartographer. Hector SLAM je braný jako front-end SLAM, což znamená, že dochází k odhadu stavu robota v reálném čase. Back-end SLAM optimalizuje poziční graf vzhledem k omezením mezi pozicemi.
-
-\subsection{Přehled}
-Daný systém se musí převézt z 3DOF pomocí naklonění a rotace na 6DOF, kdy navigační filtr spojí měření z inerciální jednotky (IMU) a dalších senzorů. Tím dojde k získání 3D řešení a díky 2D SLAMu je obsažena informace o poloze v prostoru. Oba odhady se aktualizují nezávisle na sobě a jsou propojeny jen velmi málo.\\
-\indent Kvůli znatelnému posunu odhadů integrované pozice a rychlosti, který je způsoben šumem v senzorech, zahrnujeme do systému další informace. Jedná se například o porovnávání snímků, snímání magnetického pole, senzor barometrického tlaku a nebo měření rychlosti kol.
+Hector SLAM je systém představený v roce 2011 v práci (A Flexible and scalable). Jeho hlavním znakem je rychlost a nízké výpočetní nároky oproti předchozím dvěma typům, které jsou v této práci rozebírány. Je tedy vhodný pro implementaci v menších autonomních systémech, pro rychlý pohyb terénem a nehodí se pro uzavírání velkých smyček.\\
+\indent Vnitřní skladba systému je ze tří hlavních částí, a to 2D SLAM, běžící jako soft real time, 3D navigace, která je hard real time a inerciální jednotka (IMU). Hector SLAM je braný jako front-end SLAM, což znamená, že dochází k odhadu stavu robota v reálném čase a nedochází ke zpětné optimalizaci mapy.\\
+\indent Daný systém se musí převézt z 3DOF přidáním naklonění a rotace na 6DOF, kdy navigační filtr spojí měření z IMU a dalších senzorů. Tím dojde k získání 3D řešení. 2D SLAM poté poskytuje informaci o poloze v prostoru. Oba odhady se aktualizují nezávisle na sobě a jsou propojeny jen velmi málo.\\
+\indent Kvůli znatelnému posunu odhadů integrované pozice a rychlosti, který je způsoben šumem v senzorech, jsou do systému zahrnuty další informace. Jedná se například o porovnávání snímků, snímání magnetického pole, senzor barometrického tlaku a nebo měření rychlosti kol.
 
 Pohyb robota je popsán:
 \begin{equation}
@@ -346,16 +312,16 @@ Pohyb robota je popsán:
 	\dot{p}=v\\
 \end{equation}
 \begin{equation}
-	\dot{v}=R_\Omega.a+g
+	\dot{v}=R_\Omega.a+g,
 \end{equation}\\
-$\Omega=(\phi,\theta,\psi)^T$ je zde informace o otáčení, stoupání a natočení. Vektor $x=(\Omega^T p^T v^T)^T$ reprezentuje 3D stav, $p,v$ jsou pozice a rychlost platformy v navigačním rámci. Vektor $u=(\omega^T a^T)^T$ je vstupní vektor pro inerciální měření, $\omega=(\omega_x,\omega_y,\omega_z)^T$ je úhlová rychlost a $a=(a_x,a_y,a_z)^T$ je zrychlení. $R_\Omega$ je pak matice směrových cosinů, $E_\Omega$ je mapování natočení těla na deriváty Eulerova úhlu a $g$ je vektor gravitace.\\
+kde $\Omega=(\phi,\theta,\psi)^T$ je informace o otáčení, stoupání a natočení. Vektor $x=(\Omega^T p^T v^T)^T$ reprezentuje 3D stav, $p,v$ jsou pozice a rychlost platformy v navigačním rámci. Vektor $u=(\omega^T a^T)^T$ je vstupní vektor pro inerciální měření, $\omega=(\omega_x,\omega_y,\omega_z)^T$ je úhlová rychlost a $a=(a_x,a_y,a_z)^T$ je zrychlení. $R_\Omega$ je pak matice směrových cosinů, $E_\Omega$ je mapování natočení těla na deriváty Eulerova úhlu a $g$ je vektor gravitace.\\
 
 \subsection{2D SLAM}
-Jako reprezentace prostředí je zde vybrána osvědčená metoda mřížkových map. Odhadovaná pozice robota slouží pro transformaci skenu na lokální stabilizovaný souřadnicový rámec. Odhadovanou orientací a přidruženými hodnotami je ze skenu vytvořen oblak bodů, který je pro odstranění odlehlých bodů předzpracováván. Filtrace probíhá pouze na základě souřadnic koncového bodu, kdy jsou pro porovnávání skenu použity pouze koncové body v rámci skenovací roviny.\\
-\indent Jak již bylo poznamenáno, je zde použita struktura mřížkových map, to vede k omezení přesnosti a neumožnění přímého výpočtu interpolovaných hodnot a derivátů. Pro oba odhady se tedy využívá interpolační schéma, díky kterému ta možnost je. Jakoukoliv souřadnici, kterou potřebujeme nahradit, aproximujeme pomocí čtyř nejbližších integerových souřadnic. \\
+Jako reprezentace prostředí je zde vybrána metoda mřížkových map. Odhadovaná pozice robota slouží pro transformaci pozorování na lokální souřadnicový rámec. Odhadovanou orientací a přidruženými hodnotami je z pozorování vytvořen oblak bodů, který je předzpracován pro odstranění odlehlých bodů. Filtrace probíhá pouze na základě souřadnic koncového bodu, kdy jsou pro porovnávání pozorování použity pouze koncové body v rámci skenovací roviny.\\
+\indent Jak již bylo poznamenáno, je zde použita struktura mřížkových map, to vede k omezení přesnosti a neumožnění přímého výpočtu interpolovaných hodnot a derivátů. Pro oba odhady se tedy využívá interpolační schéma, díky kterému tato možnost je. Souřadnice, které se potřebují nahradit, se aproximují pomocí čtyř nejbližších integerových souřadnic. \\
 \indent Laserové skenery jsou již velice přesná zařízení, jejich měření zatěžuje minimální šum a snímky se dají vytvářet s vysokou frekvencí. Měření pomocí laseru je tedy mnohem přesnější než to odometrické, což je jeden z důvodu, proč je odometrie v tomto systému zcela vynechána. Při zarovnávání snímků s již známou mapou není potřeba hledat žádná spojení mezi koncovými body, ale dochází k porovnávání s předchozími skeny.  
 
-Hledání transformace při nejlepším sladění skenu s mapou:
+Hledání transformace pro nejlepší sladění skenu s mapou:
 \begin{equation}
 	\xi^*=argmin_\xi\Sigma_{i=1}^n[1-M(S_i(\xi))]^2
 \end{equation}
@@ -366,14 +332,58 @@ Optimalizace chyby měření:
 	\Sigma_{i=1}^n[1-M(S_i(\xi+\Delta\xi))]^2\rightarrow 0,
 \end{equation}
 kde $\Delta\xi$ je odhad $\xi$.\\
-\indent Při tvorbě mapy dochází často k nalezení pouze lokálního minima, reprezentací mapy pomocí více rozlišení se tak toto riziko znatelně redukuje. Utváří se mřížkové mapy, kdy každá další má poloviční rozlišení, než ta předchozí. Je tak uloženo více map, které se součastně aktualizují podle odhadu aktuální pozice, který je generovaný zarovnávacím procesem. Díky tomuto přístupu jsou mapy konzistentní a nepotřebují převzorkovávání. Zarovnávání skenů probíhá pouze na mapě s nejvyšším rozlišením a tento odhad je pak, jak je uvedeno, použit pro ostatní mapy. Mapy s nízkým rozlišením jsou tedy v podstatě dostupné okamžitě, a lze je hned použít pro odhad trasy. 
+\indent Při tvorbě mapy dochází často k nalezení pouze lokálního minima, reprezentací mapy pomocí více rozlišení se tak toto riziko znatelně redukuje. Utváří se mřížkové mapy, kdy každá další má poloviční rozlišení, než ta předchozí. Je tak uloženo více map, které se součastně aktualizují podle odhadu aktuální pozice. Díky tomuto přístupu jsou mapy konzistentní a nepotřebují převzorkování. Zarovnávání pozorování probíhá pouze na mapě s nejvyšším rozlišením a tento odhad je pak použit pro ostatní mapy. Mapy s nízkým rozlišením jsou tedy v podstatě dostupné okamžitě, a lze je hned využít pro odhad trasy. 
 
 \subsection{Odhad 3D stavu}
-Pro odhad úplného 6D stavu (3D stav + informace o naklonění z gyroskopů a informace z akcelerometrů) slouží navigační filtr běžící v reálném čase. Filtr je asynchronně aktualizován při příchodu odhadované pozice z porovnávače nebo jiných informací ze senzorů. Filtr je implementován ve formě EKF, jedná se tedy o nelineární filtr a jako jeho známé vstupy se berou inerciální měření. Rychlost a pozici aktualizujeme integrací zrychlení. Aby se ale zabránilo nezávislému růstu odhadu stavu při nepřítomnosti měření, dochází k aktualizace pseudo-nulové rychlosti, které se spouští při dosažení odchylky určité prahové hodnoty a zajišťuje tak stabilitu systému.\\
-\indent Při integraci systému jsou přítomny základní dva celky, 2D SLAM a 3D stavový odhad, které spolu musejí komunikovat v obou směrech. Jejich fungování neni nijak synchronizováno, odhad stavu běží typicky s vyšší frekvencí. Odhadovaná pozice z EKF je brána jako počáteční odhad pro optimalizaci porovnávání. Opačným směrem je použit pro spojení pozice ze SLAM s celkovým odhadovaným stavem kovarianční průsečík (CI - covariance interseption).
-
+Pro odhad úplného 6D stavu (3D stav + informace o naklonění z gyroskopů a informace z akcelerometrů) slouží navigační filtr běžící v reálném čase. Filtr je asynchronně aktualizován při příchodu odhadované pozice z porovnávače pozorování nebo jiných informací ze senzorů. Filtr je implementován ve formě EKF, jedná se tedy o nelineární filtr a jako jeho známé vstupy se berou inerciální měření. Rychlost a pozice je získávána integrací zrychlení. Aby se ale zabránilo nezávislému růstu odhadu stavu při nepřítomnosti měření, dochází k aktualizaci pseudo-nulové rychlosti, která se spouští při dosažení odchylky určité prahové hodnoty a zajišťuje tak stabilitu systému.\\
 
 \newpage
+
+\section{Catographer}
+
+Systém Cartographer je vyvíjen společností Google a aktuální verze byla publikována v roce 2012 (Real-Time Loop Closure...).Jedná se o implementaci Graph-Based SLAM. Je vhodný pro tvorbu rozsáhlých map a zisk optimalizovaných výsledků v reálném čase. \\
+\indent Cartographer vytváří v reálném čase 2D mřížkovou mapu. Submapy se vkládají na odhadované místo a daná submapa se porovnává vůči poslední zaznamenané. Dochází tedy k hromadění globální chyby z odhadu pozice. Systém neobsahuje žádný částicový filtr a to z důvodu snížení hardwarových nároků na běh algoritmu.\\
+\indent Submapa se po pořízení již dále nijak nepřepisuje a je zařazena mezi ostatní k porovnávání na uzavření smyčky. Pokud dojde k blízkému odhadu pozice a zároveň dostatečné shodě snímků, přidá se omezení uzavření smyčky do optimalizačního problému, čímž je odhad pozice. Odhad se aktualizuje po několika vteřinách a uzavření smyčky je tedy okamžitě viditelné.\\
+\indent Rozlišují se dva možné přístupy, lokální a globální, v obou případech se jedná o optimalizaci pozice, přičemž pozice se zkládá z hodnoty na ose $x$, z hodnoty na ose $y$ a z natočení robota. V systému je také obsažená jednotka IMU, která slouží k odhadu směru gravitace, což má využití při pohybu na nerovné ploše.\\
+
+\subsection{Lokální 2D SLAM}
+\indent Skeny prostředí se iterativně zarovnávají se snímky již obsaženými v submapě. Submapa je tedy v postatě zachycení kousku světa, který je složený z pár skenů. Lokální chyba, vznikající při její tvorbě, je poté odstraněna v globálním přístupu. Pro každý bod mřížky je definován odpovídající pixel skládající se ze všech pixelů nejblíže danému bodu.\\
+\indent Při přidání skenu do pravděpodobnostní mřížky je počítána množina zasažených bodů mřížky a bodů minutých. Při zásahu se nejbližší bod mřížky vloží do množiny zásahů. Při nezaznamenání překážky jsou vloženy do množiny minutí všechny body odpovídající dráze laserového paprsku. Dosud nepozorované body mřížky mají přiřazenou pravděpodobnost minutí či zásahu, podle toho, jestli se v jedné z těchto množin vyskytují. Již pozorovaným bodům se pak aktualizují pravděpodobnosti minutí a zásahu.\\
+\indent Před vložením skenu do submapy se ještě využívá Ceres scan matching, který optimalizuje pozici skenu vůči submapě. Jedná se o maximalizaci pravděpodobnosti výskytu v dané oblasti.  
+
+\begin{equation}
+argmin_\xi\Sigma^K_{k=1}(1-M(T_{\xi}h_k))
+\end{equation}
+
+$H$ je zde informace o bodech skenu, $M$ je pravděpodobnostní mřížka, $\xi$ je pozice snímání skenu a $T_{\xi}$ je pozice skenu vůči submapě. Dochází k transormaci, kdy body skenu se transformují do submapy.
+
+\subsection{Globální 2D SLAM}
+Daný systém pracuje v oblasti submap s porovnáváním scan-to-scan, hromadí se v něm tedy lokální chyby. Pár snímků za sebou má však vůči sobě chybu minimální. Relativní pozice skenů se ukládají a v případě, že se submapa nezmění, všechny další páry ze skenů a submapy se předkládají k porovnávání pro uzavření smyčky. To vše běží na pozadí a pokud je nalezena shoda, dojde k uložení relativní pozice mezi optimalizační problémy.\\
+\indent Optimalizační problém je problém nelineárních nejmenších čtverců. Díky tomu je můžou jednoduše přidávat zbytky pro zohledňování dalších dat. Jednou za pár sekund je, pro optimalizaci pozice skenu vůči daným omezením, spuštěn Ceres scan matching. Omezeními jsou myšlena relativní pozice $\xi_{ij}$ a kovarianční matice $\Sigma_{ij}$.
+\begin{equation}
+argmin_{\Xi^m,\Xi^s}\frac{1}{2}\Sigma_{ij}\rho(E^2(\xi_i^m,\xi_j^s,\Sigma_{ij},\xi_{ij})),
+\end{equation}\\
+kde $\rho$ je ztrátová funkce, například tedy Hubertova ztráta. Jedná se o snížení vlivu odlehlých hodnot, které přidávají nesprávná omezení do optimalizačního problému.\\
+\indent Při uzavírání smyčky se vyžívá také branch-and-bound scan matching, což se dá přeložit jako porovnávání větví a mezí. Zde se metoda zaměřuje na přesnou shodu pixelů. Podmnožiny možností jsou popsány jako uzly stromu, kdy kořenový uzel obsahuje všechna možné možnosti $W$. Potomci uzlu dohromady utváří stejný soubor možností, jako samotný rodičovský uzel. Listy jsou brány jako singlety, odpovídají jedinému proveditelnému řešení. Tento přístup dává stejné řešení jako ten předchozí, dokud je hodnota $score(c)$ vnitřních uzlů horní mezní skóre jeho prvků. Neexistuje tedy žádné řešení, než to doposud známé.
+
+\begin{equation}
+\xi^*=argmax_{(\xi\epsilon W)}\Sigma_{k=1}^KM_{nearest}(T_{\xi}h_k)
+\end{equation}\\
+$W$ je zde vyhledávací okno a $M_{nearest}$ je rozšíření pravděpodobnostní mřížky $M$ na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky. Rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel.\\
+\indent Výběr uzlů probíhá prohledáváním do hloubky. Efektivnost algoritmu hodně závisí na podobě stromu, zda-li má pro výpočet dobrou horní mez a dobré aktuální řešení. Důležitým termínem je zde prahová hodnota skóre. Jedná se o hodnotu, pod níž není v zájmu jít a řešení je tedy nevyhovující. Díky tomu se nepřidávají špatné shody jako omezení pro uzavírání smyčky. Pro rychlost algoritmu je důležité rozhodování o průchodu stromem. Pro každého potomka je vypočítána horní hranice skóre a je vybrán ten nejslibnější, což je uzel s největším mezním počtem.\\
+\indent Každý z uzlů je popsán pomocí pole integerů: 
+\begin{equation}
+c=(c_x,c_y,c_\Theta,c_h)\epsilon Z^4,
+\end{equation}\\
+kde $c_h$ je výška uzlu. Pokud $c_h=0$, uzel je list.\\
+\indent Horní meze jsou pak počítány přes vnitřní uzly: 
+\begin{equation}
+score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)
+\end{equation}
+
+\newpage
+
+
 
 
 \section{Experimentální měření}
