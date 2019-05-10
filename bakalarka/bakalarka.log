@@ -1,22 +1,23 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  6 MAY 2019 20:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  10 MAY 2019 19:20
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\report.cls"
+Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
 File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
@@ -67,11 +68,11 @@ File: babel.def 2017/11/03 3.15 Babel common definitions
 ("C:\Program Files\MiKTeX 2.9\tex\generic\babel\switch.def"
 File: switch.def 2017/11/03 3.15 Babel switching mechanism
 )
-\babel@savecnt=\count87
+\babel@savecnt=\count88
 \U@D=\dimen105
 )
 Package babel Info: Making " an active character on input line 172.
-\cs@wordlen=\count88
+\cs@wordlen=\count89
 Package babel Info: Making - an active character on input line 226.
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
@@ -406,15 +407,15 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\calc.sty"
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count89
-\calc@Bcount=\count90
+\calc@Acount=\count90
+\calc@Bcount=\count91
 \calc@Adimen=\dimen106
 \calc@Bdimen=\dimen107
 \calc@Askip=\skip46
 \calc@Bskip=\skip47
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count91
+\calc@Ccount=\count92
 \calc@Cskip=\skip48
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\eso-pic\eso-pic.sty"
@@ -458,12 +459,12 @@ File: pppdftex.def 2017/10/31 v0.5l Pdfpages driver for pdfTeX (AM)
 \AM@pagebox=\box26
 \AM@global@opts=\toks17
 \AM@toc@title=\toks18
-\c@AM@survey=\count92
+\c@AM@survey=\count93
 \AM@templatesizebox=\box27
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\lipsum\lipsum.sty"
 Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
-\c@lips@count=\count93
+\c@lips@count=\count94
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\mathtools\mathtools.sty"
 Package: mathtools 2017/10/30 v1.20 mathematical typesetting tools
@@ -491,13 +492,13 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count94
+\inf@bad=\count95
 LaTeX Info: Redefining \frac on input line 213.
-\uproot@=\count95
-\leftroot@=\count96
+\uproot@=\count96
+\leftroot@=\count97
 LaTeX Info: Redefining \overline on input line 375.
-\classnum@=\count97
-\DOTSCASE@=\count98
+\classnum@=\count98
+\DOTSCASE@=\count99
 LaTeX Info: Redefining \ldots on input line 472.
 LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
@@ -506,15 +507,15 @@ LaTeX Info: Redefining \cdots on input line 596.
 \big@size=\dimen112
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
-\macc@depth=\count99
-\c@MaxMatrixCols=\count100
+\macc@depth=\count100
+\c@MaxMatrixCols=\count101
 \dotsspace@=\muskip10
-\c@parentequation=\count101
-\dspbrk@lvl=\count102
+\c@parentequation=\count102
+\dspbrk@lvl=\count103
 \tag@help=\toks20
-\row@=\count103
-\column@=\count104
-\maxfields@=\count105
+\row@=\count104
+\column@=\count105
+\maxfields@=\count106
 \andhelp@=\toks21
 \eqnshift@=\dimen113
 \alignsep@=\dimen114
@@ -533,7 +534,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count106
+\g_MT_multlinerow_int=\count107
 \l_MT_multwidth_dim=\dimen119
 \origjot=\skip52
 \l_MT_shortvdotswithinadjustabove_dim=\dimen120
@@ -546,7 +547,7 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\multirow\multirow.sty"
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip53
-\multirow@cntb=\count107
+\multirow@cntb=\count108
 \multirow@dima=\skip54
 \bigstrutjot=\dimen126
 )
@@ -564,11 +565,11 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen132
 \caption@hangindent=\dimen133
 )
-\c@ContinuedFloat=\count108
+\c@ContinuedFloat=\count109
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count109
+\c@float@type=\count110
 \float@exts=\toks24
 \float@box=\box30
 \@float@everytoks=\toks25
@@ -580,26 +581,26 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@outerparindent=\dimen134
 \enit@toks=\toks26
 \enit@inbox=\box32
-\enitdp@description=\count110
+\enitdp@description=\count111
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
-\lst@mode=\count111
+\lst@mode=\count112
 \lst@gtempboxa=\box33
 \lst@token=\toks27
-\lst@length=\count112
+\lst@length=\count113
 \lst@currlwidth=\dimen135
-\lst@column=\count113
-\lst@pos=\count114
+\lst@column=\count114
+\lst@pos=\count115
 \lst@lostspace=\dimen136
 \lst@width=\dimen137
-\lst@newlines=\count115
-\lst@lineno=\count116
+\lst@newlines=\count116
+\lst@lineno=\count117
 \lst@maxwidth=\dimen138
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count117
-\lst@skipnumbers=\count118
+\c@lstnumber=\count118
+\lst@skipnumbers=\count119
 \lst@framebox=\box34
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
@@ -633,16 +634,16 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
  ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count119
+\scratchcounter=\count120
 \scratchdimen=\dimen139
 \scratchbox=\box35
-\nofMPsegments=\count120
-\nofMParguments=\count121
+\nofMPsegments=\count121
+\nofMParguments=\count122
 \everyMPshowfont=\toks28
-\MPscratchCnt=\count122
+\MPscratchCnt=\count123
 \MPscratchDim=\dimen140
-\MPnumerator=\count123
-\makeMPintoPDFobject=\count124
+\MPnumerator=\count124
+\makeMPintoPDFobject=\count125
 \everyMPtoPDFconversion=\toks29
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -703,7 +704,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count125
+\c@lstlisting=\count126
 <logo_zcu.png, id=1, 306.14375pt x 165.61874pt>
 File: logo_zcu.png Graphic file (type png)
 <use logo_zcu.png>
@@ -724,164 +725,208 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1])
+) [1
+
+])
 \tf@toc=\write3
 \openout3 = `bakalarka.toc'.
 
- [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 74--76
+ [2]
+Kapitola 1.
+
+Overfull \hbox (20.21817pt too wide) in paragraph at lines 50--55
+[]\OT1/cmr/m/n/12 Tret ka-pi-tola je zamerena jiz na po-rovnan danych
+ systemu na zaklade namerenych
+ []
+
+[3
+
+] [4]
+Kapitola 2.
+[5
+
+]
+<imgs/SLAM_estimate_vs_reality.pdf, id=24, pagebox=cropbox, 296.21907pt x 249.3
+8043pt>
+File: imgs/SLAM_estimate_vs_reality.pdf Graphic file (type pdf)
+<use imgs/SLAM_estimate_vs_reality.pdf>
+Package pdftex.def Info: imgs/SLAM_estimate_vs_reality.pdf  used on input line 
+74. on input line 74.
+Package pdftex.def Info: Requested size: 256.0774pt x 215.60835pt on input line
+ 74.
+ [6 <./imgs/SLAM_estimate_vs_reality.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 93--97
 
  []
 
-[4]
-Overfull \hbox (1.71846pt too wide) in paragraph at lines 77--78
-[]\OT1/cmr/m/n/12 Model po-zo-rovan po-pi-suje pravdepodobnost zisku po-zo-
-rovan $[][]$, po-kud zname
- []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--88
-
- []
-
-
-Overfull \hbox (7.42908pt too wide) in paragraph at lines 100--101
+Overfull \hbox (7.42908pt too wide) in paragraph at lines 109--110
 \OT1/cmr/m/n/12 Model po-zo-rovan udava zavislost po-lohy vo-zi-dla a po-
 zice lan-d-marku, z cehoz vyplyva,
  []
 
 
-Overfull \hbox (18.85905pt too wide) in paragraph at lines 105--108
-\OT1/cmr/m/n/12 prostredm tak zskavame presnejs a ro-bustnejs m
-apu. Naprklad nasobnym pruchodem
+Overfull \hbox (14.94243pt too wide) in paragraph at lines 112--116
+\OT1/cmr/m/n/12 prostredm je tak zskana presnejs a ro-bustnejs m
+apa. Naprklad nasobnym pruchodem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--108
+Underfull \hbox (badness 10000) in paragraph at lines 112--116
 
  []
 
-[5] [6]
-Overfull \hbox (7.75206pt too wide) in paragraph at lines 111--114
+<imgs/SLAM_corelations.pdf, id=60, pagebox=cropbox, 242.0543pt x 192.188pt>
+File: imgs/SLAM_corelations.pdf Graphic file (type pdf)
+<use imgs/SLAM_corelations.pdf>
+Package pdftex.def Info: imgs/SLAM_corelations.pdf  used on input line 119. on 
+input line 119.
+Package pdftex.def Info: Requested size: 256.0774pt x 203.34pt on input line 11
+9.
+[7]
+Overfull \hbox (7.75206pt too wide) in paragraph at lines 127--130
 \OT1/cmr/m/n/12 sumem, coz vede k pouzit rozsreneho Kal-ma-nova fil-t
 ru (v ori-ginale $\OML/cmm/m/it/12 extended$ $Kalman$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 111--114
+Underfull \hbox (badness 10000) in paragraph at lines 127--130
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--123
+Underfull \hbox (badness 10000) in paragraph at lines 135--139
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 125--130
-
- []
-
-[7]
-Overfull \hbox (13.47578pt too wide) in paragraph at lines 175--181
-\OT1/cmr/m/n/12 marku k nule. Jed-not-live od-chylky lan-d-marku pak kon-ver
--guj dle puvodnch nepresnost
- []
-
-
-Overfull \hbox (7.62814pt too wide) in paragraph at lines 175--181
-[]\OT1/cmr/m/n/12 Metoda EKF-SLAM je velmi nachylna na chybne spo-jen po-z
-o-rovan se znamymi
- []
-
-
-Overfull \hbox (13.86876pt too wide) in paragraph at lines 175--181
-\OT1/cmr/m/n/12 lan-d-marky. Jedna se zejmena o problem s uzavrenm smyck
-y, kdy dochaz k opetovnemu
- []
-
-
-Overfull \hbox (8.85591pt too wide) in paragraph at lines 175--181
-\OT1/cmr/m/n/12 nepresnostem ve vysledku, ne-bot[] EKF-SLAM vyuzva linea
-rnch mo-delu pro vyjadren
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--185
-
- []
-
-
-Overfull \hbox (3.05394pt too wide) in paragraph at lines 187--190
+[8 <./imgs/SLAM_corelations.pdf>] [9]
+Overfull \hbox (3.05394pt too wide) in paragraph at lines 199--202
 []\OT1/cmr/m/n/12 Rozlisuj se dva zpusoby mozne im-ple-men-tace. Prvn z
  nich pra-cuje na zmensene
  []
 
 
-Overfull \hbox (19.65428pt too wide) in paragraph at lines 187--190
+Overfull \hbox (19.65428pt too wide) in paragraph at lines 199--202
 \OT1/cmr/m/n/12 souradnicovym ramcem ne-o-poustejcm da-nou sub-mapu. J
 sou to al-go-ri-thmy $\OML/cmm/m/it/12 constrained$
  []
 
 
-Overfull \hbox (4.38771pt too wide) in paragraph at lines 187--190
+Overfull \hbox (4.38771pt too wide) in paragraph at lines 199--202
 []\OT1/cmr/m/n/12 Logaritmus sub-mapy se sklada z dvou nezavislych od-hadu
 , ktere si stale udrzuje.
  []
 
-[8]
-Overfull \hbox (1.10005pt too wide) in paragraph at lines 192--195
-\OT1/cmr/m/n/12 zskavat presne resen dky rozsirovan stavu novy
-m od-ha-dem po-zice ro-bota v kazdem
- []
 
-
-Overfull \hbox (0.65222pt too wide) in paragraph at lines 197--201
+Overfull \hbox (0.65222pt too wide) in paragraph at lines 204--207
 \OT1/cmr/m/n/12 rozlisovat ruzne balcky dat. To je pote vyuzito pro pr
 epoved dane aso-ci-ace, nejcasteji
  []
 
-[9] [10]
-Underfull \hbox (badness 10000) in paragraph at lines 222--224
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--207
 
  []
 
-[11] [12]
-Overfull \hbox (18.85905pt too wide) in paragraph at lines 236--238
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 227--229
+
+ []
+
+[11]
+<imgs/RBPF_trajectory.pdf, id=90, pagebox=cropbox, 242.55618pt x 238.85236pt>
+File: imgs/RBPF_trajectory.pdf Graphic file (type pdf)
+<use imgs/RBPF_trajectory.pdf>
+Package pdftex.def Info: imgs/RBPF_trajectory.pdf  used on input line 236. on i
+nput line 236.
+Package pdftex.def Info: Requested size: 256.0774pt x 252.19095pt on input line
+ 236.
+ [12 <./imgs/RBPF_trajectory.pdf>]
+<imgs/GBS_constrains.pdf, id=106, pagebox=cropbox, 153.6942pt x 162.6075pt>
+File: imgs/GBS_constrains.pdf Graphic file (type pdf)
+<use imgs/GBS_constrains.pdf>
+Package pdftex.def Info: imgs/GBS_constrains.pdf  used on input line 253. on in
+put line 253.
+Package pdftex.def Info: Requested size: 213.39566pt x 225.77812pt on input lin
+e 253.
+
+Overfull \hbox (18.85905pt too wide) in paragraph at lines 249--258
 \OT1/cmr/m/n/12 provad lokaln li-nea-ri-zace prvnm stupnem Ta-y-lo-rov
 a po-ly-nomu. Nasledne je vypoctana
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 251--252
+[13 <./imgs/GBS_constrains.pdf
+
+pdfTeX warning: pdflatex.exe (file ./imgs/GBS_constrains.pdf): PDF inclusion: i
+nvalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
+
+>]
+<imgs/GBS_virtual_measurment.pdf, id=113, pagebox=cropbox, 421.575pt x 299.1977
+8pt>
+File: imgs/GBS_virtual_measurment.pdf Graphic file (type pdf)
+<use imgs/GBS_virtual_measurment.pdf>
+Package pdftex.def Info: imgs/GBS_virtual_measurment.pdf  used on input line 27
+2. on input line 272.
+Package pdftex.def Info: Requested size: 256.0774pt x 181.74338pt on input line
+ 272.
+ [14 <./imgs/GBS_virtual_measurment.pdf
+
+pdfTeX warning: pdflatex.exe (file ./imgs/GBS_virtual_measurment.pdf): PDF incl
+usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
+ignored.
+>]
+<imgs/landmark_map.jpg, id=137, 421.575pt x 316.18124pt>
+File: imgs/landmark_map.jpg Graphic file (type jpg)
+<use imgs/landmark_map.jpg>
+Package pdftex.def Info: imgs/landmark_map.jpg  used on input line 288. on inpu
+t line 288.
+Package pdftex.def Info: Requested size: 298.75262pt x 224.07051pt on input lin
+e 288.
+ [15 <./imgs/landmark_map.jpg>]
+<imgs/gridmap.png, id=141, 429.85594pt x 271.0125pt>
+File: imgs/gridmap.png Graphic file (type png)
+<use imgs/gridmap.png>
+Package pdftex.def Info: imgs/gridmap.png  used on input line 309. on input lin
+e 309.
+Package pdftex.def Info: Requested size: 298.75262pt x 188.35933pt on input lin
+e 309.
+ [16 <./imgs/gridmap.png>]
+<imgs/point_cloud.jpg, id=147, 642.4pt x 405.515pt>
+File: imgs/point_cloud.jpg Graphic file (type jpg)
+<use imgs/point_cloud.jpg>
+Package pdftex.def Info: imgs/point_cloud.jpg  used on input line 320. on input
+ line 320.
+Package pdftex.def Info: Requested size: 298.75262pt x 188.59344pt on input lin
+e 320.
+ [17 <./imgs/point_cloud.jpg>]
+Kapitola 3.
+
+Underfull \hbox (badness 10000) in paragraph at lines 331--332
 
  []
 
-[14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 275--276
 
- []
-
-
-Overfull \hbox (30.01912pt too wide) in paragraph at lines 278--281
+Overfull \hbox (30.01912pt too wide) in paragraph at lines 334--337
 \OT1/cmr/m/n/12 zoru, pote odo-me-t-rii a ak-tu-a-li-zuje sadu vzorku re-pre-
 zen-tujc po-ste-ri-orn pravdepodobnost,
  []
 
+[18
 
-Overfull \hbox (14.06459pt too wide) in paragraph at lines 283--287
+]
+Overfull \hbox (14.06459pt too wide) in paragraph at lines 339--343
 \OT1/cmr/m/n/12 po-zo-rovan, tvorby mapy a pocatecn od-had po-zice ro-b
 ota. Po-kud je pravdepodobnostn
  []
 
-[16] [17]
-Overfull \hbox (15.38481pt too wide) in paragraph at lines 302--306
+[19] [20]
+Overfull \hbox (15.38481pt too wide) in paragraph at lines 358--362
 []\OT1/cmr/m/n/12 Kvuli zna-telnemu po-sunu od-hadu in-te-gro-vane po-zice 
 a rych-losti, ktery je zpusoben
  []
 
 
-Overfull \hbox (2.05707pt too wide) in paragraph at lines 316--318
+Overfull \hbox (2.05707pt too wide) in paragraph at lines 372--374
 \OT1/cmr/m/n/12 kde $
  = (\OML/cmm/m/it/12 ; ;  \OT1/cmr/m/n/12 )[]$ je in-for-mace o otacen, s
 toupan a natocen. Vek-tor $\OML/cmm/m/it/12 x \OT1/cmr/m/n/12 = (
@@ -889,146 +934,169 @@ toupan a natocen. Vek-tor $\OML/cmm/m/it/12 x \OT1/cmr/m/n/12 = (
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 316--318
+Underfull \hbox (badness 10000) in paragraph at lines 372--374
 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 327--329
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 383--385
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 338--339
+Underfull \hbox (badness 10000) in paragraph at lines 394--395
 
  []
 
-[19]
-Overfull \hbox (4.12088pt too wide) in paragraph at lines 344--348
+[22]
+Overfull \hbox (4.12088pt too wide) in paragraph at lines 400--404
 \OT1/cmr/m/n/12 Based SLAM. Je vhodny pro tvorbu rozsahlych map a zisk op-ti
 -ma-li-zo-vanych vysledku
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--348
+Underfull \hbox (badness 10000) in paragraph at lines 400--404
 
  []
 
 
-Overfull \hbox (3.7989pt too wide) in paragraph at lines 350--353
+Overfull \hbox (3.7989pt too wide) in paragraph at lines 406--409
 []\OT1/cmr/m/n/12 Pri pridan skenu do pravdepodobnostn mrzky je po
 ctana mnozina zasazenych
  []
 
 
-Overfull \hbox (23.9854pt too wide) in paragraph at lines 350--353
+Overfull \hbox (23.9854pt too wide) in paragraph at lines 406--409
 \OT1/cmr/m/n/12 od-povdajc draze la-se-roveho pa-prsku. Do-sud ne-po-zo
 -ro-vane body mrzky maj prirazenou
  []
 
-[20] [21]
-Overfull \hbox (0.78404pt too wide) in paragraph at lines 390--391
+[23] [24]
+Kapitola 4.
+
+Overfull \hbox (0.78404pt too wide) in paragraph at lines 446--447
 \OT1/cmr/m/n/12 Pro tes-tovan vsech vyse zmnenych systemu jsem vyu
 zil fra-mework $\OML/cmm/m/it/12 Robot$ $Operating$
  []
 
 
-Overfull \hbox (6.37807pt too wide) in paragraph at lines 393--398
+Overfull \hbox (6.37807pt too wide) in paragraph at lines 449--454
 \OT1/cmr/m/n/12 moznych ko-mu-nikacnch stylu. Pres sluzby je to syn-chr
 onn ko-mu-ni-kace RPC ($\OML/cmm/m/it/12 Remote$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 393--398
+Underfull \hbox (badness 10000) in paragraph at lines 449--454
+
+ []
+
+[25
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 456--461
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 400--405
+Underfull \hbox (badness 10000) in paragraph at lines 463--471
 
  []
 
-[22]
-Underfull \hbox (badness 10000) in paragraph at lines 407--415
-
- []
-
-[23] [24] [25] [26]
-Overfull \hbox (370.15704pt too wide) in paragraph at lines 449--451
+[26] [27] [28] [29] [30]
+Overfull \hbox (370.15704pt too wide) in paragraph at lines 505--507
 \OML/cmm/m/it/12 ==code:research:uts:edu:au=\OT1/cmr/m/n/12 13110756\OML/cmm/m/
 it/12 =cartographer[]ros=blob=master=cartographer[]ros=cartographer[]ros=dev=pb
 stream[]trajectories[]to[]rosbag[]main:cc$\OT1/cmr/m/n/12 ).
  []
 
 
-Overfull \hbox (1.33208pt too wide) in paragraph at lines 454--455
+Overfull \hbox (1.33208pt too wide) in paragraph at lines 510--511
 \OT1/cmr/m/n/12 mapy i castice, na ktere pri dobehnut dat z $\OML/cmm/m/
 it/12 measured:bag$ \OT1/cmr/m/n/12 jeste nedoslo. Nasledujcm
  []
 
-[27] [28] [29]
-Underfull \hbox (badness 10000) in paragraph at lines 496--497
+[31] [32] [33]
+Underfull \hbox (badness 10000) in paragraph at lines 554--555
 
  []
 
-[30]
-Overfull \hbox (15.82576pt too wide) in paragraph at lines 511--516
-\OT1/cmr/m/n/12 dopoctavanou. Pouzitm to-hoto na-sta-ven se Car-to-gra
--pher stava nachylny na podlouhle
- []
-
-
-Overfull \hbox (17.0479pt too wide) in paragraph at lines 511--516
-\OT1/cmr/m/n/12 pro-story bez vetsch rodlu, ty-pickym prkladem jsou 
-chodby. GMap-ping bez-podmnecne
- []
-
-[31]
-Overfull \hbox (15.4341pt too wide) in paragraph at lines 519--521
+[34]
+Overfull \hbox (15.4341pt too wide) in paragraph at lines 569--571
 \OT1/cmr/m/n/12 natocen a pocatek stejny. Po-rovnavan pak bylo pro-ve
 -deno dle rov-nic v sekci Srovnavac
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 519--521
+Underfull \hbox (badness 10000) in paragraph at lines 569--571
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 531--533
+Underfull \hbox (badness 10000) in paragraph at lines 581--583
 
  []
 
-[32] [33] [34]
-Overfull \hbox (0.13452pt too wide) in paragraph at lines 596--599
+[35]
+Overfull \hbox (15.82576pt too wide) in paragraph at lines 596--601
+\OT1/cmr/m/n/12 dopoctavanou. Pouzitm to-hoto na-sta-ven se Car-to-gra
+-pher stava nachylny na podlouhle
+ []
+
+
+Overfull \hbox (17.0479pt too wide) in paragraph at lines 596--601
+\OT1/cmr/m/n/12 pro-story bez vetsch rodlu, ty-pickym prkladem jsou 
+chodby. GMap-ping bez-podmnecne
+ []
+
+[36]
+Kapitola 5.
+
+Overfull \hbox (9.32533pt too wide) in paragraph at lines 617--630
+ [] 
+ []
+
+[37
+
+]
+Overfull \hbox (26.93625pt too wide) in paragraph at lines 655--657
+[]\OT1/cmr/m/n/12 V po-sledn tes-to-vane sku-pine se menily pa-ra-me-try p
+ro vzor-kovan pravdepodobnosti: 
+ []
+
+[38] [39]
+Overfull \hbox (0.13452pt too wide) in paragraph at lines 673--677
 \OT1/cmr/m/n/12 prostred. Pri uvazen, ze by se vsak ro-bot premist[]
 oval mezi uzavrenymi a otevrenymi
  []
 
-[35] [36] (bakalarka.aux) ) 
+[40]
+Kapitola 6.
+[41
+
+] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
- 8052 strings out of 493312
- 115750 string characters out of 3138899
- 304368 words of memory out of 3000000
- 11452 multiletter control sequences out of 15000+200000
- 10593 words of font info for 40 fonts, out of 3000000 for 9000
+ 8121 strings out of 493312
+ 117360 string characters out of 3138899
+ 305838 words of memory out of 3000000
+ 11511 multiletter control sequences out of 15000+200000
+ 11199 words of font info for 42 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,39p,1494b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmbx8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pf
-b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Fil
-es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX
- 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/font
-s/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
-cmtt12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msa
-m10.pfb>
-Output written on bakalarka.pdf (37 pages, 263189 bytes).
+ 41i,17n,39p,1494b,305s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx8.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/ams
+fonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.p
+fb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+
+Output written on bakalarka.pdf (42 pages, 512797 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
+ 269 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
