@@ -47,9 +47,9 @@
 
 
 \chapter{Úvod}
-Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. První část práce je zaměřena obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Jsou zde popsány vnitřní principy a různé přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. V této práci je zaměření čistě na systémy využívající 2D LIDAR, tedy sezor, měřící vzdálenosti pouze v jedné výškové úrovni.\\
+Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. První část práce je zaměřena obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Jsou zde popsány vnitřní principy a různé přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. V této práci je zaměření čistě na systémy využívající 2D LIDAR, tedy senzor, měřící vzdálenosti pouze v jedné výškové úrovni.\\
 \indent Další kapitola se věnuje třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o gMapping, HectorSLAM a Google Cartographer. Je zde popsáno, na jakých principech každý ze systémů pracuje a jak je daný přístup do systému implementován. \\
-\indent Třetí kapitola je zaměřena již na porovnání daných systémů na základě naměřených dat. Nejprve je zde popsán operační systém pro roboty (ROS), ve kterém pracují všechny tři systémy a pomocí kterého se nahrávala reálná data. V další části je ukázáno, jak byla získána data. V této práci jsou použity tři typy dat, kdy jsou využity čistě simulační data, která jsou nahraná pomocí již zmíněného operačního systému pro roboty. Dále data nahraná na univerzitě MIT v Massachusetts a jako poslední data nahraná mobilním robotem přímo v budově FAV na Západočeské univerzitě v Plzni. Dále je zde rozebráno, jak data byla zpracována, aby byla připravena na následné porovnávání. Poslední částí této kapitoly je srovnání výsledků. Je zde uvedeno, jaké kritérium bylo pro srovnávání zvoleno. Dále jsou zde popsány získané výsledky pro jednotlivé datasety. U každého typu dat je také vyhodnocení, jaká metoda se pro daná data hodila nejvíce, jak si vedly metody ostatní a důvody, proč tomu tak bylo.\\
+\indent Třetí kapitola je zaměřena na porovnání daných systémů na základě naměřených dat. Nejprve je zde popsán operační systém pro roboty (ROS), ve kterém pracují všechny tři systémy a pomocí kterého se nahrávala reálná data. V další části je ukázáno, jak byla získána data. V této práci jsou použity tři typy dat, kdy jsou využity čistě simulační data, která jsou nahraná pomocí již zmíněného operačního systému pro roboty. Dále data nahraná na univerzitě MIT v Massachusetts a jako poslední data nahraná mobilním robotem přímo v budově FAV na Západočeské univerzitě v Plzni. Dále je zde rozebráno, jak data byla zpracována, aby byla připravena na následné porovnávání. Poslední částí této kapitoly je srovnání výsledků. Je zde uvedeno, jaké kritérium bylo pro srovnávání zvoleno. Dále jsou zde popsány získané výsledky pro jednotlivé datasety. U každého typu dat je také vyhodnocení, jaká metoda se pro daná data hodila nejvíce, jak si vedly metody ostatní a důvody, proč tomu tak bylo.\\
 \indent V páté kapitole je uvedení bližšího průzkumu vybraného systému. Jsou zde popsány důvody, které vedly k vybrání zvoleného systému. Pro náhled do vnitřních pochodů, jsou zde také uvedena srovnání, jak metoda proběhne při změně určitých nastavitelných parametrů. Následně je pro každou změnu zhodnoceno, jaký vliv na systém daná změna má a proč tomu tak je. Nakonec je uvedeno, jaké změny by bylo vhodné v systému udělat. Jedná se jak o změny zlepšující výkonnost systému, tak i o změny pouze ulehčující práci pro uživatele.\\
 \indent Poslední kapitolou je závěr, ve kterém je zhodnocena postupně celá práce. Hlavním zaměřením je zde popis práce s jednotlivými metodami, jak složité je bylo nastavovat, jaká k nim byla dokumentace a jak její nedostatky doplňovala komunita a především, jak byly systémy po celou dobu práce s nimi stabilní, či nestabilní.
 
@@ -67,7 +67,7 @@ Za počátek diskuze problému se považuje konference Robotics and Automation C
 
 
 \section{Formulace a struktura} 
-Jedná se o proces, při kterém robot vytváří mapu prostředí v němž se pohybuje a na základě mapy určuje svoji pozici v prostoru. Pro určování trajektorie robota a rozložení landmarků není třeba předchozí znalosti jeho lokace, neboť odhad těchto parametrů probíhá v reálném čase. 
+Jedná se o proces, při kterém robot vytváří mapu prostředí v němž se pohybuje a na základě mapy určuje svoji pozici v prostoru. Pro určování trajektorie robota a rozložení landmarků není třeba předchozí znalosti jeho lokace, neboť odhad těchto parametrů probíhá v reálném čase. Tento proces je znázorněný na obrázku \ref{fig:SLAM_estimate_vs_reality}, ze kterého je vidět, že odhad nemusí být přesný. Pro metody řešící problém SLAM je tak cílem minimalizovat danou chybu, neboli drift.
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -78,11 +78,11 @@ Jedná se o proces, při kterém robot vytváří mapu prostředí v němž se p
 \end{figure}
 
 \subsection{Pravděpodobnostní SLAM}
-Cílem je získat v časovém okamžiku k odhadu hustoty pravděpodobnosti
+Cílem je získat v časovém okamžiku $k$ odhad hustoty pravděpodobnosti
 \begin{equation}
 	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k},\textbf{U}_{0:k},\textbf{x}_0)
 \end{equation}
-pro každý časový okamžik ${k}$, kde $\textbf{x}_k$ je stavový vektor popisující pozici a orientaci robota, $\textbf{m}$ je množina landmarů, tedy mapa, $\textbf{Z}_{0:k}$ jsou všechna pozorování landmarků, $\textbf{U}_{0:k}$ je historie vstupů a $\textbf{x}_0$ je počáteční stav. Jedná se tedy o srduženou posteriorní hustotu mapy, stavu vozidla s ohledem na zaznamenané pozorování, řídící vstupy a  počáteční stav robota. Pro výpočet je využit Bayesův teorém, který vyžaduje rozdělení algoritmu do dvou kroků. Prvním krokem je predikce, která využívá model pohybu robota. Tím druhým je korekce modelu pozorování, ke kterému jsou třeba data ze senzorů. Pohybový model a model pozorování tak popisují vliv vstupního řízení a pozorování.\\
+pro každý časový okamžik ${k}$, kde $\textbf{x}_k$ je stavový vektor popisující pozici a orientaci robota, $\textbf{m}$ je množina landmarů, tedy mapa, $\textbf{Z}_{0:k}$ jsou všechna pozorování landmarků, $\textbf{U}_{0:k}$ je historie vstupů a $\textbf{x}_0$ je počáteční stav. Jedná se tedy o sdruženou posteriorní hustotu mapy, stavu vozidla s ohledem na zaznamenané pozorování, řídící vstupy a  počáteční stav robota. Pro výpočet je využit Bayesův teorém, který vyžaduje rozdělení algoritmu do dvou kroků. Prvním krokem je predikce, která využívá model pohybu robota. Tím druhým je korekce modelu pozorování, ke kterému jsou třeba data ze senzorů. Pohybový model a model pozorování tak popisují vliv vstupního řízení a pozorování.\\
 \indent Model pozorování popisuje pravděpodobnost zisku pozorování $\textbf{z}_k$, pokud je známa poloha vozidla $\textbf{x}_k$ a landmarků $\textbf{m}$.
 \begin{equation}
 	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})
@@ -112,7 +112,7 @@ Model pozorování udává závislost polohy vozidla a pozice landmarků, z čeh
 \end{equation}
 neboť by to vedlo k chybným odhadům. Dalším zdrojem chyb je špatný odhad pozice robota. Landmarky jsou ale silně korelované, takže chybný odhad landmarku vůči mapě nevede k chybné poloze dvou landmarků navzájem.\\
 \indent Velmi důležitým poznatkem bylo zjištění, že korelace mezi landmarky monotónně vzrůstá s počtem jejich pozorování (dokázáno pouze pro lineární Gaussovský případ [6]). Odhad pozice landmarku je tedy s narůstajícím počtem pozorování monotónně přesnější. Tento jev nastává díky, v podstatě, skoro nezávislému měření relativních pozic mezi landmarky. Ty jsou zcela nezávislé na natočení vozidla a úspěšné pozorovnání z tohoto bodu může nést další nezávislá měření relativních rozložení landmarků. \\
-\indent Pohybem v prostoru, robot získává pozorováním novou pozici známých landmarků vůči sobě a dle této informace aktualizuje jejich pozici a též svoji odhadovanou polohu. Pokud již nějaký landmark není pozorován, tak je jeho pozice aktualizována dle změny pozorovaných landmarků. Při pozorování nových landmarků dochází ke korelaci s již známými, čímž se vytváří síť. Čím častěji jsou dva landmarky pozorovány při jednom měření, tím je síla korelace větší. Opětovným projížděním prostředím je tak získána přesnější a robustnější mapa. Například násobným průchodem jedné smyčky se získá znatelně kvalitnější záznam o daném prostředí, než pouze jedním projetím.\\
+\indent Pohybem v prostoru, robot získává pozorováním novou pozici známých landmarků vůči sobě a dle této informace aktualizuje jejich pozici a též svoji odhadovanou polohu. Pokud již nějaký landmark není pozorován, tak je jeho pozice aktualizována dle změny pozorovaných landmarků. Při pozorování nových landmarků dochází ke korelaci s již známými, čímž se vytváří síť. Čím častěji jsou dva landmarky pozorovány při jednom měření, tím je síla korelace větší. Opětovným projížděním prostředím je tak získána přesnější a robustnější mapa. Například násobným průchodem jedné smyčky se získá znatelně kvalitnější záznam o daném prostředí, než pouze jedním projetím. Pro lepší představu, na obrázku \ref{fig:SLAM_corelations} se nachází ukázka korelací mezi jednotlivými landmarky a zároveň jejich korelace s aktuální pozicí robota.\\
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -140,7 +140,7 @@ Model pozorování je vyjádřen vztahem
 	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})\leftrightarrow \textbf{z}_k=\textbf{h}(\textbf{x}_k,\textbf{m})+\textbf{v}_k
 \end{equation}
 kde funkce $\textbf{h}(.)$ popisuje geometrické vlastnosti pozorování a $\textbf{v}_k$ jsou chyby měření.
-Tyto dvě definice jsou využity v metodě EKF k výpočtu průměru a kovariance sdruženého posteriorního rozložení\\
+Tyto dvě definice jsou využity v metodě EKF k výpočtu střední hodnoty a kovariance sdruženého posteriorního rozložení\\
 \indent průměr:
 \begin{equation}
 	\begin{bmatrix}
@@ -198,7 +198,7 @@ Jedním ze základních kritérií všech algoritmů je jejich výpočetní slo�
 \subsubsection{Oddělné aktualizace}
 Metody využívající oddělěné aktualizce vytvářejí optimální odhady. Při implementaci základní podoby aktualizace pozorování, se při každém novém měření aktualizuje jak stav vozidla, tak i mapy. To vede ke kvadratickému nárůstu složitosti s množstvím landmarků. Při této implementaci se však mapa rozdělí na submapy.\\
 \indent Rozlišují se dva způsoby možné implementace. První z nich pracuje na zmenšené oblasti, ale stále si drží globální referenční souřadnice, jedná se například o algoritmus $compressed$ $EKF$ (CEFK). Druhou možností je tvorba menších map s vlastním\\ souřadnicovým rámcem neopouštějícím danou submapu. Jsou to algorithmy $constrained$ $local$ $submap$ $filter$ (CLSF, v překladu - omezený lokální submapový filtr). Pro další rozbor je vhodnější druhá možnost, neboť je jednodušší a při provádění operací s velkou frekvencí opakování je méně ovlivněna linearizačními chybami. Je také stabilnější a zabraňuje příliš velkému nárůstu globální kovariance. \\
-\indent Logaritmus submapy se skládá z dvou nezávislých odhadů, které si stále udržuje. Jde o vektory $x_G$ a $x_R$, kdy $x_G$ je mapa složená z globálně referencovaných landmarků a globálně referencované pozice dané submapy a $x_R$ je lokální submapa s lokálně referencovanou pozicí robota a lokálně referencovanými landmarky. Při získání pozorování se aktualizují pouze landmarky náležící aktuální submapě, ve které se robot nachází. Celkový globální odhad je pak získáván periodicky, zaevidováním submapy do mapy celé a použitím aktualizace omezení na společné vlatnosti obou map.
+\indent Submapa se skládá z dvou nezávislých odhadů, které si stále udržuje. Jde o vektory $x_G$ a $x_R$, kdy $x_G$ je mapa složená z globálně referencovaných landmarků a globálně referencované pozice dané submapy a $x_R$ je lokální submapa s lokálně referencovanou pozicí robota a lokálně referencovanými landmarky. Při získání pozorování se aktualizují pouze landmarky náležící aktuální submapě, ve které se robot nachází. Celkový globální odhad je pak získáván periodicky, zaevidováním submapy do mapy celé a použitím aktualizace omezení na společné vlastnosti obou map.
 
 \subsubsection{Asociace dat}
 Jedná se o velmi důležitý problém, neboť, i když během procesu tvorby mapy dojde pouze k jedné chybné asociaci dat, může to vézt k destabilizaci odhadu mapy. Často dokonce k pádu celého algoritmu.\\
@@ -207,7 +207,7 @@ Jedná se o velmi důležitý problém, neboť, i když během procesu tvorby ma
 
 \newpage
 \subsection{Rao-Blackwellizovaný částicový filtr}
-Forma SLAM na Rao-Blackwellizovaném filtru (RBPF), jinak nazývaná také jako FastSLAM, je založena na rekurzivním Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
+Forma SLAM založená na Rao-Blackwellizovaném filtru (RBPF), jinak nazývaná také jako FastSLAM, je založena na rekurzivním Monte Carlo modelu a dokáže reprezentovat nelineání stavový model. Dochází k odhadu celého posterioru, ne jenom nejpravděpodobnějšího sdružení dat, jedná se tedy o robustnější řešení než jakým je EKF. \\
 \indent Částice zde znázorňují trasu robota, jedna částice je tedy vzorkem v cestě. Každá částice také obsahuje mapu, kde je každý landmark reprezentovaný vlastním Gaussiánem. Díky použití částicových filtrů se jedná o jedinou formu SLAM, která řeší jak problém $full$ $SLAM$, tak i problém $online$ $SLAM$. Odhadováním pozice robota v každém časovém okamžiku je algoritmus označován jako online. O odhad pozice se starají právě částicové filtry.\\
 \indent Sdružený stav může být rozdělen zvlášť na komponentu robota a mapy. Posteriorní pravděpodobnost se tak dá odděleně počítat jako
 \begin{equation}
@@ -221,11 +221,11 @@ kde $m$ je mapa, $X_{0:k}$ je trajektorie robota, $Z_{0:k}$ je sada všech již 
 	\{w^{(i)}_{k-1},X^{(i)}_{0:k-1},P(m|X^{(i)}_{0:k-1},Z_{0:k-1})\}^V_i,
 \end{equation}
 kde $w^{(i)}_{k}$ je váha vzorku $i$ v časovém okamžiku $k$. Sdružený stav v čase $k-1$ je poté použit v procesu generování nové sady částic. Sada znázorňuje potenciální cesty robota, ze které je poté na základě porovnání pozorování vybrána ta nejpravděpodobnější částice.\\
-\indent V prvním kroce je pro každou částici vypočítáno návrhové rozložení, jež je podmíněno svojí specifickou historií. Z návrhu je odebrán vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, je stanovena váha vzorků:
+\indent V prvním kroce je pro každou částici vypočítáno návrhové rozložení, jež je podmíněno svojí historií. Z návrhu je odebrán vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, je stanovena váha vzorků:
 \begin{equation}
 	w_t^i=\frac{a}{b},
 \end{equation}
-kdy $a$ je cílové rozložení (rozložení, které je optimální pro sadu částic) a $b$ je návrhové rozložení. Třetím krokem je případné převzorkování, které se provádí různě často dle implementace. Krokem posledním je provedení EKF aktualizace pro každou již zpozorovanou částici, která je při aktuálním pozorováním zaznamenána. \\
+kdy $a$ je cílové rozložení (rozložení, které je optimální pro sadu částic) a $b$ je návrhové rozložení. Třetím krokem je případné převzorkování, které se provádí různě často dle implementace. Posledním krokem je provedení EKF aktualizace pro každý již zpozorovaný landmark, který je při aktuálním pozorování zaznamenán. \\
 
 \subsubsection{Asociace dat}
 Funkcionalita systému popisovaná výše se vztahuje k datům, která mají známé sdružování. Pokud se jedná o data, pro která není tato niformace známa, je třeba systém rozšířit. Problém sdružení dat spočívá v tom, že na bázi dostupných dat není možno v časovém okamžiku $k$, určit proměnnou vyjadřující shodu $c_k$. Může se jednat například o neurčitost s pozicí, kdy má robot na základě pozorování možnost přiřadit více než jednu pozici.\\
@@ -248,16 +248,19 @@ Graph-based SLAM je algoritmus založený na metodě nejmenších čtverců. Jed
 	\textbf{e}_i(x)=\textbf{z}_i-\textbf{f}_i(x)
 \end{equation}  
 Jedním z předpokladů pro správný průběh metody je dobrý počáteční odhad stavu. Dále, okolí minima chyby musí být hladké, bez skoků a zubů. V této oblasti se provádí lokální linearizace prvním stupněm Taylorova polynomu. Následně je vypočítána první derivace funkce chyby ve čtverci, která se položí rovna nule. Vyřeší se lineární systém, získá se nový stav, který by měl být lepší, než ten předchozí. Poté se znovu iteruje.
+
+\subsubsection{Tvorba pozičního grafu}
+Tvorba grafu je první částí metody Graph-based SLAM, tedy část vývojová (front-end). Dochází zde ke tvorbě pozičního grafu, který je zpracováván do mapy. Graf se složen ze dvou složek, a to z uzlů a hran. Uzel zde znázorňuje odhadovanou pozici robota a hrana omezení, které je mezi dvěma uzly. Toto spojení je nejisté a proměnné. Při projetí známým prostředím se vytvářejí hrany mezi uzlem novým a uzly již dříve zaznamenanými, což je využito například při uzavírání smyčky (viz. obrázek \ref{fig:GBS_constrains}).\\
 \begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=0.5\columnwidth]{imgs/GBS_constrains.pdf}
+		\includegraphics[width=0.4\columnwidth]{imgs/GBS_constrains.pdf}
 	\end{center}
 	\caption{Propojení uzlů pomocí hran.}
 	\label{fig:GBS_constrains}
 \end{figure}
-\subsubsection{Tvorba pozičního grafu}
-Tvorba grafu je první částí metody Graph-based SLAM, tedy část vývojová (front-end). Dochází zde ke tvorbě pozičního grafu, který je zpracováván do mapy. Graf se složen ze dvou složek, a to z uzlů a hran. Uzel zde znázorňuje odhadovanou pozici robota a hrana omezení, které je mezi dvěma uzly. Toto spojení je nejisté a proměnné. Při projetí známým prostředím se vytvářejí hrany mezi uzlem novým a uzly již dříve zaznamenanými, což je využito například při uzavírání smyčky (viz. obrázek \ref{fig:GBS_constrains}).\\
+
 \indent Nové hrany vznikají při splnění jedné ze dvou podmínek. Pokud je zaznamenán přesun robota z pozice $x_i$ do $x_{i+1}$, hrana odpovídá naměřenné odometrii. Druhou možností je zpozorování stejného prostředí. Vzniká tak virtuální měření, ve kterém se porovnají obě tyto pozorování. Na základě rozdílu odhadované pozice při obou měřeních, se umístí nový uzel spojený odpovídající hranou(viz. obrázek \ref{fig:GBS_virtual_measurment}). 
+
 
 \subsubsection{Optimalizace mapy}
 Druhou částí algoritmu Graph-based SLAM je back-end část, která zodpovídá za optimalizaci získaného grafu. Upravuje se zde pozice uzlů tak, aby byl získán stav, který co nejpřesněji vystihuje získaná měření. Po tomto procesu je pak možno utvořit mapu na základě známých pozic.\\
@@ -293,7 +296,7 @@ V počátcích vývoje problému SLAM bylo pochopitelně potřeba vymyslet, jak 
 \newpage
 \subsubsection{Mřížkové mapy}
 Metoda mřížkových map, v originále $Grid$ $maps$, byla představena v 80. letech minulého století. Její základní myšlenkou je diskretizace spojitého prostředí do jednotlivých buněk, přičemž mřížky rozdělující prostor na buňky mají pevnou velikost. Metoda je poměrně náročná na paměť.\\
-\indent Důležitým faktorem je zde takzvaná obsazenost, v angličtině $occupancy$. V originále se tedy metoda nazývá $Occupancy$ $Grid$ $Maps$. Pravděpodobnost obsazení každé buňky může nabývat tří hodnot. Při inicializaci je hodnota pravděpodobnosti nastavena na $P(m_i)=0.5$, kdy $m_i$ je daná buňka. Tato počáteční hodnota znamená, že o buňce nemáme žádnou znalost. Poté, co se buňka dostane do dosahu senzoru, nabývá pravěpodobnost obsazenosti již pouze dvou hodnot. $P(m_i)=0$, pokud je buňka neobsazená a $P(m_i)=1$ v případě obsazenosti.\\
+\indent Důležitým faktorem je zde takzvaná obsazenost, v angličtině $occupancy$. V originále se tedy metoda nazývá $Occupancy$ $Grid$ $Maps$. informace o obsazení každé buňky může nabývat tří hodnot. Při inicializaci je hodnota nastavena na $m_i=0.5$, kdy $m_i$ představuje danou buňku. Tato počáteční hodnota znamená, že o buňce není žádná znalost. Poté, co se buňka dostane do dosahu senzoru, nabývá hodnota obsazenosti již pouze dvou hodnot. $m_i=0$, pokud je rozhodnuto, že je buňka neobsazená a $m_i=1$ v případě rozhodnutí o obsazenosti.\\
 \indent Buňky jsou na sobě zcela nezávislé a součinem pravděpodobností obsazení buněk je získáno pravděpodobnostní rozložení mapy:
 \begin{equation}
 	p(m)=\Pi_ip(m_i)
@@ -308,7 +311,7 @@ kdy $z_{1:t}$ jsou pozorování a $x_{1:t}$ pozice robota.
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{imgs/gridmap.png}
 	\end{center}
-	\caption{Rozložení pravděpodobností mřížkové mapy dle aktuálního měření.}
+	\caption{Rozložení mřížkové mapy dle aktuálního měření.}
 	\label{fig:grid_map}
 \end{figure}
 \newpage
@@ -317,7 +320,7 @@ Výše zmíněné metody se vztahují především na práci s daty ve 2D. Pro z
 
 \begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=0.7\columnwidth]{imgs/point_cloud.png}
+		\includegraphics[width=0.6\columnwidth]{imgs/point_cloud.png}
 	\end{center}
 	\caption{Ukázka mapování pomocí mračna bodů.}
 	\label{fig:point_cloud}
@@ -325,14 +328,14 @@ Výše zmíněné metody se vztahují především na práci s daty ve 2D. Pro z
 
 \newpage
 \chapter{Systémy SLAM}
-V této kapitole jsou popsány vybrané systémy SLAM. Výběr systémů byl proveden na základě největší rozšířenosti. Tímto kritériem byly zvoleny systémy gMapping, Hector SLAM a Google Cartographer. Níže je jednotlivě uvedena doba představení systému, na čem je založen a způsob implementace.
+V této kapitole jsou popsány vybrané systémy SLAM. Výběr systémů byl proveden na základě největší rozšířenosti. Tímto kritériem byly zvoleny systémy gMapping, Hector SLAM a Google Cartographer. Níže je jednotlivě uvedena historie systému, její princip a způsob implementace.
 
 \section{GMapping}
 GMapping byl představen v roce 2007 v článku [8]. Tato metoda je založená na implementaci Rao-Blackwellizovaného filtru, kde si každá vytvořená částice nese svoji mapu prostředí. Pro praktické využití je tedy nutné částicový filtr zefektivnit, což bylo úkolem tohoto systému. Jedna možnost je zahrnout přesnost měření do návrhového rozložení, tím je získáno přesné vykreslení částic. Druhou možností, je volba vzorkovací techniky udržující rozumný počet částic. Udržuje se tak přesná mapa a snižuje se riziko vyčerpání částice, což je problém vznikající při převzorkování.\\
 
 \subsection{Mapování pomocí RBPF}
 Základním úkolem je odhad posteriorní pravděpodobnosti a tím zisk mapy a trajektorie pohybu. Odhad je prováděn na základě porovnání pozorování a informace z odometrie. Nejprve dochází k odhadu mapy, která je utvářena z porovnání pozorování, poté až trajektorie. Ta je získána z částic, které měly v rozhodovací době největší pravděpodobnost. Každá částice tedy reprezentuje část trajektorie.\\
-\indent Pro výběr správné částice je použit částicový filtr, v tomto případěm Sampling Importance Resamplin (SIR), který při mapování postupně zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost, která zahrnuje informace o mapě a trajektorii. \\
+\indent Pro výběr správné částice je použit částicový filtr, v tomto případě Sampling Importance Resampling (SIR), který při mapování postupně zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost, která zahrnuje informace o mapě a trajektorii. \\
 \indent Nejprve se získají nové částice. To je provedeno odběrem vzorků z předchozí generace návrhového rozložení. V dalším kroce je částicím nastavena vážená důležitost, aby cílové rozložení nebylo rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem. Nakonec se odhaduje podoba mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, mapa vypočítána.
 
 \begin{figure}[!ht]
@@ -348,7 +351,7 @@ Základním úkolem je odhad posteriorní pravděpodobnosti a tím zisk mapy a t
 \subsection{Vylepšené návrhy a adaptivní převzorkování}
 Pro zisk nové generace částic je třeba vykreslení vzorků z návrhového rozložení, kde platí úměra, čím lepší návrh, tím lepší výsledek. Kdyby byl návrh rovný cílovému rozložení, částice by měly stejnou váženou důležitost a převzorkování by nebylo třeba. \\
 \indent Návrhové rozložení typicky odpovídá odometrickému pohybovému modelu, který však není optimální a to zejména, pokud je senzor výrazně přesnější než odhad pozice. Využívá se také vyhlazování pravděpodobnostní funkce, což zabraňuje částicím v okolí významné oblasti, aby vážené důležitosti příliš poklesly. Následkem je ale zkreslení mapy. To se však dá vyřešit zahrnutím posledního pozorování do generování nových vzorků. Díky tomu se systém zaměřuje na vzorkování ve významné oblasti pravděpodobnosti pozorování.\\
-\indent Zlepšením návrhu se objevuje možnost získávat pro každou částici zvlášť její parametry Gaussiánského návrhu a snižuje se také neurčitost výsledných hustot pravěpodobností. Porovnání pozorování má funkci maximalizace pravděpodobnosti pozorování, tvorby mapy a počáteční odhad pozice robota. Pokud je pravděpodobnostní funkce vícerežimová, například při uzavírání smyčky, porovnáním se vrací nejbližší lokální maximum pro každou částici. To může způsobit vynechání některých maxim v pavděpodobnostní funkci.\\
+\indent Zlepšením návrhu se objevuje možnost získávat pro každou částici zvlášť její parametry Gaussovského návrhu a snižuje se také neurčitost výsledných hustot pravěpodobností. Porovnání pozorování má funkci maximalizace pravděpodobnosti pozorování, tvorby mapy a počáteční odhad pozice robota. Pokud je pravděpodobnostní funkce multimodální (rozložení pravděpodobnosti má více maxim, viz. obr. \ref{fig:multimodal}), například při uzavírání smyčky, porovnáním se vrací nejbližší lokální maximum pro každou částici. To může způsobit vynechání některých maxim v pavděpodobnostní funkci.\\
 \indent Převzorkování je velice důležitým aspektem určujícím výkon částicového filtru. Dochází k nahrazování vzorků s nízkou vahou. Je to nezbytný proces, neboť je potřeba konečného počtu částic pro aproximaci cílového rozložení. Může však odstranit dobré vzorky a ochudit tak částice, je proto důležité mít pro převzorkování vhodné rozhodovací kritérium a provádět ho ve správný čas. 
 \begin{equation}
 	N_{eff}=\frac{1}{\varSigma_{i-1}^N(w^{(i)})^2},
@@ -359,6 +362,13 @@ Základní nastavení převzorkování je následující:
 	N_{eff} < N/2,
 \end{equation}
 kde $N$ je počet částic. Tím dochází k výrazné redukci možnosti nahrazení dobrých částic a počtu převzorkování, které se vykonává pouze pokud je třeba.\\
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{imgs/multimodal.png}
+	\end{center}
+	\caption{Příklad multimodálního (v tomto případě bimodální) rozložení pravděpodobnosti}
+	\label{fig:multimodal}
+\end{figure}
 \indent Algoritmus probíhá následovně. Dojde k zisku odhadu pozice, který je reprezentovaný danou částicí. Odhad je získán z předchozí pozice částice a odometrického měření od poslední aktualizace. Na základě mapy je provedeno porovnání pozorování z místa úvodního odhadu pozice, kdy se vyhledává pouze v okolí tohoto bodu. V případě selhání se pozice a váhy počítají dle pohybového modelu a následující dva kroky jsou přeskočeny. Prvním z nich je vybrání sady vzorků v okolí dané pozice, vypočítání průměrů a kovarianční matice návrhu pomocí bodového ohodnocení cílového rozložení v pozici vzorku. Druhým, potenciálně přeskočeným krokem, je zakreslení nové pozice částice z Gaussovské aproximace podle zlepšeného návrhového rozložení. Dále, a to již vždy, dojde k aktualizaci vážených důležitostí a, podle zakreslené pozice a pozorování, je aktualizována i mapa částice. 
  
 \newpage
@@ -384,8 +394,8 @@ kde $\Omega=(\phi,\theta,\psi)^T$ je informace o otáčení, stoupání a natoč
 
 \subsection{2D SLAM}
 Jako reprezentace prostředí je zde vybrána metoda mřížkových map. Odhadovaná pozice robota slouží pro transformaci pozorování na lokální souřadnicový rámec. Odhadovanou orientací a přidruženými hodnotami je z pozorování vytvořeno mračno bodů, které je předzpracováno pro odstranění odlehlých bodů. Filtrace probíhá pouze na základě souřadnic koncového bodu, kdy jsou pro porovnávání pozorování použity pouze koncové body v rámci skenovací roviny.\\
-\indent Jak již bylo poznamenáno, je zde použita struktura mřížkových map, to vede k omezení přesnosti a neumožnění přímého výpočtu interpolovaných hodnot a derivátů. Pro oba odhady se tedy využívá interpolační schéma, díky kterému tato možnost je. Souřadnice, které se potřebují nahradit, se aproximují pomocí čtyř nejbližších integerových souřadnic. \\
-\indent Laserové skenery jsou již velice přesná zařízení, jejich měření zatěžuje minimální šum a snímky se dají vytvářet s vysokou frekvencí. Měření pomocí laseru je tedy mnohem přesnější než to odometrické, což je jeden z důvodu, proč je odometrie v tomto systému zcela vynechána. Při zarovnávání snímků s již známou mapou není potřeba hledat žádná spojení mezi koncovými body, ale dochází k porovnávání s předchozími skeny.  
+\indent Jak již bylo poznamenáno, je zde použita struktura mřížkových map, to vede k omezení přesnosti a neumožnění přímého výpočtu interpolovaných hodnot a derivátů. Pro oba odhady se tedy využívá interpolační schéma, díky kterému tato možnost je. Souřadnice, které se potřebují nahradit, se aproximují pomocí čtyř nejbližších celočíselných souřadnic. \\
+\indent Laserové skenery jsou velice přesná zařízení, jejich měření zatěžuje minimální šum a snímky se dají vytvářet s vysokou frekvencí. Měření pomocí laseru je tedy mnohem přesnější než to odometrické, což je jeden z důvodu, proč je odometrie v tomto systému zcela vynechána. Při zarovnávání snímků s již známou mapou není potřeba hledat žádná spojení mezi koncovými body, ale dochází k porovnávání s předchozími skeny.  
 
 Hledání transformace pro nejlepší sladění skenu s mapou:
 \begin{equation}
@@ -410,7 +420,7 @@ Pro odhad úplného 6D stavu (3D stav + informace o naklonění z gyroskopů a i
 Systém Cartographer je vyvíjen společností Google a aktuální verze implementace byla publikována v roce 2012 [10]. Jedná se o implementaci Graph-Based SLAM. Je vhodný pro tvorbu rozsáhlých map a zisk optimalizovaných výsledků v reálném čase. \\
 \indent Cartographer vytváří v reálném čase 2D mřížkovou mapu. Submapy se vkládají na odhadované místo a daná submapa se porovnává vůči poslední zaznamenané. Dochází tedy k hromadění globální chyby z odhadu pozice. Systém neobsahuje žádný částicový filtr a to z důvodu snížení hardwarových nároků na běh algoritmu.\\
 \indent Submapa se po pořízení již dále nijak nepřepisuje a je zařazena mezi ostatní k porovnávání na uzavření smyčky. Pokud dojde k blízkému odhadu pozice a zároveň dostatečné shodě snímků, přidá se omezení uzavření smyčky do optimalizačního problému, čímž je odhad pozice. Odhad se aktualizuje po několika vteřinách a uzavření smyčky je tedy okamžitě viditelné.\\
-\indent Rozlišují se dva možné přístupy, lokální a globální, v obou případech se jedná o optimalizaci pozice, přičemž pozice se zkládá z hodnoty na ose $x$, z hodnoty na ose $y$ a z natočení robota. V systému je také obsažená jednotka IMU, která slouží k odhadu směru gravitace, což má využití při pohybu na nerovné ploše.\\
+\indent Rozlišují se dva možné přístupy, lokální a globální, v obou případech se jedná o optimalizaci pozice, přičemž pozice se zkládá z hodnoty na ose $x$, z hodnoty na ose $y$ a z natočení robota. V systému je také možné využít jednotku IMU, která slouží k odhadu směru gravitace, což je vhodné při pohybu na nerovné ploše.\\
 
 \subsection{Lokální 2D SLAM}
 \indent Skeny prostředí se iterativně zarovnávají se snímky již obsaženými v submapě. Submapa je tedy v postatě zachycení kousku světa, které je složené z pár skenů. Lokální chyba, vznikající při její tvorbě, je poté odstraněna v globálním přístupu. Pro každý bod mřížky je definován odpovídající pixel skládající se ze všech pixelů nejblíže danému bodu.\\
@@ -484,23 +494,20 @@ Výpočetní graf se skládá z jednotlivých procesů zpracovávajících spole
 \indent Posledním pojmem jsou zde bagy, v originálu $Bags$, které slouží k uložení a přehrávání dat z topiků. Jedná se o důležitý mechanismus skladování dat, který je nezbytný pro vývoj a testování algoritmů.\\
 \indent Pro ROS jsou velmi důležitá pojmenování. Jména jsou primárním prostředkem pro vybudování velkého a složitého systému. Každy uzel, topik, služba nebo parametr má svůj název. Všechny klientské knihovny podporují přemapování názvu z příkazového řádku, běžící programy tak mohou být za běhu překonfigurovány, aby fungovaly i odlišné topologii výpočetního grafu.\\
 
-\subsection{Komunitní úroveň}
-Jedná se o zdroje, které umožňují různým skupinám vývojářů, vyměňovat si software a znalosti. Spadají sem distribuce, což jsou kolekce verzovaných stacků, které lze nainstalovat. Mají dost podobnou úlohu jako distribuce Linuxu, usnadňují tedy instalaci kolekce softwaru a následné udržování konzistentní verze. Dále sem patří repozitáře, kdy různé instituce mohou vyvíjet své vlastní softwarové komponenty robota a sdílet je tak pomocí federované sítě úložišť. Velmi důležitým zdrojem je $The$ $ROS$ $Wiki$, což je hlavní fórum pro dokumentaci informací o ROSu. Kdokoliv přihlášený na svůj účet tak může přidávat nové, či upravovat a aktualizovat již vzniklé dokumentace, psát návody a mnoho dalších věcí užitečných pro komunitu.
-
 \newpage
 
 \section{Zisk dat k porovnání}
-Data potřebná pro porovnávání se dají získat prostřdednictvím internetu. Existují veřejně přístupné nahrané datasety z MIT, Deutsche Museum a řady dalších míst. Pro vyzkoušení systémů na velkých datech je tedy daná možnost také využita. Pro porovnání implementací jsou ale převážně použity datasety získané jak ze simulace v ROS, tak i reálná data naměřená robotem $Dagu$ $Wild$ $Thumper$ $6WD$. Získání datasetu je pro porovnání implementací zásadním faktorem. Systémy SLAM mohou samozřejmě jednotlivě běžet na aktuálně simulovaných datech, pro správné porovnání jsou však potřebná data totožná.\\ 
-\indent Datasety jsou v ROS ukládány ve formátu $bag$, kde se jsou nahrány vybrané topiky. Pro každou porovnávanou implementaci byly vytvořeny $launch$ soubory, které při zavolání spouštějí uvedené uzly se specifikovaným nastavením. Soubory $launch$ byly pro všechny systémy nastaveny tak, aby potřebovaly informaci o měření z LIDARu, odometrickou informaci a transformaci přepočítávající pozici robota. Tyto tři typy informací stačí při spuštění dané metody k vytvoření mapy a všeho k tomu přidruženého. Pro porovnání trajektorií je potřeba uložit ještě informaci o přesné pozici robota, neboli $ground$ $truth$. V nahraných souborech $bag$ se tedy nachází pouze tyto zmíněné čtyři informace. Výjimkou jsou data získaná robotem $Wild$ $Thumper$. $Ground$ $truth$ by zde měla vycházet z odometrie kol, tudíž o informaci méně. Odometrie z kol robota je však natolik nepřesná, že se pro účely porovnávání nedá využít. Tato nepřesnost samozřejmě zhoršuje provedení metod, které odometrii využívají (Cartographer, gMapping), podrobnější popis dané problematiky se nachází u vyhodnocení daného typu naměřených dat.
+Data potřebná pro porovnávání se dají získat prostřednictvím internetu. Existují veřejně přístupné nahrané datasety z MIT, Deutsche Museum a řady dalších míst. Pro vyzkoušení systémů na velkých datech je tedy daná možnost také využita. Pro porovnání implementací jsou ale převážně použity datasety získané jak ze simulace v ROS, tak i reálná data naměřená robotem $Dagu$ $Wild$ $Thumper$ $6WD$. Získání datasetu je pro porovnání implementací zásadním faktorem. Systémy SLAM mohou samozřejmě jednotlivě běžet na aktuálně simulovaných datech, pro správné porovnání jsou však potřebná data totožná.\\ 
+\indent Datasety jsou v ROS ukládány ve formátu $bag$, kde se jsou nahrány vybrané topiky. Pro každou porovnávanou implementaci byly vytvořeny $launch$ soubory, které při zavolání spouštějí uvedené uzly se specifikovaným nastavením. Soubory $launch$ byly pro všechny systémy nastaveny tak, aby potřebovaly informaci o měření z LIDARu, odometrickou informaci a transformaci přepočítávající pozici robota. Tyto tři typy informací stačí při spuštění dané metody k vytvoření mapy a všeho k tomu přidruženého. Pro porovnání trajektorií je potřeba uložit ještě informaci o přesné pozici robota, neboli $ground$ $truth$. V nahraných souborech $bag$ se tedy nachází pouze tyto zmíněné čtyři informace. Výjimkou jsou data získaná robotem $Wild$ $Thumper$. $Ground$ $truth$ by zde měla vycházet z odometrie kol, tudíž o informaci méně. Odometrie z kol robota je však natolik nepřesná, že se pro účely porovnávání nedá využít. Tato nepřesnost samozřejmě zhoršuje provedení metod, které odometrii využívají (Cartographer, gMapping), podrobnější popis dané problematiky se nachází u vyhodnocení daného typu naměřených dat.\\
 
 \subsection{Simulace v ROS}
 Pro zisk dat pomocí simulace jsou v systému ROS implementovány dva hlavní simulátory. Prvním z nich je $Gazebo$. Jedná se o nástroj určený pro simulaci ve 3D, stále prochází vývojem a je nejpoužívanějším simulátorem v ROS. Pro dané účely má však zbytečně veliké množství nastavení. Byl zvolen tedy nástroj $Stage$, který je starší, má méně funkcí, má ale také menší výkonostní nároky a pro simulaci robota s 2D LIDARem je naprosto vyhovující.\\
-\indent Simulační prostředí je rozloženo do tří souborů. Dva s příponou $inc$, kdy první obsahuje informace pro načtení mapy. Jsou zde obsaženy informace o velikosti, frekvenci obnovování, výšce překážek v ose $z$ a různá boolean nastavení. V druhém $inc$ souboru se pak nachází informace o simulačním robotovi. Byla zvolena trojúhleníková platforma, na které se nachází malý čtvercový blok simulující LIDAR. Je zde obsaženo i jeho nastavení, jako je počet paprsků, úhel rozsahu a velikost dosahu. Posledním konfiguračním souborem je soubor $wolrd$, ve kterém se nachází nastavení velikosti okna a načtení obou souborů $inc$. Při načítání souboru s nastevením mapy je zde definován obrázek obsahující mapu a s načítáním souboru o robotovi se definuje jeho pozice v prostoru.\\
-\indent Pro nahrání dat poté stačí příkazem
+\indent Simulační prostředí je rozloženo do tří souborů. Dva s příponou $inc$, kdy první obsahuje informace pro načtení mapy. Jsou zde obsaženy informace o velikosti, frekvenci obnovování, výšce překážek v ose $z$ a různá boolean nastavení. V druhém $inc$ souboru se pak nachází informace o simulačním robotovi. Byla zvolena trojúhleníková platforma, na které se nachází malý čtvercový blok simulující LIDAR. Je zde obsaženo i jeho nastavení, jako je počet paprsků, úhel rozsahu a velikost dosahu. Posledním konfiguračním souborem je soubor $wolrd$, ve kterém se nachází nastavení velikosti okna a načtení obou souborů $inc$. Při načítání souboru s nastevením mapy je zde definován obrázek obsahující mapu a s načítáním souboru o robotovi se definuje jeho pozice v prostoru. Výsledný vzhled prostředí je zobrazen na obrázku \ref{fig:stage}.\\
+Pro nahrání dat poté stačí příkazem
 \begin{center}
 	\texttt{rosrun stage\_ros stageros file.world}
 \end{center}
-spustit simulaci a pomocí některého z navigačních balíčků s robotem v mapě jezdit. Pro navigaci byla zvolena knihovna $teleop\_twist\_keyboard$, která umožňuje navigaci robota pomocí klávesnice.
+spustit simulaci a pomocí některého z navigačních balíčků s robotem v mapě jezdit. Pro navigaci byla zvolena knihovna $teleop\_twist\_keyboard$, která umožňuje navigaci robota pomocí klávesnice. 
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -513,8 +520,8 @@ spustit simulaci a pomocí některého z navigačních balíčků s robotem v ma
 
 
 \subsection{Nahrání reálných dat}
-K nahrání reálného datasetu byl k dispozici robot $Wild$ $Thumper$ $6WD$. Jedná se o robota s pohonem šesti kol. Hliníkové tělo má v sobě s rozestupem jednoho centimetru díry, díky kterým se na něj dají jednoduše přidělat další součástky. \\
-\indent Pro řízení kol je využito Arduino, pro zpracování dat a komunikaci je zde superpočítač od společnosti NVIDIA, jehož označení je Jetson TX2 a velikost 50 x 87 milimetrů. Výpočetní výkon zajišťuje osmijádrový procesor s architekturou jádra ARMv8. Velikost operační paměti má 8 GB a úložiště 32 GB. Pro komunikaci je zde rozhraní Wi-Fi 802.11ac a Bluetooth 4.1. Jako měřící senzor je zde využit LIDAR $Hokuyo$ $URG-04LX-UG01$ s detekovatelným rozsahem od dvou centimetrů do 5,6 metru. Daný sezor má rozsah snímání 240$^o$ s úhlovým rozlišením 0,36$^o$. Obnovovací frekvence je 100 milisekund a uvedená přesnost je 30 milimetrů.\\
+K nahrání reálného datasetu byl k dispozici robot $Wild$ $Thumper$ $6WD$. Jedná se o robota s pohonem šesti kol. Hliníkové tělo má v sobě s rozestupem jednoho centimetru otvory, díky kterým se na něj dají jednoduše přidělat další součástky. \\
+\indent Pro řízení kol je využito Arduino, pro zpracování dat a komunikaci je zde výkonný malý počítač od společnosti NVIDIA, jehož označení je Jetson TX2 a velikost 50 x 87 milimetrů. Výpočetní výkon zajišťuje osmijádrový procesor s architekturou jádra ARMv8. Velikost operační paměti má 8 GB a úložiště 32 GB. Pro komunikaci je zde rozhraní Wi-Fi 802.11ac a Bluetooth 4.1. Jako měřící senzor je zde využit LIDAR $Hokuyo$ $URG-04LX-UG01$ s detekovatelným rozsahem od dvou centimetrů do 5,6 metru. Daný sezor má rozsah snímání 240$^o$ s úhlovým rozlišením 0,36$^o$. Obnovovací frekvence je 100 milisekund a uvedená přesnost je 30 milimetrů.\\
 \indent Pro pohyb robota v prostoru byla využita možnost připojení bezdrátového ovladače $Xbox$ $One$ $Wireless$ $Controller$. Přesto, že robot díky integrovanému počítači od NVIDIA má velmi vysoký výkon, tyto prostředky byly nevyužity a data byla při běhu programu posílána rovnou do počítače, kde se následně ukládala do souboru $bag$. Spojení bylo zprostředkováno Wi-Fi routerem $Ubiquiti$ $AirCube$ $AC$, který musí být připojen ethernetovým kabelem k danému počítači. Tento druh propojení má své jisté výhody i nevýhody. Výhodou je bezproblémový přenos, který při připojení robota rovnou na univerzitní Wi-Fi nebyl zdaleka pravidlem. Nevýhodou tohoto řešení je dosah, který je limitován, stejně tak jako je tomu běžně u vysílačů Wi-Fi signálu. Pro dané účely to však nakonec nebyl problém a vhodným umístěním routeru byla možnost naměřit data na dostatečném prostoru. 
 
 \begin{figure}[!ht]
@@ -536,7 +543,7 @@ U metody gMapping je zisk trajektorie složitější. Tato implementace nikam tr
 \begin{center}
 	\texttt{rosservice call /trajectory > trajectory\_gmapping}
 \end{center}
-Nejsložitější postup zskávání trajektorie je v případě systému Cartographer. Dříve se dala tato informace získat pomocí dvou příkazů. Aktualizací Cartographeru před dvěma lety však zavedl Google pro ukládání dat nový formát $pbstream$, pro práci s nimž není příliš dobrá veřeně dostupná dokumentace. 
+Nejsložitější postup získávání trajektorie je v případě systému Cartographer. Dříve se dala tato informace získat pomocí dvou příkazů. Aktualizací Cartographeru před dvěma lety však zavedl Google pro ukládání dat nový formát $pbstream$, pro práci s nimž není příliš dobrá veřeně dostupná dokumentace. 
 Cartographer při běhu publikuje uzel s názvem $/trajectory\_node\_list$, který nese v daném časovém okamžiku informaci o všech bodech trajektorie. Při dokončení výpočtů ze spuštěného $bag$ souboru je tedy k uložení dostupná finální trajektorie. Součástí této informace jsou však pouze souřadnice v prostoru a chybí tak informace o natočení, či časovém momentu, kdy robot v daném místě byl. Pro jednodušší porovnání implementací by to stačilo, ale pro správné porovnávání dle [11] by to bylo nedostatečné. Nakonec pro předevení souboru $pbstream$ do souboru $bag$ posloužil kód, který přidal do své implementace Cartographeru jeden výkumník Googlu [12]. V běžné implementaci Cartographeru se tento kód nevyskytuje. Využitím tohoto kódu již byla možnost trajektorii získat a to následujícím postupem. Nejprve je třeba nechat proběhnout všechny výpočty z nahraného souboru $bag$, pro lepší orientaci si bude označen jako $measured.bag$. Po doběhnutí výpočtů z $measured.bag$ je potřeba ukončit výpočty Cartographeru zavoláním
 \begin{center}
 	\texttt{rosservice call /finish\_trajectory 0},
@@ -590,8 +597,8 @@ Pro porovnání výsledků, nahraných pomocí rozhraní Stage bylo vytvořeno n
 	\begin{tabular}{c|ccp{3cm}}
 		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$  \\ [2mm]
 		\hline
-		GMapping & $5.7225\times10^{-5}$ & $4.45249\times10^{-5}$ & $0.00010$  \\ 
-		Hector & $4.12745\times10^{-5}$ & $0.00023$ & $0.00027$  \\ 
+		GMapping & $0.00006$ & $0.00004$ & $0.00010$  \\ 
+		Hector & $0.00004$ & $0.00023$ & $0.00027$  \\ 
 		Cartographer & $0.00086$ & $0.00062$ & $0.00149$  \\
 	\end{tabular}
 \end{center}
@@ -642,6 +649,7 @@ Pro porovnání systémů byla potřeba najít dataset, který v sobě obsahuje 
 \end{figure}
 
 Z výsledků je patrné, že v tomto případě si nejlépe vedl Cartographer. Za ním je dle tabulky Hector SLAM a poslední je gMapping. Při pohledu na mapu je však vidět, že trajektorie Hector SLAMu je neúplná a na konci silně vychýlená. Je to z důvodu, že při průjezdu předcházejícím výběžkem, došlo vždy k dislokaci robota, následně i v dalších částech měl problémy v orientaci i přes změny v řadě nastavení. Trajektorie Hector SLAMu by tak byla pro porovnání naprosto nevyhovující a je proto ukončena v bodě, do kterého se systém jevil správně. Grafické znázornění na obrázcích \ref{fig:mit_short}, \ref{fig:mapy_mit_short}\\
+\indent Výše zmíněné výsledky a mapy jsou však získány z datasetu, ve kterém byla použita pouze část trajektorie obsažená ve staženém datasetu. Důvod byl, že i přes nastavení Cartographeru určené pro tyto data, nedokázal si tento systém částečně poradit s jednou chodbou a došlo tak k posunu velké části trajektorie a mapy. Dané místo je znázorněno na mapách náležících obrázku \ref{fig:mapy_mit_full}, výsledné trajektorie jsou na obrázku \ref{fig:mit_full}. 
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -651,7 +659,7 @@ Z výsledků je patrné, že v tomto případě si nejlépe vedl Cartographer. Z
 	\label{fig:mit_short}
 \end{figure}
 
-\indent Výše zmíněné výsledky a mapy, jsou však získány z datasetu, kterému byla zmenšena obsažená data. Respektive jsou od určitého času ustřižena. Důvod byl, že i přes nastavení Cartographeru určené pro tyto data, nedokázal si tento systém částečně poradit s jednou chodbou a došlo tak k posunu velké části trajektorie a mapy (dané místo znázorněno na mapách náležících obrázku \ref{fig:mapy_mit_full}). Výsledky z celého datasetu jsou následující.\\
+\noindent Výsledky z nezkráceného datasetu jsou následující.\\
 \begin{center}
 	\begin{tabular}{c|ccp{3cm}}
 		\bfseries \bfseries  & $\varepsilon_{trans}(\delta)$ $[m]$ & $\varepsilon_{rot}(\delta)$ $[rad]$ & $\varepsilon(\delta)$ \\ [2mm]
@@ -682,8 +690,8 @@ Je vidět, že výsledky se u obou porovnávaných systémů mírně zhoršily, 
 
 \subsection{Porovnání dat nahraných robotem} \label{sekce:data_robot}
 Data pro toto porovnání jsou nahrána na Fakultě aplikovaných věd ZČU v budově NTIS. Jak je již výše zmíněno, odometrie zaznamenána robotem je v tomto případě nepoužitelná. Přesto, že vše v něm nahrané je nastaveno dle specifikace výrobce, informace je velmi nepřesná. Robot sám při jízdě dopředu lehce zatáčí doprava. Informace o dopředném pohybu je ale jinak ukládána správně, při zatáčení však robot zaznamenává informaci o mnohem větším zatočení, než k jakému došlo. Ztráta odometrie má na každý ze systémů rozídlný dopad.\\
-\indent Hector SLAM, který odometrickou informaci vůbec nepoužívá, není tedy tímto omezením nijak ovlivněn a jeho průběh je standardní. Cartographer již odometrii využívá, lze ale vypnout sledování odometrie a používat odometrii systémem dopočítávanou. Použitím tohoto nastavení se Cartographer stává náchylný na podlouhlé prostory bez větších rodílů, typickým příkladem jsou chodby. GMapping bezpodmíněčně odometrickou informaci vyžaduje. Informace silně zkreslená tak průběh programu velmi komplikuje.\\
-\indent Při pohledu na vytvořené mapy (obrázek \ref{fig:mapy_robot}) je znát nedostatek s odometrií pouze u Cartographeru, kdy jedno projetí celého prostoru bylo nedostatečné a mapa není na pohled příliš kvalitní. Pro srovnání jsem však nahrál ještě nový dataset, kdy jsem projel daný prostor dvakrát a výsledek je znatelně lepší.(obrázek \ref{fig:mapa_robot_cartographer_dvakrat})\\
+\indent Hector SLAM, který odometrickou informaci vůbec nepoužívá, není tedy tímto omezením nijak ovlivněn a jeho průběh je standardní. Cartographer již odometrii využívá, lze ale vypnout sledování odometrie a používat odometrii systémem dopočítávanou. Použitím tohoto nastavení se Cartographer stává náchylný na podlouhlé prostory bez větších rozdílů, typickým příkladem jsou chodby. GMapping bezpodmíněčně odometrickou informaci vyžaduje. Informace silně zkreslená tak průběh programu velmi komplikuje.\\
+\indent Při pohledu na vytvořené mapy (obrázek \ref{fig:mapy_robot}) je znát nedostatek s odometrií pouze u Cartographeru, kdy jedno projetí celého prostoru bylo nedostatečné a mapa není na pohled příliš kvalitní. Pro srovnání tak byl nahrán ještě nový dataset, kdy bylo daným prostorem projeto dvakrát a výsledek je znatelně lepší (obrázek \ref{fig:mapa_robot_cartographer_dvakrat}).\\
 \indent Pohled na trajektorie je však již více vypovídající o nedostatcích spojených s nekvalitní odometrickou informací. Pro Hector SLAM se opět nic neměnilo a trajektorie je v pořádku. U Cartographeru je vidět, že kvůli občasným problémům s rozeznáním posunu po chodbách, je trajektorie značně kratší. Největší problém v oblasti trajektorie je znatelný u systému gMapping, kdy informace o přetáčení vytváří na trajektorii po celou dobu velké výchylky a zuby. Algoritmus si s tím však dokáže i tak poradit a výsledná mapa tím ovlivněna není.\\
 \indent Bez znalosti $ground$ $truth$ je třeba porovnat algoritmy na základě získaných map. Měřením poměru vzdáleností mezi jednotivými body v prostoru a porovnáním s těmito body ve vytvořených mapách, vychází pro tento případ jako nejlepší algoritmus Hector SLAM, v těsném závěsu poté gMapping. Pro srovnání je přiložen i graf s trajektoriemi \ref{fig:robot_trajectory}. 
 
@@ -766,7 +774,7 @@ Z této tabulky je vidět, že ve většině případů nemá dané nastavení v
 	\label{fig:gmapping1}
 \end{figure}
 
-\indent Pro druhou sadu nastavení se měnil pouze parametr $particles$:
+\noindent Pro druhou sadu nastavení se měnil pouze parametr $particles$:
 \begin{center}
 	\begin{tabular}{c|p{1.5cm}}
 		\bfseries $particles$  & $e(t,g)$ \\ [2mm]
@@ -785,7 +793,7 @@ Ze zdejších výsledků je znatelné, že se průběh programu s počtem vytvá
 	\label{fig:gmapping2}
 \end{figure}
 
-\indent V poslední testované skupině se měnily parametry pro vzorkování pravděpodobnosti:
+\noindent V poslední testované skupině se měnily parametry pro vzorkování pravděpodobnosti:
 \begin{center}
 	\begin{tabular}{cccc|p{1.5cm}}
 		\bfseries $llsamplerange$  & \bfseries $llsamplestep$ & \bfseries $lasamplerange$ & \bfseries $lasamplestep$ & $e(t,g)$ \\ [2mm]
