@@ -43,12 +43,11 @@
 \newpage
 
 \chapter{Úvod}
-Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. Řešením tohoto problému je metoda simultánní lokalizace a mapování (SLAM), jejíž uvedením se zabývá první část práce. Daný problém spočívá v tom, že mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. V této kapitole jsou tak popsány vnitřní principy a různé přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Autonomní vozidla však využívají i mnoho dalších senzorů, jako jsou například kamery. V této práci je zaměření čistě na systémy využívající 2D LIDAR, tedy senzor, měřící vzdálenosti pouze v jedné výškové hladině.\\
+Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. Řešením tohoto problému je metoda simultánní lokalizace a mapování (SLAM), jejíž popisem se zabývá první část práce. Daný problém je založen na situaci, kdy je mobilní robot umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. V této kapitole jsou popsány vnitřní principy a přístupy k řešení problému. Daná tematika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Autonomní vozidla však využívají i mnoho dalších senzorů, jako jsou například kamery. Tato práce je zaměřena čistě na systémy využívající 2D LIDAR, tedy senzor, měřící vzdálenosti pouze v jedné výškové hladině.\\
 \indent Následující kapitola se věnuje třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o gMapping, HectorSLAM a Google Cartographer. Je zde popsáno, na jakých principech každý ze systémů pracuje a jak je daný přístup do systému implementován. \\
-\indent Další kapitola je zaměřena na porovnání zmíněných systémů na naměřených datech. Nahrávání a zpracovávání dat probíhalo pomocí operačního systému pro roboty (Robot operation System $\rightarrow$ ROS). Díky ROSu lze snadno propojit více zařízení, na kterých běží. Ve frameworku ROS je také možné spouštět simulace, tudíž je pomocí ROSu možné získat jak data reálná, tak data simulační. Obě tyto možnosti byly v práci využity a je zde i popis, jak se k jednotlivým nahrání dat přistupovalo. Data byla nahrána, aby na nich mohly být spuštěny jednotlivé systémy a na základě výsledků je poté porovnat. Pro srovnávání byla simulační a reálná data rozšířena ještě o stažený dataset z univerzity MIT. Rozsah dat je v tomto případě větší a výsledky tak ukazují jiný pohled na systémy, než je tomu při datech z menších prostor. Zmíněné srovnání je prováděno dle kritérií v sekci \ref{kapitola:comparison}. Po provedení porovnání systémů na jednotlivých datasetech jsou uvedeny výsledky, jejich popis a následně také vysvětlení, proč se na daných datech dostalo těchto výsledků. \\
+\indent Další kapitola je zaměřena na porovnání zmíněných systémů na naměřených datech. Nahrávání a zpracovávání dat probíhalo pomocí operačního systému pro roboty (Robot operation System $\rightarrow$ ROS). Díky ROSu lze snadno propojit více zařízení, na kterých běží. Ve frameworku ROS je také možné spouštět simulace, tudíž je pomocí ROSu možné získat jak data reálná, tak data simulační. Obě tyto možnosti byly v práci využity, součástí je též popis přístupu ke všem druhům nahraných dat. Data byla nahrána, aby na nich mohly být spuštěny jednotlivé systémy a na základě výsledků je poté porovnat. Pro srovnávání byla simulační a reálná data rozšířena ještě o stažený dataset z univerzity MIT. Rozsah dat je v tomto případě větší a výsledky tak ukazují jiný pohled na systémy, než je tomu při datech z menších prostor. Zmíněné srovnání je prováděno dle kritérií v sekci \ref{kapitola:comparison}. Po provedení porovnání systémů na jednotlivých datasetech jsou uvedeny výsledky, jejich popis a diskuze nad jejich relevantností. \\
 \indent V páté kapitole je blíže prozkoumán systém gMapping. Jsou zde popsány důvody, které vedly k vybrání tohoto systému. Systém je podroben analýze funkčnosti v závislosti na zvolených parametrech. Součástí této kapitoly je také návrh změn na vylepšení systému, které by vedly jak k zlepšení výkonu, tak k lepší uživatelské přívětivosti. \\
-\indent Poslední kapitolou je závěr, ve kterém je postupně zhodnocena celá práce. Hlavním zaměřením je však popis, jak se s jednotlivými zkoumanými metodami pracovalo. Je zde uvedeno, jak složité bylo jejich nastavování, jak komplexní k nim byla dokumentace, jak její nedostatky doplňovala komunita a především, jak byly systémy po celou dobu práce stabilní, či nestabilní.
-
+\indent Poslední kapitolou je závěr, ve kterém je postupně zhodnocena celá práce. Nejdříve je však potřeba seznámit čtenáře s definicí a řešením úlohy SLAMu, jednotlivými systémy a zejména výsledky. Definice SLAM založená na teorii pravděpodobnosti bude podrobně rozebrána v další kapitole.
 \newpage
 
 \chapter{Simultánní lokalizace a mapování}
@@ -92,13 +91,13 @@ Implementace je tak ve formě dvoukrokého rekurzivního algoritmu.\\
 Aktualizace času (predikce):
 \begin{equation}
 	\begin{split}
-	P(\textbf{x}_k,\textbf{m}|\textbf{Z}&_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)=\\&\int P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\times P(\textbf{x}_{k-1},\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k-1},\textbf{x}_0)d\textbf{x}_{k-1}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}&_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)=\\&\int P(\textbf{x}_k|\textbf{x}_{k-1},\textbf{u}_k)\times P(\textbf{x}_{k-1},\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k-1},\textbf{x}_0)d\textbf{x}_{k-1}.
 	\end{split}
 \end{equation}
 \\
 Aktualizace měření (korekce):
 \begin{equation}
-	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k},\textbf{U}_{0:k},\textbf{x}_0)=\frac{P(\textbf{z}_k|\textbf{x}_k,\textbf{m})P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)}{P(\textbf{z}_k|\textbf{Z}_{0:k-1},\textbf{U}_{0:k})}
+	P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k},\textbf{U}_{0:k},\textbf{x}_0)=\frac{P(\textbf{z}_k|\textbf{x}_k,\textbf{m})P(\textbf{x}_k,\textbf{m}|\textbf{Z}_{0:k-1},\textbf{U}_{0:k},\textbf{x}_0)}{P(\textbf{z}_k|\textbf{Z}_{0:k-1},\textbf{U}_{0:k})}.
 \end{equation}
 
 \subsection{Struktura}
@@ -133,7 +132,7 @@ kde $\textbf{f}(\textbf{x}_{k-1},\textbf{u}_k)$ je funkce modelující pohyb rob
 \\
 Model pozorování je vyjádřen vztahem
 \begin{equation}
-	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})\leftrightarrow \textbf{z}_k=\textbf{h}(\textbf{x}_k,\textbf{m})+\textbf{v}_k
+	P(\textbf{z}_k|\textbf{x}_k,\textbf{m})\leftrightarrow \textbf{z}_k=\textbf{h}(\textbf{x}_k,\textbf{m})+\textbf{v}_k,
 \end{equation}
 kde funkce $\textbf{h}(.)$ popisuje geometrické vlastnosti pozorování a $\textbf{v}_k$ jsou chyby měření.
 Tyto dvě definice jsou využity v metodě EKF k výpočtu střední hodnoty a kovariance sdruženého posteriorního rozložení\\
@@ -144,7 +143,7 @@ Tyto dvě definice jsou využity v metodě EKF k výpočtu střední hodnoty a k
 	\end{bmatrix}=E
 	\begin{bmatrix}
 	\textbf{x}_k |\textbf{Z}_{0:k}\\\textbf{m}\indent
-	\end{bmatrix}
+	\end{bmatrix},
 \end{equation}
 
 \indent kovariance:
@@ -157,7 +156,7 @@ Tyto dvě definice jsou využity v metodě EKF k výpočtu střední hodnoty a k
 	\end{pmatrix} \begin{pmatrix}
 	\textbf{x}_k-\hat{\textbf{x}}_k\\\textbf{m}-\hat{\textbf{m}}_k
 	\end{pmatrix}^T |\textbf{T}_{0:k}
-	\end{bmatrix}
+	\end{bmatrix}.
 \end{equation}
 Aktualizace času je pak počítána jako
 \begin{equation}
@@ -167,7 +166,7 @@ Aktualizace času je pak počítána jako
 	\textbf{P}_{xx,k|k-1}=\triangledown\textbf{f}\textbf{P}_{xx,k-1|k-1}\triangledown\textbf{f}^T+\textbf{Q}_k,
 \end{equation}
 kde $\triangledown\textbf{f}$ je Jacobián z funkce $\textbf{f}$, která vychází z odhadu stavu $\textbf{\^{x}}_{k-1|k-1}$.\\
-\indent Aktualizace pozorování se provádí výpočtem rovnic
+Aktualizace pozorování se provádí výpočtem rovnic
 \begin{equation}
 	\begin{bmatrix}
 	\hat{\textbf{x}}_{k|k}\\\hat{\textbf{m}}_k
@@ -241,7 +240,7 @@ Funkcionalita systému popisovaná výše se vztahuje k datům, která mají zn�
 Graph-based SLAM je algoritmus založený na metodě nejmenších čtverců. Jedná se o offline algoritmus rozdělený do dvou částí, front-end a back-end.\\
 \indent Metoda nejmenších čtverců je optimalizační metoda počítající s přeurčeným systémem, kdy je známo více rovnic, než je neznámých. Metodu představil na konci 18. století Carl Friedrich Gauss, a jak z názvu vyplývá, snaží se minimalizovat sumu chyb ve čtverci. Chyba je zde definována jako rozdíl odhadovaného stavu k aktuálnímu měření:
 \begin{equation}
-	\textbf{e}_i(x)=\textbf{z}_i-\textbf{f}_i(x)
+	\textbf{e}_i(x)=\textbf{z}_i-\textbf{f}_i(x).
 \end{equation}  
 Jedním z předpokladů pro správný průběh metody je dobrý počáteční odhad stavu. Dále, okolí minima chyby musí být hladké, bez skoků a zubů. V této oblasti se provádí lokální linearizace prvním stupněm Taylorova polynomu. Následně je vypočítána první derivace funkce chyby ve čtverci, která se položí rovna nule. Vyřeší se lineární systém, získá se nový stav, který by měl být lepší, než ten předchozí. Poté se znovu iteruje.
 
@@ -295,7 +294,7 @@ Metoda mřížkových map, v originále $Grid$ $maps$, byla představena v 80. l
 \indent Důležitým faktorem je zde takzvaná obsazenost, v angličtině $occupancy$. V originále se tedy metoda nazývá $Occupancy$ $Grid$ $Maps$. informace o obsazení každé buňky může nabývat tří hodnot. Při inicializaci je hodnota nastavena na $m_i=0.5$, kdy $m_i$ představuje danou buňku. Tato počáteční hodnota znamená, že o buňce není žádná znalost. Poté, co se buňka dostane do dosahu senzoru, nabývá hodnota obsazenosti již pouze dvou hodnot. $m_i=0$, pokud je rozhodnuto, že je buňka neobsazená a $m_i=1$ v případě rozhodnutí o obsazenosti.\\
 \indent Buňky jsou na sobě zcela nezávislé a součinem pravděpodobností obsazení buněk je získáno pravděpodobnostní rozložení mapy:
 \begin{equation}
-	p(m)=\Pi_ip(m_i)
+	p(m)=\Pi_ip(m_i).
 \end{equation}
 Odhad mapy ze senzoru:
 \begin{equation}
@@ -353,7 +352,7 @@ Pro zisk nové generace částic je třeba vykreslení vzorků z návrhového ro
 	N_{eff}=\frac{1}{\varSigma_{i-1}^N(w^{(i)})^2},
 \end{equation} 
 $w^{(i)}$ je zde normalizovaná váha částice $i$ a $N_{eff}$ jsou vzorky z cílového rozložení, které mají stejné váhové důležitosti. Pokud dochází ke zhoršení aproximace cílového rozložení, nastává větší odchylka vážených důležitostí.\\
-Základní nastavení převzorkování je následující:
+Nastavení převzorkování dle [8] je následující:
 \begin{equation}
 	N_{eff} < N/2,
 \end{equation}
@@ -395,7 +394,7 @@ Jako reprezentace prostředí je zde vybrána metoda mřížkových map. Odhadov
 
 Hledání transformace pro nejlepší sladění skenu s mapou:
 \begin{equation}
-	\xi^*=argmin_\xi\Sigma_{i=1}^n[1-M(S_i(\xi))]^2
+	\xi^*=argmin_\xi\Sigma_{i=1}^n[1-M(S_i(\xi))]^2,
 \end{equation}
 $M(P_m)$ je zde hodnota obsazenosti a $S_i(\xi)$ jsou souřadnice koncového bodu $s_i=(s_{i,x},s_{i,y})^T$, přičemž $\xi$ jsou souřadnice robota.\\
  
@@ -451,14 +450,14 @@ kde $\rho$ je ztrátová funkce, například tedy Hubertova ztráta. Jedná se o
 \end{equation}\\
 $W$ je zde vyhledávací okno a $M_{nearest}$ je rozšíření pravděpodobnostní mřížky $M$ na všechny $R^2$ zaokrouhlením argumentů do nejbližšího bodu mřížky. Rozšířená hodnota bodu mřížky ukazuje na odpovídající pixel.\\
 \indent Výběr uzlů probíhá prohledáváním do hloubky. Efektivnost algoritmu hodně závisí na podobě stromu, zda-li má pro výpočet dobrou horní mez a dobré aktuální řešení. Důležitým termínem je zde prahová hodnota skóre. Jedná se o hodnotu, pod níž není v zájmu jít a řešení je tedy nevyhovující. Díky tomu se nepřidávají špatné shody jako omezení pro uzavírání smyčky. Pro rychlost algoritmu je důležité rozhodování o průchodu stromem. Pro každého potomka je vypočítána horní hranice skóre a je vybrán ten nejslibnější, což je uzel s největším mezním počtem.\\
-\indent Každý z uzlů je popsán pomocí pole integerů: 
+\indent Každý z uzlů je popsán pomocí celočíselného pole: 
 \begin{equation}
 c=(c_x,c_y,c_\Theta,c_h)\epsilon Z^4,
 \end{equation}
 kde $c_h$ je výška uzlu. Pokud $c_h=0$, uzel je list.\\
 \indent Horní meze jsou pak počítány přes vnitřní uzly: 
 \begin{equation}
-score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k)
+score(c)=\Sigma_{k=1}^Kmax_{(j\epsilon \bar{W})}M_{nearest}(T_{\xi_j}h_k).
 \end{equation}
 
 \newpage
@@ -574,7 +573,7 @@ kde $\varepsilon_{trans}(\delta)$ je chyba určení pozice robota a $\varepsilon
 \end{equation}
 kde $N$ je celkový počet bodů trajektorie, $\delta_{i,j}$ je relativní pozice robota dle daného algoritmu SLAM v čase $i$ a $j$, přičemž $i$ a $j$ jsou bezprostředně se následující časové záznamy. Pozice v daných časových okamžicích z ground truth je označena jako $\delta^*_{i,j}$. Funkce $f_{trans}()$ je určena ve formě Euklidovské normy:
 \begin{equation}
-	f_{trans}(\delta_{i,j}\ominus\delta^*_{i,j})=||\delta_{i,j}\ominus\delta^*_{i,j}||
+	f_{trans}(\delta_{i,j}\ominus\delta^*_{i,j})=||\delta_{i,j}\ominus\delta^*_{i,j}||.
 \end{equation}  
 Rovnice pro určení chyby natočení robota je ve tvaru:
 \begin{equation}
@@ -582,7 +581,7 @@ Rovnice pro určení chyby natočení robota je ve tvaru:
 \end{equation}
 kde všechny proměnné mají stejný význam jako u chyby určení pozice a funkce $f_{rot}()$ má předpis:
 \begin{equation}
-	f_{rot}(\delta_{i,j}\ominus\delta^*_{i,j})=|min(2\pi-|\delta_{i,j}\ominus\delta^*_{i,j}|,|\delta_{i,j}\ominus\delta^*_{i,j}|)|
+	f_{rot}(\delta_{i,j}\ominus\delta^*_{i,j})=|min(2\pi-|\delta_{i,j}\ominus\delta^*_{i,j}|,|\delta_{i,j}\ominus\delta^*_{i,j}|)|.
 \end{equation}
 Tento přístup, narozdíl od běžného porovnávání vzdálenosti bodů v prostoru, nehledí na přímý rozdíl pozice bodů v daném čase, ale na změnu relativních pozic v časovém úseku. 
 
@@ -724,7 +723,7 @@ Data pro toto porovnání jsou nahrána na Fakultě aplikovaných věd ZČU v bu
 \chapter{Průzkum vybraného systému}
 Pro důkladnější prozkoumání vybraného systému byl zvolen gMapping, neboť je nejstarší, má aktivní komunitu a stále se využívá. Tím je zajištěno rychlé ustabilizování systému po případných aktualizacích. Pro bližší seznámení a případné návrhy změn vychází tedy nejlépe.
 
-\section{Změny v konfiguraci systému}
+\section{Změny v konfiguraci systému} \label{sekce:config}
 V předchozích měřeních bylo vždy použito defaultní nastavení systému. Toto nastavení nebylo třeba měnit, neboť gMapping vždy provedl výpočty dle očekávání a nikdy se nestalo, že by jako jediný selhal. Pro zkoumání vlivu nastavení na systém, byly postupně měněny různé parametry. Jako testovací data byl zvolen zkrácený dataset z MIT Stata Center.\\
 \indent Kritériem pro testování vlivu nastavení na algoritmus byla pro tento případ zvolena odlišná rovnice, která porovnává přímo polohu jednotlivých bodů trajektorie s $ground$ $truth$ ($Root$ $Mean$ $Square$ $Error$). Důvodem je absence extrahovatelné trajektorie přímo ze systému gMapping. Při vývoji tak nebyl kladen důraz na srovnání dle [11], ale hlavně na to, aby částice tvořící mapu měli správné umístění. Rovnice použitá pro srovnání je ve tvaru:
 \begin{equation}
@@ -814,7 +813,9 @@ Z posledních výsledků je patrné, že zmenšením oblasti vzorkování není 
 
 \newpage
 \section{Návrh změn v systému} \label{kapitola:navrh zmen}
-Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extrahovatelné trajektorie. Jako řešení se zde nabízí přidání topiku, který bude mít podobnou strukturu jako $/trajectory\_node\_list$ v Cartographeru. Tento topik, jak je popsáno v kapitole \ref{sekce:ulozeni_trajektorie}, nemá však pro potřebné porovnávání dostatek informací. Pro případ gMappingu by tak mohla být do určitého topiku publikovaná zpráva o aktuální trajektorii. Obsah topiku by tak obsahoval vždy hlavu, ve které by byl uvedený aktuální čas. K tomu by byly připojeny pod sebou dle času seřazené částice tvořící aktuální trajaketorii. K těmto částicím by byla přidružena vždy informace o simulačním čase, kdy byla částice vytvořena, její souřadnice v prostoru a informace o natočení. Při poslouchání topiku v průběhu programu by tak bylo možné získat srovnání, jak se trajektorie v průběhu času optimalizovala. Při zavolání po doběhnutí datasetu by pak byla poskytnuta rovnou hotová trajektorie. Pro lepší představu je na obrázku \ref{fig:gmapping_graph} vyobrazený výpočetní graf pro takto upravený systém.\\
+Systém gMapping je v současné podobě kvalitní systém. Je však možné stanovit vylepšení, která mohou vést k větší přesnosti, stabilitě či uživatelské přívětivosti.\\
+\indent Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extrahovatelné trajektorie. Jako řešení se zde nabízí implementace systému pro publikování trajektorie do topiku. Topik by mohl mít podobnou strukturu jako $/trajectory\_node\_list$ v Cartographeru. Ten, jak je popsáno v kapitole \ref{sekce:ulozeni_trajektorie}, nemá však pro potřebné porovnávání dostatek informací. Pro případ gMappingu by tak mohla být do určitého topiku publikovaná zpráva o aktuální trajektorii, která by nesla více informací. Obsah topiku by tak obsahoval vždy hlavu, ve které by byl uvedený aktuální čas. K tomu by byly připojeny pod sebou dle času seřazené částice tvořící aktuální trajektorii. K těmto částicím by byla přidružena vždy informace o simulačním čase, kdy byla částice vytvořena, její souřadnice v prostoru a informace o natočení. Při přijímání dat z topiku by tak bylo možné v průběhu programu získávat srovnání, jak se trajektorie v průběhu času optimalizovala. Při zavolání po doběhnutí datasetu by pak byla poskytnuta rovnou hotová trajektorie. Pro lepší představu je na obrázku \ref{fig:gmapping_graph} vyobrazený výpočetní graf pro takto upravený systém, kde /odometry posílá zaznamenanou odometrii, /tf obsahuje informace o souřadných soustavách, /scan obsahuje data ze senzoru, která jsou přijímána z /hokuyo\_node. GMappingem jsou tato data zpracována. Produktem zpracování je běžně pouze mapa /map, v tomto případě i trajektorie zaznamenávaná do /trajectory\_list.\\
+\indent Druhým možným přístupem by bylo řešení pomocí funkce $rosservice$. Volání trajektorie by tak probíhalo stejným způsobem, jak tomu bylo přímo u gMappingu v kapitole \ref{sekce:ulozeni_trajektorie}. Rozdíl by však spočíval v tom, že trajektorie získaná přístupem z \ref{sekce:ulozeni_trajektorie} se zpětně neupravuje. Vybrané částice tak utvářejí trajektorii, i když už byly při optimalizaci programem nahrazeny. Pokud by však tato zpráva byla publikována přímo gMappingem, daný problém by se odstranil.
 \begin{figure}[!ht]
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{imgs/gmapping_graph.pdf}
@@ -823,17 +824,18 @@ Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extra
 	\label{fig:gmapping_graph}
 \end{figure}
 
-\indent Další prospěšnou změnou by pro systém byla určitě možnost upravovat parametry za běhu programu. Pro výše provedené testy nebyla taková úprava potřeba, neboť se jak reálný, tak simulační robot pohybovali po celou dobu ve stejném prostředí. Při uvážení, že by se však robot přemisťoval mezi uzavřenými a otevřenými prostory, tato mořnost by byla jistě užitečná. Při běžněm průběhu, kdy uživatel robotem sám jezdí, může program vypnout a spustit gMapping s jiným nastavením, což není příliš hezké řešení. Pro autonomního robota by to však mohl být větší problém. V případě, že vyjede do jiného typu prostředí mohl by si sám přenastavit parametry tak, aby odpovídali již někde uloženému nastavení pro dané prostředí.\\
-\indent Zlepšení systému by bylo jistě dosaženo i integrací jednotky IMU, která by zajišťovala zlepšení odhadu pozice. V jednotce IMU jsou obsaženy gyroskopy, akcelerometry a magnetometry, které zjišťují stoupání, vybočení a rolování. Zaznamenáváním zmíněných hodnot je tedy získán lepší přehled o pohybu robota, než pouze z odometrie kol a tím tedy zlepšení odhadu pozice. Příklad, jak tato jednotka může vypadat, je na obrázku \ref{fig:imu}.\\
+\indent Další prospěšnou změnou by pro systém byla možnost upravovat parametry za běhu programu. Pro výše provedené testy nebyla taková úprava potřeba, neboť se jak reálný, tak simulační robot pohybovali po celou dobu ve stejném prostředí. Při uvážení, že by se však robot přemisťoval mezi uzavřenými a otevřenými prostory, tato možnost by byla jistě užitečná. Při běžněm průběhu, kdy uživatel robotem sám jezdí, může program vypnout a spustit gMapping s jiným nastavením, což není příliš hezké řešení. Pro autonomního robota by to však mohl být větší problém. V případě, že vyjede do jiného typu prostředí mohl by si sám přenastavit parametry tak, aby odpovídaly uloženému nastavení pro dané prostředí.\\
+\indent Zlepšení systému by bylo jistě dosaženo i integrací jednotky IMU, která by zajišťovala zlepšení odhadu pozice. V jednotce IMU jsou obsaženy gyroskopy, akcelerometry a magnetometry, které zjišťují stoupání, vybočení a rolování. Zaznamenáváním zmíněných hodnot je tedy získán lepší přehled o pohybu robota, než pouze z odometrie kol a tím tedy zlepšení odhadu pozice. Příklad, jak tato jednotka může vypadat, je na obrázku \ref{fig:imu}. [13]\\
 \begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=0.7\columnwidth]{imgs/imu.jpg}
+		\includegraphics[width=0.5\columnwidth]{imgs/imu.jpg}
 	\end{center}
 	\caption{Jednotka IMU určená pro použití s mikročipy Arduino.}
 	\label{fig:imu}
 \end{figure}
-\newpage
-\indent Další potenciální změnou, která se již nevztahuje přímo k procesům v gMappingu, by byla integrace kamerového vidění, například monokulární kamery. Robot by snímal prostředí jak LIDARem, tak kamerou. V případě kamerových dat by se snažil rozeznat předměty v prostoru a následně předat informaci o tom, jaký typ předmětu to je. Například při detekci židle by byla vyslána informace, že se daný předmět nemá zanášet do mapy, případně z mapy vymazat. Do místa, kde je židle postavena, by se ještě přidala značka substituující židli. Při opětovném projetí by pak robot věděl, že v daném místě by se mohla židle nacházet a v případě, že tam stále nějaký předmět je, rovnou se snažit ho označit jako židli. Při velké množině objektů v paměti by se tak ušetřilo mnoho výpočetního výkonu. "Pohyblivé" předměty jsou v mapě navíc a při jejich přemístění může mít robot problém poznat stejné místo. Pokud by tedy v mapě zaneseny nebyly a robot měl opět jak LIDAR, tak kameru, sám by opět vyhodnotil, že předměty jsou v prostoru navíc, a počítal by tak s mapou předměty neobsahující. Pokud by mu tak byla poskytnuta mapa nějakého takto "vyčištěného" prostředí, byl by v něm schopen určit svoji pozici bez ohledu na předměty, které v daném prostoru již vůbec nejsou, jsou přemístěny nebo se tam dříve ani nenacházeli. Jedno z možných zapojení se nachází na obrázku \ref{fig:camera}.
+
+\indent Další potenciální změnou, která se již nevztahuje přímo k procesům v gMappingu, by byla integrace kamerového vidění, například monokulární kamery. Robot by snímal prostředí jak LIDARem, tak kamerou. V případě kamerových dat by se snažil rozeznat předměty v prostoru a následně předat informaci o tom, jaký typ předmětu to je. Například při detekci židle by byla vyslána informace, že se daný předmět nemá zanášet do mapy, případně z mapy vymazat. Do místa, kde je židle postavena, by se ještě přidala značka substituující židli. Při opětovném projetí by pak robot věděl, že v daném místě by se mohla židle nacházet a v případě, že tam stále nějaký předmět je, rovnou ho označit jako židli. Při velké množině objektů v paměti by se tak ušetřilo mnoho výpočetního výkonu. "Pohyblivé" předměty jsou v mapě navíc a při jejich přemístění může mít robot problém poznat stejné místo. Pokud by tedy v mapě zaneseny nebyly a robot měl opět jak LIDAR, tak kameru, sám by opět vyhodnotil, že předměty jsou v prostoru navíc, a počítal by tak s mapou předměty neobsahující. Pokud by mu tak byla poskytnuta mapa nějakého takto "vyčištěného" prostředí, byl by v něm schopen určit svoji pozici bez ohledu na předměty, které v daném prostoru již vůbec nejsou, jsou přemístěny nebo se tam dříve ani nenacházeli. Jedno z možných zapojení se nachází na obrázku \ref{fig:camera}. [14]
+
 \begin{figure}[t]
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{imgs/camera.jpg}
@@ -846,11 +848,13 @@ Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extra
 \newpage
 \chapter{Závěr}
 Cílem této práce bylo bližší seznámení se systémy produkujícími mapu na základě dat z 2D LIDARu. Práce začíná u obecných pojmů a uvedením do problematiky simultánní lokalizace a mapování. Následně jsou popsány jednotlivé přístupy, kterými se dá tento problém řešit. Těmito přístupy je rozšířený Kallmanův filtr, Rao-Blackwellizovaný částicový filtr a grafová reprezentace.\\
-\indent V další části je již popisováno, jak jsou dané přístupy implementovány do reálných systémů, které řeší problém SLAM. Popsány a náledně porovnány jsou systémy gMapping, Hector SLAM a Cartographer. Zmíněné tři systémy byly vybrány z důvodu jejich rozšířenosti a kvality zpracování.\\
-\indent Pro provádění simulací, nahrávání dat a získávání výsledků byl použit framework sloužící k programování a manipulaci s roboty (ROS). V prostředí ROS se, díky početné komunitě a kvalitní dokumentaci, pracovalo dobře. Návody jsou ve velké většině případů aktualizované a tak stále funkční. Při hledání problémů, které nepokrývá dokumentace, je možnost využít komunitní úroveň ROSu a problém tak vyřešit.Při práci se samotnými třemi systémy, byla učiněna řada zjištění ohledně jejich výkonu a stability. \\
-\indent Prvním a i nejvíce rozebíraným systémem byl gMapping. Má kvalitně zpracovanou dokumentaci a je nejvíce prověřený časem. Stabilita systému byla po celou dobu nadmíru dobrá. například, i přes celkem složitou situaci s daty popsanými v sekci \ref{sekce:data_robot}, dokázal na defaultní nastavení parametrů utvořit kvalitní mapu ve všech případech. Jedná se i o případy, kdy se získané výsledky do této práce nedostaly. Bližší popsání nedostatků je rozebráno v kapitole \ref{kapitola:navrh zmen}.\\
-\indent Druhým popisovaným a zkoumaným systémem je Hector SLAM, který je vytvořen především pro rychlý pohyb v prostoru a rychlé rozhodování o nadcházející cestě. Z těchto informací je patrné, že je kladen důraz na co nejnižší výkonnostní nároky. V praktickém využití je to pak citelně znát. Zatímco na menších a dobře rozeznatelných prostorech běží rychle a kvalitně, ve složitějších oblastech má velké nedostatky. Několikrát zmíněný je problém s chodbami, kde pro Hector SLAM není dostatek záchytných bodů pro indikaci pohybu vpřed. Daná problematika se dá částečně odstranit častějším měřením a zapisováním pozorování. Daná změna má však za následek zhoršení jiných vlastností. Například se zhoršuje oriantace při rychlém otočení (viz. graf \ref{fig:mit_short}). Celkově byla třeba některá nastavení více upravovat a i tak nebylo zaručeno získání správného výsledku. V uvedených testech většinou Hector SLAM dokázal vytvořit kvalití mapu a přesnou trajektorii. Narozdíl od gMappingu však toto neplatí u případů, které zde nejsou uvedeny. Ve spoustě případů docházelo k destabilizaci systému a znedhodnocení celého výsledku.\\
-\indent Posledním rozebíraným systémem je Google Cartographer. Jedná se o nejnovější a nejpropracovanější systém ze všech uvedených. Tento aspekt ale byl ve velkém množství případů na škodu. Z hlediska stability systém vytváří přesnou a kvalitní mapu, kdy se projevuje důležitost back-end procesu, optimalizace mapy. Při rozběhnutí systému se tak již většinou získají i kvalitní výsledky. Problémem je však zmíněná novota a komplikovanost systému. Finální podoba této verze vznikla před dvěma lety, ale části dohledatelné dokumentace stále odkazují na verze předchozí. Například v sekci \ref{sekce:ulozeni_trajektorie} je uveden Cartographerem publikovaný topik $/trajectory\_node\_list$, který je i zobrazen ve výpočetním grafu u oficiální dokumentace Cartographeru, nikde se však o něm nedá dohledat žádná informace. Při dané složitosti systému je toto velký problém. Mnoho času tak je stráveno na hledání a zkoušení různých nastavení, aby se systém rozběhnul a začal utvářet mapu.\\
-\indent Finální porovnání systémů a zhodnocení jejich použitelnosti je následující. V případě potřeby pouze navigačních informací a pro rychlou tvorbu mapy, nejlepší volbou je Hector SLAM. Stejně tomu tak je v případě menších uzavřených prostor s větším množstvím záchytných bodů. S takovými prostrory samozřejmě nemají problém ani gMapping a Cartographer. Pro rozsáhlá území by měl být nejlepší Cartographer, bylo k tomu i tak od začátku práce přistupováno. Pokud tedy člověk věnuje dostatek času zkoumáním nastavování a poté jeho změnami a testováním, jedná se o nejkvalitnější možnost. Ve zkoumaném rozsahu však gMapping vždy splnil své úkoly a větší smyčky také detekoval a uzavřel. Pro celkovou jednoduchost v nastavování, rozsah použití a odladěnost systému, je na základě této práce gMapping hodnocen jako ten nejspolehlivější.
+\indent V další části je již popisováno, jak jsou dané přístupy implementovány do reálných systémů, které řeší problém SLAM. Popsány a náledně porovnány jsou systémy gMapping, Hector SLAM a Cartographer. Zmíněné systémy byly vybrány z důvodu jejich rozšířenosti a kvality zpracování.\\
+\indent Pro provádění simulací, nahrávání dat a získávání výsledků byl použit framework sloužící k programování a manipulaci s roboty (ROS). V prostředí ROS se, díky početné komunitě a kvalitní dokumentaci, pracovalo dobře. Návody jsou ve velké většině případů aktualizované a tak stále funkční. Při hledání problémů, které nepokrývá dokumentace, je možnost využít komunitní úroveň ROSu a problém tak vyřešit. Při práci se samotnými třemi systémy, byla učiněna řada zjištění ohledně jejich výkonu a stability. \\
+\indent Prvním a i nejvíce rozebíraným systémem byl gMapping. Má kvalitně zpracovanou dokumentaci a je nejvíce prověřený časem. Stabilita systému byla po celou dobu dobrá. Například, i přes celkem složitou situaci s daty popsanými v sekci \ref{sekce:data_robot}, dokázal na defaultní nastavení parametrů utvořit kvalitní mapu ve všech případech. Bližší popsání nedostatků je rozebráno v kapitole \ref{kapitola:navrh zmen}.\\
+\indent Druhým popisovaným a zkoumaným systémem je Hector SLAM, který je vytvořen především pro rychlý pohyb v prostoru a rychlé rozhodování o nadcházející cestě. Z těchto informací je patrné, že je kladen důraz na co nejnižší výkonnostní nároky. Zatímco na menších a dobře rozeznatelných prostorech běží rychle a kvalitně, ve složitějších oblastech má velké nedostatky. Několikrát zmíněný je problém s chodbami, kde pro Hector SLAM není dostatek záchytných bodů pro indikaci pohybu vpřed. Daná problematika se dá částečně odstranit častějším měřením a zapisováním pozorování. Daná změna má však za následek zhoršení jiných vlastností. Například se zhoršuje orientace při rychlém otočení (viz. graf \ref{fig:mit_short}). Celkově byla třeba některá nastavení více upravovat a i tak nebylo zaručeno získání správného výsledku. V uvedených testech většinou Hector SLAM dokázal vytvořit kvalití mapu a přesnou trajektorii. Ve spoustě případů však docházelo k destabilizaci systému a znedhodnocení celého výsledku.\\
+\indent Posledním rozebíraným systémem je Google Cartographer. Jedná se o nejnovější a nejpropracovanější systém ze všech uvedených. Tento aspekt byl ale ve velkém množství případů na škodu. Z hlediska stability, systém vytváří přesnou a kvalitní mapu, kdy se projevuje důležitost back-end procesu, optimalizace mapy. Problémem však je, že finální podoba systému vznikla před dvěma lety, části dohledatelné dokumentace přitom stále odkazují na předchozí verze. Například v sekci \ref{sekce:ulozeni_trajektorie} je uveden Cartographerem publikovaný topik $/trajectory\_node\_list$. Ten je správně zobrazen ve výpočetním grafu v oficiální dokumentaci Cartographeru, nikde se však o něm nedá dohledat žádná informace. Při komplikovanosti systému se dá absence spolehlivé dokumentace považovat za významný problém pro každého člověka, který se bude chtít se systémem seznámit. Hledání řešení pak může zabrat velké množství času, což se projevuje zejména při snaze systém spustit.\\
+\indent Finální porovnání systémů a zhodnocení jejich použitelnosti je následující. V případě potřeby pouze navigačních informací a pro rychlou tvorbu mapy, nejlepší volbou je Hector SLAM. Stejně tomu tak je v případě menších uzavřených prostor s větším množstvím záchytných bodů. S takovými prostory samozřejmě nemají problém ani gMapping a Cartographer. Pro rozsáhlá území by měl být nejlepší Cartographer. Pokud tedy člověk věnuje dostatek času zkoumáním nastavování a poté jeho změnami a testováním, jedná se o nejkvalitnější možnost. Ve zkoumaném rozsahu však gMapping vždy splnil své úkoly a větší smyčky také detekoval a uzavřel. Pro celkovou jednoduchost v nastavování, rozsah použití a odladěnost systému, je na základě této práce gMapping hodnocen jako ten nejspolehlivější.\\
+\indent Díky svým kvalitám tak byl gMapping vybrán pro bližší prozkoumání. Byly na něm testovány změny konfigurace (kapitola \ref{sekce:config}), na které se objevila odpovídající reakce. Při práci s gMappingem se však přišlo na to, že i zde je prostor pro zlepšení. V kapitole \ref{kapitola:navrh zmen} jsou posány možnosti, jak systém z hlediska výkonu i uživatelsky vylepšit. Z pohledu uživatele se jedná o možnost extrakce trajektorie a změnu parametrů za běhu programu. Z hlediska výkonnostního pak integrace jednotky IMU. Na konci sekce je ještě uvedena možnost integrace kamery. V tomto případě se jedná o výrazné rozšíření systému, ne pouze o zlepšení. Tato změna by tak posunula systém ještě na vyšší úroveň, což může být zajímavý námět na budoucí práci.  
+
 
 \end{document}
