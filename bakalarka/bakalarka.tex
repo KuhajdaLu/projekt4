@@ -42,16 +42,12 @@
 \tableofcontents
 \newpage
 
-
-
-
-
 \chapter{Úvod}
-Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. První část práce je zaměřena obecně na problém simultánní lokalizace a mapování (SLAM). Mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. Jsou zde popsány vnitřní principy a různé přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Tyto automobily však využívají i mnoho dalších senzorů, jako jsou například kamery. V této práci je zaměření čistě na systémy využívající 2D LIDAR, tedy senzor, měřící vzdálenosti pouze v jedné výškové úrovni.\\
-\indent Další kapitola se věnuje třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o gMapping, HectorSLAM a Google Cartographer. Je zde popsáno, na jakých principech každý ze systémů pracuje a jak je daný přístup do systému implementován. \\
-\indent Třetí kapitola je zaměřena na porovnání daných systémů na základě naměřených dat. Nejprve je zde popsán operační systém pro roboty (ROS), ve kterém pracují všechny tři systémy a pomocí kterého se nahrávala reálná data. V další části je ukázáno, jak byla získána data. V této práci jsou použity tři typy dat, kdy jsou využity čistě simulační data, která jsou nahraná pomocí již zmíněného operačního systému pro roboty. Dále data nahraná na univerzitě MIT v Massachusetts a jako poslední data nahraná mobilním robotem přímo v budově FAV na Západočeské univerzitě v Plzni. Dále je zde rozebráno, jak data byla zpracována, aby byla připravena na následné porovnávání. Poslední částí této kapitoly je srovnání výsledků. Je zde uvedeno, jaké kritérium bylo pro srovnávání zvoleno. Dále jsou zde popsány získané výsledky pro jednotlivé datasety. U každého typu dat je také vyhodnocení, jaká metoda se pro daná data hodila nejvíce, jak si vedly metody ostatní a důvody, proč tomu tak bylo.\\
-\indent V páté kapitole je uvedení bližšího průzkumu vybraného systému. Jsou zde popsány důvody, které vedly k vybrání zvoleného systému. Pro náhled do vnitřních pochodů, jsou zde také uvedena srovnání, jak metoda proběhne při změně určitých nastavitelných parametrů. Následně je pro každou změnu zhodnoceno, jaký vliv na systém daná změna má a proč tomu tak je. Nakonec je uvedeno, jaké změny by bylo vhodné v systému udělat. Jedná se jak o změny zlepšující výkonnost systému, tak i o změny pouze ulehčující práci pro uživatele.\\
-\indent Poslední kapitolou je závěr, ve kterém je zhodnocena postupně celá práce. Hlavním zaměřením je zde popis práce s jednotlivými metodami, jak složité je bylo nastavovat, jaká k nim byla dokumentace a jak její nedostatky doplňovala komunita a především, jak byly systémy po celou dobu práce s nimi stabilní, či nestabilní.
+Tato práce je věnována systémům, které pomocí měření z LIDARu (Light Detection And Ranging) utváří mapu prostředí, v němž se pohybují. Řešením tohoto problému je metoda simultánní lokalizace a mapování (SLAM), jejíž uvedením se zabývá první část práce. Daný problém spočívá v tom, že mobilní robot je umístěn do neznámého prostředí a jeho úkolem je určovat svoji pozici a utvářet mapu. V této kapitole jsou tak popsány vnitřní principy a různé přístupy k řešení problému. Daná tématika momentálně vstupuje do podvědomí i širší veřejnosti, neboť pomalu dochází k přechodu na autonomní vozidla, která fungují na podobných principech. Autonomní vozidla však využívají i mnoho dalších senzorů, jako jsou například kamery. V této práci je zaměření čistě na systémy využívající 2D LIDAR, tedy senzor, měřící vzdálenosti pouze v jedné výškové hladině.\\
+\indent Následující kapitola se věnuje třem nejrozšířenějším 2D SLAM systémům, přesněji se jedná o gMapping, HectorSLAM a Google Cartographer. Je zde popsáno, na jakých principech každý ze systémů pracuje a jak je daný přístup do systému implementován. \\
+\indent Další kapitola je zaměřena na porovnání zmíněných systémů na naměřených datech. Nahrávání a zpracovávání dat probíhalo pomocí operačního systému pro roboty (Robot operation System $\rightarrow$ ROS). Díky ROSu lze snadno propojit více zařízení, na kterých běží. Ve frameworku ROS je také možné spouštět simulace, tudíž je pomocí ROSu možné získat jak data reálná, tak data simulační. Obě tyto možnosti byly v práci využity a je zde i popis, jak se k jednotlivým nahrání dat přistupovalo. Data byla nahrána, aby na nich mohly být spuštěny jednotlivé systémy a na základě výsledků je poté porovnat. Pro srovnávání byla simulační a reálná data rozšířena ještě o stažený dataset z univerzity MIT. Rozsah dat je v tomto případě větší a výsledky tak ukazují jiný pohled na systémy, než je tomu při datech z menších prostor. Zmíněné srovnání je prováděno dle kritérií v sekci \ref{kapitola:comparison}. Po provedení porovnání systémů na jednotlivých datasetech jsou uvedeny výsledky, jejich popis a následně také vysvětlení, proč se na daných datech dostalo těchto výsledků. \\
+\indent V páté kapitole je blíže prozkoumán systém gMapping. Jsou zde popsány důvody, které vedly k vybrání tohoto systému. Systém je podroben analýze funkčnosti v závislosti na zvolených parametrech. Součástí této kapitoly je také návrh změn na vylepšení systému, které by vedly jak k zlepšení výkonu, tak k lepší uživatelské přívětivosti. \\
+\indent Poslední kapitolou je závěr, ve kterém je postupně zhodnocena celá práce. Hlavním zaměřením je však popis, jak se s jednotlivými zkoumanými metodami pracovalo. Je zde uvedeno, jak složité bylo jejich nastavování, jak komplexní k nim byla dokumentace, jak její nedostatky doplňovala komunita a především, jak byly systémy po celou dobu práce stabilní, či nestabilní.
 
 \newpage
 
@@ -221,7 +217,7 @@ kde $m$ je mapa, $X_{0:k}$ je trajektorie robota, $Z_{0:k}$ je sada všech již 
 	\{w^{(i)}_{k-1},X^{(i)}_{0:k-1},P(m|X^{(i)}_{0:k-1},Z_{0:k-1})\}^V_i,
 \end{equation}
 kde $w^{(i)}_{k}$ je váha vzorku $i$ v časovém okamžiku $k$. Sdružený stav v čase $k-1$ je poté použit v procesu generování nové sady částic. Sada znázorňuje potenciální cesty robota, ze které je poté na základě porovnání pozorování vybrána ta nejpravděpodobnější částice.\\
-\indent V prvním kroce je pro každou částici vypočítáno návrhové rozložení, jež je podmíněno svojí historií. Z návrhu je odebrán vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, je stanovena váha vzorků:
+\indent V prvním kroku je pro každou částici vypočítáno návrhové rozložení, jež je podmíněno svojí historií. Z návrhu je odebrán vzorek $x_k$, který je poté sdružen k historii částice $X^{(i)}_{0:k}$. Krokem dva, dle funkce důležitosti, je stanovena váha vzorků:
 \begin{equation}
 	w_t^i=\frac{a}{b},
 \end{equation}
@@ -253,7 +249,7 @@ Jedním z předpokladů pro správný průběh metody je dobrý počáteční od
 Tvorba grafu je první částí metody Graph-based SLAM, tedy část vývojová (front-end). Dochází zde ke tvorbě pozičního grafu, který je zpracováván do mapy. Graf se složen ze dvou složek, a to z uzlů a hran. Uzel zde znázorňuje odhadovanou pozici robota a hrana omezení, které je mezi dvěma uzly. Toto spojení je nejisté a proměnné. Při projetí známým prostředím se vytvářejí hrany mezi uzlem novým a uzly již dříve zaznamenanými, což je využito například při uzavírání smyčky (viz. obrázek \ref{fig:GBS_constrains}).\\
 \begin{figure}[!ht]
 	\begin{center}
-		\includegraphics[width=0.4\columnwidth]{imgs/GBS_constrains.pdf}
+		\includegraphics[width=0.6\columnwidth]{imgs/GBS_constrains.pdf}
 	\end{center}
 	\caption{Propojení uzlů pomocí hran.}
 	\label{fig:GBS_constrains}
@@ -290,7 +286,7 @@ V počátcích vývoje problému SLAM bylo pochopitelně potřeba vymyslet, jak 
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{imgs/landmark_map.jpg}
 	\end{center}
-	\caption{Ukázka mapy z landmarků.}
+	\caption{Ukázka mapy z landmarků vytvořená pomocí simulace v prostředí MATLAB.}
 	\label{fig:landmark_map}
 \end{figure}
 \newpage
@@ -336,7 +332,7 @@ GMapping byl představen v roce 2007 v článku [8]. Tato metoda je založená n
 \subsection{Mapování pomocí RBPF}
 Základním úkolem je odhad posteriorní pravděpodobnosti a tím zisk mapy a trajektorie pohybu. Odhad je prováděn na základě porovnání pozorování a informace z odometrie. Nejprve dochází k odhadu mapy, která je utvářena z porovnání pozorování, poté až trajektorie. Ta je získána z částic, které měly v rozhodovací době největší pravděpodobnost. Každá částice tedy reprezentuje část trajektorie.\\
 \indent Pro výběr správné částice je použit částicový filtr, v tomto případě Sampling Importance Resampling (SIR), který při mapování postupně zpracovává data ze senzoru, poté odometrii a aktualizuje sadu vzorků reprezentující posteriorní pravděpodobnost, která zahrnuje informace o mapě a trajektorii. \\
-\indent Nejprve se získají nové částice. To je provedeno odběrem vzorků z předchozí generace návrhového rozložení. V dalším kroce je částicím nastavena vážená důležitost, aby cílové rozložení nebylo rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem. Nakonec se odhaduje podoba mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, mapa vypočítána.
+\indent Nejprve se získají nové částice. To je provedeno odběrem vzorků z předchozí generace návrhového rozložení. V dalším kroku je částicím nastavena vážená důležitost, aby cílové rozložení nebylo rovno tomu navrhovanému. Poté dochází k převzorkování, kdy jsou částice přepisovány úměrně jejich váženým důležitostem. Nakonec se odhaduje podoba mapy, kdy je pro každou částici, na základě trajektorie vzorku a historie pozorování, mapa vypočítána.
 
 \begin{figure}[!ht]
 	\begin{center}
@@ -743,7 +739,7 @@ kde $t$ je vypočtená trajektorie, $g$ je $ground$ $truth$, $N$ je počet vzork
 		$linearUpdate$ & $1.0$ & ujetá vzdálenost pro nové měření [m]  (1)\\
 		$angularUpdate$ & $0.5$ & zaznamenané otočení pro nové měření [rad]\\
 		\hline
-		$particles$ & $30$ & počet částic tvořený v každém kroce  (2)\\
+		$particles$ & $30$ & počet částic tvořený v každém kroku  (2)\\
 		\hline
 		$llsamplerange$ & $0.01$ & rozsah translačního vzorkování pravděpodobnosti (3)\\
 		$llsamplestep$ & $0.01$ & krok v translačním vzorkování pravděpodobnosti\\
@@ -805,7 +801,7 @@ Ze zdejších výsledků je znatelné, že se průběh programu s počtem vytvá
 		0.5 & 0.5 & 0.2 & 0.2 & 1.250\\
 	\end{tabular}
 \end{center}
-Z posledních výsledků je patrné, že přes častější vzorkování není v tomto případě dosaženo lepších výsledků. Důvodem jsou opět zmiňované výkonnostní nároky, které byly s častějším vzorkováním příliš vysoké.\\
+Z posledních výsledků je patrné, že zmenšením oblasti vzorkování není v tomto případě dosaženo lepších výsledků. Důvodem je rychlejší degenerace částic, které jsou vytvořeny v menší oblasti. Pokud je tedy tato oblast určená špatně, všechny tyto částice selžou.\\
 \indent Z těchto informací lze dojít k závěru, že systém je defaultně dobře nastavený na výkonější zařízení. Jednotlivá nastavení lze upravit tak, aby algoritmus poskytnul lepší výsledek, při kombinaci více parametrů dohromady však již vzniká riziko zvýšení výkonnových nároků natolik, že má změna nastavení na program opačný vliv.
 
 \begin{figure}[!ht]
@@ -818,10 +814,34 @@ Z posledních výsledků je patrné, že přes častější vzorkování není v
 
 \newpage
 \section{Návrh změn v systému} \label{kapitola:navrh zmen}
-Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extrahovatelné trajektorie. Jako řešení se zde nabízí přidání topiku, který bude mít podobnou strukturu jako $/trajectory\_node\_list$ v Cartographeru. Tento topik, jak je popsáno v kapitole \ref{sekce:ulozeni_trajektorie}, nemá však pro potřebné porovnávání dostatek informací. Pro případ gMappingu by tak mohl být publikován topik, který by posílal v daném čase informaci o aktuální trajektorii. Obsah topiku by tak obsahoval vždy hlavu, ve které by byl uvedený aktuální čas. K tomu by byly připojeny pod sebou dle času seřazené částice tvořící aktuální trajaketorii. K těmto částicím by byla přidružena vždy informace o simulačním čase, kdy byla částice vytvořena, její souřadnice v prostoru a informace o natočení. Při poslouchání topiku v průběhu programu by tak bylo možné získat srovnání, jak se trajektorie v průběhu času optimalizovala. Při zavolání po doběhnutí datasetu by pak byla poskytnuta rovnou hotová trajektorie.\\
+Jako první věc, kterou je dobré uvést, je výše zmíněná neprodukce extrahovatelné trajektorie. Jako řešení se zde nabízí přidání topiku, který bude mít podobnou strukturu jako $/trajectory\_node\_list$ v Cartographeru. Tento topik, jak je popsáno v kapitole \ref{sekce:ulozeni_trajektorie}, nemá však pro potřebné porovnávání dostatek informací. Pro případ gMappingu by tak mohla být do určitého topiku publikovaná zpráva o aktuální trajektorii. Obsah topiku by tak obsahoval vždy hlavu, ve které by byl uvedený aktuální čas. K tomu by byly připojeny pod sebou dle času seřazené částice tvořící aktuální trajaketorii. K těmto částicím by byla přidružena vždy informace o simulačním čase, kdy byla částice vytvořena, její souřadnice v prostoru a informace o natočení. Při poslouchání topiku v průběhu programu by tak bylo možné získat srovnání, jak se trajektorie v průběhu času optimalizovala. Při zavolání po doběhnutí datasetu by pak byla poskytnuta rovnou hotová trajektorie. Pro lepší představu je na obrázku \ref{fig:gmapping_graph} vyobrazený výpočetní graf pro takto upravený systém.\\
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{imgs/gmapping_graph.pdf}
+	\end{center}
+	\caption{Znázornění odebíraných a publikovaných topiků při implementaci extrahovatelné trajektorie.}
+	\label{fig:gmapping_graph}
+\end{figure}
+
 \indent Další prospěšnou změnou by pro systém byla určitě možnost upravovat parametry za běhu programu. Pro výše provedené testy nebyla taková úprava potřeba, neboť se jak reálný, tak simulační robot pohybovali po celou dobu ve stejném prostředí. Při uvážení, že by se však robot přemisťoval mezi uzavřenými a otevřenými prostory, tato mořnost by byla jistě užitečná. Při běžněm průběhu, kdy uživatel robotem sám jezdí, může program vypnout a spustit gMapping s jiným nastavením, což není příliš hezké řešení. Pro autonomního robota by to však mohl být větší problém. V případě, že vyjede do jiného typu prostředí mohl by si sám přenastavit parametry tak, aby odpovídali již někde uloženému nastavení pro dané prostředí.\\
-\indent Zlepšení systému by bylo jistě dosaženo i integrací jednotky IMU, která by zajišťovala zlepšení odhadu pozice. V jednotce IMU jsou obsaženy gyroskopy, akcelerometry a magnetometry, které zjišťují stoupání, vybočení a rolování. Zaznamenáváním zmíněných hodnot je tedy získán lepší přehled o pohybu robota, než pouze z odometrie kol a tím tedy zlepšení odhadu pozice.\\
-\indent Další potenciální změnou, která se již nevztahuje přímo k procesům v gMappingu, by byla integrace kamerového vidění, například monokulární kamery. Robot by snímal prostředí jak LIDARem, tak kamerou. V případě kamerových dat by se snažil rozeznat předměty v prostoru a následně předat informaci o tom, jaký typ předmětu to je. Například při detekci židle by byla vyslána informace, že se daný předmět nemá zanášet do mapy, případně z mapy vymazat. Do místa, kde je židle postavena, by se ještě přidala značka substituující židli. Při opětovném projetí by pak robot věděl, že v daném místě by se mohla židle nacházet a v případě, že tam stále nějaký předmět je, rovnou se snažit ho označit jako židli. Při velké množině objektů v paměti by se tak ušetřilo mnoho výpočetního výkonu. "Pohyblivé" předměty jsou v mapě navíc a při jejich přemístění může mít robot problém poznat stejné místo. Pokud by tedy v mapě zaneseny nebyly a robot měl opět jak LIDAR, tak kameru, sám by opět vyhodnotil, že předměty jsou v prostoru navíc, a počítal by tak s mapou předměty neobsahující. Pokud by mu tak byla poskytnuta mapa nějakého takto "vyčištěného" prostředí, byl by v něm schopen určit svoji pozici bez ohledu na předměty, které v daném prostoru již vůbec nejsou, jsou přemístěny nebo se tam dříve ani nenacházeli.
+\indent Zlepšení systému by bylo jistě dosaženo i integrací jednotky IMU, která by zajišťovala zlepšení odhadu pozice. V jednotce IMU jsou obsaženy gyroskopy, akcelerometry a magnetometry, které zjišťují stoupání, vybočení a rolování. Zaznamenáváním zmíněných hodnot je tedy získán lepší přehled o pohybu robota, než pouze z odometrie kol a tím tedy zlepšení odhadu pozice. Příklad, jak tato jednotka může vypadat, je na obrázku \ref{fig:imu}.\\
+\begin{figure}[!ht]
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{imgs/imu.jpg}
+	\end{center}
+	\caption{Jednotka IMU určená pro použití s mikročipy Arduino.}
+	\label{fig:imu}
+\end{figure}
+\newpage
+\indent Další potenciální změnou, která se již nevztahuje přímo k procesům v gMappingu, by byla integrace kamerového vidění, například monokulární kamery. Robot by snímal prostředí jak LIDARem, tak kamerou. V případě kamerových dat by se snažil rozeznat předměty v prostoru a následně předat informaci o tom, jaký typ předmětu to je. Například při detekci židle by byla vyslána informace, že se daný předmět nemá zanášet do mapy, případně z mapy vymazat. Do místa, kde je židle postavena, by se ještě přidala značka substituující židli. Při opětovném projetí by pak robot věděl, že v daném místě by se mohla židle nacházet a v případě, že tam stále nějaký předmět je, rovnou se snažit ho označit jako židli. Při velké množině objektů v paměti by se tak ušetřilo mnoho výpočetního výkonu. "Pohyblivé" předměty jsou v mapě navíc a při jejich přemístění může mít robot problém poznat stejné místo. Pokud by tedy v mapě zaneseny nebyly a robot měl opět jak LIDAR, tak kameru, sám by opět vyhodnotil, že předměty jsou v prostoru navíc, a počítal by tak s mapou předměty neobsahující. Pokud by mu tak byla poskytnuta mapa nějakého takto "vyčištěného" prostředí, byl by v něm schopen určit svoji pozici bez ohledu na předměty, které v daném prostoru již vůbec nejsou, jsou přemístěny nebo se tam dříve ani nenacházeli. Jedno z možných zapojení se nachází na obrázku \ref{fig:camera}.
+\begin{figure}[t]
+	\begin{center}
+		\includegraphics[width=0.7\columnwidth]{imgs/camera.jpg}
+	\end{center}
+	\caption{Příklad sestavy kamera-LIDAR.}
+	\label{fig:camera}
+\end{figure}
+
 
 \newpage
 \chapter{Závěr}

@@ -46,4 +46,4 @@
 \contentsline {chapter}{\numberline {5}Pr\IeC {\r u}zkum vybran\IeC {\'e}ho syst\IeC {\'e}mu}{43}
 \contentsline {section}{\numberline {5.1}Zm\IeC {\v e}ny v konfiguraci syst\IeC {\'e}mu}{43}
 \contentsline {section}{\numberline {5.2}N\IeC {\'a}vrh zm\IeC {\v e}n v syst\IeC {\'e}mu}{47}
-\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{48}
+\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{50}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  13 MAY 2019 22:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2017.12.9)  14 MAY 2019 18:13
 entering extended mode
 **./bakalarka.tex
 (bakalarka.tex
@@ -734,9 +734,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [2]
 Kapitola 1.
 
-Overfull \hbox (5.53082pt too wide) in paragraph at lines 50--55
-[]\OT1/cmr/m/n/12 Tret ka-pi-tola je zamerena na po-rovnan danych syst
-emu na zaklade namerenych
+Overfull \hbox (3.65497pt too wide) in paragraph at lines 46--51
+\OT1/cmr/m/n/12 duvody, ktere vedly k vybran to-hoto systemu. System je 
+podro-ben analyze funkcnosti
  []
 
 [3
@@ -746,84 +746,84 @@ Kapitola 2.
 [5
 
 ]
-<imgs/SLAM_estimate_vs_reality.pdf, id=24, pagebox=cropbox, 296.21907pt x 249.3
+<imgs/SLAM_estimate_vs_reality.pdf, id=25, pagebox=cropbox, 296.21907pt x 249.3
 8043pt>
 File: imgs/SLAM_estimate_vs_reality.pdf Graphic file (type pdf)
 <use imgs/SLAM_estimate_vs_reality.pdf>
 Package pdftex.def Info: imgs/SLAM_estimate_vs_reality.pdf  used on input line 
-74. on input line 74.
+70. on input line 70.
 Package pdftex.def Info: Requested size: 256.0774pt x 215.60835pt on input line
- 74.
+ 70.
  [6 <./imgs/SLAM_estimate_vs_reality.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 93--97
+Underfull \hbox (badness 10000) in paragraph at lines 89--93
 
  []
 
 
-Overfull \hbox (7.42908pt too wide) in paragraph at lines 109--110
+Overfull \hbox (7.42908pt too wide) in paragraph at lines 105--106
 \OT1/cmr/m/n/12 Model po-zo-rovan udava zavislost po-lohy vo-zi-dla a po-
 zice lan-d-marku, z cehoz vyplyva,
  []
 
 
-Overfull \hbox (14.94243pt too wide) in paragraph at lines 112--116
+Overfull \hbox (14.94243pt too wide) in paragraph at lines 108--112
 \OT1/cmr/m/n/12 prostredm je tak zskana presnejs a ro-bustnejs m
 apa. Naprklad nasobnym pruchodem
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 112--116
+Underfull \hbox (badness 10000) in paragraph at lines 108--112
 
  []
 
 <imgs/SLAM_corelations.pdf, id=60, pagebox=cropbox, 242.0543pt x 192.188pt>
 File: imgs/SLAM_corelations.pdf Graphic file (type pdf)
 <use imgs/SLAM_corelations.pdf>
-Package pdftex.def Info: imgs/SLAM_corelations.pdf  used on input line 119. on 
-input line 119.
+Package pdftex.def Info: imgs/SLAM_corelations.pdf  used on input line 115. on 
+input line 115.
 Package pdftex.def Info: Requested size: 256.0774pt x 203.34pt on input line 11
-9.
+5.
 [7]
-Overfull \hbox (7.75206pt too wide) in paragraph at lines 127--130
+Overfull \hbox (7.75206pt too wide) in paragraph at lines 123--126
 \OT1/cmr/m/n/12 sumem, coz vede k pouzit rozsreneho Kal-ma-nova fil-t
 ru (v ori-ginale $\OML/cmm/m/it/12 extended$ $Kalman$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 127--130
+Underfull \hbox (badness 10000) in paragraph at lines 123--126
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--139
+Underfull \hbox (badness 10000) in paragraph at lines 131--135
 
  []
 
 [8 <./imgs/SLAM_corelations.pdf>] [9]
-Overfull \hbox (3.05394pt too wide) in paragraph at lines 199--202
+Overfull \hbox (3.05394pt too wide) in paragraph at lines 195--198
 []\OT1/cmr/m/n/12 Rozlisuj se dva zpusoby mozne im-ple-men-tace. Prvn z
  nich pra-cuje na zmensene
  []
 
 
-Overfull \hbox (19.65428pt too wide) in paragraph at lines 199--202
+Overfull \hbox (19.65428pt too wide) in paragraph at lines 195--198
 \OT1/cmr/m/n/12 souradnicovym ramcem ne-o-poustejcm da-nou sub-mapu. J
 sou to al-go-ri-thmy $\OML/cmm/m/it/12 constrained$
  []
 
 
-Overfull \hbox (0.65222pt too wide) in paragraph at lines 204--207
+Overfull \hbox (0.65222pt too wide) in paragraph at lines 200--203
 \OT1/cmr/m/n/12 rozlisovat ruzne balcky dat. To je pote vyuzito pro pr
 epoved dane aso-ci-ace, nejcasteji
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 204--207
+Underfull \hbox (badness 10000) in paragraph at lines 200--203
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 227--229
+Underfull \hbox (badness 10000) in paragraph at lines 223--225
 
  []
 
@@ -831,123 +831,123 @@ Underfull \hbox (badness 10000) in paragraph at lines 227--229
 <imgs/RBPF_trajectory.pdf, id=90, pagebox=cropbox, 242.55618pt x 238.85236pt>
 File: imgs/RBPF_trajectory.pdf Graphic file (type pdf)
 <use imgs/RBPF_trajectory.pdf>
-Package pdftex.def Info: imgs/RBPF_trajectory.pdf  used on input line 236. on i
-nput line 236.
+Package pdftex.def Info: imgs/RBPF_trajectory.pdf  used on input line 232. on i
+nput line 232.
 Package pdftex.def Info: Requested size: 256.0774pt x 252.19095pt on input line
- 236.
+ 232.
  [12 <./imgs/RBPF_trajectory.pdf>]
-Overfull \hbox (18.85905pt too wide) in paragraph at lines 249--251
+Overfull \hbox (18.85905pt too wide) in paragraph at lines 245--247
 \OT1/cmr/m/n/12 provad lokaln li-nea-ri-zace prvnm stupnem Ta-y-lo-rov
 a po-ly-nomu. Nasledne je vypoctana
  []
 
-<imgs/GBS_constrains.pdf, id=106, pagebox=cropbox, 153.6942pt x 162.6075pt>
+<imgs/GBS_constrains.pdf, id=106, pagebox=cropbox, 349.305pt x 190.7928pt>
 File: imgs/GBS_constrains.pdf Graphic file (type pdf)
 <use imgs/GBS_constrains.pdf>
-Package pdftex.def Info: imgs/GBS_constrains.pdf  used on input line 256. on in
-put line 256.
-Package pdftex.def Info: Requested size: 170.71393pt x 180.62051pt on input lin
-e 256.
+Package pdftex.def Info: imgs/GBS_constrains.pdf  used on input line 252. on in
+put line 252.
+Package pdftex.def Info: Requested size: 256.0774pt x 139.8802pt on input line 
+252.
 [13 <./imgs/GBS_constrains.pdf
 
 pdfTeX warning: pdflatex.exe (file ./imgs/GBS_constrains.pdf): PDF inclusion: i
 nvalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
 
 >]
-<imgs/GBS_virtual_measurment.pdf, id=113, pagebox=cropbox, 421.575pt x 299.1977
+<imgs/GBS_virtual_measurment.pdf, id=118, pagebox=cropbox, 421.575pt x 299.1977
 8pt>
 File: imgs/GBS_virtual_measurment.pdf Graphic file (type pdf)
 <use imgs/GBS_virtual_measurment.pdf>
 Package pdftex.def Info: imgs/GBS_virtual_measurment.pdf  used on input line 27
-5. on input line 275.
+1. on input line 271.
 Package pdftex.def Info: Requested size: 256.0774pt x 181.74338pt on input line
- 275.
+ 271.
  [14 <./imgs/GBS_virtual_measurment.pdf
 
 pdfTeX warning: pdflatex.exe (file ./imgs/GBS_virtual_measurment.pdf): PDF incl
 usion: invalid other resource which is no dict (key 'ProcSets', type <array>); 
 ignored.
 >]
-<imgs/landmark_map.jpg, id=137, 421.575pt x 316.18124pt>
+<imgs/landmark_map.jpg, id=142, 421.575pt x 316.18124pt>
 File: imgs/landmark_map.jpg Graphic file (type jpg)
 <use imgs/landmark_map.jpg>
-Package pdftex.def Info: imgs/landmark_map.jpg  used on input line 291. on inpu
-t line 291.
+Package pdftex.def Info: imgs/landmark_map.jpg  used on input line 287. on inpu
+t line 287.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.07051pt on input lin
-e 291.
+e 287.
  [15 <./imgs/landmark_map.jpg>]
-<imgs/gridmap.png, id=141, 429.85594pt x 271.0125pt>
+<imgs/gridmap.png, id=146, 429.85594pt x 271.0125pt>
 File: imgs/gridmap.png Graphic file (type png)
 <use imgs/gridmap.png>
-Package pdftex.def Info: imgs/gridmap.png  used on input line 312. on input lin
-e 312.
+Package pdftex.def Info: imgs/gridmap.png  used on input line 308. on input lin
+e 308.
 Package pdftex.def Info: Requested size: 298.75262pt x 188.35933pt on input lin
-e 312.
+e 308.
  [16 <./imgs/gridmap.png>]
-<imgs/point_cloud.png, id=147, 947.03813pt x 578.91281pt>
+<imgs/point_cloud.png, id=152, 947.03813pt x 578.91281pt>
 File: imgs/point_cloud.png Graphic file (type png)
 <use imgs/point_cloud.png>
-Package pdftex.def Info: imgs/point_cloud.png  used on input line 323. on input
- line 323.
+Package pdftex.def Info: imgs/point_cloud.png  used on input line 319. on input
+ line 319.
 Package pdftex.def Info: Requested size: 256.0774pt x 156.52937pt on input line
- 323.
+ 319.
  [17 <./imgs/point_cloud.png>]
 Kapitola 3.
 
-Overfull \hbox (2.92912pt too wide) in paragraph at lines 334--335
+Overfull \hbox (2.92912pt too wide) in paragraph at lines 330--331
 \OT1/cmr/m/n/12 mapa a snizuje se ri-ziko vycerpan castice, coz je prob
 lem vzni-kajc pri prevzorkovan. 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 334--335
+Underfull \hbox (badness 10000) in paragraph at lines 330--331
 
  []
 
 
-Overfull \hbox (30.01912pt too wide) in paragraph at lines 337--340
+Overfull \hbox (30.01912pt too wide) in paragraph at lines 333--336
 \OT1/cmr/m/n/12 zoru, pote odo-me-t-rii a ak-tu-a-li-zuje sadu vzorku re-pre-
 zen-tujc po-ste-ri-orn pravdepodobnost,
  []
 
-<imgs/gmapping_particles.pdf, id=152, pagebox=cropbox, 229.00555pt x 116.58557p
+<imgs/gmapping_particles.pdf, id=157, pagebox=cropbox, 229.00555pt x 116.58557p
 t>
 File: imgs/gmapping_particles.pdf Graphic file (type pdf)
 <use imgs/gmapping_particles.pdf>
-Package pdftex.def Info: imgs/gmapping_particles.pdf  used on input line 343. o
-n input line 343.
+Package pdftex.def Info: imgs/gmapping_particles.pdf  used on input line 339. o
+n input line 339.
 Package pdftex.def Info: Requested size: 298.75262pt x 152.09666pt on input lin
-e 343.
+e 339.
 [18
 
 ]
-Overfull \hbox (14.06459pt too wide) in paragraph at lines 352--356
+Overfull \hbox (14.06459pt too wide) in paragraph at lines 348--352
 \OT1/cmr/m/n/12 po-zo-rovan, tvorby mapy a pocatecn od-had po-zice ro-b
 ota. Po-kud je pravdepodobnostn
  []
 
 [19 <./imgs/gmapping_particles.pdf>]
-<imgs/multimodal.png, id=164, 1524.69624pt x 682.55pt>
+<imgs/multimodal.png, id=169, 1524.69624pt x 682.55pt>
 File: imgs/multimodal.png Graphic file (type png)
 <use imgs/multimodal.png>
-Package pdftex.def Info: imgs/multimodal.png  used on input line 367. on input 
-line 367.
+Package pdftex.def Info: imgs/multimodal.png  used on input line 363. on input 
+line 363.
 Package pdftex.def Info: Requested size: 298.75262pt x 133.73723pt on input lin
-e 367.
+e 363.
 
-Underfull \hbox (badness 1137) in paragraph at lines 369--369
+Underfull \hbox (badness 1137) in paragraph at lines 365--365
 []\OT1/cmr/m/n/12 Obrazek 3.2: |Prklad mul-ti-modalnho (v tomto prpad
 e bi-modaln) rozlozen
  []
 
 [20 <./imgs/multimodal.png>]
-Overfull \hbox (15.38481pt too wide) in paragraph at lines 378--382
+Overfull \hbox (15.38481pt too wide) in paragraph at lines 374--378
 []\OT1/cmr/m/n/12 Kvuli zna-telnemu po-sunu od-hadu in-te-gro-vane po-zice 
 a rych-losti, ktery je zpusoben
  []
 
 
-Overfull \hbox (2.05707pt too wide) in paragraph at lines 392--394
+Overfull \hbox (2.05707pt too wide) in paragraph at lines 388--390
 \OT1/cmr/m/n/12 kde $
  = (\OML/cmm/m/it/12 ; ;  \OT1/cmr/m/n/12 )[]$ je in-for-mace o otacen, s
 toupan a natocen. Vek-tor $\OML/cmm/m/it/12 x \OT1/cmr/m/n/12 = (
@@ -955,160 +955,160 @@ toupan a natocen. Vek-tor $\OML/cmm/m/it/12 x \OT1/cmr/m/n/12 = (
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+Underfull \hbox (badness 10000) in paragraph at lines 388--390
 
  []
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 403--405
+Underfull \hbox (badness 10000) in paragraph at lines 399--401
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 414--415
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
 
  []
 
 [22]
-Underfull \hbox (badness 10000) in paragraph at lines 420--424
+Underfull \hbox (badness 10000) in paragraph at lines 416--420
 
  []
 
 
-Overfull \hbox (3.7989pt too wide) in paragraph at lines 426--429
+Overfull \hbox (3.7989pt too wide) in paragraph at lines 422--425
 []\OT1/cmr/m/n/12 Pri pridan skenu do pravdepodobnostn mrzky je po
 ctana mnozina zasazenych
  []
 
 
-Overfull \hbox (23.9854pt too wide) in paragraph at lines 426--429
+Overfull \hbox (23.9854pt too wide) in paragraph at lines 422--425
 \OT1/cmr/m/n/12 od-povdajc draze la-se-roveho pa-prsku. Do-sud ne-po-zo
 -ro-vane body mrzky maj prirazenou
  []
 
-<imgs/cartographer.png, id=174, 596.98032pt x 446.41782pt>
+<imgs/cartographer.png, id=179, 596.98032pt x 446.41782pt>
 File: imgs/cartographer.png Graphic file (type png)
 <use imgs/cartographer.png>
-Package pdftex.def Info: imgs/cartographer.png  used on input line 438. on inpu
-t line 438.
+Package pdftex.def Info: imgs/cartographer.png  used on input line 434. on inpu
+t line 434.
 Package pdftex.def Info: Requested size: 298.75262pt x 223.4059pt on input line
- 438.
+ 434.
 [23] [24 <./imgs/cartographer.png>] [25]
 Kapitola 4.
 
-Overfull \hbox (12.79503pt too wide) in paragraph at lines 471--472
+Overfull \hbox (12.79503pt too wide) in paragraph at lines 467--468
 \OT1/cmr/m/n/12 Pro tes-tovan vsech vyse zmnenych systemu bylo vyu
 zito fra-meworku $\OML/cmm/m/it/12 Robot$ $Operating$
  []
 
 
-Overfull \hbox (6.37807pt too wide) in paragraph at lines 474--479
+Overfull \hbox (6.37807pt too wide) in paragraph at lines 470--475
 \OT1/cmr/m/n/12 moznych ko-mu-nikacnch stylu. Pres sluzby je to syn-chr
 onn ko-mu-ni-kace RPC ($\OML/cmm/m/it/12 Remote$
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 474--479
+Underfull \hbox (badness 10000) in paragraph at lines 470--475
 
  []
 
 [26
 
 ]
-Overfull \hbox (21.67715pt too wide) in paragraph at lines 481--486
+Overfull \hbox (21.67715pt too wide) in paragraph at lines 477--482
 \OT1/cmr/m/n/12 se pra-cuje na pevnem disku. Jedna se o balcky ($\OML/cmm/
 m/it/12 Pakages$\OT1/cmr/m/n/12 ), me-ta-balcky ($\OML/cmm/m/it/12 Metapacka
 ges$\OT1/cmr/m/n/12 ),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--486
+Underfull \hbox (badness 10000) in paragraph at lines 477--482
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 488--496
+Underfull \hbox (badness 10000) in paragraph at lines 484--492
 
  []
 
 [27] [28]
-Underfull \hbox (badness 10000) in paragraph at lines 500--502
+Underfull \hbox (badness 10000) in paragraph at lines 496--498
 
  []
 
 [29]
-<imgs/stage.png, id=198, 1059.96pt x 639.13782pt>
+<imgs/stage.png, id=203, 1059.96pt x 639.13782pt>
 File: imgs/stage.png Graphic file (type png)
 <use imgs/stage.png>
-Package pdftex.def Info: imgs/stage.png  used on input line 514. on input line 
-514.
+Package pdftex.def Info: imgs/stage.png  used on input line 510. on input line 
+510.
 Package pdftex.def Info: Requested size: 298.75262pt x 180.1374pt on input line
- 514.
+ 510.
  [30 <./imgs/stage.png>]
-<imgs/robot.jpg, id=204, 1734.48pt x 1300.86pt>
+<imgs/robot.jpg, id=209, 1734.48pt x 1300.86pt>
 File: imgs/robot.jpg Graphic file (type jpg)
 <use imgs/robot.jpg>
-Package pdftex.def Info: imgs/robot.jpg  used on input line 529. on input line 
-529.
+Package pdftex.def Info: imgs/robot.jpg  used on input line 525. on input line 
+525.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.06116pt on input lin
-e 529.
+e 525.
 
-Overfull \hbox (2.4914pt too wide) in paragraph at lines 542--543
+Overfull \hbox (2.4914pt too wide) in paragraph at lines 538--539
 \OT1/cmr/m/n/12 obsazeny v systemu Hec-tor SLAM. Pridanm uzlu s nazvem 
 $\OML/cmm/m/it/12 hector[]trajectory[]server$
  []
 
 [31 <./imgs/robot.jpg>]
-Overfull \hbox (1.33208pt too wide) in paragraph at lines 551--552
+Overfull \hbox (1.33208pt too wide) in paragraph at lines 547--548
 \OT1/cmr/m/n/12 mapy i castice, na ktere pri dobehnut dat z $\OML/cmm/m/
 it/12 measured:bag$ \OT1/cmr/m/n/12 jeste nedoslo. Nasledujcm
  []
 
 [32] [33] [34]
-Underfull \hbox (badness 10000) in paragraph at lines 595--596
+Underfull \hbox (badness 10000) in paragraph at lines 591--592
 
  []
 
-<imgs/stage_trajectories.pdf, id=217, pagebox=cropbox, 462.52798pt x 346.89601p
+<imgs/stage_trajectories.pdf, id=222, pagebox=cropbox, 462.52798pt x 346.89601p
 t>
 File: imgs/stage_trajectories.pdf Graphic file (type pdf)
 <use imgs/stage_trajectories.pdf>
-Package pdftex.def Info: imgs/stage_trajectories.pdf  used on input line 610. o
-n input line 610.
+Package pdftex.def Info: imgs/stage_trajectories.pdf  used on input line 606. o
+n input line 606.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.07703pt on input lin
-e 610.
+e 606.
 <imgs/Maps/Bag/newmaze_with_ground_truth/gmapping_newmaze_with_ground_truth.png
-, id=218, 712.91344pt x 509.65407pt>
+, id=223, 712.91344pt x 509.65407pt>
 File: imgs/Maps/Bag/newmaze_with_ground_truth/gmapping_newmaze_with_ground_trut
 h.png Graphic file (type png)
 <use imgs/Maps/Bag/newmaze_with_ground_truth/gmapping_newmaze_with_ground_truth
 .png>
 Package pdftex.def Info: imgs/Maps/Bag/newmaze_with_ground_truth/gmapping_newma
-ze_with_ground_truth.png  used on input line 618. on input line 618.
+ze_with_ground_truth.png  used on input line 614. on input line 614.
 Package pdftex.def Info: Requested size: 213.39566pt x 152.55522pt on input lin
-e 618.
+e 614.
 <imgs/Maps/Bag/newmaze_with_ground_truth/hector_newmaze_with_ground_truth.png, 
-id=219, 808.52063pt x 544.28343pt>
+id=224, 808.52063pt x 544.28343pt>
 File: imgs/Maps/Bag/newmaze_with_ground_truth/hector_newmaze_with_ground_truth.
 png Graphic file (type png)
 <use imgs/Maps/Bag/newmaze_with_ground_truth/hector_newmaze_with_ground_truth.p
 ng>
 Package pdftex.def Info: imgs/Maps/Bag/newmaze_with_ground_truth/hector_newmaze
-_with_ground_truth.png  used on input line 619. on input line 619.
+_with_ground_truth.png  used on input line 615. on input line 615.
 Package pdftex.def Info: Requested size: 213.39566pt x 143.65306pt on input lin
-e 619.
+e 615.
 <imgs/Maps/Bag/newmaze_with_ground_truth/cartographer_newmaze_with_ground_truth
-.png, id=220, 852.18375pt x 606.01407pt>
+.png, id=225, 852.18375pt x 606.01407pt>
 File: imgs/Maps/Bag/newmaze_with_ground_truth/cartographer_newmaze_with_ground_
 truth.png Graphic file (type png)
 <use imgs/Maps/Bag/newmaze_with_ground_truth/cartographer_newmaze_with_ground_t
 ruth.png>
 Package pdftex.def Info: imgs/Maps/Bag/newmaze_with_ground_truth/cartographer_n
-ewmaze_with_ground_truth.png  used on input line 620. on input line 620.
+ewmaze_with_ground_truth.png  used on input line 616. on input line 616.
 Package pdftex.def Info: Requested size: 213.39566pt x 151.7528pt on input line
- 620.
+ 616.
 [35 <./imgs/stage_trajectories.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 629--631
+Underfull \hbox (badness 10000) in paragraph at lines 625--627
 
  []
 
@@ -1116,200 +1116,228 @@ Underfull \hbox (badness 10000) in paragraph at lines 629--631
 th.png> <./imgs/Maps/Bag/newmaze_with_ground_truth/hector_newmaze_with_ground_t
 ruth.png> <./imgs/Maps/Bag/newmaze_with_ground_truth/cartographer_newmaze_with_
 ground_truth.png>]
-<imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short.png, id=262, 941.76843p
+<imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short.png, id=267, 941.76843p
 t x 450.18187pt>
 File: imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short.png Graphic file (
 type png)
 <use imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short.png>
 Package pdftex.def Info: imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short
-.png  used on input line 643. on input line 643.
+.png  used on input line 639. on input line 639.
 Package pdftex.def Info: Requested size: 256.0774pt x 122.40938pt on input line
- 643.
-<imgs/Maps/Bag/mit_stata/hector_mit_stata.png, id=263, 735.49782pt x 449.42906p
+ 639.
+<imgs/Maps/Bag/mit_stata/hector_mit_stata.png, id=268, 735.49782pt x 449.42906p
 t>
 File: imgs/Maps/Bag/mit_stata/hector_mit_stata.png Graphic file (type png)
 <use imgs/Maps/Bag/mit_stata/hector_mit_stata.png>
 Package pdftex.def Info: imgs/Maps/Bag/mit_stata/hector_mit_stata.png  used on 
-input line 644. on input line 644.
+input line 640. on input line 640.
 Package pdftex.def Info: Requested size: 256.0774pt x 156.47958pt on input line
- 644.
-<imgs/Maps/Bag/mit_stata_short/cartographer_mit_stata_short.png, id=264, 800.23
+ 640.
+<imgs/Maps/Bag/mit_stata_short/cartographer_mit_stata_short.png, id=269, 800.23
 969pt x 405.76593pt>
 File: imgs/Maps/Bag/mit_stata_short/cartographer_mit_stata_short.png Graphic fi
 le (type png)
 <use imgs/Maps/Bag/mit_stata_short/cartographer_mit_stata_short.png>
 Package pdftex.def Info: imgs/Maps/Bag/mit_stata_short/cartographer_mit_stata_s
-hort.png  used on input line 645. on input line 645.
+hort.png  used on input line 641. on input line 641.
 Package pdftex.def Info: Requested size: 256.0774pt x 129.84775pt on input line
- 645.
+ 641.
  [37 <./imgs/Maps/Bag/mit_stata_short/gmapping_mit_stata_short.png> <./imgs/Map
 s/Bag/mit_stata/hector_mit_stata.png> <./imgs/Maps/Bag/mit_stata_short/cartogra
 pher_mit_stata_short.png>]
-<imgs/mit_short.pdf, id=271, pagebox=cropbox, 462.52798pt x 346.89601pt>
+<imgs/mit_short.pdf, id=276, pagebox=cropbox, 462.52798pt x 346.89601pt>
 File: imgs/mit_short.pdf Graphic file (type pdf)
 <use imgs/mit_short.pdf>
-Package pdftex.def Info: imgs/mit_short.pdf  used on input line 656. on input l
-ine 656.
+Package pdftex.def Info: imgs/mit_short.pdf  used on input line 652. on input l
+ine 652.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.07703pt on input lin
-e 656.
+e 652.
 
-Underfull \hbox (badness 10000) in paragraph at lines 662--663
+Underfull \hbox (badness 10000) in paragraph at lines 658--659
 
  []
 
 [38 <./imgs/mit_short.pdf>]
-<imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png, id=302, 754.31813pt x 406.5187
+<imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png, id=307, 754.31813pt x 406.5187
 5pt>
 File: imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png Graphic file (type png)
 <use imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png>
 Package pdftex.def Info: imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png  used o
-n input line 676. on input line 676.
+n input line 672. on input line 672.
 Package pdftex.def Info: Requested size: 256.0774pt x 138.00363pt on input line
- 676.
-<imgs/Maps/Bag/mit_stata/cartographer_mit_stata.png, id=303, 719.68875pt x 392.
+ 672.
+<imgs/Maps/Bag/mit_stata/cartographer_mit_stata.png, id=308, 719.68875pt x 392.
 21532pt>
 File: imgs/Maps/Bag/mit_stata/cartographer_mit_stata.png Graphic file (type png
 )
 <use imgs/Maps/Bag/mit_stata/cartographer_mit_stata.png>
 Package pdftex.def Info: imgs/Maps/Bag/mit_stata/cartographer_mit_stata.png  us
-ed on input line 677. on input line 677.
+ed on input line 673. on input line 673.
 Package pdftex.def Info: Requested size: 256.0774pt x 139.55759pt on input line
- 677.
-<imgs/mit_full.pdf, id=304, pagebox=cropbox, 462.52798pt x 346.89601pt>
+ 673.
+<imgs/mit_full.pdf, id=309, pagebox=cropbox, 462.52798pt x 346.89601pt>
 File: imgs/mit_full.pdf Graphic file (type pdf)
 <use imgs/mit_full.pdf>
-Package pdftex.def Info: imgs/mit_full.pdf  used on input line 685. on input li
-ne 685.
+Package pdftex.def Info: imgs/mit_full.pdf  used on input line 681. on input li
+ne 681.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.07703pt on input lin
-e 685.
+e 681.
 
-Overfull \hbox (15.82576pt too wide) in paragraph at lines 692--697
+Overfull \hbox (15.82576pt too wide) in paragraph at lines 688--693
 \OT1/cmr/m/n/12 dopoctavanou. Pouzitm to-hoto na-sta-ven se Car-to-gra
 -pher stava nachylny na podlouhle
  []
 
 
-Overfull \hbox (21.94368pt too wide) in paragraph at lines 692--697
+Overfull \hbox (21.94368pt too wide) in paragraph at lines 688--693
 \OT1/cmr/m/n/12 pro-story bez vetsch rozdlu, ty-pickym prkladem jsou
  chodby. GMap-ping bez-podmnecne
  []
 
 [39 <./imgs/Maps/Bag/mit_stata/gmapping_mit_stata.png> <./imgs/Maps/Bag/mit_sta
 ta/cartographer_mit_stata.png> <./imgs/mit_full.pdf>]
-<imgs/Maps/Robot/5patromoreslower/gmapping_5patromoreslower.png, id=336, 755.07
+<imgs/Maps/Robot/5patromoreslower/gmapping_5patromoreslower.png, id=341, 755.07
 094pt x 527.72156pt>
 File: imgs/Maps/Robot/5patromoreslower/gmapping_5patromoreslower.png Graphic fi
 le (type png)
 <use imgs/Maps/Robot/5patromoreslower/gmapping_5patromoreslower.png>
 Package pdftex.def Info: imgs/Maps/Robot/5patromoreslower/gmapping_5patromoresl
-ower.png  used on input line 702. on input line 702.
+ower.png  used on input line 698. on input line 698.
 Package pdftex.def Info: Requested size: 256.0774pt x 178.97202pt on input line
- 702.
-<imgs/Maps/Robot/5patromoreslower/hector_5patromoreslower.png, id=337, 755.0709
+ 698.
+<imgs/Maps/Robot/5patromoreslower/hector_5patromoreslower.png, id=342, 755.0709
 4pt x 542.77782pt>
 File: imgs/Maps/Robot/5patromoreslower/hector_5patromoreslower.png Graphic file
  (type png)
 <use imgs/Maps/Robot/5patromoreslower/hector_5patromoreslower.png>
 Package pdftex.def Info: imgs/Maps/Robot/5patromoreslower/hector_5patromoreslow
-er.png  used on input line 703. on input line 703.
+er.png  used on input line 699. on input line 699.
 Package pdftex.def Info: Requested size: 256.0774pt x 184.07822pt on input line
- 703.
-<imgs/Maps/Robot/5patromoreslower/cartographer_5patromoreslower.png, id=338, 72
+ 699.
+<imgs/Maps/Robot/5patromoreslower/cartographer_5patromoreslower.png, id=343, 72
 0.44156pt x 502.87875pt>
 File: imgs/Maps/Robot/5patromoreslower/cartographer_5patromoreslower.png Graphi
 c file (type png)
 <use imgs/Maps/Robot/5patromoreslower/cartographer_5patromoreslower.png>
 Package pdftex.def Info: imgs/Maps/Robot/5patromoreslower/cartographer_5patromo
-reslower.png  used on input line 704. on input line 704.
+reslower.png  used on input line 700. on input line 700.
 Package pdftex.def Info: Requested size: 256.0774pt x 178.74188pt on input line
- 704.
-<imgs/robot_trajectory.pdf, id=339, pagebox=cropbox, 462.52798pt x 346.89601pt>
+ 700.
+<imgs/robot_trajectory.pdf, id=344, pagebox=cropbox, 462.52798pt x 346.89601pt>
 
 File: imgs/robot_trajectory.pdf Graphic file (type pdf)
 <use imgs/robot_trajectory.pdf>
-Package pdftex.def Info: imgs/robot_trajectory.pdf  used on input line 712. on 
-input line 712.
+Package pdftex.def Info: imgs/robot_trajectory.pdf  used on input line 708. on 
+input line 708.
 Package pdftex.def Info: Requested size: 298.75262pt x 224.07703pt on input lin
-e 712.
-<imgs/Maps/Robot/5patrodvakrat_cart_traj.png, id=340, 720.44156pt x 528.47438pt
+e 708.
+<imgs/Maps/Robot/5patrodvakrat_cart_traj.png, id=345, 720.44156pt x 528.47438pt
 >
 File: imgs/Maps/Robot/5patrodvakrat_cart_traj.png Graphic file (type png)
 <use imgs/Maps/Robot/5patrodvakrat_cart_traj.png>
 Package pdftex.def Info: imgs/Maps/Robot/5patrodvakrat_cart_traj.png  used on i
-nput line 720. on input line 720.
+nput line 716. on input line 716.
 Package pdftex.def Info: Requested size: 256.0774pt x 187.83954pt on input line
- 720.
+ 716.
  [40] [41 <./imgs/Maps/Robot/5patromoreslower/gmapping_5patromoreslower.png> <.
 /imgs/Maps/Robot/5patromoreslower/hector_5patromoreslower.png> <./imgs/Maps/Rob
 ot/5patromoreslower/cartographer_5patromoreslower.png>] [42 <./imgs/robot_traje
 ctory.pdf> <./imgs/Maps/Robot/5patrodvakrat_cart_traj.png>]
 Kapitola 5.
 
-Overfull \hbox (9.32533pt too wide) in paragraph at lines 740--753
+Overfull \hbox (9.32533pt too wide) in paragraph at lines 736--749
  [] 
  []
 
 [43
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 767--768
+Underfull \hbox (badness 10000) in paragraph at lines 763--764
 
  []
 
-<imgs/gmapping1.pdf, id=384, pagebox=cropbox, 462.52798pt x 346.89601pt>
+<imgs/gmapping1.pdf, id=389, pagebox=cropbox, 462.52798pt x 346.89601pt>
 File: imgs/gmapping1.pdf Graphic file (type pdf)
 <use imgs/gmapping1.pdf>
-Package pdftex.def Info: imgs/gmapping1.pdf  used on input line 771. on input l
-ine 771.
+Package pdftex.def Info: imgs/gmapping1.pdf  used on input line 767. on input l
+ine 767.
 Package pdftex.def Info: Requested size: 285.9494pt x 214.46986pt on input line
- 771.
+ 767.
 [44 <./imgs/gmapping1.pdf>]
-<imgs/gmapping2.pdf, id=413, pagebox=cropbox, 462.52798pt x 346.89601pt>
+<imgs/gmapping2.pdf, id=418, pagebox=cropbox, 462.52798pt x 346.89601pt>
 File: imgs/gmapping2.pdf Graphic file (type pdf)
 <use imgs/gmapping2.pdf>
-Package pdftex.def Info: imgs/gmapping2.pdf  used on input line 790. on input l
-ine 790.
+Package pdftex.def Info: imgs/gmapping2.pdf  used on input line 786. on input l
+ine 786.
 Package pdftex.def Info: Requested size: 285.9494pt x 214.46986pt on input line
- 790.
+ 786.
  [45 <./imgs/gmapping2.pdf>]
-<imgs/gmapping3.pdf, id=442, pagebox=cropbox, 462.52798pt x 346.89601pt>
+<imgs/gmapping3.pdf, id=447, pagebox=cropbox, 462.52798pt x 346.89601pt>
 File: imgs/gmapping3.pdf Graphic file (type pdf)
 <use imgs/gmapping3.pdf>
-Package pdftex.def Info: imgs/gmapping3.pdf  used on input line 813. on input l
-ine 813.
+Package pdftex.def Info: imgs/gmapping3.pdf  used on input line 809. on input l
+ine 809.
 Package pdftex.def Info: Requested size: 285.9494pt x 214.46986pt on input line
- 813.
+ 809.
  [46 <./imgs/gmapping3.pdf>]
-Overfull \hbox (0.13452pt too wide) in paragraph at lines 821--825
+<imgs/gmapping_graph.pdf, id=476, pagebox=cropbox, 402.54388pt x 84.315pt>
+File: imgs/gmapping_graph.pdf Graphic file (type pdf)
+<use imgs/gmapping_graph.pdf>
+Package pdftex.def Info: imgs/gmapping_graph.pdf  used on input line 820. on in
+put line 820.
+Package pdftex.def Info: Requested size: 298.75262pt x 62.57608pt on input line
+ 820.
+<imgs/imu.jpg, id=477, 563.85657pt x 461.47406pt>
+File: imgs/imu.jpg Graphic file (type jpg)
+<use imgs/imu.jpg>
+Package pdftex.def Info: imgs/imu.jpg  used on input line 830. on input line 83
+0.
+Package pdftex.def Info: Requested size: 298.75262pt x 244.50966pt on input lin
+e 830.
+
+Overfull \hbox (0.13452pt too wide) in paragraph at lines 826--835
 \OT1/cmr/m/n/12 prostred. Pri uvazen, ze by se vsak ro-bot premist[]
 oval mezi uzavrenymi a otevrenymi
  []
 
-[47]
+[47 <./imgs/gmapping_graph.pdf
+
+pdfTeX warning: pdflatex.exe (file ./imgs/gmapping_graph.pdf): PDF inclusion: i
+nvalid other resource which is no dict (key 'ProcSets', type <array>); ignored.
+
+>]
+<imgs/camera.jpg, id=490, 1734.48pt x 1300.86pt>
+File: imgs/camera.jpg Graphic file (type jpg)
+<use imgs/camera.jpg>
+Package pdftex.def Info: imgs/camera.jpg  used on input line 839. on input line
+ 839.
+Package pdftex.def Info: Requested size: 298.75262pt x 224.06116pt on input lin
+e 839.
+ [48 <./imgs/imu.jpg>] [49 <./imgs/camera.jpg>]
 Kapitola 6.
 
-Overfull \hbox (0.86066pt too wide) in paragraph at lines 828--835
+Overfull \hbox (0.86066pt too wide) in paragraph at lines 848--855
 \OT1/cmr/m/n/12 systemy gMap-ping, Hec-tor SLAM a Car-to-gra-pher. Zmnene 
 tri systemy byly vybrany
  []
 
 
-Overfull \hbox (31.6919pt too wide) in paragraph at lines 828--835
+Overfull \hbox (31.6919pt too wide) in paragraph at lines 848--855
 \OT1/cmr/m/n/12 Naprklad v sekci 4.2.3[] je uve-den Car-to-gra-phe-rem pu-b-
 li-ko-vany to-pik $\OML/cmm/m/it/12 =trajectory[]node[]list$\OT1/cmr/m/n/12 ,
  []
 
-[48
+[50
 
-] [49] (bakalarka.aux) ) 
+] [51] (bakalarka.aux) ) 
 Here is how much of TeX's memory you used:
- 8268 strings out of 493312
- 122947 string characters out of 3138899
- 306077 words of memory out of 3000000
- 11629 multiletter control sequences out of 15000+200000
+ 8286 strings out of 493312
+ 123304 string characters out of 3138899
+ 306110 words of memory out of 3000000
+ 11644 multiletter control sequences out of 15000+200000
  11199 words of font info for 42 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,17n,39p,1496b,305s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,17n,39p,1567b,305s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfont
 s/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
 x8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><
@@ -1322,9 +1350,9 @@ c/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmt
 t12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msam10
 .pfb>
-Output written on bakalarka.pdf (50 pages, 2585731 bytes).
+Output written on bakalarka.pdf (52 pages, 2847937 bytes).
 PDF statistics:
- 521 PDF objects out of 1000 (max. 8388607)
+ 544 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 181 words of extra memory for PDF output out of 10000 (max. 10000000)
 
