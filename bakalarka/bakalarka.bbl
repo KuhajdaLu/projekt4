@@ -1,0 +1,102 @@
+\begin{thebibliography}{}
+
+\bibitem[\protect\astroncite{Bailey and Durrant-Whyte}{2006}]{Bailey2006a}
+Bailey, T. and H.~Durrant-Whyte\leavevmode\nopagebreak\newline 2006.
+\newblock Simultaneous localization and mapping ({SLAM}): part {II}.
+\newblock {\em {IEEE} Robotics {\&} Automation Magazine}, 13(3):108--117.
+
+\bibitem[\protect\astroncite{Dissanayake et~al.}{2001}]{Dissanayake2001}
+Dissanayake, M., P.~Newman, S.~Clark, H.~Durrant-Whyte, and
+  M.~Csorba\leavevmode\nopagebreak\newline 2001.
+\newblock A solution to the simultaneous localization and map building ({SLAM})
+  problem.
+\newblock {\em {IEEE} Transactions on Robotics and Automation}, 17(3):229--241.
+
+\bibitem[\protect\astroncite{Durrant-Whyte}{1988}]{Durrant-Whyte1988}
+Durrant-Whyte, H.\leavevmode\nopagebreak\newline 1988.
+\newblock Uncertain geometry in robotics.
+\newblock {\em {IEEE} Journal on Robotics and Automation}, 4(1):23--31.
+
+\bibitem[\protect\astroncite{Durrant-Whyte and
+  Bailey}{2006}]{Durrant-Whyte2006}
+Durrant-Whyte, H. and T.~Bailey\leavevmode\nopagebreak\newline 2006.
+\newblock Simultaneous localization and mapping: part i.
+\newblock {\em {IEEE} Robotics {\&} Automation Magazine}, 13(2):99--110.
+
+\bibitem[\protect\astroncite{G{\'{a}}lvez-L{\'{o}}pez
+  et~al.}{2016}]{Galvez-Lopez2016}
+G{\'{a}}lvez-L{\'{o}}pez, D., M.~Salas, J.~D. Tard{\'{o}}s, and
+  J.~Montiel\leavevmode\nopagebreak\newline 2016.
+\newblock Real-time monocular object {SLAM}.
+\newblock {\em Robotics and Autonomous Systems}, 75:435--449.
+
+\bibitem[\protect\astroncite{Grisetti et~al.}{2010}]{Grisetti2010}
+Grisetti, G., R.~Kummerle, C.~Stachniss, and
+  W.~Burgard\leavevmode\nopagebreak\newline 2010.
+\newblock A tutorial on graph-based {SLAM}.
+\newblock {\em {IEEE} Intelligent Transportation Systems Magazine},
+  2(4):31--43.
+
+\bibitem[\protect\astroncite{Grisetti et~al.}{2007}]{Grisetti2007}
+Grisetti, G., C.~Stachniss, and W.~Burgard\leavevmode\nopagebreak\newline 2007.
+\newblock Improved techniques for grid mapping with rao-blackwellized particle
+  filters.
+\newblock {\em {IEEE} Transactions on Robotics}, 23(1):34--46.
+
+\bibitem[\protect\astroncite{Hess et~al.}{2016}]{Hess2016a}
+Hess, W., D.~Kohler, H.~Rapp, and D.~Andor\leavevmode\nopagebreak\newline 2016.
+\newblock Real-time loop closure in 2d {LIDAR} {SLAM}.
+\newblock In {\em 2016 {IEEE} International Conference on Robotics and
+  Automation ({ICRA})}. {IEEE}.
+
+\bibitem[\protect\astroncite{Hollerbach and Koditscheck}{2000}]{2000}
+Hollerbach, J. and D.~Koditscheck\leavevmode\nopagebreak\newline 2000.
+\newblock {\em Robotics Research: The Nineth International Symposium}.
+\newblock Springer.
+
+\bibitem[\protect\astroncite{Kümmerle et~al.}{2009}]{Kuemmerle2009}
+Kümmerle, R., B.~Steder, C.~Dornhege, M.~Ruhnke, G.~Grisetti, C.~Stachniss,
+  and A.~Kleiner\leavevmode\nopagebreak\newline 2009.
+\newblock On measuring the accuracy of {SLAM} algorithms.
+\newblock {\em Autonomous Robots}, 27(4):387--407.
+
+\bibitem[\protect\astroncite{Kohlbrecher et~al.}{2011}]{Kohlbrecher2011}
+Kohlbrecher, S., O.~von Stryk, J.~Meyer, and
+  U.~Klingauf\leavevmode\nopagebreak\newline 2011.
+\newblock A flexible and scalable {SLAM} system with full 3d motion estimation.
+\newblock In {\em 2011 {IEEE} International Symposium on Safety, Security, and
+  Rescue Robotics}. {IEEE}.
+
+\bibitem[\protect\astroncite{Lee}{2019}]{Lee2019}
+Lee, B.\leavevmode\nopagebreak\newline 2019.
+\newblock Tool for extracting pbstream trajectories into bag with tf.
+
+\bibitem[\protect\astroncite{Leonard and Durrant-Whyte}{1991}]{Leonarda}
+Leonard, J. and H.~Durrant-Whyte\leavevmode\nopagebreak\newline 1991.
+\newblock Simultaneous map building and localization for an autonomous mobile
+  robot.
+\newblock In {\em Proceedings {IROS} :{nternational Workshop on Intelligent
+  Robots and Systems}}. {IEEE}.
+
+\bibitem[\protect\astroncite{Leutenegger et~al.}{2013}]{Leutenegger2013}
+Leutenegger, S., P.~Furgale, V.~Rabaud, M.~Chli, K.~Konolige, and
+  R.~Siegwart\leavevmode\nopagebreak\newline 2013.
+\newblock Keyframe-based visual-inertial {SLAM} using nonlinear optimization.
+\newblock In {\em Robotics: Science and Systems {IX}}. Robotics: Science and
+  Systems Foundation.
+
+\bibitem[\protect\astroncite{ROS}{2007}]{Ros}
+ROS\leavevmode\nopagebreak\newline 2007.
+\newblock Ros wiki http://wiki.ros.org/.
+
+\bibitem[\protect\astroncite{S.~Thrun}{2005}]{Thrun2005}
+S.~Thrun, W.~Burgard, D.~F.\leavevmode\nopagebreak\newline 2005.
+\newblock {\em Probabilistic Robotics}.
+
+\bibitem[\protect\astroncite{Thrun et~al.}{1998}]{Thrun1998}
+Thrun, S., W.~Burgard, and D.~Fox\leavevmode\nopagebreak\newline 1998.
+\newblock A probabilistic approach to concurrent mapping and localization for
+  mobile robots.
+\newblock {\em Autonomous Robots}, 5(3/4):253--271.
+
+\end{thebibliography}
