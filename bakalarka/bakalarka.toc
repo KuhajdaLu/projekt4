@@ -1,49 +1,49 @@
 \select@language {czech}
-\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{4}
-\contentsline {chapter}{\numberline {2}Simult\IeC {\'a}nn\IeC {\'\i } lokalizace a mapov\IeC {\'a}n\IeC {\'\i }}{6}
-\contentsline {section}{\numberline {2.1}Historie}{6}
-\contentsline {section}{\numberline {2.2}Formulace a struktura}{7}
-\contentsline {subsection}{\numberline {2.2.1}Pravd\IeC {\v e}podobnostn\IeC {\'\i } SLAM}{7}
-\contentsline {subsection}{\numberline {2.2.2}Struktura}{8}
-\contentsline {section}{\numberline {2.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i } probl\IeC {\'e}mu SLAM}{9}
-\contentsline {subsection}{\numberline {2.3.1}EKF-SLAM}{9}
-\contentsline {subsubsection}{V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } slo\IeC {\v z}itost}{10}
-\contentsline {subsubsection}{Odd\IeC {\v e}ln\IeC {\'e} aktualizace}{11}
-\contentsline {subsubsection}{Asociace dat}{11}
-\contentsline {subsection}{\numberline {2.3.2}Rao-Blackwellizovan\IeC {\'y} \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr}{12}
-\contentsline {subsubsection}{Asociace dat}{13}
-\contentsline {subsection}{\numberline {2.3.3}Graph-based SLAM}{14}
-\contentsline {subsubsection}{Tvorba pozi\IeC {\v c}n\IeC {\'\i }ho grafu}{14}
-\contentsline {subsubsection}{Optimalizace mapy}{15}
-\contentsline {subsection}{\numberline {2.3.4}Reprezentace prost\IeC {\v r}ed\IeC {\'\i }}{16}
-\contentsline {subsubsection}{Mapa z landmark\IeC {\r u}}{16}
-\contentsline {subsubsection}{M\IeC {\v r}\IeC {\'\i }\IeC {\v z}kov\IeC {\'e} mapy}{17}
-\contentsline {subsubsection}{Mra\IeC {\v c}no bod\IeC {\r u}}{18}
-\contentsline {chapter}{\numberline {3}Syst\IeC {\'e}my SLAM}{19}
-\contentsline {section}{\numberline {3.1}GMapping}{19}
-\contentsline {subsection}{\numberline {3.1.1}Mapov\IeC {\'a}n\IeC {\'\i } pomoc\IeC {\'\i } RBPF}{19}
-\contentsline {subsection}{\numberline {3.1.2}Vylep\IeC {\v s}en\IeC {\'e} n\IeC {\'a}vrhy a adaptivn\IeC {\'\i } p\IeC {\v r}evzorkov\IeC {\'a}n\IeC {\'\i }}{20}
-\contentsline {section}{\numberline {3.2}Hector SLAM}{22}
-\contentsline {subsection}{\numberline {3.2.1}2D SLAM}{22}
-\contentsline {subsection}{\numberline {3.2.2}Odhad 3D stavu}{23}
-\contentsline {section}{\numberline {3.3}Catographer}{24}
-\contentsline {subsection}{\numberline {3.3.1}Lok\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{24}
-\contentsline {subsection}{\numberline {3.3.2}Glob\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{25}
-\contentsline {chapter}{\numberline {4}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{27}
-\contentsline {section}{\numberline {4.1}Robot Operating System}{27}
-\contentsline {subsection}{\numberline {4.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{28}
-\contentsline {subsection}{\numberline {4.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{28}
-\contentsline {section}{\numberline {4.2}Zisk dat k porovn\IeC {\'a}n\IeC {\'\i }}{30}
-\contentsline {subsection}{\numberline {4.2.1}Simulace v ROS}{30}
-\contentsline {subsection}{\numberline {4.2.2}Nahr\IeC {\'a}n\IeC {\'\i } re\IeC {\'a}ln\IeC {\'y}ch dat}{31}
-\contentsline {subsection}{\numberline {4.2.3}Ulo\IeC {\v z}en\IeC {\'\i } trajektorie}{32}
-\contentsline {subsection}{\numberline {4.2.4}P\IeC {\v r}\IeC {\'\i }prava dat}{34}
-\contentsline {section}{\numberline {4.3}Vyhodnocen\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{35}
-\contentsline {subsection}{\numberline {4.3.1}Srovn\IeC {\'a}vac\IeC {\'\i } krit\IeC {\'e}rium}{35}
-\contentsline {subsection}{\numberline {4.3.2}Porovn\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} ze simul\IeC {\'a}toru Stage}{36}
-\contentsline {subsection}{\numberline {4.3.3}Porovn\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} ze sta\IeC {\v z}en\IeC {\'e}ho datasetu}{37}
-\contentsline {subsection}{\numberline {4.3.4}Porovn\IeC {\'a}n\IeC {\'\i } dat nahran\IeC {\'y}ch robotem}{41}
-\contentsline {chapter}{\numberline {5}Pr\IeC {\r u}zkum vybran\IeC {\'e}ho syst\IeC {\'e}mu}{44}
-\contentsline {section}{\numberline {5.1}Zm\IeC {\v e}ny v konfiguraci syst\IeC {\'e}mu}{44}
-\contentsline {section}{\numberline {5.2}N\IeC {\'a}vrh zm\IeC {\v e}n v syst\IeC {\'e}mu}{48}
-\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{51}
+\contentsline {chapter}{\numberline {1}\IeC {\'U}vod}{5}
+\contentsline {chapter}{\numberline {2}Simult\IeC {\'a}nn\IeC {\'\i } lokalizace a mapov\IeC {\'a}n\IeC {\'\i }}{7}
+\contentsline {section}{\numberline {2.1}Historie}{7}
+\contentsline {section}{\numberline {2.2}Formulace a struktura}{8}
+\contentsline {subsection}{\numberline {2.2.1}Pravd\IeC {\v e}podobnostn\IeC {\'\i } SLAM}{8}
+\contentsline {subsection}{\numberline {2.2.2}Struktura}{9}
+\contentsline {section}{\numberline {2.3}\IeC {\v R}e\IeC {\v s}en\IeC {\'\i } probl\IeC {\'e}mu SLAM}{10}
+\contentsline {subsection}{\numberline {2.3.1}EKF-SLAM}{10}
+\contentsline {subsubsection}{V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } slo\IeC {\v z}itost}{11}
+\contentsline {subsubsection}{Odd\IeC {\v e}ln\IeC {\'e} aktualizace}{12}
+\contentsline {subsubsection}{Asociace dat}{12}
+\contentsline {subsection}{\numberline {2.3.2}Rao-Blackwellizovan\IeC {\'y} \IeC {\v c}\IeC {\'a}sticov\IeC {\'y} filtr}{13}
+\contentsline {subsubsection}{Asociace dat}{14}
+\contentsline {subsection}{\numberline {2.3.3}Graph-based SLAM}{15}
+\contentsline {subsubsection}{Tvorba pozi\IeC {\v c}n\IeC {\'\i }ho grafu}{15}
+\contentsline {subsubsection}{Optimalizace mapy}{16}
+\contentsline {subsection}{\numberline {2.3.4}Reprezentace prost\IeC {\v r}ed\IeC {\'\i }}{17}
+\contentsline {subsubsection}{Mapa z landmark\IeC {\r u}}{17}
+\contentsline {subsubsection}{M\IeC {\v r}\IeC {\'\i }\IeC {\v z}kov\IeC {\'e} mapy}{18}
+\contentsline {subsubsection}{Mra\IeC {\v c}no bod\IeC {\r u}}{19}
+\contentsline {chapter}{\numberline {3}Syst\IeC {\'e}my SLAM}{20}
+\contentsline {section}{\numberline {3.1}GMapping}{20}
+\contentsline {subsection}{\numberline {3.1.1}Mapov\IeC {\'a}n\IeC {\'\i } pomoc\IeC {\'\i } RBPF}{20}
+\contentsline {subsection}{\numberline {3.1.2}Vylep\IeC {\v s}en\IeC {\'e} n\IeC {\'a}vrhy a adaptivn\IeC {\'\i } p\IeC {\v r}evzorkov\IeC {\'a}n\IeC {\'\i }}{21}
+\contentsline {section}{\numberline {3.2}Hector SLAM}{23}
+\contentsline {subsection}{\numberline {3.2.1}2D SLAM}{23}
+\contentsline {subsection}{\numberline {3.2.2}Odhad 3D stavu}{24}
+\contentsline {section}{\numberline {3.3}Catographer}{25}
+\contentsline {subsection}{\numberline {3.3.1}Lok\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{25}
+\contentsline {subsection}{\numberline {3.3.2}Glob\IeC {\'a}ln\IeC {\'\i } 2D SLAM}{26}
+\contentsline {chapter}{\numberline {4}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{28}
+\contentsline {section}{\numberline {4.1}Robot Operating System}{28}
+\contentsline {subsection}{\numberline {4.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{29}
+\contentsline {subsection}{\numberline {4.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{29}
+\contentsline {section}{\numberline {4.2}Zisk dat k porovn\IeC {\'a}n\IeC {\'\i }}{31}
+\contentsline {subsection}{\numberline {4.2.1}Simulace v ROS}{31}
+\contentsline {subsection}{\numberline {4.2.2}Nahr\IeC {\'a}n\IeC {\'\i } re\IeC {\'a}ln\IeC {\'y}ch dat}{32}
+\contentsline {subsection}{\numberline {4.2.3}Ulo\IeC {\v z}en\IeC {\'\i } trajektorie}{33}
+\contentsline {subsection}{\numberline {4.2.4}P\IeC {\v r}\IeC {\'\i }prava dat}{35}
+\contentsline {section}{\numberline {4.3}Vyhodnocen\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{36}
+\contentsline {subsection}{\numberline {4.3.1}Srovn\IeC {\'a}vac\IeC {\'\i } krit\IeC {\'e}rium}{36}
+\contentsline {subsection}{\numberline {4.3.2}Porovn\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} ze simul\IeC {\'a}toru Stage}{37}
+\contentsline {subsection}{\numberline {4.3.3}Porovn\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u} ze sta\IeC {\v z}en\IeC {\'e}ho datasetu}{38}
+\contentsline {subsection}{\numberline {4.3.4}Porovn\IeC {\'a}n\IeC {\'\i } dat nahran\IeC {\'y}ch robotem}{42}
+\contentsline {chapter}{\numberline {5}Pr\IeC {\r u}zkum vybran\IeC {\'e}ho syst\IeC {\'e}mu}{45}
+\contentsline {section}{\numberline {5.1}Zm\IeC {\v e}ny v konfiguraci syst\IeC {\'e}mu}{45}
+\contentsline {section}{\numberline {5.2}N\IeC {\'a}vrh zm\IeC {\v e}n v syst\IeC {\'e}mu}{49}
+\contentsline {chapter}{\numberline {6}Z\IeC {\'a}v\IeC {\v e}r}{52}

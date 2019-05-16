@@ -26,32 +26,69 @@
 \title{Bakalářská práce}
 \author{Lukáš Kuhajda}
 \date{Akademický rok 2018/2019}
+
 \begin{titlepage}
 	\begin{center}
-		\includegraphics[scale=0.5]{logo_zcu}\\
-		\vspace{5cm}
+		\begin{huge}
+			Západočeská univerzita v Plzni\\
+			Fakulta aplikovaných věd\\
+		\end{huge}
+		\vspace{0.3cm}
+		\begin{LARGE}
+			Katedra kybernetiky\\
+		\end{LARGE}
+		\vspace{7cm}
+		\begin{Huge}
+			\textbf{Bakalářská práce}\\
+		\end{Huge}
+		\vspace{1cm}
 		\begin{Large}
-			\textbf{\thetitle}\\
+			Simultánní lokalizace a mapování\\
 		\end{Large}
-		
-		\vspace{3cm}
-		\theauthor\\
-		\vspace{5cm}
-		\thedate
+		\vspace{8cm}
 	\end{center}
+	\large{Plzeň, 2019}		\quad \quad \quad \quad \quad \quad\quad \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad \large{Lukáš Kuhajda}
 \end{titlepage}
+
+
+\newpage
+
+\noindent\textbf{\Large{Prohlášení}}\\
+
+\noindent Předkládám tímto k posouzení a obhajobě bakalářskou práci zpracovanou na závěr studia na Fakultě aplikovaných věd Západočeské univerzity v Plzni.
+\newline
+\newline 
+\thispagestyle{empty}
+Prohlašuji, že jsem bakalářskou práci vypracoval samostatně a výhradně s použitím odborné literatury a pramenů, jejichž úplný seznam je její součástí.\newline
+\newline\newline\newline
+\begin{minipage}{0.4\textwidth}
+	V Plzni dne
+\end{minipage} \hfill
+\begin{minipage}{0.30\textwidth}
+	\hspace{3cm}
+	...........................................
+\end{minipage}
+\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline\newline
+\noindent\textbf{\Large{Poděkování}}\\
+
+\noindent Tímto bych chtěl poděkovat panu Ing. Petru Neduchalovi za příkladné vedení mojí bakalářské práce, kdy mi byl vždy ochoten poskytnout odborné rady a cenné poz-\\námky, které vedly k úspěšnému dokončení práce. Další moje poděkování patří panu Ing. Miroslavu Flídrovi, Ph.D., který mi vypomáhal s nahráním reálných dat v budově univerzity a kolegovi panu Josefu Švecovi, za poskytnutí nahraného robota, na kterém v rámci své bakalářské práce pracoval a díky kterému jsem mohl vytvořit potřebný dataset.
+
+
+\newpage
 
 \noindent\textbf{\Large{Abstrakt}}\\
 
-\noindent Práce se zabývá problémem simultánní lokalizace a mapování a popisuje základní tři přístupy možného řešení. Dále rozebírá tři vybrané systémy, které tyto přístupy implementují. Dané implementace jsou následně testovány na vybraných datasetech a výsledky jsou poté porovnány a vyhodnoceny. Nejzajímavější ze systémů je nakonec ještě podrobněji rozebrán a jsou pro něj navrženy možné úpravy vedoucí ke zlepšení.\\
-\textbf{Klíčová slova}: SLAM, Simultánní lokalizace a mapování, rozšířený Kallmanův filtr, Rao-Blackwellizovaný částicový filtr, Graph-Based SLAM, gMapping, Hector SLAM, Google Cartographer, ROS, 2D LIDAR\\
-\newline
+\noindent Práce se zabývá problémem simultánní lokalizace a mapování a popisuje základní tři přístupy možného řešení. Dále rozebírá tři vybrané systémy, které tyto přístupy implementují. Dané implementace jsou následně testovány na vybraných datasetech a výsledky jsou poté porovnány a vyhodnoceny. Nejzajímavější ze systémů je nakonec podrobněji rozebrán a jsou pro něj navrženy možné úpravy vedoucí ke zlepšení.\\
+
+\noindent\textbf{Klíčová slova}: SLAM, Simultánní lokalizace a mapování, rozšířený Kallmanův filtr, Rao-Blackwellizovaný částicový filtr, Graph-Based SLAM, gMapping, Hector SLAM, Google Cartographer, ROS, 2D LIDAR\\
+\newline\newline\newline
 
 
 \noindent\textbf{\Large{Abstract}}\\
 
 \noindent The thesis deals with the problem of simultaneous localization and mapping and describes the basic three approaches of a possible solution. It also analyzes three selected systems that implement these approaches. These implementations are then tested on selected datasets and the results are then compared and evaluated. In the end, the most interesting of the systems is discussed in more detail and possible modifications are proposed for improvement.\\
-\textbf{Keywords}: SLAM, Simultaneous Localization and Mapping, extended Kallman filter, Rao-Blackwellized particle filter, Graph-Based SLAM, gMapping, Hector SLAM, Google Cartographer, ROS, 2D LIDAR
+
+\noindent\textbf{Keywords}: SLAM, Simultaneous Localization and Mapping, extended Kallman filter, Rao-Blackwellized particle filter, Graph-Based SLAM, gMapping, Hector SLAM, Google Cartographer, ROS, 2D LIDAR
 
 \newpage	
 	
