@@ -32,7 +32,7 @@
 \contentsline {chapter}{\numberline {4}Experiment\IeC {\'a}ln\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{28}
 \contentsline {section}{\numberline {4.1}Robot Operating System}{28}
 \contentsline {subsection}{\numberline {4.1.1}Souborov\IeC {\'y} syst\IeC {\'e}m}{29}
-\contentsline {subsection}{\numberline {4.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{29}
+\contentsline {subsection}{\numberline {4.1.2}V\IeC {\'y}po\IeC {\v c}etn\IeC {\'\i } graf}{30}
 \contentsline {section}{\numberline {4.2}Zisk dat k porovn\IeC {\'a}n\IeC {\'\i }}{31}
 \contentsline {subsection}{\numberline {4.2.1}Simulace v ROS}{31}
 \contentsline {subsection}{\numberline {4.2.2}Nahr\IeC {\'a}n\IeC {\'\i } re\IeC {\'a}ln\IeC {\'y}ch dat}{32}
